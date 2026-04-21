@@ -3,175 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>노년학 기말고사 대비 포털</title>
+    <title>노년학 기말고사 포털 | 로비</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #2d6a4f;
-            --primary-light: #52b788;
-            --bg: #f8f9fa;
-            --card: #ffffff;
-            --text: #2d3748;
+            --primary-green: #2d6a4f;
+            --light-green: #d8f3dc;
+            --accent: #52b788;
+            --bg: #f0faf3;
         }
 
         body {
             font-family: 'Noto Sans KR', sans-serif;
             background-color: var(--bg);
-            color: var(--text);
             margin: 0;
-            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
         }
 
-        /* 헤더 스타일 */
         header {
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            width: 100%;
+            background: var(--primary-green);
             color: white;
-            padding: 40px 20px;
+            padding: 50px 0;
             text-align: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
-        header h1 { margin: 0; font-size: 2.2rem; }
-        header p { margin: 10px 0 0; opacity: 0.9; }
+        h1 { margin: 0; font-size: 2.5rem; letter-spacing: -1px; }
+        .subtitle { opacity: 0.9; margin-top: 10px; font-weight: 300; }
 
-        .container {
-            max-width: 1000px;
-            margin: -30px auto 50px;
-            padding: 0 20px;
+        .main-container {
+            max-width: 900px;
+            width: 90%;
+            margin-top: -40px;
         }
 
-        /* 대시보드 그리드 */
-        .dashboard-grid {
+        /* 챕터 카드 리스트 */
+        .chapter-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
         }
 
-        .card {
-            background: var(--card);
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease;
+        .chapter-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 1px solid #e0e0e0;
         }
 
-        .card:hover { transform: translateY(-5px); }
-
-        .card h2 {
-            font-size: 1.25rem;
-            color: var(--primary);
-            border-bottom: 2px solid var(--bg);
-            padding-bottom: 10px;
-            margin-top: 0;
+        .chapter-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
         }
 
-        /* 8장 핵심 요약 섹션 (전달해주신 내용 반영) */
-        .chapter-preview {
-            background: #f0faf3;
-            border-left: 5px solid var(--primary);
-            padding: 15px;
-            margin-top: 15px;
+        .ch-number {
             font-size: 0.9rem;
-        }
-
-        .tag {
-            display: inline-block;
-            background: var(--primary-light);
-            color: white;
-            padding: 2px 8px;
-            border-radius: 5px;
-            font-size: 0.75rem;
+            color: var(--accent);
+            font-weight: 700;
             margin-bottom: 10px;
         }
 
-        /* 메뉴 리스트 */
-        .chapter-list {
-            list-style: none;
-            padding: 0;
+        .ch-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #1a3a2a;
+            margin-bottom: 20px;
+            word-break: keep-all;
         }
 
-        .chapter-list li {
-            padding: 12px 0;
-            border-bottom: 1px solid #eee;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .btn-study {
-            background: var(--primary);
+        /* 이동 버튼 */
+        .btn-enter {
+            background: var(--primary-green);
             color: white;
             text-decoration: none;
-            padding: 6px 15px;
-            border-radius: 20px;
-            font-size: 0.85rem;
+            text-align: center;
+            padding: 15px;
+            border-radius: 12px;
+            font-weight: 700;
             transition: background 0.2s;
         }
 
-        .btn-study:hover { background: var(--primary-light); }
-
-        .status-badge {
-            background: #e9ecef;
-            padding: 2px 10px;
-            border-radius: 10px;
-            font-size: 0.8rem;
+        .btn-enter:hover {
+            background: var(--accent);
         }
 
-        @media (max-width: 600px) {
-            header h1 { font-size: 1.8rem; }
+        /* 준비중인 카드 */
+        .pending {
+            opacity: 0.6;
+            background: #f9f9f9;
+        }
+        .status-tag {
+            display: inline-block;
+            background: #eee;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            color: #777;
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 40px;
+            color: #888;
+            font-size: 0.9rem;
         }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>🎓 노년학 기말고사 포털</h1>
-    <p>성공적인 A+를 위한 마지막 정리 공간</p>
+    <h1>GERONTOLOGY PORTAL</h1>
+    <p class="subtitle">노년학 기말고사 완벽 대비를 위한 학습 로비</p>
 </header>
 
-<div class="container">
-    <div class="dashboard-grid">
+<div class="main-container">
+    <div class="chapter-grid">
         
-        <div class="card">
-            <h2>📚 시험 범위 (챕터별)</h2>
-            <ul class="chapter-list">
-                <li>
-                    <span>CH 08. 사회적 노화 Ⅰ</span>
-                    <a href="#chapter-08" class="btn-study">학습하기</a>
-                </li>
-                <li>
-                    <span style="color:#999">CH 09. 사회적 노화 Ⅱ</span>
-                    <span class="status-badge">준비중</span>
-                </li>
-                <li>
-                    <span style="color:#999">CH 10. 고령사회와 산업</span>
-                    <span class="status-badge">준비중</span>
-                </li>
-            </ul>
-        </div>
-
-        <div id="chapter-08" class="card">
-            <span class="tag">HOT KEYWORD</span>
-            <h2>⭐ 8장 핵심 퀵뷰</h2>
-            <div class="chapter-preview">
-                <strong>1. 콩깍지형 가족:</strong> 다세대 공존, 세대별 규모는 작음.<br>
-                <strong>2. 양가성(Ambivalence):</strong> 긍정과 부정 감정의 공존.<br>
-                <strong>3. 발달적 이해관계:</strong> 부모가 자녀보다 관계를 더 긍정적으로 봄.<br>
-                <strong>4. 거주유형:</strong> 노인 단독 가구(독거/부부) 증가 추세.
+        <div class="chapter-card">
+            <div>
+                <div class="ch-number">CHAPTER 08</div>
+                <div class="ch-title">사회적 노화 Ⅰ (세대 및 친족관계)</div>
+                <p style="font-size: 0.9rem; color: #666;">콩깍지형 가족, 세대 간 결속도, 양가성 모델 등 핵심 이론 정리</p>
             </div>
-            <p style="font-size: 0.85rem; color: #666; margin-top: 15px;">
-                💡 <b>Tip:</b> 양가감정 계산 공식 <br>
-                <code>(긍정+부정)/2 - |긍정-부정|</code>
-            </p>
+            <a href="gerontology_ch08_study.html" class="btn-enter">학습 시작하기 →</a>
         </div>
 
-    </div>
+        <div class="chapter-card pending">
+            <div>
+                <div class="ch-number">CHAPTER 09</div>
+                <div class="ch-title">사회적 노화 Ⅱ (퇴직 및 사회활동)</div>
+                <span class="status-tag">자료 정리 중...</span>
+            </div>
+            <a href="#" class="btn-enter" style="background: #ccc; cursor: default;">잠겨있음</a>
+        </div>
 
-    <div class="card" style="margin-top: 20px;">
-        <h2>📅 시험 일정 및 정보</h2>
-        <p>✔️ <b>시험 일시:</b> 2024년 6월 OO일 (요일) 14:00</p>
-        <p>✔️ <b>준비물:</b> 컴퓨터용 싸인펜, 신분증</p>
+        <div class="chapter-card pending">
+            <div>
+                <div class="ch-number">CHAPTER 10</div>
+                <div class="ch-title">노인복지정책 및 산업</div>
+                <span class="status-tag">자료 정리 중...</span>
+            </div>
+            <a href="#" class="btn-enter" style="background: #ccc; cursor: default;">잠겨있음</a>
+        </div>
+
     </div>
 </div>
+
+<footer>
+    © 2026 Gerontology Exam Study Portal
+</footer>
 
 </body>
 </html>
