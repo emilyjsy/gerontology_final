@@ -1,0 +1,1636 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>노년학 CH08 | 사회적 노화 I 시험대비 정리본</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700;900&family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+
+  :root {
+    --green-dark: #1a3a2a;
+    --green-mid: #2d6a4f;
+    --green-light: #52b788;
+    --green-pale: #d8f3dc;
+    --green-pastel: #f0faf3;
+    --accent: #b7e4c7;
+    --gold: #e9c46a;
+    --red: #e63946;
+    --blue: #2b6cb0;
+    --text-dark: #1a1a2e;
+    --text-mid: #2d3748;
+    --text-light: #4a5568;
+    --bg: #f7fdf9;
+    --card-bg: #ffffff;
+    --border: #c3e6cb;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: var(--bg);
+    color: var(--text-dark);
+    line-height: 1.8;
+    font-size: 15px;
+  }
+
+  /* HEADER */
+  .hero {
+    background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-mid) 60%, var(--green-light) 100%);
+    color: white;
+    padding: 60px 40px 50px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 250px; height: 250px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -40px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 30px;
+    padding: 5px 20px;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .hero h1 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 2.2rem;
+    font-weight: 900;
+    margin-bottom: 10px;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  }
+  .hero p {
+    font-size: 1rem;
+    opacity: 0.85;
+    margin-bottom: 6px;
+  }
+  .hero-tags {
+    margin-top: 22px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .hero-tag {
+    background: rgba(255,255,255,0.18);
+    border-radius: 20px;
+    padding: 5px 16px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  /* NAV */
+  .toc {
+    background: var(--green-dark);
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+  }
+  .toc-inner {
+    display: flex;
+    overflow-x: auto;
+    gap: 0;
+  }
+  .toc a {
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    padding: 14px 20px;
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: all 0.2s;
+    border-bottom: 3px solid transparent;
+  }
+  .toc a:hover {
+    color: white;
+    background: rgba(255,255,255,0.08);
+    border-bottom-color: var(--green-light);
+  }
+
+  /* LAYOUT */
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  /* SECTION */
+  .section {
+    margin-bottom: 56px;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--green-pale);
+  }
+  .section-num {
+    width: 44px; height: 44px;
+    background: var(--green-mid);
+    color: white;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Noto Serif KR', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--green-dark);
+  }
+  .section-sub {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    font-weight: 400;
+    margin-top: 2px;
+  }
+
+  /* SUBSECTION */
+  .subsection {
+    margin-bottom: 32px;
+  }
+  .subsection-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--green-mid);
+    padding: 8px 16px;
+    background: var(--green-pastel);
+    border-left: 4px solid var(--green-light);
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 16px;
+  }
+
+  /* CARDS */
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px 26px;
+    margin-bottom: 16px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+  }
+  .card-title {
+    font-weight: 700;
+    color: var(--green-dark);
+    font-size: 1rem;
+    margin-bottom: 10px;
+  }
+
+  /* KEY TERM */
+  .term-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  @media (max-width: 600px) {
+    .term-grid { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 1.6rem; }
+  }
+  .term-card {
+    background: white;
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .term-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--green-light);
+  }
+  .term-name {
+    font-weight: 700;
+    color: var(--green-dark);
+    font-size: 1rem;
+    margin-bottom: 6px;
+  }
+  .term-name .eng {
+    font-size: 0.8rem;
+    color: var(--text-light);
+    font-weight: 400;
+    display: block;
+    font-style: italic;
+  }
+  .term-def {
+    font-size: 0.9rem;
+    color: var(--text-mid);
+    line-height: 1.7;
+  }
+
+  /* HIGHLIGHT BOX */
+  .highlight {
+    background: linear-gradient(135deg, #edfdf4, #d8f3dc);
+    border: 1.5px solid var(--green-light);
+    border-radius: 12px;
+    padding: 18px 22px;
+    margin-bottom: 16px;
+  }
+  .highlight.warning {
+    background: linear-gradient(135deg, #fff8e1, #ffeaa7);
+    border-color: var(--gold);
+  }
+  .highlight.danger {
+    background: linear-gradient(135deg, #fff5f5, #ffd6d6);
+    border-color: #fc8181;
+  }
+  .highlight.blue {
+    background: linear-gradient(135deg, #ebf8ff, #bee3f8);
+    border-color: #63b3ed;
+  }
+
+  /* TABLE */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+    margin-bottom: 16px;
+  }
+  th {
+    background: var(--green-mid);
+    color: white;
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.88rem;
+  }
+  td {
+    padding: 11px 16px;
+    border-bottom: 1px solid #e8f5e9;
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:nth-child(even) td { background: #f9fffe; }
+
+  /* SOLIDARITY BOXES */
+  .solidarity-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  @media (max-width: 600px) {
+    .solidarity-grid { grid-template-columns: 1fr 1fr; }
+  }
+  .sol-box {
+    background: white;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    text-align: center;
+  }
+  .sol-emoji { font-size: 1.5rem; display: block; margin-bottom: 6px; }
+  .sol-name { font-weight: 700; color: var(--green-dark); font-size: 0.88rem; margin-bottom: 4px; }
+  .sol-eng { font-size: 0.75rem; color: var(--text-light); font-style: italic; }
+  .sol-desc { font-size: 0.82rem; color: var(--text-mid); margin-top: 6px; }
+
+  /* QUIZ */
+  .quiz-section {
+    background: var(--card-bg);
+    border: 2px solid var(--green-light);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+  .quiz-header {
+    background: var(--green-mid);
+    color: white;
+    padding: 14px 22px;
+    font-weight: 700;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .quiz-body {
+    padding: 20px 22px;
+  }
+  .quiz-item {
+    padding: 14px 0;
+    border-bottom: 1px dashed var(--border);
+  }
+  .quiz-item:last-child { border-bottom: none; }
+  .quiz-q {
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+    font-size: 0.93rem;
+  }
+  .quiz-q .qnum {
+    display: inline-block;
+    background: var(--green-mid);
+    color: white;
+    border-radius: 50%;
+    width: 24px; height: 24px;
+    line-height: 24px;
+    text-align: center;
+    font-size: 0.78rem;
+    margin-right: 8px;
+  }
+  .answer-toggle {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--green-pale);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 5px 14px;
+    font-size: 0.82rem;
+    color: var(--green-mid);
+    font-weight: 600;
+    transition: all 0.2s;
+    user-select: none;
+    margin-top: 6px;
+  }
+  .answer-toggle:hover { background: var(--accent); }
+  .answer-box {
+    display: none;
+    margin-top: 10px;
+    background: #f0faf3;
+    border-left: 3px solid var(--green-light);
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    font-size: 0.9rem;
+    color: var(--green-dark);
+  }
+  .answer-box.show { display: block; }
+  .answer-box .correct { color: #276749; font-weight: 700; }
+  .answer-box .wrong { color: var(--red); font-weight: 700; }
+
+  /* OX */
+  .ox-badge {
+    display: inline-block;
+    width: 28px; height: 28px;
+    line-height: 28px;
+    text-align: center;
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: 0.85rem;
+    margin-right: 6px;
+  }
+  .ox-o { background: #c6f6d5; color: #276749; }
+  .ox-x { background: #fed7d7; color: #c53030; }
+
+  /* THEORY COMPARE */
+  .theory-box {
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 16px;
+    border: 1.5px solid var(--border);
+  }
+  .theory-head {
+    padding: 13px 20px;
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+  .theory-head.exchange { background: #ebf8ff; color: #2b6cb0; border-bottom: 1px solid #bee3f8; }
+  .theory-head.solidarity { background: #f0fff4; color: #276749; border-bottom: 1px solid #c6f6d5; }
+  .theory-head.ambivalence { background: #fff5f0; color: #c05621; border-bottom: 1px solid #fbd38d; }
+  .theory-body { padding: 16px 20px; background: white; }
+  .theory-body ul { padding-left: 18px; }
+  .theory-body li { margin-bottom: 6px; font-size: 0.9rem; }
+
+  /* BADGE */
+  .badge {
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    margin: 3px 2px;
+  }
+  .badge-green { background: #c6f6d5; color: #276749; }
+  .badge-blue { background: #bee3f8; color: #2b6cb0; }
+  .badge-orange { background: #fbd38d; color: #c05621; }
+  .badge-red { background: #fed7d7; color: #c53030; }
+  .badge-purple { background: #e9d8fd; color: #553c9a; }
+
+  /* MEMORY TIP */
+  .memory-tip {
+    background: linear-gradient(135deg, #fff8e1, #fff3cd);
+    border: 1.5px solid #f6cc5e;
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin: 12px 0;
+    font-size: 0.88rem;
+  }
+  .memory-tip-label {
+    font-weight: 700;
+    color: #b7791f;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* SUMMARY BOX */
+  .summary-box {
+    background: var(--green-dark);
+    color: white;
+    border-radius: 14px;
+    padding: 24px 28px;
+    margin-bottom: 20px;
+  }
+  .summary-box h4 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 1.05rem;
+    margin-bottom: 14px;
+    opacity: 0.9;
+  }
+  .summary-box ul { padding-left: 18px; }
+  .summary-box li { margin-bottom: 8px; font-size: 0.9rem; opacity: 0.9; }
+
+  /* STAT BOX */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  @media (max-width: 600px) { .stat-grid { grid-template-columns: 1fr 1fr; } }
+  .stat-box {
+    background: white;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 14px;
+    text-align: center;
+  }
+  .stat-num {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: var(--green-mid);
+    line-height: 1.2;
+  }
+  .stat-label { font-size: 0.78rem; color: var(--text-light); margin-top: 4px; }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--border), transparent);
+    margin: 32px 0;
+  }
+
+  /* PROGRESS */
+  .progress-bar {
+    background: var(--green-pale);
+    height: 6px;
+    border-radius: 3px;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--green-light), var(--green-mid));
+  }
+
+  ul, ol { padding-left: 20px; }
+  li { margin-bottom: 5px; }
+  strong { color: var(--green-dark); }
+  em { color: var(--blue); font-style: normal; font-weight: 600; }
+
+  .text-sm { font-size: 0.87rem; }
+  .text-mid { color: var(--text-mid); }
+
+  .important-quote {
+    border-left: 4px solid var(--green-light);
+    padding: 10px 16px;
+    background: #f8fffe;
+    margin: 10px 0;
+    font-size: 0.88rem;
+    color: var(--text-mid);
+    font-style: italic;
+  }
+
+  .back-to-top {
+    position: fixed;
+    bottom: 28px; right: 24px;
+    background: var(--green-mid);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 46px; height: 46px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+    transition: all 0.2s;
+    z-index: 999;
+  }
+  .back-to-top:hover { background: var(--green-dark); transform: translateY(-2px); }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">GERONTOLOGY · 노년학</div>
+  <h1>Chapter 08<br>사회적 노화 Ⅰ</h1>
+  <p>중노년기 세대관계 및 친족관계</p>
+  <p style="font-size:0.85rem; opacity:0.7;">중간고사 완벽 대비 정리본</p>
+  <div class="hero-tags">
+    <span class="hero-tag">📚 핵심개념 정리</span>
+    <span class="hero-tag">✅ O/X 퀴즈</span>
+    <span class="hero-tag">✍️ 단답형 문제</span>
+    <span class="hero-tag">📝 서술형 대비</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="toc">
+  <div class="toc-inner">
+    <a href="#key-concepts">핵심용어</a>
+    <a href="#theories">세대관계 이론</a>
+    <a href="#korea-family">한국 가족 현황</a>
+    <a href="#grandparent">조부모관계</a>
+    <a href="#sibling">형제관계</a>
+    <a href="#quiz-ox">O/X 퀴즈</a>
+    <a href="#quiz-short">단답형</a>
+    <a href="#quiz-essay">서술형 대비</a>
+  </div>
+</nav>
+
+<div class="container">
+
+<!-- ===================== 1. 핵심 용어 ===================== -->
+<div id="key-concepts" class="section">
+  <div class="section-header">
+    <div class="section-num">01</div>
+    <div>
+      <div class="section-title">핵심 용어 정리</div>
+      <div class="section-sub">시험에 자주 나오는 필수 개념어</div>
+    </div>
+  </div>
+
+  <div class="term-grid">
+    <div class="term-card">
+      <div class="term-name">관계수명
+        <span class="eng">relationship life expectancy</span>
+      </div>
+      <div class="term-def">평균 수명 연장으로 부모-자녀 간의 관계가 유지되는 기간이 늘어나는 것. 세대관계의 중요성이 증가하는 배경.</div>
+    </div>
+    <div class="term-card">
+      <div class="term-name">콩깍지형 가족
+        <span class="eng">beanpole family</span>
+      </div>
+      <div class="term-def">저출산으로 다세대가 공존하지만 한 세대의 규모는 작은 수직형 가족. 세대 수는 많으나 각 세대 구성원 수가 적음.</div>
+    </div>
+    <div class="term-card">
+      <div class="term-name">세대관계 약화설
+        <span class="eng">Popenoe, 1993</span>
+      </div>
+      <div class="term-def">저출산·이혼율 증가·가족해체를 근거로 세대관계가 약화된다는 주장. Bengtson이 결속도 모델로 반박.</div>
+    </div>
+    <div class="term-card">
+      <div class="term-name">호혜성
+        <span class="eng">reciprocity</span>
+      </div>
+      <div class="term-def">이익 극대화보다 주고받음의 균형이 중요하다는 개념. ① 지원 종류가 달라도 되고 ② 장기적(지연된) 형태로 나타날 수 있음.</div>
+    </div>
+    <div class="term-card">
+      <div class="term-name">발달적 이해관계 가설
+        <span class="eng">developmental stake hypothesis</span>
+      </div>
+      <div class="term-def">Bengtson & Kuypers(1971). 부모가 자녀보다 세대관계를 더 긍정적으로 인식하는 경향. 이미 투자한 자원이 많기 때문.</div>
+    </div>
+    <div class="term-card">
+      <div class="term-name">심리적 양가성
+        <span class="eng">psychological ambivalence</span>
+      </div>
+      <div class="term-def">동일한 대상에 대해 상충되는 감정(긍정+부정)이 공존하는 상태. 예: 어머니와 친하지만 구속되기도 함.</div>
+    </div>
+    <div class="term-card">
+      <div class="term-name">사회적 양가성
+        <span class="eng">social ambivalence</span>
+      </div>
+      <div class="term-def">특정 역할 수행 시 사회적 기대가 모순적이어서 겪는 양가성. 예: 독립성과 상호의존성이 동시에 요구됨.</div>
+    </div>
+    <div class="term-card">
+      <div class="term-name">수정확대가족
+        <span class="eng">modified extended family</span>
+      </div>
+      <div class="term-def">함께 살지 않지만 '국이 식지 않는 거리'에서 근접 거주하며 긴밀한 유대를 맺는 가족 형태. 분리된 거주 + 친밀성 유지.</div>
+    </div>
+    <div class="term-card">
+      <div class="term-name">거주 근접성
+        <span class="eng">residential proximity</span>
+      </div>
+      <div class="term-def">세대 간 얼마나 가까운 거리에 거주하는가. 세대 간 접촉빈도 및 지원교환을 예측하는 중요 요인.</div>
+    </div>
+    <div class="term-card">
+      <div class="term-name">공평이론
+        <span class="eng">equity theory</span>
+      </div>
+      <div class="term-def">지원의 양이 아닌 교환의 호혜성이 중요. 과다수혜(over-benefit)→독립성 상실감, 과소수혜(under-benefit)→분노감. 교환량과 삶의 질은 곡선관계.</div>
+    </div>
+    <div class="term-card">
+      <div class="term-name">양계화
+        <span class="eng">bilateralization</span>
+      </div>
+      <div class="term-def">친족과의 상호작용이 부계와 모계 혈족을 차별하지 않고 이루어지는 것. 형식·의무보다 생활 필요에 따른 선택적 교류 증가.</div>
+    </div>
+    <div class="term-card">
+      <div class="term-name">조손가족
+        <span class="eng">grandparent-grandchild family</span>
+      </div>
+      <div class="term-def">부모를 대신하여 조부모와 손자녀만으로 이루어지는 가족. 자녀의 결혼해체·경제적 어려움 등으로 발생.</div>
+    </div>
+  </div>
+
+  <div class="memory-tip">
+    <div class="memory-tip-label">💡 암기 Tip</div>
+    <strong>콩깍지형 가족</strong> = 세대(콩깍지)는 많은데 각 세대(콩) 수는 적다! / <strong>수정확대가족</strong> = "같이 살진 않아도 국이 식지 않는 거리" / <strong>발달적 이해관계 가설</strong> = 부모 &gt; 자녀 (더 긍정적으로 인식)
+  </div>
+
+  <!-- 양가감정 공식 -->
+  <div class="highlight warning">
+    <strong>📐 양가감정 측정 공식 (반드시 암기!)</strong><br>
+    <div style="text-align:center; font-size:1.1rem; margin: 10px 0; font-weight:700; color:#b7791f;">
+      양가감정 = (긍정 + 부정) / 2 − |긍정 − 부정|
+    </div>
+    <span class="text-sm text-mid">점수가 클수록 양가감정이 크다. (Thompson 공식 / Guo et al., 2013)</span>
+  </div>
+</div>
+
+<!-- ===================== 2. 세대관계 이론 ===================== -->
+<div id="theories" class="section">
+  <div class="section-header">
+    <div class="section-num">02</div>
+    <div>
+      <div class="section-title">세대관계를 설명하는 주요 이론</div>
+      <div class="section-sub">사회교환이론 · 결속도 모델 · 양가성 모델</div>
+    </div>
+  </div>
+
+  <!-- 사회교환이론 -->
+  <div class="subsection">
+    <div class="subsection-title">① 사회교환이론 (Social Exchange Theory)</div>
+    <div class="theory-box">
+      <div class="theory-head exchange">🔵 핵심 전제</div>
+      <div class="theory-body">
+        <p style="margin-bottom:10px;">인간은 <strong>합리성에 기초</strong>하여 관계에서 <strong>이익(benefit)을 극대화하고 비용(cost)을 최소화</strong>하는 방향으로 행동.</p>
+        <p>→ 보상이 비용보다 크거나 비슷해야 관계 지속 가능 / 적용 범위가 가장 넓어 세대 간 지원교환 설명에 가장 많이 사용됨.</p>
+      </div>
+    </div>
+    <table>
+      <tr>
+        <th>개념</th><th>내용</th><th>키워드</th>
+      </tr>
+      <tr>
+        <td><strong>호혜성</strong></td>
+        <td>주고받음의 균형이 중요. 이익 극대화보다 상응하는 교환 유지가 핵심.</td>
+        <td><span class="badge badge-green">균형</span></td>
+      </tr>
+      <tr>
+        <td><strong>지원 종류 비동일성</strong></td>
+        <td>주고받는 지원의 종류가 반드시 같을 필요 없음 (예: 돌봄 ↔ 경제적 지원)</td>
+        <td><span class="badge badge-blue">이종 교환</span></td>
+      </tr>
+      <tr>
+        <td><strong>장기적 호혜성</strong></td>
+        <td>세대관계는 오래 지속되어 보상이 즉각적이지 않고 지연될 수 있음. 특정 시점에는 일방적으로 보일 수 있으나 시간의 틀을 넓히면 호혜성 발견.</td>
+        <td><span class="badge badge-orange">지연 보상</span></td>
+      </tr>
+      <tr>
+        <td><strong>이타심 관점</strong></td>
+        <td>배려와 사랑이 지원교환의 동기. 교환이론에서는 이도 보람·기쁨이라는 보상으로 설명 가능.</td>
+        <td><span class="badge badge-purple">이타성</span></td>
+      </tr>
+      <tr>
+        <td><strong>효(filial piety) 규범</strong></td>
+        <td>세대관계를 지배하는 문화적 각본. 불효 시 '불효한 자녀'라는 큰 비용 발생.</td>
+        <td><span class="badge badge-red">문화 규범</span></td>
+      </tr>
+    </table>
+    <div class="memory-tip">
+      <div class="memory-tip-label">💡 암기 Tip</div>
+      장기적 호혜성 연구: Silverstein 등(2002) — 과거 부모로부터 받은 지원 → 나중에 자녀가 부모에게 제공하는 지원 양에 영향. Leopold & Raab(2013) — 부모 지원 많이 받은 자녀가 주 돌봄자로 선택됨.
+    </div>
+  </div>
+
+  <!-- 결속도 모델 -->
+  <div class="subsection">
+    <div class="subsection-title">② 결속도 모델 (Intergenerational Solidarity Model)</div>
+    <div class="theory-box">
+      <div class="theory-head solidarity">🟢 핵심 전제</div>
+      <div class="theory-body">
+        <p>Parsons의 핵가족화 고립론 + Popenoe의 세대관계 약화설에 <strong>반박</strong>. <strong>Bengtson(1988)</strong> 제안. Durkheim의 결속도 개념을 세대관계에 적용.</p>
+        <p style="margin-top:8px;">→ 생애과정에 걸쳐 부모-자녀 관계가 지속적이고 긴밀하게 연결됨을 실증적으로 보여줌.</p>
+      </div>
+    </div>
+
+    <div class="solidarity-grid">
+      <div class="sol-box">
+        <span class="sol-emoji">🤝</span>
+        <div class="sol-name">연계적 결속</div>
+        <div class="sol-eng">associational solidarity</div>
+        <div class="sol-desc">세대 간 접촉의 빈도나 질</div>
+      </div>
+      <div class="sol-box">
+        <span class="sol-emoji">❤️</span>
+        <div class="sol-name">애정적 결속</div>
+        <div class="sol-eng">affectional solidarity</div>
+        <div class="sol-desc">정서적 친밀도</div>
+      </div>
+      <div class="sol-box">
+        <span class="sol-emoji">💬</span>
+        <div class="sol-name">합의적 결속</div>
+        <div class="sol-eng">consensual solidarity</div>
+        <div class="sol-desc">가족 간 가치·신념의 유사성</div>
+      </div>
+      <div class="sol-box">
+        <span class="sol-emoji">🔄</span>
+        <div class="sol-name">기능적 결속</div>
+        <div class="sol-eng">functional solidarity</div>
+        <div class="sol-desc">지원교환 수준 및 상호 호혜성</div>
+      </div>
+      <div class="sol-box">
+        <span class="sol-emoji">📜</span>
+        <div class="sol-name">규범적 결속</div>
+        <div class="sol-eng">normative solidarity</div>
+        <div class="sol-desc">가족역할 헌신, 의무감</div>
+      </div>
+      <div class="sol-box">
+        <span class="sol-emoji">🏠</span>
+        <div class="sol-name">구조적 결속</div>
+        <div class="sol-eng">structural solidarity</div>
+        <div class="sol-desc">거주근접성 등 구조적 상태</div>
+      </div>
+    </div>
+
+    <div class="highlight blue">
+      <strong>📌 주요 연구 결과</strong><br>
+      Yi & Lin(2009): 동거 시 비동거보다 대부분 영역의 결속 수준이 더 높음 → 구조적 결속과 다른 결속의 관련성 확인<br>
+      정순둘·이루리(2014): 40세 이상에서 <strong>애정적 결속</strong>이 삶의 만족도를 가장 잘 예측<br>
+      최희정·민주홍(2015): <strong>거주근접성, 애정적 결속</strong>이 노부모 건강에 영향
+    </div>
+
+    <div class="highlight warning">
+      <strong>⭐ 발달적 이해관계 가설 (Bengtson & Kuypers, 1971)</strong><br>
+      노부모가 성인자녀보다 세대관계를 <strong>더 긍정적으로 인식</strong>하는 경향.<br>
+      이유: 부모는 자녀에게 이미 많은 자원을 투자 → 관계 실패 인정 어려움 + 관계 파기 시 잃을 것이 더 많음.
+    </div>
+  </div>
+
+  <!-- 양가성 모델 -->
+  <div class="subsection">
+    <div class="subsection-title">③ 양가성 모델 (Ambivalence Model)</div>
+    <div class="theory-box">
+      <div class="theory-head ambivalence">🟠 핵심 전제</div>
+      <div class="theory-body">
+        <p>결속도 모델이 세대관계의 <strong>부정적 측면을 간과</strong>한다는 비판에서 등장. Luscher & Pillemer(1998).</p>
+        <p style="margin-top:8px;">→ 결속·유대(긍정)와 긴장·갈등(부정)이 <strong>공존</strong>한다고 봄.</p>
+      </div>
+    </div>
+    <table>
+      <tr><th>유형</th><th>정의</th><th>예시</th></tr>
+      <tr>
+        <td><strong>심리적 양가성</strong></td>
+        <td>동일한 대상에 대해 상충되는 감정이 공존하는 상태</td>
+        <td>"어머니와 친하지만 구속되기도 한다"</td>
+      </tr>
+      <tr>
+        <td><strong>사회적 양가성</strong></td>
+        <td>역할 수행 시 부과되는 사회적 기대가 모순적이어서 겪는 양가성</td>
+        <td>독립성 + 상호의존성 동시 요구</td>
+      </tr>
+    </table>
+    <div class="highlight">
+      <strong>📌 주요 연구 결과</strong><br>
+      Fingerman 등(2012): 지원 많이 하는 부모 → 양가감정 + 낮은 삶의 만족감<br>
+      Birditt 등(2010): 자녀 문제 많고 보상 적을수록 부모의 양가감정↑<br>
+      한경혜·윤성은(2004): 중년 딸-노년 어머니 사이 친밀감+갈등 공존, <strong>관계사(relationship history)</strong>의 결과물<br>
+      문정희·안정신(2014): 양가감정 ↔ 세대 간 친밀감, 갈등, 관계만족도 연관
+    </div>
+  </div>
+
+  <!-- 이론 비교 요약 -->
+  <div class="card">
+    <div class="card-title">📊 3가지 이론 비교 요약</div>
+    <table>
+      <tr><th>이론</th><th>학자</th><th>핵심 주장</th><th>초점</th></tr>
+      <tr>
+        <td><span class="badge badge-blue">사회교환이론</span></td>
+        <td>보편적</td>
+        <td>이익 극대화·비용 최소화. 호혜성과 균형이 관계 유지의 핵심</td>
+        <td>지원교환</td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-green">결속도 모델</span></td>
+        <td>Bengtson(1988)</td>
+        <td>세대 간 관계는 잘 유지됨. 6가지 결속 차원으로 측정</td>
+        <td>긍정적 측면</td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-orange">양가성 모델</span></td>
+        <td>Luscher & Pillemer(1998)</td>
+        <td>긍정·부정이 공존. 결속도만으로는 설명 불충분</td>
+        <td>긍정+부정 공존</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<!-- ===================== 3. 한국 가족 세대관계 현황 ===================== -->
+<div id="korea-family" class="section">
+  <div class="section-header">
+    <div class="section-num">03</div>
+    <div>
+      <div class="section-title">한국 가족 내 세대관계 현황</div>
+      <div class="section-sub">구조적 특성 + 질적 특성</div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-title">세대관계의 특성: 구조적 vs 질적</div>
+    <div class="term-grid">
+      <div class="term-card">
+        <div class="term-name">구조적 특성</div>
+        <div class="term-def">세대 간 <strong>동거유형</strong>, <strong>거주근접성</strong>, <strong>접촉빈도</strong>로 파악</div>
+      </div>
+      <div class="term-card">
+        <div class="term-name">질적 특성</div>
+        <div class="term-def">세대 간 <strong>지지 교환 양상</strong>, <strong>세대관계 만족도</strong>로 탐색</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-title">① 거주유형 변화</div>
+    <div class="stat-grid">
+      <div class="stat-box">
+        <div class="stat-num">54.7%</div>
+        <div class="stat-label">1994년 자녀동거 비율</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">23.7%</div>
+        <div class="stat-label">2017년 자녀동거 비율</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">72%</div>
+        <div class="stat-label">2017년 노인단독가구</div>
+      </div>
+    </div>
+    <div class="highlight">
+      <strong>가구원 수 변화:</strong> 1990년 평균 3.7명 → 2015년 2.5명 → 2045년(전망) 2.1명<br>
+      <strong>핵심 트렌드:</strong> 자녀동거 ↓, 노인단독가구(노인독신+노인부부) ↑
+    </div>
+
+    <div class="card">
+      <div class="card-title">동거 결정 요인</div>
+      <table>
+        <tr><th>요인</th><th>내용</th></tr>
+        <tr><td><strong>필요(needs)</strong></td><td>건강상태 — 건강하면 독립 거주 선호</td></tr>
+        <tr><td><strong>경제적 자원</strong></td><td>두 세대 모두 독립 가능 시 별거 선호</td></tr>
+        <tr><td><strong>가용성(availability)</strong></td><td>자녀 수 (인구학적 변수)</td></tr>
+        <tr><td><strong>문화적 선호</strong></td><td>전통적 가치관·효규범이 강하면 동거 선호</td></tr>
+        <tr><td><strong>교환적 이득</strong></td><td>맞벌이 자녀 + 육아지원 = 서로 이익 → 동거</td></tr>
+        <tr><td><strong>사회적 서비스</strong></td><td>주간보호, 방문간호, 아동돌봄 등이 충분하면 별거 선택 가능</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-title">② 세대 간 거주 근접성</div>
+    <div class="highlight">
+      <strong>거주 근접성(residential proximity)</strong>: 접촉빈도·지원교환을 예측하는 핵심 요인.<br>
+      현재 선호: <strong>"거리를 둔 친밀성"</strong> → 동거는 원치 않지만 국이 식지 않는 거리에 근접거주 (수정확대가족)<br><br>
+      한국사회조사(2016): 걸어서 15분 이내 거주 비율 — 시가 13.7%, 처가 9.1% (2006년 대비 증가)
+    </div>
+    <div class="card">
+      <div class="card-title">근접거주 관련 연구</div>
+      <ul class="text-sm">
+        <li>한경혜·윤성은(2004): 남편 연령 낮을수록 시가/처가와 더 가까이 거주. 아내 학력·취업 시 <strong>처가</strong> 근접성 높음.</li>
+        <li>최희정·남보람(2016): 손자녀 많을수록 노부모와 가깝게 거주 (조부모의 육아지원 역할 반영)</li>
+        <li>성별의 영향: <strong>아들</strong>이 딸보다 부모와 가까이 거주 (부계 중심성 잔존)</li>
+        <li>유재언(2017): 노부모의 IADL 제한 시 또는 손자녀 출생·돌봄 시 → 동거 시작이나 근거리 이주 증가</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-title">③ 세대 간 접촉</div>
+    <div class="highlight blue">
+      <strong>접촉빈도</strong> = 성인자녀가 노부모에게 제공하는 <strong>경제·도구적 지원의 가장 강한 예측요인</strong> (한경혜·김상욱, 2010)<br><br>
+      2017년 사회동향조사: 18세↑ 기혼자 중 <strong>70% 이상</strong>이 주 1회 이상 연락, <strong>60% 이상</strong>이 월 1회 이상 만남<br>
+      2017년 노인실태조사: 비동거 자녀와 주 1회↑ 왕래 38.0%, 연락 81.0%<br><br>
+      빈보경·최희정(2017): 자녀 결혼 → 만남빈도↓ / 첫 자녀 출산 → 만남·연락 빈도↑ (부모 교육수준 높을수록 증가폭 큼)
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-title">④ 세대 간 지원교환</div>
+    <div class="card">
+      <div class="card-title">지원의 3가지 종류</div>
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-bottom:12px;">
+        <span class="badge badge-green">💰 경제적 지원</span>
+        <span class="badge badge-blue">❤️ 정서적 지원</span>
+        <span class="badge badge-orange">🔧 도구적 지원</span>
+      </div>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-box">
+        <div class="stat-num">70.2%</div>
+        <div class="stat-label">자녀로부터 정서적 지원 <em>수혜</em></div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">59.1%</div>
+        <div class="stat-label">자녀에게 정서적 지원 <em>제공</em></div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">34.5% / 7.1%</div>
+        <div class="stat-label">도구적 지원 수혜 / 제공</div>
+      </div>
+    </div>
+
+    <div class="highlight warning">
+      <strong>⭐ 핵심: 노인의 수혜율 &gt; 자녀에 대한 제공률 (전반적 경향)</strong><br>
+      특히 도구적 지원: 상호 방문이 필요 → 정서적 지원보다 제공률·수혜율 모두 낮음.
+    </div>
+
+    <div class="card">
+      <div class="card-title">지원교환 유형화 (김익기·김정석, 2000)</div>
+      <table>
+        <tr><th>유형</th><th>특성</th><th>생활만족도</th></tr>
+        <tr><td><strong>쌍방형</strong></td><td>주고받음</td><td>높음 ⭐</td></tr>
+        <tr><td><strong>수급형</strong></td><td>자녀로부터만 받음</td><td>중간</td></tr>
+        <tr><td><strong>무교환형</strong></td><td>아무런 지원교환 없음</td><td>가장 낮음 ❌</td></tr>
+      </table>
+      <p class="text-sm text-mid" style="margin-top:8px;">→ 공평이론으로 설명: 지원 양 자체가 아닌 <strong>호혜성</strong>이 중요</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title">박경숙(2003) — 중년자녀 관점 유형화</div>
+      <table>
+        <tr><th>유형</th><th>비율</th><th>특성</th></tr>
+        <tr><td>고립형</td><td>31.5%</td><td>떨어져 살며 지원교환 적음</td></tr>
+        <tr><td>비호혜적 유형</td><td>-</td><td>함께 살며 일방적으로 노부모에게 지원 제공</td></tr>
+        <tr><td>호혜형</td><td>-</td><td>함께 살며 호혜적 강한 지원관계</td></tr>
+        <tr><td>상황적 지원</td><td>12.8%</td><td>필요 상황에서만 지원 제공</td></tr>
+      </table>
+      <p class="text-sm text-mid" style="margin-top:8px;"><strong>노인 관점 유형(3가지):</strong> 전통적 유형(49.7%) > 고립형 > 호혜형(19.8%)</p>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-title">⑤ 세대관계와 삶의 질</div>
+    <div class="card">
+      <div class="card-title">이론별 예측</div>
+      <table>
+        <tr><th>이론</th><th>예측</th></tr>
+        <tr>
+          <td><strong>사회교환이론</strong></td>
+          <td>지원수혜↑ → 삶의 질↑ (보상이기 때문) / 지원제공↑ → 삶의 질↓ (비용). 단, 광의의 보상/비용 개념 적용 시 반대 결과도 설명 가능.</td>
+        </tr>
+        <tr>
+          <td><strong>공평이론</strong></td>
+          <td>호혜적 교환 시 삶의 질↑. 과다수혜(over-benefit)→독립성 상실감, 과소수혜(under-benefit)→분노감. 곡선관계.</td>
+        </tr>
+      </table>
+    </div>
+    <div class="highlight">
+      <strong>📌 세대 간 애정적 결속</strong> = 삶의 질에 가장 큰 영향 (Lowenstein 등, 2008)<br>
+      양가성 → 부모·자녀 양측의 삶의 질↓, 정신건강에 부정적 영향 (다수 연구 확인)<br>
+      Lowenstein 등(2007): 노르웨이·영국·독일·스페인·이스라엘 75세↑ 노인 → 호혜적 교환 = 삶의 질↑, 과다수혜 = 자율성↓ → 삶의 질↓
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-title">⑥ 한국 사회 세대관계의 양계화</div>
+    <div class="highlight">
+      <strong>전통:</strong> 부계 중심성이 강했음<br>
+      <strong>변화:</strong> 부계 중심성 약화 + 양계화 경향 → 단, 비대칭적 양계화
+    </div>
+    <div class="card">
+      <div class="card-title">비대칭적 양계화 패턴</div>
+      <table>
+        <tr><th>구분</th><th>지원 제공(→ 부계 높음)</th><th>지원 수혜(← 모계 높음)</th></tr>
+        <tr><td>경제적 지원</td><td>남편부모 &gt; 처가 (약 3배)</td><td>아내부모 &gt; 시부모</td></tr>
+        <tr><td>도구적 지원</td><td>수혜자 = 남편 부모</td><td>제공자 = 아내 부모</td></tr>
+        <tr><td>정서적 지원</td><td>중요 결정 시 = 부계</td><td>일상대화 = 모계(친정) 활발</td></tr>
+        <tr><td>공식 행사</td><td colspan="2">명절·공식 행사에서는 시가 우선성 여전</td></tr>
+      </table>
+      <p class="text-sm text-mid" style="margin-top:8px;">김경민 등(2015): 남편이 부인에게 지지적일수록 부계중심 → 양계균형 지원교환 가능성 높음</p>
+    </div>
+    <div class="highlight blue">
+      <strong>최근 10년간 변화 (2006→2016):</strong><br>
+      주 1회 이상 연락: 시가 79.4%→71.5%↓ / 처가 72.9%→73.4%↑<br>
+      → 처가와의 상호작용 비중 증가. 시가와 처가 차이 점차 좁혀지는 추세.
+    </div>
+  </div>
+</div>
+
+<!-- ===================== 4. 조부모-손자녀 관계 ===================== -->
+<div id="grandparent" class="section">
+  <div class="section-header">
+    <div class="section-num">04</div>
+    <div>
+      <div class="section-title">조부모와 손자녀 관계</div>
+      <div class="section-sub">역할의 중요성 증가 · 역할유형 · 관계의 질</div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-title">조부모 역할의 중요성 증가 배경</div>
+    <div class="card">
+      <ul>
+        <li>전통적: '역할 없는 역할(roleless role)' — 핵가족화로 영향력 감소</li>
+        <li><strong>현재 중요성 증가 이유:</strong>
+          <ol style="margin-top:6px;">
+            <li>수명 연장 → 다세대 공존 기간 길어짐 + 콩깍지형 가족 증가</li>
+            <li>기혼여성의 노동시장 참여율 증가 → 조부모의 손자녀 양육 지원 필요</li>
+            <li>이혼율 증가 → 조손가족 증가</li>
+            <li>건강하고 자원 있는 조부모 집단 증가 (베이비부머 노년기 진입)</li>
+          </ol>
+        </li>
+      </ul>
+    </div>
+    <div class="highlight">
+      홍승우·최혜경(2012): 32.3%의 조부모가 손자녀에게 <strong>경제적 지원</strong> 제공
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-title">조부모의 역할</div>
+    <div class="term-grid">
+      <div class="term-card">
+        <div class="term-name">훈육자</div>
+        <div class="term-def">행동 지도 및 훈육 역할</div>
+      </div>
+      <div class="term-card">
+        <div class="term-name">전통·문화 전승자</div>
+        <div class="term-def">문화적 유산 전달</div>
+      </div>
+      <div class="term-card">
+        <div class="term-name">친구 같은 역할</div>
+        <div class="term-def">정서적 동반자</div>
+      </div>
+      <div class="term-card">
+        <div class="term-name">경제적 후원자</div>
+        <div class="term-def">재정적 지원 제공</div>
+      </div>
+      <div class="term-card">
+        <div class="term-name">대리부모</div>
+        <div class="term-def">실질적 양육 담당</div>
+      </div>
+      <div class="term-card">
+        <div class="term-name">세대 연속감 제공</div>
+        <div class="term-def">정체감 발달 지원</div>
+      </div>
+    </div>
+    <div class="highlight warning">
+      <strong>양가성:</strong> 손자녀 = 삶의 영속성·즐거움 BUT 자신이 늙었다는 사실을 인식하게 됨 → 양가적 감정 경험 가능
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-title">조부모 역할 유형 (Cherlin & Furstenberg, 1986)</div>
+    <table>
+      <tr><th>유형</th><th>특성</th></tr>
+      <tr><td><strong>거리두기형 (detached)</strong></td><td>지원교환·양육 관여 모두 낮음. 최소한의 연락만 하는 매우 먼 관계.</td></tr>
+      <tr><td><strong>수동형 (passive)</strong></td><td>지원교환·양육 관여 모두 낮음 (거리두기보다는 조금 더 접촉)</td></tr>
+      <tr><td><strong>적극형 (active)</strong></td><td>지원교환·양육 관여 모두 높음</td></tr>
+    </table>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-title">한국 조부모 역할 유형 (홍승우·최혜경, 2012)</div>
+    <div class="term-grid">
+      <div class="term-card">
+        <div class="term-name">공식형 <span style="font-size:0.8rem;">(61.8% — 가장 많음)</span></div>
+        <div class="term-def">자주 만나지 않지만 용돈·선물로 관심 표현. 연령 높고 혼자 사는 비율 높음.</div>
+      </div>
+      <div class="term-card">
+        <div class="term-name">밀착형 <span style="font-size:0.8rem;">(22%)</span></div>
+        <div class="term-def">손자녀 양육에 깊이 관여하며 긴밀한 관계 유지.</div>
+      </div>
+      <div class="term-card">
+        <div class="term-name">소극형</div>
+        <div class="term-def">자주 만나 시간은 많이 보내지만 양육에는 적극적으로 관여하지 않음.</div>
+      </div>
+    </div>
+    <div class="highlight blue">
+      성별 차이: <strong>조모</strong>가 주로 실질적 양육자 역할 담당<br>
+      연령 차이: 젊은 조부모 — 손자녀와 즐거움·재미 추구 / 먼 거리 유형도 젊은 조부모에 빈번<br>
+      손자녀 성장하면서 → 조부모와 접촉빈도↓, 유대감↓
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-title">조손가족 — 보상-비용 유형 (한경혜 등, 2008)</div>
+    <div class="term-grid">
+      <div class="term-card">
+        <div class="term-name">유형 Ⅱ 〈보상高-비용低〉 32.3% (가장 많음)</div>
+        <div class="term-def">젊은 조모, 유배우율 높음, 영유아 손자녀</div>
+      </div>
+      <div class="term-card">
+        <div class="term-name">유형 Ⅲ 〈보상低-비용低〉 25.1%</div>
+        <div class="term-def"> </div>
+      </div>
+      <div class="term-card">
+        <div class="term-name">유형 Ⅳ 〈보상低-비용高〉 23.5%</div>
+        <div class="term-def">손자녀 수 많음, 경제적 어려움, 맞벌이 지원 양육</div>
+      </div>
+      <div class="term-card">
+        <div class="term-name">유형 Ⅰ 〈보상高-비용高〉 19.1% (가장 적음)</div>
+        <div class="term-def"> </div>
+      </div>
+    </div>
+    <div class="highlight warning">
+      조손가족 조부모 어려움: <strong>양육스트레스, 우울감, 건강악화</strong><br>
+      긍정적 측면: 어려운 자녀를 돕는다는 <strong>자부심</strong>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-title">조부모-손자녀 관계의 질에 영향하는 요인</div>
+    <ul class="text-sm">
+      <li>접촉(대면·전화·문자·이메일) → 유대감 강화 (단, 접촉빈도≠관계의 질 정비례 아님)</li>
+      <li>가치·태도 유사성↑ → 관계 질↑</li>
+      <li>조부모 교육수준↑ → 조손 유대 강하고 애정적 관계</li>
+      <li>가족위기(부모 이혼·사망) → 조부모 개입 기회↑, 연대 강화 기회</li>
+      <li><strong>부모-조부모 관계 좋을수록</strong> → 손자녀도 조부모와 더 친밀 (세대 간 매개자로서 부모의 역할)</li>
+    </ul>
+    <div class="highlight">
+      이정화·한경혜(2008) — 농촌 조손가족 유형화:<br>
+      삼중유대(Triple-bonded): 45.5% / 이중유대: 20.2% / 단일유대: 16.2% / 유대없음: 18.2%<br>
+      → 미국보다 Not-bonded 비율 높아 취약함. 복지서비스 필요성 시사.
+    </div>
+  </div>
+</div>
+
+<!-- ===================== 5. 노년기 형제관계 ===================== -->
+<div id="sibling" class="section">
+  <div class="section-header">
+    <div class="section-num">05</div>
+    <div>
+      <div class="section-title">노년기 형제관계</div>
+      <div class="section-sub">독특성 · 사회적 지원망으로서의 역할</div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-title">형제관계의 중요성</div>
+    <div class="highlight">
+      수명 연장 → 노년기 길어짐 → 형제관계 중요성↑<br>
+      젊은 시절: 각자 가족 형성으로 소원 → <strong>노년기: 형제 다시 찾는 경향</strong><br>
+      부모님의 사망 = 중노년기 형제관계를 소중히 여기는 <strong>중요한 터닝 포인트</strong>
+    </div>
+    <div class="stat-grid">
+      <div class="stat-box">
+        <div class="stat-num">84.7%</div>
+        <div class="stat-label">65세↑ 노인 중 형제자매 생존</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">62.9%</div>
+        <div class="stat-label">월 1회 이상 연락</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">21.8%</div>
+        <div class="stat-label">주 1회 이상 잦은 연락·왕래</div>
+      </div>
+    </div>
+    <p class="text-sm text-mid">* 2017년 노인실태조사 기준. 미국: 약 80%가 형제자매 생존, 1년에 1번 정도 만남, 33%는 월 1회 잦은 접촉.</p>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-title">형제관계의 독특성</div>
+    <div class="card">
+      <ul>
+        <li><strong>공유 시간의 길이</strong>: 어느 누구보다도 긴 공유 시간, 어릴 적 기억 공유</li>
+        <li><strong>비교적 평등한 관계</strong>: 부모-자녀관계보다 수평적</li>
+        <li><strong>자발적·선택적 성격</strong>: 성인 후 형제관계에 대한 의무·규범적 기대가 약함</li>
+        <li><strong>갈등 가능성도 큼</strong>: 부모의 사랑·가족자원을 둘러싼 경쟁 (형제간 경쟁, sibling rivalry)</li>
+        <li>Cicirelli(1982): 노년기에는 <strong>90%</strong>가 싸우거나 경쟁하지 않는다고 응답</li>
+        <li>중노년기 형제: 잦은 접촉이 없어도 관계를 유지하고 소중히 여김 (Bedford et al., 2000)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-title">Gold(1990) — 노년기 형제관계 유형</div>
+    <table>
+      <tr><th>긍정적 유형 (3가지)</th><th>부정적 유형 (2가지)</th></tr>
+      <tr>
+        <td>① 매우 친밀한 관계<br>② 우호적 관계<br>③ 충성스러운 관계</td>
+        <td>④ 무관심 유형<br>⑤ 적대적 유형</td>
+      </tr>
+    </table>
+    <p class="text-sm text-mid" style="margin-top:8px;">→ 약 10%만이 나쁜 관계 유형에 속함.</p>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-title">부모관계와 형제관계의 연관성</div>
+    <div class="term-grid">
+      <div class="term-card">
+        <div class="term-name">보상기제 (형제관계에서 두드러짐)</div>
+        <div class="term-def">부모와 관계가 나쁘면 → 형제자매 간 정서적 지지↑ (부모 관계를 형제로 보상)</div>
+      </div>
+      <div class="term-card">
+        <div class="term-name">강화기제 (자매관계에서 두드러짐)</div>
+        <div class="term-def">세대 간 지원 수준이 높으면 → 형제자매 간 지원 수준도 높음</div>
+      </div>
+    </div>
+    <p class="text-sm text-mid">* Voorpostel & Blieszner(2008). Suitor 등(2009): 부모의 편애 인식 → 형제자매 관계 질↓ (현재보다 <strong>과거의 편애</strong>가 더 큰 영향)</p>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-title">사회적 지원망으로서의 형제</div>
+    <div class="highlight">
+      <strong>1차 지원:</strong> 배우자 → 자녀<br>
+      <strong>형제자매:</strong> 잠재적 자원 — 1차 지원 불가 시 도움 요청 가능 (안정감 제공). Cicirelli(1985)<br>
+      특히 <strong>이혼·배우자 상실·건강문제</strong> 등 생애사건 시 유대감↑
+    </div>
+    <div class="card">
+      <div class="card-title">형제관계에서의 차이</div>
+      <ul class="text-sm">
+        <li>젠더: <strong>자매간 관계</strong>가 가장 친밀 / 남성 노인은 여자 형제에게 가깝게 느낌</li>
+        <li>비혼·무자녀 노인에게 형제관계는 더욱 중요한 지원망</li>
+        <li>저출산 → 형제자매 관계망 축소 전망 (1차 베이비부머 평균 5명 형제 vs 자녀세대 평균 1.9명)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ===================== O/X 퀴즈 ===================== -->
+<div id="quiz-ox" class="section">
+  <div class="section-header">
+    <div class="section-num">✅</div>
+    <div>
+      <div class="section-title">O/X 퀴즈</div>
+      <div class="section-sub">클릭하면 정답 확인</div>
+    </div>
+  </div>
+
+  <div class="quiz-section">
+    <div class="quiz-header">⭕❌ O/X 문제 (20문항)</div>
+    <div class="quiz-body">
+
+      <div class="quiz-item">
+        <div class="quiz-q"><span class="qnum">1</span> 콩깍지형 가족(beanpole family)은 다세대가 공존하고 각 세대의 구성원 수도 많은 수평형 가족이다.</div>
+        <span class="answer-toggle" onclick="toggleAnswer(this)">▼ 정답 보기</span>
+        <div class="answer-box"><span class="ox-badge ox-x">X</span> <span class="wrong">틀림</span>. 콩깍지형 가족은 다세대가 공존하지만 <strong>한 세대의 규모는 작은 수직형 가족</strong>이다. 저출산으로 각 세대 구성원 수가 적다.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q"><span class="qnum">2</span> Bengtson은 사회교환이론을 통해 세대관계가 잘 유지되고 있음을 실증적으로 보여주었다.</div>
+        <span class="answer-toggle" onclick="toggleAnswer(this)">▼ 정답 보기</span>
+        <div class="answer-box"><span class="ox-badge ox-x">X</span> <span class="wrong">틀림</span>. Bengtson은 <strong>세대 간 결속도(solidarity) 모델</strong>을 통해 세대관계가 잘 유지됨을 보여주었다. 사회교환이론이 아님.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q"><span class="qnum">3</span> 사회교환이론에서 세대 간 지원교환의 호혜성은 반드시 즉각적으로 이루어져야 한다.</div>
+        <span class="answer-toggle" onclick="toggleAnswer(this)">▼ 정답 보기</span>
+        <div class="answer-box"><span class="ox-badge ox-x">X</span> <span class="wrong">틀림</span>. 세대관계는 오랜 기간 지속되므로 <strong>지연된 형태(장기적 호혜성)</strong>로 나타날 수 있다.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q"><span class="qnum">4</span> 발달적 이해관계 가설에 따르면, 노부모는 성인자녀보다 세대관계를 더 긍정적으로 인식하는 경향이 있다.</div>
+        <span class="answer-toggle" onclick="toggleAnswer(this)">▼ 정답 보기</span>
+        <div class="answer-box"><span class="ox-badge ox-o">O</span> <span class="correct">맞음</span>. 부모가 자녀에게 이미 많은 자원을 투자했기 때문에 관계를 긍정적으로 평가하는 경향이 크다. (Bengtson & Kuypers, 1971)</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q"><span class="qnum">5</span> 양가성 모델은 결속도 모델이 세대관계의 부정적 측면을 지나치게 강조한다는 비판에서 등장하였다.</div>
+        <span class="answer-toggle" onclick="toggleAnswer(this)">▼ 정답 보기</span>
+        <div class="answer-box"><span class="ox-badge ox-x">X</span> <span class="wrong">틀림</span>. 양가성 모델은 결속도 모델이 부정적 측면을 <strong>지나치게 간과(무시)</strong>한다는 비판에서 등장하였다.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q"><span class="qnum">6</span> 수정확대가족(modified extended family)은 자녀와 동거하지는 않지만 국이 식지 않는 거리에서 근접거주하는 가족 형태이다.</div>
+        <span class="answer-toggle" onclick="toggleAnswer(this)">▼ 정답 보기</span>
+        <div class="answer-box"><span class="ox-badge ox-o">O</span> <span class="correct">맞음</span>. 분리 거주 + '거리를 둔 친밀성' 유지 = 수정확대가족. 증가 추세.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q"><span class="qnum">7</span> 2017년 노인실태조사에 따르면 노인의 자녀동거가구 비율이 노인단독가구보다 더 높다.</div>
+        <span class="answer-toggle" onclick="toggleAnswer(this)">▼ 정답 보기</span>
+        <div class="answer-box"><span class="ox-badge ox-x">X</span> <span class="wrong">틀림</span>. 2017년 기준 자녀동거 23.7% < 노인단독가구 72%. 역전되었다.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q"><span class="qnum">8</span> 공평이론에 따르면 자녀로부터 지원을 많이 받을수록 노부모의 삶의 질이 높아진다.</div>
+        <span class="answer-toggle" onclick="toggleAnswer(this)">▼ 정답 보기</span>
+        <div class="answer-box"><span class="ox-badge ox-x">X</span> <span class="wrong">틀림</span>. 공평이론은 <strong>호혜적 교환</strong> 시 안녕감이 높다고 본다. 과다수혜(over-benefit) 시 독립성 상실감 발생 → 삶의 질↓. 곡선 관계.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q"><span class="qnum">9</span> 접촉빈도는 성인자녀가 노부모에게 제공하는 경제 및 도구적 지원정도의 가장 강한 예측요인이다.</div>
+        <span class="answer-toggle" onclick="toggleAnswer(this)">▼ 정답 보기</span>
+        <div class="answer-box"><span class="ox-badge ox-o">O</span> <span class="correct">맞음</span>. 한경혜·김상욱(2010). 접촉빈도↑ → 도구적·경제적 지원 제공↑.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q"><span class="qnum">10</span> 한국 가족의 양계화는 부계친족과 모계친족과의 상호작용이 균형적으로 이루어지는 대칭적 양계화이다.</div>
+        <span class="answer-toggle" onclick="toggleAnswer(this)">▼ 정답 보기</span>
+        <div class="answer-box"><span class="ox-badge ox-x">X</span> <span class="wrong">틀림</span>. <strong>비대칭적 양계화</strong>이다. 지원 제공은 부계(시댁), 지원 수혜는 모계(친정)로부터 받는 비대칭 패턴.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q"><span class="qnum">11</span> 결속도 모델의 6가지 차원 중 '기능적 결속'은 세대 간 접촉의 빈도나 질을 의미한다.</div>
+        <span class="answer-toggle" onclick="toggleAnswer(this)">▼ 정답 보기</span>
+        <div class="answer-box"><span class="ox-badge ox-x">X</span> <span class="wrong">틀림</span>. 접촉의 빈도나 질은 <strong>연계적 결속(associational solidarity)</strong>이다. 기능적 결속은 <strong>세대 간 지원교환의 수준 및 상호 호혜성</strong>이다.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q"><span class="qnum">12</span> 조부모역할 유형 중 홍승우·최혜경(2012)이 한국 조부모에서 가장 많이 발견한 유형은 '밀착형'이다.</div>
+        <span class="answer-toggle" onclick="toggleAnswer(this)">▼ 정답 보기</span>
+        <div class="answer-box"><span class="ox-badge ox-x">X</span> <span class="wrong">틀림</span>. 가장 많은 유형은 <strong>공식형(61.8%)</strong>이다. 밀착형은 약 22%.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q"><span class="qnum">13</span> 형제관계는 성인자녀가 노부모를 돌봐야 한다는 규범처럼 의무감이 강하게 작용한다.</div>
+        <span class="answer-toggle" onclick="toggleAnswer(this)">▼ 정답 보기</span>
+        <div class="answer-box"><span class="ox-badge ox-x">X</span> <span class="wrong">틀림</span>. 형제관계는 의무나 규범적 기대가 약하기 때문에 <strong>선택적·자발적 성격</strong>이 상대적으로 크다.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q"><span class="qnum">14</span> Cicirelli(1982)에 따르면 노년기에는 응답자의 90%가 형제간에 싸우거나 경쟁하지 않는다고 응답하였다.</div>
+        <span class="answer-toggle" onclick="toggleAnswer(this)">▼ 정답 보기</span>
+        <div class="answer-box"><span class="ox-badge ox-o">O</span> <span class="correct">맞음</span>. 노년기에는 형제 간 경쟁이 감소하고 긍정적 관계를 형성하는 경향이 있다.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q"><span class="qnum">15</span> Voorpostel & Blieszner(2008)에 따르면 부모와의 관계가 나쁘면 형제자매 간 정서적 지지 수준이 낮아지는 '보상기제'가 나타난다.</div>
+        <span class="answer-toggle" onclick="toggleAnswer(this)">▼ 정답 보기</span>
+        <div class="answer-box"><span class="ox-badge ox-x">X</span> <span class="wrong">틀림</span>. 보상기제는 부모와 관계 나쁠 때 → 형제자매 간 정서적 지지↑이다. 즉 보상기제는 지지가 <strong>높아지는</strong> 것이다.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q"><span class="qnum">16</span> Hagestad의 다세대 가족 모델에서 가장 위의 부모세대(G1)를 '야누스', 가장 아래의 자녀세대(Gn)를 '알파'라고 지칭한다.</div>
+        <span class="answer-toggle" onclick="toggleAnswer(this)">▼ 정답 보기</span>
+        <div class="answer-box"><span class="ox-badge ox-x">X</span> <span class="wrong">틀림</span>. G1(가장 위)은 <strong>'오메가'</strong>, Gn(가장 아래)은 <strong>'알파'</strong>이다. <strong>'야누스'</strong>는 부모이면서 동시에 자녀인 세대.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q"><span class="qnum">17</span> 세대 간 심리적 양가성이 높을수록 부모와 자녀 양측의 삶의 질이 낮아지고 정신건강에 부정적 영향을 미친다.</div>
+        <span class="answer-toggle" onclick="toggleAnswer(this)">▼ 정답 보기</span>
+        <div class="answer-box"><span class="ox-badge ox-o">O</span> <span class="correct">맞음</span>. 다수의 연구(Fingerman et al., 2008; Lee & Szinovacz, 2016 등)에서 양가성의 부정적 영향이 확인되었다.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q"><span class="qnum">18</span> 노부모와 성인자녀의 동거 여부는 경제적 지원을 받을 가능성을 직접적으로 높인다.</div>
+        <span class="answer-toggle" onclick="toggleAnswer(this)">▼ 정답 보기</span>
+        <div class="answer-box"><span class="ox-badge ox-x">X</span> <span class="wrong">틀림</span>. 동거 여부는 <strong>신체적·도구적 지원</strong>에는 영향을 미치지만, <strong>경제적 지원이나 정서적 부양을 받을 가능성을 직접적으로 높이지는 않는다.</strong></div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q"><span class="qnum">19</span> 한경혜·윤성은(2004)에 따르면 아내의 학력이 높거나 취업한 경우 처가와의 거주근접성이 높게 나타났다.</div>
+        <span class="answer-toggle" onclick="toggleAnswer(this)">▼ 정답 보기</span>
+        <div class="answer-box"><span class="ox-badge ox-o">O</span> <span class="correct">맞음</span>. 아내가 고학력·취업 시 친정(처가) 근처에 거주하는 경향 → 맞벌이 시 육아지원 필요성 반영.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q"><span class="qnum">20</span> 노년기에 자매간 관계보다 형제간(남-남) 관계가 가장 친밀한 경향을 보인다.</div>
+        <span class="answer-toggle" onclick="toggleAnswer(this)">▼ 정답 보기</span>
+        <div class="answer-box"><span class="ox-badge ox-x">X</span> <span class="wrong">틀림</span>. 일반적으로 <strong>자매간 관계</strong>가 가장 친밀한 경향. 남성 노인은 여자 형제에게 가깝게 느낀다.</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ===================== 단답형 ===================== -->
+<div id="quiz-short" class="section">
+  <div class="section-header">
+    <div class="section-num">✍️</div>
+    <div>
+      <div class="section-title">단답형 / 빈칸 채우기</div>
+      <div class="section-sub">클릭하면 정답 확인</div>
+    </div>
+  </div>
+
+  <div class="quiz-section">
+    <div class="quiz-header">📝 단답형 문제 (15문항)</div>
+    <div class="quiz-body">
+
+      <div class="quiz-item">
+        <div class="quiz-q"><span class="qnum">1</span> 저출산으로 다세대가 공존하지만 한 세대의 규모는 작은 수직형 가족을 무엇이라 하는가?</div>
+        <span class="answer-toggle" onclick="toggleAnswer(this)">▼ 정답 보기</span>
+        <div class="answer-box"><strong>콩깍지형 가족 (beanpole family)</strong></div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q"><span class="qnum">2</span> Bengtson(1988)이 제안한 세대 간 결속의 6가지 차원을 모두 쓰시오.</div>
+        <span class="answer-toggle" onclick="toggleAnswer(this)">▼ 정답 보기</span>
+        <div class="answer-box">① 연계적 결속 (접촉 빈도·질)<br>② 애정적 결속 (정서적 친밀도)<br>③ 합의적 결속 (가치·신념 유사성)<br>④ 기능적 결속 (지원교환 수준·호혜성)<br>⑤ 규범적 결속 (가족역할 헌신·의무감)<br>⑥ 구조적 결속 (거주근접성 등)</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q"><span class="qnum">3</span> 생애단계상의 위치 차이로 인하여 부모가 자녀보다 세대관계를 더 긍정적으로 인식하는 경향을 설명하는 가설은?</div>
+        <span class="answer-toggle" onclick="toggleAnswer(this)">▼ 정답 보기</span>
+        <div class="answer-box"><strong>발달적 이해관계 가설 (developmental stake hypothesis)</strong> — Bengtson & Kuypers(1971)</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q"><span class="qnum">4</span> 세대관계에서 동일한 대상에 대해 상충되는 감정이 공존하는 상태를 무엇이라 하는가?</div>
+        <span class="answer-toggle" onclick="toggleAnswer(this)">▼ 정답 보기</span>
+        <div class="answer-box"><strong>심리적 양가성 (psychological ambivalence)</strong></div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q"><span class="qnum">5</span> 양가감정 측정 공식을 쓰시오.</div>
+        <span class="answer-toggle" onclick="toggleAnswer(this)">▼ 정답 보기</span>
+        <div class="answer-box" style="font-size:1rem; font-weight:700; text-align:center;">양가감정 = (긍정 + 부정) / 2 − |긍정 − 부정|<br><span style="font-size:0.82rem; font-weight:400;">(Thompson 공식, Guo et al., 2013)</span></div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q"><span class="qnum">6</span> 함께 살지는 않지만 국이 식지 않는 거리에서 근접거주하며 긴밀한 유대를 맺는 가족 형태는?</div>
+        <span class="answer-toggle" onclick="toggleAnswer(this)">▼ 정답 보기</span>
+        <div class="answer-box"><strong>수정확대가족 (modified extended family)</strong></div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q"><span class="qnum">7</span> 세대 간 지원교환의 양과 삶의 질이 어떤 관계를 갖는다고 보는 이론은 무엇이며, 이 이론에서는 어떤 형태의 관계를 가정하는가?</div>
+        <span class="answer-toggle" onclick="toggleAnswer(this)">▼ 정답 보기</span>
+        <div class="answer-box"><strong>공평이론 (equity theory)</strong>. 지원교환의 이익과 삶의 질은 <strong>곡선(비선형) 관계</strong>를 가정한다. (호혜적 교환 시 안녕감 높음, 과다수혜/과소수혜 시 낮음)</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q"><span class="qnum">8</span> 홍승우·최혜경(2012)의 연구에서 한국 조부모 역할 유형 중 가장 많은 비율을 차지하는 유형과 그 특성을 쓰시오.</div>
+        <span class="answer-toggle" onclick="toggleAnswer(this)">▼ 정답 보기</span>
+        <div class="answer-box"><strong>공식형 (61.8%)</strong>. 손자녀의 양육에 관여하거나 자주 만나지는 않지만 용돈·선물로 관심과 사랑을 표현하는 유형.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q"><span class="qnum">9</span> Hagestad의 다세대 가족 모델에서 부모이면서 동시에 자녀인 세대를 지칭하는 용어는?</div>
+        <span class="answer-toggle" onclick="toggleAnswer(this)">▼ 정답 보기</span>
+        <div class="answer-box"><strong>야누스 (Janus)</strong></div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q"><span class="qnum">10</span> 친족과의 상호작용이 부계와 모계 혈족을 차별하지 않고 이루어지는 것을 무엇이라 하는가?</div>
+        <span class="answer-toggle" onclick="toggleAnswer(this)">▼ 정답 보기</span>
+        <div class="answer-box"><strong>양계화</strong></div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q"><span class="qnum">11</span> 2017년 노인실태조사 기준, 노인단독가구의 비율은 몇 %인가? (1994년과 비교하여)</div>
+        <span class="answer-toggle" onclick="toggleAnswer(this)">▼ 정답 보기</span>
+        <div class="answer-box">2017년: <strong>72%</strong> (1994년: 40.4%에서 급증)</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q"><span class="qnum">12</span> 형제관계에서 부모와 관계가 나쁠 때 형제자매 간 정서적 지지가 오히려 높아지는 현상을 무엇이라 하는가?</div>
+        <span class="answer-toggle" onclick="toggleAnswer(this)">▼ 정답 보기</span>
+        <div class="answer-box"><strong>보상기제</strong> (형제관계에서 두드러짐)</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q"><span class="qnum">13</span> 세대 간 지원교환에서 제공한 지원에 대한 보상이 반드시 즉각적이지 않고 시간이 흐른 후 나타나는 호혜성 개념은?</div>
+        <span class="answer-toggle" onclick="toggleAnswer(this)">▼ 정답 보기</span>
+        <div class="answer-box"><strong>장기적 호혜성</strong></div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q"><span class="qnum">14</span> 현대 사회에서 조부모가 '역할 없는 역할(roleless role)'로 여겨져 온 이유는 무엇인가?</div>
+        <span class="answer-toggle" onclick="toggleAnswer(this)">▼ 정답 보기</span>
+        <div class="answer-box"><strong>가족구조가 핵가족화됨</strong>에 따라 손자녀의 삶에서 조부모의 영향력이 크게 감소하였고, 조부모 역할에 대한 문화적 기대나 규범이 거의 존재하지 않기 때문.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q"><span class="qnum">15</span> 2017년 노인실태조사에서 65세 이상 노인 중 형제자매가 생존하는 비율은?</div>
+        <span class="answer-toggle" onclick="toggleAnswer(this)">▼ 정답 보기</span>
+        <div class="answer-box"><strong>84.7%</strong></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ===================== 서술형 대비 ===================== -->
+<div id="quiz-essay" class="section">
+  <div class="section-header">
+    <div class="section-num">📝</div>
+    <div>
+      <div class="section-title">서술형 대비 핵심 논점</div>
+      <div class="section-sub">이렇게 써야 고득점!</div>
+    </div>
+  </div>
+
+  <div class="quiz-section">
+    <div class="quiz-header">📝 주요 서술형 논점</div>
+    <div class="quiz-body">
+
+      <div class="quiz-item">
+        <div class="quiz-q"><span class="qnum">1</span> 사회교환이론에서 세대 간 호혜성의 특성 두 가지를 설명하시오.</div>
+        <span class="answer-toggle" onclick="toggleAnswer(this)">▼ 정답 보기</span>
+        <div class="answer-box">
+          <strong>① 지원 종류의 비동일성:</strong> 부모와 자녀 사이에 주고받는 지원의 종류가 반드시 동일하지 않아도 된다. 서로 다른 생애단계에 있어 각자 필요로 하는 지원이나 자원의 종류가 상이하기 때문이다. (예: 돌봄 ↔ 경제적 지원)<br><br>
+          <strong>② 장기적 호혜성 (지연된 호혜성):</strong> 세대관계는 오랜 기간 지속되므로 지원에 대한 보상이 즉각적으로 이루어질 필요가 없으며 지연된 형태로 나타날 수 있다. 특정 시점에서 일방적으로 보여도 시간의 틀을 넓히면 호혜성이 발견된다.
+        </div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q"><span class="qnum">2</span> 결속도 모델과 양가성 모델의 차이점을 비교하여 설명하시오.</div>
+        <span class="answer-toggle" onclick="toggleAnswer(this)">▼ 정답 보기</span>
+        <div class="answer-box">
+          <strong>결속도 모델 (Bengtson, 1988):</strong> Parsons의 핵가족화 고립론과 Popenoe의 세대관계 약화설에 반박하여 세대 간 관계가 생애과정에 걸쳐 지속적·긴밀하게 유지됨을 실증적으로 보여준다. 연계적·애정적·합의적·기능적·규범적·구조적 결속의 6가지 차원으로 세대관계를 측정하며 긍정적 측면에 초점.<br><br>
+          <strong>양가성 모델 (Luscher & Pillemer, 1998):</strong> 결속도 모델이 세대관계의 부정적 측면을 지나치게 간과한다는 비판에서 등장. 세대 간에 결속·유대(긍정)와 긴장·갈등(부정)이 공존함을 강조. 심리적 양가성(상충되는 감정 공존)과 사회적 양가성(역할 기대의 모순)으로 구분.
+        </div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q"><span class="qnum">3</span> 한국 사회 세대관계의 양계화를 설명하고, 이것이 '비대칭적' 양계화라고 불리는 이유를 구체적으로 서술하시오.</div>
+        <span class="answer-toggle" onclick="toggleAnswer(this)">▼ 정답 보기</span>
+        <div class="answer-box">
+          <strong>양계화:</strong> 압축적 근대화와 함께 부계 중심성이 약화되고, 친족과의 상호작용이 부계와 모계 혈족을 차별하지 않고 이루어지는 방향으로 변화하는 현상.<br><br>
+          <strong>비대칭적인 이유:</strong> 한경혜·윤성은(2004) 등의 연구에 따르면 경제적 지원의 경우 남편부모(시댁)에 대한 제공률이 처가의 약 3배로 높은 반면, 부모로부터 받는 경제적·도구적 지원은 아내부모(친정)로부터 더 많이 받는 것으로 나타났다. 즉 지원 제공은 시댁으로, 지원 수혜는 친정으로부터 이루어지는 패턴이 나타나 부계·모계 상호작용이 균형적으로 이루어지는 대칭적 양계화라기보다는 비대칭적 성격의 양계화 경향을 보인다.
+        </div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q"><span class="qnum">4</span> 조부모 역할의 중요성이 증가하는 배경을 4가지 이상 서술하시오.</div>
+        <span class="answer-toggle" onclick="toggleAnswer(this)">▼ 정답 보기</span>
+        <div class="answer-box">
+          ① <strong>수명 연장 및 콩깍지형 가족 증가:</strong> 세대 수가 늘고 여러 세대가 함께 살아가는 기간이 길어짐<br>
+          ② <strong>기혼여성의 노동시장 참여율 증가:</strong> 조부모의 손자녀 양육 지원 필요성 증대<br>
+          ③ <strong>이혼율 증가 등 가족불안정성:</strong> 조손가족 증가로 조부모의 역할이 부각됨<br>
+          ④ <strong>건강하고 자원 있는 조부모 집단 증가:</strong> 베이비부머의 노년기 진입으로 적극적인 역할 수행 가능
+        </div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q"><span class="qnum">5</span> 자녀로부터의 지원 수혜가 노부모의 삶의 질을 오히려 낮출 수 있는 이유를 사회교환이론과 공평이론의 관점에서 각각 설명하시오.</div>
+        <span class="answer-toggle" onclick="toggleAnswer(this)">▼ 정답 보기</span>
+        <div class="answer-box">
+          <strong>사회교환이론:</strong> 지원 수혜는 필요한 자원을 '받는다'는 면에서 보상이지만, 동시에 '독립성의 상실'이라는 비용으로 작용할 수 있다. 특히 독립성 규범이 강한 문화적 맥락에서 자녀에게 일방적으로 지원을 받는 경우, 노부모는 과도하게 받는 관계가 적절치 않다는 감정이 비용으로 작용하여 사기가 저하될 수 있다(Stoller, 1985).<br><br>
+          <strong>공평이론:</strong> 인간은 이익 극대화보다 호혜적이고 균형 잡힌 관계를 선호하며 이때 안녕감이 높다. 자신이 제공한 것보다 더 많이 받는 과다수혜(over-benefit) 상태에서는 자신이 받은 만큼 되갚을 능력이 없다는 점 때문에 독립성 상실감을 경험하여 삶의 질이 낮아질 수 있다(Lowenstein 등, 2007).
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 최종 요약 -->
+  <div class="summary-box">
+    <h4>🎯 시험 직전 최종 체크리스트</h4>
+    <ul>
+      <li>콩깍지형 가족 = 수직형, 다세대 공존 + 각 세대 규모 小</li>
+      <li>결속도 6차원: 연·애·합·기·규·구 (연계/애정/합의/기능/규범/구조)</li>
+      <li>발달적 이해관계 가설: 부모 &gt; 자녀 (더 긍정적 인식)</li>
+      <li>양가감정 공식: (긍정+부정)/2 − |긍정−부정|</li>
+      <li>거주유형: 1994년 자녀동거 54.7% → 2017년 23.7% (역전)</li>
+      <li>노인단독가구 2017년 72%</li>
+      <li>공평이론: 과다수혜 → 독립성 상실감 / 과소수혜 → 분노감 (곡선 관계)</li>
+      <li>한국 양계화 = 비대칭적: 지원제공→시댁, 지원수혜←친정</li>
+      <li>한국 조부모 역할: 공식형(61.8%) &gt; 밀착형(22%) &gt; 소극형</li>
+      <li>형제관계: 자매간 가장 친밀 / 보상기제(형제) vs 강화기제(자매)</li>
+      <li>수정확대가족 = "국이 식지 않는 거리" = 분리거주+친밀성</li>
+      <li>접촉빈도 = 도구적·경제적 지원의 가장 강한 예측요인</li>
+    </ul>
+  </div>
+</div>
+
+</div><!-- /container -->
+
+<button class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+function toggleAnswer(btn) {
+  const box = btn.nextElementSibling;
+  box.classList.toggle('show');
+  btn.textContent = box.classList.contains('show') ? '▲ 닫기' : '▼ 정답 보기';
+}
+</script>
+</body>
+</html>
