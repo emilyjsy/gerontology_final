@@ -10,6 +10,7 @@
             --primary-green: #2d6a4f;
             --light-green: #d8f3dc;
             --accent: #52b788;
+            --paper-blue: #2b6cb0; /* 논문 섹션용 포인트 컬러 */
             --bg: #f0faf3;
         }
 
@@ -36,22 +37,42 @@
         .subtitle { opacity: 0.9; margin-top: 10px; font-weight: 300; }
 
         .main-container {
-            max-width: 900px;
+            max-width: 1000px;
             width: 90%;
             margin-top: -40px;
+            margin-bottom: 60px;
         }
 
-        /* 챕터 카드 리스트 */
-        .chapter-grid {
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1a3a2a;
+            margin: 40px 0 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title::before {
+            content: '';
+            display: inline-block;
+            width: 5px;
+            height: 24px;
+            background: var(--accent);
+            margin-right: 10px;
+            border-radius: 2px;
+        }
+
+        /* 그리드 레이아웃 */
+        .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
         }
 
-        .chapter-card {
+        .card {
             background: white;
             border-radius: 20px;
-            padding: 30px;
+            padding: 25px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.05);
             transition: all 0.3s ease;
             display: flex;
@@ -60,61 +81,53 @@
             border: 1px solid #e0e0e0;
         }
 
-        .chapter-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent);
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
         }
 
-        .ch-number {
-            font-size: 0.9rem;
-            color: var(--accent);
+        .category-tag {
+            font-size: 0.8rem;
             font-weight: 700;
             margin-bottom: 10px;
+            text-transform: uppercase;
         }
 
-        .ch-title {
-            font-size: 1.4rem;
+        .title {
+            font-size: 1.25rem;
             font-weight: 700;
             color: #1a3a2a;
-            margin-bottom: 20px;
-            word-break: keep-all;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .description {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 25px;
         }
 
         /* 이동 버튼 */
         .btn-enter {
-            background: var(--primary-green);
-            color: white;
             text-decoration: none;
             text-align: center;
-            padding: 15px;
-            border-radius: 12px;
+            padding: 12px;
+            border-radius: 10px;
             font-weight: 700;
-            transition: background 0.2s;
+            transition: opacity 0.2s;
         }
 
-        .btn-enter:hover {
-            background: var(--accent);
-        }
+        /* 챕터 버튼 색상 */
+        .btn-chapter { background: var(--primary-green); color: white; }
+        /* 논문 버튼 색상 */
+        .btn-paper { background: var(--paper-blue); color: white; }
 
-        /* 준비중인 카드 */
-        .pending {
-            opacity: 0.6;
-            background: #f9f9f9;
-        }
-        .status-tag {
-            display: inline-block;
-            background: #eee;
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 0.8rem;
-            color: #777;
-        }
+        .btn-enter:hover { opacity: 0.9; }
 
         footer {
-            margin-top: auto;
-            padding: 40px;
+            padding: 30px;
             color: #888;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
     </style>
 </head>
@@ -126,36 +139,40 @@
 </header>
 
 <div class="main-container">
-    <div class="chapter-grid">
+    
+    <div class="section-title">주요 챕터 정리</div>
+    <div class="grid">
+        <div class="card">
+            <div>
+                <div class="category-tag" style="color: var(--accent);">Chapter 08</div>
+                <div class="title">사회적 노화 Ⅰ: 세대 및 친족관계</div>
+                <p class="description">콩깍지형 가족, 세대 간 결속도 모델, 양가성 모델 등 핵심 이론과 한국적 맥락 정리.</p>
+            </div>
+            <a href="gerontology_ch08_study.html" class="btn-enter btn-chapter">학습 시작하기 →</a>
+        </div>
         
-        <div class="chapter-card">
+        <div class="card" style="opacity: 0.6;">
             <div>
-                <div class="ch-number">CHAPTER 08</div>
-                <div class="ch-title">사회적 노화 Ⅰ (세대 및 친족관계)</div>
-                <p style="font-size: 0.9rem; color: #666;">콩깍지형 가족, 세대 간 결속도, 양가성 모델 등 핵심 이론 정리</p>
+                <div class="category-tag" style="color: #999;">Chapter 09</div>
+                <div class="title">사회적 노화 Ⅱ: 퇴직 및 사회활동</div>
+                <p class="description">업데이트 예정입니다.</p>
             </div>
-            <a href="gerontology_ch08_study.html" class="btn-enter">학습 시작하기 →</a>
+            <span class="btn-enter" style="background: #ccc;">준비중</span>
         </div>
-
-        <div class="chapter-card pending">
-            <div>
-                <div class="ch-number">CHAPTER 09</div>
-                <div class="ch-title">사회적 노화 Ⅱ (퇴직 및 사회활동)</div>
-                <span class="status-tag">자료 정리 중...</span>
-            </div>
-            <a href="#" class="btn-enter" style="background: #ccc; cursor: default;">잠겨있음</a>
-        </div>
-
-        <div class="chapter-card pending">
-            <div>
-                <div class="ch-number">CHAPTER 10</div>
-                <div class="ch-title">노인복지정책 및 산업</div>
-                <span class="status-tag">자료 정리 중...</span>
-            </div>
-            <a href="#" class="btn-enter" style="background: #ccc; cursor: default;">잠겨있음</a>
-        </div>
-
     </div>
+
+    <div class="section-title">심화 논문 학습</div>
+    <div class="grid">
+        <div class="card" style="border-top: 5px solid var(--paper-blue);">
+            <div>
+                <div class="category-tag" style="color: var(--paper-blue);">Research Paper</div>
+                <div class="title">Suitor et al. (2014): 편애와 형제 관계</div>
+                <p class="description">부모의 편애 지각이 성인 자녀의 형제간 갈등과 우울에 미치는 영향 분석 및 퀴즈 정리.</p>
+            </div>
+            <a href="suitor2014_study_guide.html" class="btn-enter btn-paper">논문 분석 보기 📄</a>
+        </div>
+    </div>
+
 </div>
 
 <footer>
