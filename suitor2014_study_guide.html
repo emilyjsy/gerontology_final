@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Suitor et al. (2014) 논문 정리</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0f14;
+    --surface: #16181f;
+    --surface2: #1e2029;
+    --border: #2a2d3a;
+    --accent1: #e8b86d;
+    --accent2: #6d9ee8;
+    --accent3: #e86d8a;
+    --accent4: #6de8b8;
+    --text: #e8e9ef;
+    --text-muted: #8b8fa8;
+    --text-dim: #5a5e75;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 300;
+    line-height: 1.8;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 2.5rem 2rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(12px);
+  }
+
+  .header-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    align-items: flex-end;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .paper-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--accent1);
+    border: 1px solid var(--accent1);
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+
+  .header-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.4;
+  }
+
+  .header-sub {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-top: 0.25rem;
+  }
+
+  /* ── NAV TABS ── */
+  .nav-tabs {
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    gap: 0.25rem;
+    padding: 1rem 2rem 0;
+    border-bottom: 1px solid var(--border);
+    overflow-x: auto;
+  }
+
+  .tab-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 0.82rem;
+    padding: 0.6rem 1.1rem;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active {
+    color: var(--accent1);
+    border-bottom-color: var(--accent1);
+    font-weight: 500;
+  }
+
+  /* ── MAIN ── */
+  main {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  .section { display: none; animation: fadeIn 0.3s ease; }
+  .section.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── BLOCK COMPONENTS ── */
+  .block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .block-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* color variants */
+  .c-gold  { color: var(--accent1); } .dot-gold  { background: var(--accent1); }
+  .c-blue  { color: var(--accent2); } .dot-blue  { background: var(--accent2); }
+  .c-pink  { color: var(--accent3); } .dot-pink  { background: var(--accent3); }
+  .c-teal  { color: var(--accent4); } .dot-teal  { background: var(--accent4); }
+
+  /* ── KV ROWS ── */
+  .kv-row {
+    display: flex;
+    gap: 0.75rem;
+    padding: 0.65rem 0;
+    border-bottom: 1px solid var(--border);
+    align-items: baseline;
+    flex-wrap: wrap;
+  }
+  .kv-row:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .kv-key {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    min-width: 160px;
+    flex-shrink: 0;
+  }
+
+  .kv-val {
+    font-size: 0.9rem;
+    color: var(--text);
+    flex: 1;
+  }
+
+  .kv-val strong { color: var(--accent1); font-weight: 500; }
+  .kv-val em    { color: var(--accent4); font-style: normal; }
+  .kv-val mark  {
+    background: rgba(232,184,109,0.15);
+    color: var(--accent1);
+    padding: 0 0.3em;
+    border-radius: 3px;
+  }
+
+  /* ── HIGHLIGHT BOX ── */
+  .hl-box {
+    border-left: 3px solid var(--accent1);
+    background: rgba(232,184,109,0.07);
+    padding: 0.9rem 1rem;
+    border-radius: 0 6px 6px 0;
+    margin: 0.75rem 0;
+    font-size: 0.88rem;
+  }
+
+  .hl-box.blue  { border-left-color: var(--accent2); background: rgba(109,158,232,0.07); }
+  .hl-box.pink  { border-left-color: var(--accent3); background: rgba(232,109,138,0.07); }
+  .hl-box.teal  { border-left-color: var(--accent4); background: rgba(109,232,184,0.07); }
+
+  /* ── HYPOTHESIS CARDS ── */
+  .hyp-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .hyp-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.1rem;
+  }
+
+  .hyp-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--accent1);
+    opacity: 0.4;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .hyp-text {
+    font-size: 0.85rem;
+    line-height: 1.65;
+    color: var(--text);
+  }
+
+  .hyp-text .tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-family: 'JetBrains Mono', monospace;
+    padding: 0.1rem 0.5rem;
+    border-radius: 3px;
+    margin-bottom: 0.4rem;
+  }
+  .tag-gold { background: rgba(232,184,109,0.2); color: var(--accent1); }
+  .tag-blue { background: rgba(109,158,232,0.2); color: var(--accent2); }
+  .tag-pink { background: rgba(232,109,138,0.2); color: var(--accent3); }
+
+  /* ── STAT TABLE ── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.83rem;
+    margin-top: 0.5rem;
+  }
+
+  th {
+    background: var(--surface2);
+    color: var(--text-muted);
+    font-weight: 500;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    padding: 0.6rem 0.9rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+
+  td {
+    padding: 0.6rem 0.9rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+    vertical-align: top;
+  }
+
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(255,255,255,0.02); }
+
+  td.sig { color: var(--accent4); font-family: 'JetBrains Mono', monospace; }
+  td.val { color: var(--accent1); font-family: 'JetBrains Mono', monospace; }
+
+  /* ── QUIZ CARDS ── */
+  .quiz-list { display: flex; flex-direction: column; gap: 1rem; }
+
+  .quiz-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+
+  .quiz-card:hover { border-color: var(--accent1); }
+
+  .quiz-q {
+    padding: 1rem 1.25rem;
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .qnum {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    min-width: 28px;
+    padding-top: 0.15rem;
+  }
+
+  .qtype {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 3px;
+    min-width: fit-content;
+    margin-top: 0.1rem;
+  }
+  .qt-ox   { background: rgba(109,232,184,0.15); color: var(--accent4); }
+  .qt-fill { background: rgba(232,184,109,0.15); color: var(--accent1); }
+  .qt-mc   { background: rgba(109,158,232,0.15); color: var(--accent2); }
+
+  .qtext {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    flex: 1;
+  }
+
+  .quiz-arrow {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    transition: transform 0.2s;
+    padding-top: 0.15rem;
+  }
+
+  .quiz-a {
+    display: none;
+    padding: 0.85rem 1.25rem 1rem;
+    border-top: 1px solid var(--border);
+    background: var(--surface2);
+  }
+
+  .quiz-a.shown { display: block; animation: fadeIn 0.2s ease; }
+
+  .answer-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--text-dim);
+    margin-bottom: 0.4rem;
+  }
+
+  .answer-text {
+    font-size: 0.87rem;
+    line-height: 1.65;
+    color: var(--text);
+  }
+
+  .answer-text strong { color: var(--accent1); font-weight: 500; }
+  .answer-text .ox-o  { color: var(--accent4); font-size: 1.1rem; font-weight: 700; }
+  .answer-text .ox-x  { color: var(--accent3); font-size: 1.1rem; font-weight: 700; }
+
+  /* ── FLOW DIAGRAM ── */
+  .flow {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin: 0.75rem 0;
+  }
+
+  .flow-node {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.5rem 0.9rem;
+    font-size: 0.8rem;
+    text-align: center;
+  }
+
+  .flow-arrow { color: var(--text-dim); font-size: 1rem; }
+
+  .flow-node.highlight { border-color: var(--accent1); color: var(--accent1); }
+  .flow-node.blue-node { border-color: var(--accent2); color: var(--accent2); }
+
+  /* ── RESULT BOX ── */
+  .result-banner {
+    border-radius: 6px;
+    padding: 1rem 1.25rem;
+    margin: 0.75rem 0;
+    font-size: 0.87rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .rb-supported { background: rgba(109,232,184,0.1); border: 1px solid rgba(109,232,184,0.25); }
+  .rb-icon { font-size: 1rem; flex-shrink: 0; margin-top: 0.1rem; }
+
+  /* ── PILL TAGS ── */
+  .pill {
+    display: inline-block;
+    font-size: 0.72rem;
+    padding: 0.2rem 0.7rem;
+    border-radius: 20px;
+    margin: 0.15rem;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .pill-gold { background: rgba(232,184,109,0.15); color: var(--accent1); border: 1px solid rgba(232,184,109,0.3); }
+  .pill-blue { background: rgba(109,158,232,0.15); color: var(--accent2); border: 1px solid rgba(109,158,232,0.3); }
+  .pill-pink { background: rgba(232,109,138,0.15); color: var(--accent3); border: 1px solid rgba(232,109,138,0.3); }
+  .pill-teal { background: rgba(109,232,184,0.15); color: var(--accent4); border: 1px solid rgba(109,232,184,0.3); }
+
+  /* ── SECTION HEADINGS ── */
+  .sec-heading {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--accent1);
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .sub-heading {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 1.5rem 0 0.75rem;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .kv-key { min-width: 120px; font-size: 0.78rem; }
+    .kv-val { font-size: 0.85rem; }
+    header { padding: 1.5rem 1rem 1rem; }
+    main { padding: 1.5rem 1rem; }
+    .nav-tabs { padding: 0.75rem 1rem 0; }
+  }
+
+  /* progress dots */
+  .progress-dots {
+    display: flex;
+    gap: 0.4rem;
+    margin-top: 0.5rem;
+  }
+  .progress-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--border);
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .progress-dot.active { background: var(--accent1); }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <span class="paper-badge">The Gerontologist · 2014 · Vol.54 No.4</span>
+    <div>
+      <div class="header-title">Suitor, Gilligan, Johnson & Pillemer — 논문 정리 노트</div>
+      <div class="header-sub">Caregiving, Perceptions of Maternal Favoritism, and Tension Among Siblings</div>
+    </div>
+  </div>
+</header>
+
+<!-- NAV -->
+<div class="nav-tabs">
+  <button class="tab-btn active" onclick="showTab('overview')">① 논문 개요</button>
+  <button class="tab-btn" onclick="showTab('theory')">② 이론 & 가설</button>
+  <button class="tab-btn" onclick="showTab('method')">③ 연구방법</button>
+  <button class="tab-btn" onclick="showTab('results')">④ 결과</button>
+  <button class="tab-btn" onclick="showTab('discussion')">⑤ 논의 & 함의</button>
+  <button class="tab-btn" onclick="showTab('quiz')">⑥ 퀴즈 연습</button>
+</div>
+
+<main>
+
+<!-- ════════════════════════ ① 개요 ════════════════════════ -->
+<div class="section active" id="sec-overview">
+  <div class="sec-heading">논문 개요</div>
+
+  <div class="block">
+    <div class="block-title c-gold"><span class="dot dot-gold"></span>연구 목적 (Purpose)</div>
+    <p style="font-size:0.9rem; line-height:1.8;">
+      노부모(어머니) 돌봄 상황에서 <strong style="color:var(--accent1)">형제자매 갈등(sibling tension)</strong>을 높이는 두 가지 요인—
+      <em>① 실제 돌봄 제공 여부</em>와 <em>② 어머니의 편애 지각</em>—이 각각, 그리고 <strong style="color:var(--accent1)">상호작용</strong>하여
+      어떻게 갈등에 영향을 미치는지 탐색.
+    </p>
+    <div class="flow" style="margin-top:1rem;">
+      <div class="flow-node highlight">돌봄 제공<br><small>caregiving</small></div>
+      <div class="flow-arrow">+</div>
+      <div class="flow-node blue-node">편애 지각<br><small>perceived favoritism</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node highlight">형제자매 갈등<br><small>sibling tension</small></div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-title c-blue"><span class="dot dot-blue"></span>핵심 개념 정리</div>
+    <div class="kv-row">
+      <div class="kv-key">형제자매 갈등<br><small>(sibling tension)</small></div>
+      <div class="kv-val">형제자매가 <mark>갈등/언쟁을 일으키는 빈도</mark>, <mark>과도한 요구</mark>, <mark>비난</mark> 3문항 합산 척도 (범위 3–15, M=6.13, SD=2.38, α=.76)</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">돌봄 제공<br><small>(caregiving)</small></div>
+      <div class="kv-val">인터뷰 전 <strong>2년 내</strong> 어머니의 중증 질병·부상 돌봄 또는 일상생활활동(ADL) 지원 여부 (0/1 이분형)</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">편애 지각<br><small>(perceived parental<br>favoritism)</small></div>
+      <div class="kv-val">"어머니가 병들거나 장애가 생기면 <strong>어떤 자녀가 돌봐주기를 원할 것 같냐</strong>"는 질문으로 측정. 특정 자녀 선호 지각=1, 없음=0 (이분형)</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">일상생활활동<br><small>(ADL)</small></div>
+      <div class="kv-val">light housework, shopping, eating, personal care 등 포함</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">가족 내 차이 접근<br><small>(within-family<br>differences approach)</small></div>
+      <div class="kv-val">동일 가족 내 자녀들을 비교하여, 가족 간 차이가 아닌 <strong>가족 내 차이</strong>를 분석하는 방법론적 특징</div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-title c-teal"><span class="dot dot-teal"></span>데이터 개요</div>
+    <div class="kv-row">
+      <div class="kv-key">출처 데이터셋</div>
+      <div class="kv-val"><strong>WFDS</strong> (Within-Family Differences Study)</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">표본 (분석 대상)</div>
+      <div class="kv-val"><strong>450명</strong> 성인자녀 / <strong>214개</strong> 가족 (어머니에게 2년 내 돌봄 필요 보고된 경우)</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">어머니 연령</div>
+      <div class="kv-val">65–75세 (T1 기준), 자녀 2명 이상</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">데이터 수집 지역</div>
+      <div class="kv-val">미국 <strong>Massachusetts</strong> 대도시 권역 (Greater Boston Area)</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">조사 시점</div>
+      <div class="kv-val">T1: 2001–2003년 / T2: 2008–2011년 (약 <strong>7년</strong> 간격)</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">전체 표본 (원래)</div>
+      <div class="kv-val">T1: 566명 어머니 → T2: 420명 어머니 (사망 78명, 거절 33명 등) → 자녀 833명/277가족</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">분석 방법</div>
+      <div class="kv-val"><strong>다층 분석</strong> (multilevel analysis / mixed model) — 가족 내 비독립성 통제</div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-title c-pink"><span class="dot dot-pink"></span>표본 기술통계 (Table 1)</div>
+    <table>
+      <thead><tr><th>변수</th><th>통계값</th></tr></thead>
+      <tbody>
+        <tr><td>평균 연령</td><td class="val">49.6세 (SD=5.8)</td></tr>
+        <tr><td>기혼 비율</td><td class="val">62%</td></tr>
+        <tr><td>백인 비율</td><td class="val">72.9%</td></tr>
+        <tr><td>취업 비율</td><td class="val">79.3%</td></tr>
+        <tr><td>가족 내 형제자매 수 평균</td><td class="val">4.3명 (SD=2.0)</td></tr>
+        <tr><td>T2에 돌봄 제공한 비율</td><td class="val"><strong>63.1%</strong></td></tr>
+        <tr><td>어머니 편애 지각 비율</td><td class="val"><strong>85.3%</strong> (자신 선호 지각 44% + 다른 자녀 선호 42%)</td></tr>
+        <tr><td>편애 없다고 지각</td><td class="val">약 13.7%</td></tr>
+        <tr><td>형제자매 갈등 평균</td><td class="val">M=6.13 (SD=2.38), 범위 3–15</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ════════════════════════ ② 이론 & 가설 ════════════════════════ -->
+<div class="section" id="sec-theory">
+  <div class="sec-heading">이론적 배경 & 가설</div>
+
+  <div class="block">
+    <div class="block-title c-gold"><span class="dot dot-gold"></span>이론적 근거 (Theoretical Background)</div>
+    <div class="hl-box">
+      <strong>사회적 지지 스트레스 완충 모델</strong><br>
+      돌봄 전환 스트레스는 지지(support) 제공보다 <em>대인 스트레스(interpersonal stress)의 부재</em>가 더 중요한 완충 요인 (Okun & Keith, 1998; Rook, 1998)
+    </div>
+    <div class="hl-box blue" style="margin-top:0.75rem;">
+      <strong>관계적 공정성 이론 (Relational Equity Theory)</strong> — Walster, Walster & Berscheid (1978)<br>
+      자신이 과도하게 혜택을 받든(over-benefitted), 적게 받든(under-benefitted) 간에, <em>불평등한 대우 지각</em> 자체가 관계의 질을 저하시킴
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-title c-blue"><span class="dot dot-blue"></span>편애가 갈등을 유발하는 메커니즘</div>
+    <div class="kv-row">
+      <div class="kv-key">일반적 편애 연구</div>
+      <div class="kv-val">부모가 특정 자녀에게 더 감정적 친밀감을 보인다고 지각될 때 형제자매 간 갈등↑, 친밀감↓ (Boll et al., 2003, 2005)</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">돌봄 전 상황</div>
+      <div class="kv-val">돌봄 필요 발생 이전에는 형제자매 교류가 자발적이고, 복잡한 의사결정이 적음</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">돌봄 시작 후</div>
+      <div class="kv-val">부모 건강 위기 → 자녀들이 한데 모여 돌봄 계획 수립 → 익숙하지 않은 고부담 의사결정 과정 → 편애 지각 시 갈등 폭발적 증가</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">편애의 방향성</div>
+      <div class="kv-val"><strong>누가 선호되느냐와 무관하게</strong> — 자신이 선호되어도, 다른 자녀가 선호되어도 갈등 증가 (→ equity 이론과 일치)</div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-title c-pink"><span class="dot dot-pink"></span>세 가지 가설 (Three Hypotheses)</div>
+    <div class="hyp-grid">
+      <div class="hyp-card">
+        <div class="hyp-num">H1</div>
+        <div class="hyp-text">
+          <span class="tag tag-gold">돌봄 주효과</span><br>
+          최근 어머니를 <strong>돌본 자녀</strong>는 돌보지 않은 자녀보다
+          형제자매 갈등이 <strong>더 높을 것</strong>이다.
+        </div>
+      </div>
+      <div class="hyp-card">
+        <div class="hyp-num">H2</div>
+        <div class="hyp-text">
+          <span class="tag tag-blue">편애 주효과</span><br>
+          어머니가 특정 자녀를 미래 돌봄자로 선호한다고 <strong>지각하는 자녀</strong>는
+          그렇지 않은 자녀보다 형제자매 갈등이 <strong>더 높을 것</strong>이다.
+        </div>
+      </div>
+      <div class="hyp-card">
+        <div class="hyp-num">H3</div>
+        <div class="hyp-text">
+          <span class="tag tag-pink">상호작용 효과</span><br>
+          <strong>돌봄 제공 × 편애 지각</strong>의 상호작용: 두 조건이 동시에 충족될 때
+          형제자매 갈등이 <strong>가장 높을 것</strong>이다.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════ ③ 연구방법 ════════════════════════ -->
+<div class="section" id="sec-method">
+  <div class="sec-heading">연구 방법</div>
+
+  <div class="block">
+    <div class="block-title c-gold"><span class="dot dot-gold"></span>표집 절차 (Sampling)</div>
+    <div class="kv-row">
+      <div class="kv-key">표집 방법</div>
+      <div class="kv-val">Massachusetts 시·읍 명부 기반 <strong>확률 표본 추출</strong> (Center for Survey Research, Univ. of Massachusetts, Boston)</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">T1 참여율</div>
+      <div class="kv-val">적격 대상의 <strong>61%</strong> 참여 (2000년대 유사 조사와 비교 가능한 수준)</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">T2 추적률</div>
+      <div class="kv-val">T1 생존자 중 <strong>86%</strong> 재인터뷰 성공 (78명 사망, 19명 건강불량, 33명 거절, 16명 미연락)</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">T2 탈락 편향</div>
+      <div class="kv-val">탈락자: 건강↓, 교육↓, 기혼 적음, 흑인 비율 높음 (주의 필요)</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">자녀 참여율</div>
+      <div class="kv-val">어머니의 <strong>81%</strong>가 자녀 연락처 제공 → 해당 자녀의 <strong>75%</strong> 참여</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">자녀 참여 편향</div>
+      <div class="kv-val">딸, 기혼자, 고학력자가 약간 더 많이 참여 (타 다세대 연구와 일치)</div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-title c-blue"><span class="dot dot-blue"></span>측정 변수 (Measures)</div>
+    <div class="sub-heading">종속변수</div>
+    <div class="hl-box">
+      <strong>형제자매 갈등 척도</strong> — 3문항 (Likert 1–5)<br>
+      (a) 형제자매가 나와 갈등/언쟁을 일으키는 빈도<br>
+      (b) 형제자매가 과도한 요구를 하는 빈도<br>
+      (c) 형제자매가 나를 비난하는 빈도<br>
+      → 합산: M=6.13, SD=2.38, α=<strong>.76</strong>
+    </div>
+
+    <div class="sub-heading">독립변수</div>
+    <div class="kv-row">
+      <div class="kv-key">돌봄 제공</div>
+      <div class="kv-val">이분형 (0/1): 최근 2년 내 중증 질환·부상 돌봄 또는 ADL 지원<br>→ 가족 내 <strong>복수</strong>의 자녀가 1로 코딩 가능</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">편애 지각</div>
+      <div class="kv-val">이분형 (0/1): "어머니는 미래 돌봄자로 누구를 원할 것 같냐" 질문에 특정 자녀 언급 시 1<br>→ 누구를 선호했는지(본인/다른 자녀)는 구분하지 않고 <strong>지각 여부</strong>만 활용</div>
+    </div>
+
+    <div class="sub-heading">통제변수</div>
+    <table>
+      <thead><tr><th>수준</th><th>변수</th><th>코딩</th></tr></thead>
+      <tbody>
+        <tr><td>가족 수준</td><td>인종(race)</td><td>백인=1, 비백인=0</td></tr>
+        <tr><td>가족 수준</td><td>가족 크기(family size)</td><td>자녀 수</td></tr>
+        <tr><td>개인 수준</td><td>성별(gender)</td><td>딸=1, 아들=0</td></tr>
+        <tr><td>개인 수준</td><td>혼인 상태(marital status)</td><td>기혼=1, 비혼=0</td></tr>
+        <tr><td>개인 수준</td><td>연령(age)</td><td>T2 기준 (T1 나이+7)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="block">
+    <div class="block-title c-teal"><span class="dot dot-teal"></span>분석 방법 (Analytic Strategy)</div>
+    <div class="kv-row">
+      <div class="kv-key">주요 분석</div>
+      <div class="kv-val"><strong>다층 혼합 모형</strong> (multilevel mixed model) — 자녀가 가족 내 중첩(nested)되어 있어 비독립성 통제 필요</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">소프트웨어</div>
+      <div class="kv-val">SPSS version 21</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">결측치 처리</div>
+      <div class="kv-val">목록 삭제(listwise deletion) — 각 변수 결측 5% 이하</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">모형 구성</div>
+      <div class="kv-val"><strong>Model 1</strong>: 주효과 모형 (caregiving + favoritism + controls)<br><strong>Model 2</strong>: 상호작용 추가 (caregiving × favoritism)</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">모형 적합도</div>
+      <div class="kv-val">AIC, BIC, Log Likelihood로 비교</div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════ ④ 결과 ════════════════════════ -->
+<div class="section" id="sec-results">
+  <div class="sec-heading">결과 (Results)</div>
+
+  <div class="block">
+    <div class="block-title c-gold"><span class="dot dot-gold"></span>Model 1 — 주효과 (Main Effects)</div>
+    <table>
+      <thead>
+        <tr><th>예측변수</th><th>B</th><th>SE</th><th>유의도</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>가족 크기</td><td class="val">−.09</td><td>.07</td><td>n.s.</td></tr>
+        <tr><td>인종(비백인)</td><td class="val">.10</td><td>.29</td><td>n.s.</td></tr>
+        <tr><td>연령</td><td class="val">.01</td><td>.02</td><td>n.s.</td></tr>
+        <tr><td>성별(딸)</td><td class="val">−.15</td><td>.21</td><td>n.s.</td></tr>
+        <tr><td><strong>혼인 상태(기혼)</strong></td><td class="val">−1.10</td><td>.22</td><td class="sig">** p&lt;.01</td></tr>
+        <tr><td><strong>돌봄 제공 여부</strong></td><td class="val">+.74</td><td>.22</td><td class="sig">** p&lt;.01</td></tr>
+        <tr><td><strong>편애 지각 여부</strong></td><td class="val">+.60</td><td>.30</td><td class="sig">* p&lt;.05</td></tr>
+      </tbody>
+    </table>
+    <div class="hl-box" style="margin-top:1rem;">
+      <strong>H1 ✓ 지지:</strong> 돌봄 제공 → 형제자매 갈등↑ (B=+.74, p&lt;.01)<br>
+      <strong>H2 ✓ 지지:</strong> 편애 지각 → 형제자매 갈등↑ (B=+.60, p&lt;.05)<br>
+      통제변수 중 유일하게 유의한 것: <strong>기혼 상태 → 갈등↓</strong> (B=−1.10, p&lt;.01)
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-title c-pink"><span class="dot dot-pink"></span>Model 2 — 상호작용 효과 (Interaction Effect)</div>
+    <table>
+      <thead>
+        <tr><th>예측변수</th><th>b</th><th>SE</th><th>유의도</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>돌봄 제공 여부</td><td class="val">−.36</td><td>.57</td><td>n.s.</td></tr>
+        <tr><td>편애 지각 여부</td><td class="val">−.13</td><td>.46</td><td>n.s.</td></tr>
+        <tr><td><strong>돌봄 × 편애 (상호작용)</strong></td><td class="val">+1.29</td><td>.61</td><td class="sig">* p&lt;.05</td></tr>
+      </tbody>
+    </table>
+    <div class="hl-box blue" style="margin-top:1rem;">
+      <strong>H3 ✓ 지지:</strong> 돌봄 제공 + 편애 지각이 <em>동시에</em> 있을 때 갈등이 가장 높음 (B=+1.29, p&lt;.05)<br>
+      → Model 2에서 주효과가 n.s.가 된 것은 상호작용항 투입으로 인한 통계적 변화 (공분산 흡수)
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-title c-teal"><span class="dot dot-teal"></span>추가 분석 — 편애 방향성 검증</div>
+    <div class="kv-row">
+      <div class="kv-key">분석 목적</div>
+      <div class="kv-val"><em>"누가 선호되느냐"</em>가 결과에 영향을 주는지 확인 (본인 vs 다른 형제 선호)</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">결과</div>
+      <div class="kv-val"><strong>방향성과 무관하게</strong> 동일한 패턴: 본인이 선호되어도, 다른 형제가 선호되어도 갈등 증가. 두 집단 간 차이는 작고 유의하지 않음.</div>
+    </div>
+    <div class="result-banner rb-supported">
+      <span class="rb-icon">⚖️</span>
+      <span>관계적 공정성 이론(equity theory) 지지 — 불평등 지각 자체가 갈등의 원인, 수혜 방향은 무관</span>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-title c-gold"><span class="dot dot-gold"></span>모형 적합도 비교</div>
+    <table>
+      <thead><tr><th>지표</th><th>Model 1</th><th>Model 2</th></tr></thead>
+      <tbody>
+        <tr><td>Log Likelihood</td><td class="val">1,958.97</td><td class="val">1,953.72</td></tr>
+        <tr><td>AIC</td><td class="val">1,962.97</td><td class="val">1,957.72</td></tr>
+        <tr><td>BIC</td><td class="val">1,971.12</td><td class="val">1,965.86</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:0.82rem; color:var(--text-muted); margin-top:0.75rem;">Model 2가 AIC·BIC 모두 낮으므로 상호작용항을 포함한 모형이 더 우수</p>
+  </div>
+</div>
+
+<!-- ════════════════════════ ⑤ 논의 & 함의 ════════════════════════ -->
+<div class="section" id="sec-discussion">
+  <div class="sec-heading">논의 & 실천적 함의</div>
+
+  <div class="block">
+    <div class="block-title c-gold"><span class="dot dot-gold"></span>이 연구의 기여점 (Contribution)</div>
+    <div class="kv-row">
+      <div class="kv-key">기존 연구와의 차이</div>
+      <div class="kv-val">이전 연구들은 가족 간 비교. 본 연구는 <strong>가족 내(within-family) 접근</strong>으로 돌봄자녀 vs. 비돌봄자녀를 직접 비교</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">유사 연구</div>
+      <div class="kv-val">Khodyakov & Carr (2009): 사전 의료지시(advance directives)가 문제적이라 지각될 때 형제자매 관계 질↓</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">핵심 확장</div>
+      <div class="kv-val">편애 지각이 돌봄 맥락에서 <strong>더욱 강력한</strong> 갈등 예측 요인이 됨을 최초로 실증</div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-title c-pink"><span class="dot dot-pink"></span>"이중 위험 (Double Jeopardy)" 개념</div>
+    <div class="hl-box pink">
+      돌봄자녀에게는 이중 부담:<br>
+      <strong>① 돌봄 자체의 스트레스 증가</strong> + <strong>② 형제자매 지지가 가장 필요한 바로 그 시점에 갈등 악화</strong><br>
+      → 도움이 필요할 때 오히려 관계가 더 힘들어지는 역설적 상황
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-title c-blue"><span class="dot dot-blue"></span>편애가 갈등을 유발하는 두 경로</div>
+    <div class="kv-row">
+      <div class="kv-key">선호 자녀(돌봄자)의 불만</div>
+      <div class="kv-val">자신의 노력이 <strong>인정받지 못하거나 비난</strong>받는다고 느낌 — 어머니가 선호하지 않은 형제자매로부터</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">비선호 자녀의 불만</div>
+      <div class="kv-val">어머니에게 <strong>과소평가되거나 무시</strong>당한다고 느낌 → 어머니의 기대를 충족시키지 못하는 경우가 많음</div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-title c-teal"><span class="dot dot-teal"></span>실천적 함의 (Implications for Practice)</div>
+    <div class="kv-row">
+      <div class="kv-key">임상·상담 적용</div>
+      <div class="kv-val">성인 자녀 돌봄자를 상담하는 전문가는 <strong>편애 지각이 가족 상호작용과 의사결정에 미치는 영향</strong>을 탐색해야 함</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">가족 체계 관점</div>
+      <div class="kv-val">노년기 가족의 복잡성과 다관점성 인정 필요 — 돌봄자녀와 비돌봄 형제자매가 <strong>관계를 다르게 경험</strong>함</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">주의사항</div>
+      <div class="kv-val">비돌봄 형제자매에게는 관계가 비교적 조화롭게 보일 수 있으나, 돌봄자녀에게는 스트레스/갈등으로 경험됨 → 관점 차이 인식 중요</div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-title c-gold"><span class="dot dot-gold"></span>연구의 한계 & 향후 과제</div>
+    <div class="kv-row">
+      <div class="kv-key">한계 1</div>
+      <div class="kv-val">성격 특성(personality traits)과 유년기 형제자매 관계 데이터 없음 → 장기적 관계 이력 통제 불가</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">한계 2</div>
+      <div class="kv-val">표본이 Massachusetts 백인 중심 → 일반화 한계 (탈락자: 흑인 비율 높음, 건강↓, 교육↓)</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">향후 과제</div>
+      <div class="kv-val">① 자녀 성격 및 유년기 행동 데이터 포함한 연구<br>② 어머니 돌봄 선호 형성 요인 추가 분석 (Suitor et al., in press: 유사성, 성별, 근접성이 예측)</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">어머니 선호 예측요인<br><small>(기존 연구 결과)</small></div>
+      <div class="kv-val">유사성(similarity), 성별(gender), 근접성(proximity) — 자녀의 문제 행동(과거·현재)으로 예측 안 됨</div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════ ⑥ 퀴즈 ════════════════════════ -->
+<div class="section" id="sec-quiz">
+  <div class="sec-heading">퀴즈 연습</div>
+  <p style="font-size:0.83rem; color:var(--text-muted); margin-bottom:1.5rem;">각 문제를 클릭하면 정답이 표시됩니다.</p>
+
+  <div class="sub-heading">O/X 퀴즈</div>
+  <div class="quiz-list">
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">01</span>
+        <span class="qtype qt-ox">O/X</span>
+        <span class="qtext">이 연구에서 형제자매 갈등 척도는 총 3개 문항(갈등/언쟁, 과도한 요구, 비난)을 합산하여 측정하였으며, Cronbach's α는 .76이다.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text"><span class="ox-o">O</span> — 정확히 3문항 합산, α=.76, 범위 3–15, M=6.13</div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">02</span>
+        <span class="qtype qt-ox">O/X</span>
+        <span class="qtext">이 연구는 어머니가 자신을 미래 돌봄자로 선호한다고 지각한 자녀만이 형제자매 갈등 증가를 경험하고, 다른 형제자매가 선호된다고 지각한 자녀는 갈등이 증가하지 않는다는 결과를 보였다.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text"><span class="ox-x">X</span> — <strong>방향성과 무관하게</strong> 편애 지각 자체가 갈등을 높임. 자신이 선호되어도, 다른 자녀가 선호되어도 동일하게 갈등 증가.</div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">03</span>
+        <span class="qtype qt-ox">O/X</span>
+        <span class="qtext">WFDS는 Massachusetts 지역의 65–75세 여성 중 자녀가 1명 이상인 어머니를 대상으로 표집하였다.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text"><span class="ox-x">X</span> — 자녀 <strong>2명 이상</strong>이 조건 (형제자매 간 비교를 위해 반드시 필요)</div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">04</span>
+        <span class="qtype qt-ox">O/X</span>
+        <span class="qtext">분석 결과, 기혼 상태인 성인 자녀는 비혼 자녀에 비해 형제자매 갈등이 유의미하게 낮았다.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text"><span class="ox-o">O</span> — Model 1에서 Married β=−1.10, p&lt;.01. 통제변수 중 유일하게 유의한 변수.</div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">05</span>
+        <span class="qtype qt-ox">O/X</span>
+        <span class="qtext">이 연구의 분석 단위는 가족이며, 한 가족에서 오직 한 명의 자녀만 돌봄 제공자(caregiver=1)로 코딩될 수 있다.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text"><span class="ox-x">X</span> — 가족 내 <strong>복수의 자녀</strong>가 caregiving=1로 코딩 가능. 다층 분석을 사용하여 이를 처리.</div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">06</span>
+        <span class="qtype qt-ox">O/X</span>
+        <span class="qtext">이 연구에서 편애 지각 여부는 자녀가 아닌 어머니에게 직접 질문하여 측정하였다.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text"><span class="ox-x">X</span> — <strong>성인 자녀(offspring)</strong>에게 질문: "어머니가 병들거나 장애가 생기면 누구에게 돌봐주기를 원할 것 같냐?"</div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">07</span>
+        <span class="qtype qt-ox">O/X</span>
+        <span class="qtext">이 연구에서 분석에 포함된 최종 표본은 T2 인터뷰 이전 2년 내에 어머니가 돌봄을 필요로 했다고 보고한 성인 자녀들로만 구성되었다.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text"><span class="ox-o">O</span> — 450명 자녀/214가족, 모두 "어머니가 T2 이전 2년 내 중증 질병·부상·장애로 도움이 필요했음"을 보고한 사례만 포함.</div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">08</span>
+        <span class="qtype qt-ox">O/X</span>
+        <span class="qtext">관계적 공정성 이론(equity theory)에 따르면, 자신이 과도하게 혜택을 받는(over-benefitted) 경우에는 관계의 질이 저하되지 않는다.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text"><span class="ox-x">X</span> — Walster et al. (1978): over-benefitted이든 under-benefitted이든, <strong>불평등한 대우 지각 자체</strong>가 관계 질 저하로 이어짐.</div></div>
+    </div>
+
+  </div>
+
+  <div class="sub-heading" style="margin-top:2rem;">단답형 / 내용 확인 퀴즈</div>
+  <div class="quiz-list">
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">09</span>
+        <span class="qtype qt-fill">단답</span>
+        <span class="qtext">이 연구가 사용한 데이터셋의 이름은? (영문 약자 포함)</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text"><strong>WFDS</strong> — Within-Family Differences Study</div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">10</span>
+        <span class="qtype qt-fill">단답</span>
+        <span class="qtext">이 연구의 분석 표본(analytic sample)은 몇 명의 자녀가 몇 개의 가족 안에 중첩되어 있는가?</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text"><strong>450명</strong> 자녀 / <strong>214개</strong> 가족</div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">11</span>
+        <span class="qtype qt-fill">단답</span>
+        <span class="qtext">T1과 T2 조사 사이의 간격은 몇 년인가? 각 조사의 기간도 함께 답하라.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text">약 <strong>7년</strong> / T1: 2001–2003년, T2: 2008–2011년</div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">12</span>
+        <span class="qtype qt-fill">단답</span>
+        <span class="qtext">형제자매 갈등 척도의 측정 범위, 평균, 표준편차, 내적일관성 계수(Cronbach's α)를 모두 답하라.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text">범위 <strong>3–15</strong> / M=<strong>6.13</strong> / SD=<strong>2.38</strong> / α=<strong>.76</strong></div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">13</span>
+        <span class="qtype qt-fill">단답</span>
+        <span class="qtext">이 연구에서 어머니가 특정 자녀를 미래 돌봄자로 선호한다고 지각한 성인 자녀의 비율은?</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text"><strong>약 86% (85.3%)</strong> — 자신이 선호된다 44% + 다른 자녀가 선호된다 42%</div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">14</span>
+        <span class="qtype qt-fill">단답</span>
+        <span class="qtext">이 연구에서 검증된 세 번째 가설(H3)의 핵심 내용을 설명하라.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text"><strong>상호작용 가설</strong>: 돌봄을 제공하면서 동시에 편애를 지각할 때(caregiving × favoritism), 어느 하나만 존재할 때보다 형제자매 갈등이 더욱 높아진다. → Model 2에서 B=+1.29, p&lt;.05로 지지됨.</div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">15</span>
+        <span class="qtype qt-fill">단답</span>
+        <span class="qtext">이 연구에서 사용된 통계 분석 방법과, 이 방법을 선택한 이유를 설명하라.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text"><strong>다층 혼합 모형(multilevel mixed model)</strong> — 자녀들이 가족 안에 중첩(nested)되어 있어 같은 가족 내 자녀들 간 비독립성(non-independence)을 통제해야 하기 때문. 또한 가족 수준에서 복수의 돌봄자녀가 존재할 수 있음.</div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">16</span>
+        <span class="qtype qt-fill">단답</span>
+        <span class="qtext">"이중 위험(double jeopardy)"이 무엇을 의미하는지, 이 논문의 맥락에서 설명하라.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text">돌봄자녀에게 이중의 불이익이 발생하는 상황: <strong>①</strong> 돌봄 역할로 인해 스트레스·부담이 증가하고, <strong>②</strong> 바로 그 시점에 가장 필요한 형제자매의 지지 대신 갈등과 긴장이 심화되는 역설적 상황.</div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">17</span>
+        <span class="qtype qt-fill">단답</span>
+        <span class="qtext">T2에서 어머니를 돌본 성인 자녀의 비율은?</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text"><strong>63.1%</strong></div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">18</span>
+        <span class="qtype qt-fill">단답</span>
+        <span class="qtext">인종 변수의 코딩 방식과 그 이론적 근거를 설명하라.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text">백인=1, 비백인=0으로 코딩. 근거: 흑인·아시아계·히스패닉 가족에서 백인 가족보다 <strong>자녀의 부모 돌봄 의무감(filial responsibility)</strong>이 더 강하다는 기존 문헌에 근거.</div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">19</span>
+        <span class="qtype qt-mc">내용확인</span>
+        <span class="qtext">이 연구에서 어머니의 돌봄 선호(care preference)를 예측하는 요인으로 기존 연구(Suitor et al., in press)에서 밝혀진 것들은 무엇인가? 반대로 예측하지 않는 것은 무엇인가?</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text">
+        <strong>예측하는 요인:</strong> 유사성(similarity), 성별(gender), 근접성(proximity)<br>
+        <strong>예측하지 않는 것:</strong> 자녀의 현재 또는 과거 문제 행동(offspring's present or previous difficult behaviors)
+      </div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">20</span>
+        <span class="qtype qt-mc">내용확인</span>
+        <span class="qtext">T2 추적 조사에서 탈락한 어머니들의 특성을 T2 참여 어머니들과 비교하여 설명하라. (최소 3가지)</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text">
+        탈락자는 참여자에 비해: <strong>① 건강 수준이 낮고</strong> / <strong>② 교육 수준이 낮으며</strong> / <strong>③ 기혼 비율이 낮고</strong> / <strong>④ 흑인(Black) 비율이 높음</strong>
+      </div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">21</span>
+        <span class="qtype qt-mc">내용확인</span>
+        <span class="qtext">이 논문의 이론적 배경에서 사회적 지지(social support)보다 대인 스트레스(interpersonal stress)의 부재가 더 중요하다는 주장의 근거와, 이것이 돌봄 상황에서 왜 특히 중요한지 설명하라.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text">
+        기존 연구(Okun & Keith, 1998; Rook, 1998)에서 비판, 과도한 요구, 도움이 안 되는 조언, 지지 불충족 등 <strong>부정적 상호작용</strong>이 긍정적 지지보다 심리적 결과에 더 강한 영향을 줌.<br><br>
+        돌봄 상황에서는: Suitor & Pillemer (1996)의 2년 종단연구에서, 형제자매의 지지가 높이 평가되더라도 <strong>대인 스트레스가 이를 압도하고 훼손</strong>함을 확인. 따라서 높은 수준의 긍정적 상호작용도 대인 스트레스가 동반되면 완충 효과 없음.
+      </div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">22</span>
+        <span class="qtype qt-mc">내용확인</span>
+        <span class="qtext">이 연구의 한계점으로 저자들이 직접 언급한 것은 무엇이며, 향후 연구에서 어떤 데이터가 필요하다고 제안하는가?</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text">
+        <strong>한계:</strong> WFDS 데이터셋에 자녀의 성격 특성(personality traits) 및 유년기 행동 데이터가 없어, 유년기부터의 어려운 형제 관계 이력이 편애 지각과 현재 갈등 모두에 영향을 줄 가능성을 배제할 수 없음.<br>
+        <strong>향후 필요 데이터:</strong> 성인 자녀의 성격 특성 및 유년기 행동에 관한 자료
+      </div></div>
+    </div>
+
+  </div>
+</div>
+
+</main>
+
+<script>
+function showTab(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('sec-' + id).classList.add('active');
+  event.currentTarget.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function toggleAnswer(el) {
+  const card = el.closest('.quiz-card');
+  const ans = card.querySelector('.quiz-a');
+  const arrow = el.querySelector('.quiz-arrow');
+  const shown = ans.classList.toggle('shown');
+  arrow.style.transform = shown ? 'rotate(180deg)' : 'rotate(0deg)';
+}
+</script>
+</body>
+</html>
