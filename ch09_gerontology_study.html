@@ -1,0 +1,1517 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CH09 사회적 노화 II: 중노년기 부부관계 — 시험대비 정리</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Noto+Serif+KR:wght@400;700&display=swap');
+
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --surface2: #222638;
+    --border: #2e3351;
+    --accent: #6c8fef;
+    --accent2: #e97b6b;
+    --accent3: #56c9a4;
+    --accent4: #f0c96b;
+    --text: #e8eaf6;
+    --text-muted: #8892b0;
+    --text-dim: #5a6785;
+    --def-bg: #141b2d;
+    --def-border: #3a4f8a;
+    --tag-green: #1e3a2f;
+    --tag-green-text: #56c9a4;
+    --tag-red: #3a1e1e;
+    --tag-red-text: #e97b6b;
+    --tag-blue: #1a2a4a;
+    --tag-blue-text: #6c8fef;
+    --tag-yellow: #3a2e10;
+    --tag-yellow-text: #f0c96b;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  /* ── HEADER ── */
+  .hero {
+    background: linear-gradient(135deg, #0f1117 0%, #1a2040 50%, #0f1117 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 48px 32px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(108,143,239,0.12) 0%, transparent 70%);
+  }
+  .hero-label {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+  .hero h1 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(22px, 4vw, 36px);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.4;
+    margin-bottom: 12px;
+  }
+  .hero-sub {
+    color: var(--text-muted);
+    font-size: 13px;
+  }
+  .hero-badges {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+  }
+  .badge {
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  .badge-blue { background: var(--tag-blue); color: var(--tag-blue-text); border: 1px solid var(--accent); }
+  .badge-green { background: var(--tag-green); color: var(--tag-green-text); border: 1px solid var(--accent3); }
+  .badge-red { background: var(--tag-red); color: var(--tag-red-text); border: 1px solid var(--accent2); }
+  .badge-yellow { background: var(--tag-yellow); color: var(--tag-yellow-text); border: 1px solid var(--accent4); }
+
+  /* ── LAYOUT ── */
+  .container { max-width: 900px; margin: 0 auto; padding: 0 20px 80px; }
+
+  /* ── NAV ── */
+  .toc {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin: 32px 0;
+  }
+  .toc-title {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+    font-weight: 700;
+  }
+  .toc-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+  .toc-list li a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 0;
+    transition: color 0.2s;
+  }
+  .toc-list li a:hover { color: var(--accent); }
+  .toc-num { color: var(--text-dim); font-size: 11px; min-width: 20px; }
+
+  /* ── SECTION ── */
+  .section {
+    margin-top: 48px;
+    scroll-margin-top: 20px;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-num {
+    background: var(--accent);
+    color: #fff;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .section-num.green { background: var(--accent3); color: #0f1117; }
+  .section-num.orange { background: var(--accent2); }
+  .section-num.yellow { background: var(--accent4); color: #0f1117; }
+  .section-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 14px;
+  }
+  .card-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--accent4);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card-title .icon { font-size: 16px; }
+
+  /* ── DEFINITION BOX ── */
+  .def-box {
+    background: var(--def-bg);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: 16px 20px;
+    margin: 12px 0;
+    font-size: 14px;
+    line-height: 1.9;
+    color: #c8d0e8;
+  }
+  .def-box.green { border-color: var(--accent3); }
+  .def-box.orange { border-color: var(--accent2); }
+  .def-box.yellow { border-color: var(--accent4); }
+  .def-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .def-label.green { color: var(--accent3); }
+  .def-label.orange { color: var(--accent2); }
+  .def-label.yellow { color: var(--accent4); }
+
+  /* ── KEY TERMS GRID ── */
+  .term-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 12px;
+    margin: 16px 0;
+  }
+  .term-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+  .term-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .term-name.green { color: var(--accent3); }
+  .term-name.orange { color: var(--accent2); }
+  .term-desc { font-size: 13px; color: var(--text-muted); line-height: 1.7; }
+
+  /* ── MECHANISM TABLE ── */
+  .mech-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0;
+    font-size: 13.5px;
+  }
+  .mech-table th {
+    background: var(--surface2);
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 700;
+    color: var(--accent);
+    border: 1px solid var(--border);
+    font-size: 12px;
+    letter-spacing: 0.5px;
+  }
+  .mech-table td {
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    vertical-align: top;
+  }
+  .mech-table tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+  .mech-table td:first-child { color: var(--accent4); font-weight: 700; white-space: nowrap; }
+
+  /* ── LIST STYLED ── */
+  .styled-list { list-style: none; margin: 12px 0; }
+  .styled-list li {
+    padding: 8px 0 8px 20px;
+    position: relative;
+    font-size: 14px;
+    color: var(--text-muted);
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .styled-list li:last-child { border-bottom: none; }
+  .styled-list li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 10px;
+    top: 10px;
+  }
+  .styled-list li strong { color: var(--text); }
+
+  /* ── COMPARISON ── */
+  .compare-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 14px 0;
+  }
+  .compare-col {
+    background: var(--surface2);
+    border-radius: 8px;
+    padding: 16px;
+    border: 1px solid var(--border);
+  }
+  .compare-head {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-align: center;
+    padding: 6px 12px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+  }
+  .compare-head.blue { background: var(--tag-blue); color: var(--tag-blue-text); }
+  .compare-head.pink { background: var(--tag-red); color: var(--tag-red-text); }
+
+  /* ── QUIZ SECTION ── */
+  .quiz-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 16px;
+    overflow: hidden;
+  }
+  .quiz-header {
+    background: var(--surface2);
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .quiz-type-tag {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 3px 10px;
+    border-radius: 4px;
+  }
+  .tag-ox { background: var(--tag-green); color: var(--tag-green-text); }
+  .tag-short { background: var(--tag-blue); color: var(--tag-blue-text); }
+  .tag-essay { background: var(--tag-yellow); color: var(--tag-yellow-text); }
+  .tag-desc { background: var(--tag-red); color: var(--tag-red-text); }
+  .quiz-q {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    flex: 1;
+  }
+  .quiz-toggle {
+    color: var(--text-dim);
+    font-size: 18px;
+    transition: transform 0.3s;
+    margin-left: 8px;
+  }
+  .quiz-body {
+    display: none;
+    padding: 16px 20px;
+    border-top: 1px solid var(--border);
+  }
+  .quiz-body.open { display: block; }
+  .quiz-answer-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--accent3);
+    margin-bottom: 8px;
+  }
+  .quiz-answer {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.8;
+  }
+  .quiz-answer strong { color: var(--accent4); }
+  .ox-badge {
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    font-size: 18px;
+    font-weight: 900;
+    line-height: 36px;
+    text-align: center;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+  .ox-o { background: var(--tag-green); color: var(--tag-green-text); }
+  .ox-x { background: var(--tag-red); color: var(--tag-red-text); }
+
+  /* ── SUMMARY BOX ── */
+  .summary-box {
+    background: linear-gradient(135deg, #141b2d, #1a2040);
+    border: 1px solid #3a4f8a;
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin: 20px 0;
+  }
+  .summary-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+  }
+
+  /* ── HIGHLIGHT ── */
+  .hl { background: rgba(108,143,239,0.15); color: var(--accent); padding: 1px 6px; border-radius: 4px; font-weight: 700; }
+  .hl-green { background: rgba(86,201,164,0.15); color: var(--accent3); padding: 1px 6px; border-radius: 4px; font-weight: 700; }
+  .hl-red { background: rgba(233,123,107,0.15); color: var(--accent2); padding: 1px 6px; border-radius: 4px; font-weight: 700; }
+  .hl-yellow { background: rgba(240,201,107,0.15); color: var(--accent4); padding: 1px 6px; border-radius: 4px; font-weight: 700; }
+
+  /* ── DIVIDER ── */
+  .divider { height: 1px; background: var(--border); margin: 28px 0; }
+
+  /* ── SUB SECTION ── */
+  .sub-section { margin: 24px 0; }
+  .sub-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent4);
+    margin-bottom: 14px;
+    padding-left: 12px;
+    border-left: 3px solid var(--accent4);
+  }
+
+  /* ── STEP LIST ── */
+  .step-list { counter-reset: step; margin: 12px 0; }
+  .step-item {
+    display: flex;
+    gap: 14px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    align-items: flex-start;
+  }
+  .step-item:last-child { border-bottom: none; }
+  .step-num {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--accent4);
+    min-width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .step-content { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+  .step-content strong { color: var(--text); }
+
+  /* ── STAT BOX ── */
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 10px;
+    margin: 14px 0;
+  }
+  .stat-item {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px;
+    text-align: center;
+  }
+  .stat-value {
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--accent);
+    display: block;
+    line-height: 1.2;
+    margin-bottom: 4px;
+  }
+  .stat-label { font-size: 11px; color: var(--text-muted); }
+
+  /* ── FOOTER ── */
+  .footer {
+    text-align: center;
+    padding: 32px;
+    color: var(--text-dim);
+    font-size: 12px;
+    border-top: 1px solid var(--border);
+    margin-top: 48px;
+  }
+
+  @media (max-width: 600px) {
+    .compare-grid { grid-template-columns: 1fr; }
+    .toc-list { grid-template-columns: 1fr; }
+    .stat-row { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-label">GERONTOLOGY · CHAPTER 09</div>
+  <h1>사회적 노화 II<br>중노년기 부부관계</h1>
+  <p class="hero-sub">핵심 개념 정리 + 단답형 · O/X · 주관식 · 서술형 시험 대비</p>
+  <div class="hero-badges">
+    <span class="badge badge-blue">가족생활주기</span>
+    <span class="badge badge-green">결혼과 건강</span>
+    <span class="badge badge-red">이혼·사별</span>
+    <span class="badge badge-yellow">결혼만족도</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- TOC -->
+  <div class="toc">
+    <div class="toc-title">📋 목차</div>
+    <ul class="toc-list">
+      <li><a href="#s1"><span class="toc-num">01</span> 가족생활주기의 변화</a></li>
+      <li><a href="#s2"><span class="toc-num">02</span> 결혼상태와 건강</a></li>
+      <li><a href="#s3"><span class="toc-num">03</span> 결혼과 건강의 연계 메커니즘</a></li>
+      <li><a href="#s4"><span class="toc-num">04</span> 결혼의 질과 건강·복지</a></li>
+      <li><a href="#s5"><span class="toc-num">05</span> 결혼·부부관계의 남녀 차이</a></li>
+      <li><a href="#s6"><span class="toc-num">06</span> 중노년기 부부관계의 변화</a></li>
+      <li><a href="#s7"><span class="toc-num">07</span> 결혼만족도의 변화</a></li>
+      <li><a href="#s8"><span class="toc-num">08</span> 중노년기 이혼</a></li>
+      <li><a href="#s9"><span class="toc-num">09</span> 사별</a></li>
+      <li><a href="#s10"><span class="toc-num">10</span> 재혼</a></li>
+      <li><a href="#quiz"><span class="toc-num">★</span> 시험 문제 풀어보기</a></li>
+    </ul>
+  </div>
+
+  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <!-- SECTION 1 가족생활주기 -->
+  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <div class="section" id="s1">
+    <div class="section-header">
+      <div class="section-num">01</div>
+      <h2 class="section-title">가족생활주기의 변화</h2>
+    </div>
+
+    <div class="def-box">
+      <div class="def-label">📖 교재 정의</div>
+      <strong>가족생활주기(Family Life Cycle)</strong>란 마치 개인의 일생이 출생과 함께 시작되어 이후 발달단계들을 거치며 성장해 가다 늙고 사망함에 따라 마무리되듯이, <strong>가족도 발생에서부터 소멸에 이르기까지 시간에 따라 일련의 변화과정을 경험하는 것으로 간주하는 것</strong>이다.
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title">📊 6단계 가족생활주기 (김승권, 2000)</div>
+      <div class="term-grid">
+        <div class="term-card">
+          <div class="term-name">① 형성기</div>
+          <div class="term-desc">결혼 ~ 첫 자녀 출생까지</div>
+        </div>
+        <div class="term-card">
+          <div class="term-name">② 확대기</div>
+          <div class="term-desc">첫 자녀 출생 ~ 막내자녀 출생까지 (소자녀화로 기간 감소)</div>
+        </div>
+        <div class="term-card">
+          <div class="term-name">③ 확대완료기</div>
+          <div class="term-desc">막내자녀 출생 ~ 자녀 독립 시작까지 (기간 증가)</div>
+        </div>
+        <div class="term-card">
+          <div class="term-name">④ 축소기</div>
+          <div class="term-desc">자녀 독립 시작 ~ 막내자녀 독립까지</div>
+        </div>
+        <div class="term-card">
+          <div class="term-name">⑤ 축소완료기 ★</div>
+          <div class="term-desc"><span class="hl">빈둥지기(empty nest)</span> — 자녀 독립 후 노부부만 남는 시기. 크게 증가!</div>
+        </div>
+        <div class="term-card">
+          <div class="term-name">⑥ 해체기</div>
+          <div class="term-desc">부부 중 한 명 사망 ~ 나머지 사망까지</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title">📈 최근 결혼 코호트의 변화 경향 (4가지)</div>
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-num">①</div>
+          <div class="step-content"><strong>가족생활주기 전체 기간 증가</strong> — 초혼 연령은 상승했지만, 기대수명 증가 폭이 더 커서 전체 기간 늘어남</div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">②</div>
+          <div class="step-content"><strong>확대기 기간 감소</strong> — 소자녀화로 첫 자녀~막내자녀 출산 기간 단축</div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">③</div>
+          <div class="step-content"><strong>확대완료기 기간 증가</strong> — 소자녀화 + 자녀 결혼연령 상승</div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">④</div>
+          <div class="step-content"><strong>축소완료기(빈둥지기) 기간 대폭 증가</strong> — 기대수명 증가 + 소자녀화. 2000~2012년 결혼 여성은 약 <span class="hl-yellow">22년</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="summary-box">
+      <div class="summary-title">💡 핵심 포인트</div>
+      <ul class="styled-list">
+        <li>20세기 초반: 모든 결혼의 <strong>절반 이상</strong>이 막내자녀 결혼 전에 한쪽 사망으로 종료</li>
+        <li>오늘날: 막내자녀 독립 후에도 부부가 <strong>약 15년 이상</strong> 함께 생존 가능 (Harris, 1990)</li>
+        <li><span class="hl">베이비붐 세대</span>(1955~63년 출생, 인구의 14.7%)가 2020년부터 노년기 진입 → 노인부부 수 증가</li>
+        <li>노년기 독립성 강조 + 부부가구 선호 경향 → 부부간 돌봄 증가</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <!-- SECTION 2 결혼상태와 건강 -->
+  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <div class="section" id="s2">
+    <div class="section-header">
+      <div class="section-num green">02</div>
+      <h2 class="section-title">결혼상태와 건강</h2>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="icon">🔍</span> 연구의 두 가지 초점</div>
+      <div class="compare-grid">
+        <div class="compare-col">
+          <div class="compare-head blue">결혼상태(marital status)</div>
+          <p style="font-size:13px;color:var(--text-muted)">결혼이라는 제도에 편입 여부가 건강·삶의 질에 미치는 영향에 주목</p>
+        </div>
+        <div class="compare-col">
+          <div class="compare-head pink">결혼의 질(marital quality)</div>
+          <p style="font-size:13px;color:var(--text-muted)">결혼 만족도·행복도·갈등 등 결혼의 질이 기혼자의 삶에 미치는 영향에 주목</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title">📊 주요 연구 통계</div>
+      <div class="stat-row">
+        <div class="stat-item">
+          <span class="stat-value">2.7~4.6배</span>
+          <span class="stat-label">기혼자 대비 미혼·이혼·사별자 사망률 (김수영, 2015)</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value">2배↑</span>
+          <span class="stat-label">비기혼 여성의 자살률 (기혼 여성 대비)</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value">100명↑</span>
+          <span class="stat-label">비기혼 남성 자살률(인구 10만 명당), 기혼남성은 35명</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="def-box green">
+      <div class="def-label green">📖 사회통합이론</div>
+      개인이 결혼을 통해 사회적 역할을 점유함으로써 사회경제적 자원들을 공유하게 되어 건강을 유지·증진하게 된다 (Waite &amp; Gallagher, 2000). 결혼상태가 사회경제적 안녕, 거주 유형, 사회적 관계, 사회적 역할, 돌봄의 특성 등 삶의 다양한 영역에 걸쳐 영향을 미친다.
+    </div>
+  </div>
+
+  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <!-- SECTION 3 메커니즘 -->
+  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <div class="section" id="s3">
+    <div class="section-header">
+      <div class="section-num orange">03</div>
+      <h2 class="section-title">결혼상태와 건강의 연계 메커니즘 ★★★</h2>
+    </div>
+
+    <p style="font-size:14px;color:var(--text-muted);margin-bottom:16px;">결혼상태에 따른 건강 차이는 아래 세 가지 기제의 <strong style="color:var(--text)">통합적 작용</strong>으로 설명된다.</p>
+
+    <table class="mech-table">
+      <thead>
+        <tr>
+          <th>메커니즘</th>
+          <th>별칭</th>
+          <th>핵심 내용</th>
+          <th>세부 경로</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>① 결혼의 보호기능</td>
+          <td>결혼자원모델<br>결혼보호모델</td>
+          <td>결혼을 통해 얻는 유·무형의 자원이 건강을 유지·향상시키고 사망 위험으로부터 보호</td>
+          <td>
+            <strong>사회통제</strong>: 위험행동 감소 (과음, 약물 등)<br>
+            <strong>사회통합</strong>: 친족 관계망을 통한 사회적 지원<br>
+            <strong>경제적 자원 공유</strong>: 소득 공유로 건강 향상
+          </td>
+        </tr>
+        <tr>
+          <td>② 결혼해체로 인한 스트레스</td>
+          <td>위기 모델</td>
+          <td>이혼·사별의 결혼해체 과정에서 오는 스트레스와 긴장이 건강에 부정적으로 영향</td>
+          <td>
+            사회적 편견, 경제·사회정서적 상실, 거주지 이동 등<br>
+            <span class="hl-yellow">단, 일정 시간 경과 후 부정적 영향 완화</span>
+          </td>
+        </tr>
+        <tr>
+          <td>③ 선택효과</td>
+          <td>Selection Effect</td>
+          <td>건강 상태가 좋지 못한 사람들은 결혼 진입 가능성이 낮고, 결혼해체 가능성은 높음</td>
+          <td>
+            신체·정신적으로 건강한 사람이 배우자를 구하기 쉽고 결혼 유지 가능성 높음<br>
+            <span class="hl-yellow">단, 선택효과만으로 모든 차이를 설명하지는 못함</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="def-box">
+      <div class="def-label">📖 선택효과(selection effect) 정의</div>
+      건강상태가 좋지 못하거나, 만성적인 질환 혹은 건강에 해로운 생활양식으로 인해 건강악화의 위험이 높은 사람들은 결혼에 진입할 가능성이 낮고 기혼상태라 하더라도 결혼이 해체될 가능성이 높다는 것.
+    </div>
+
+    <div class="def-box orange">
+      <div class="def-label orange">📖 위기 모델(crisis model) 정의</div>
+      이혼이나 사별 등의 결혼해체 과정으로 인한 스트레스와 긴장이 건강에 부정적으로 영향을 미치게 된다고 보는 것. 결혼해체는 개인에게 커다란 스트레스로 작용하게 되고, 사회적 편견·경제 및 사회정서적 상실·환경 변화 등이 건강에 부정적으로 영향을 미침.
+    </div>
+  </div>
+
+  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <!-- SECTION 4 결혼의 질 -->
+  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <div class="section" id="s4">
+    <div class="section-header">
+      <div class="section-num">04</div>
+      <h2 class="section-title">결혼의 질과 건강·복지</h2>
+    </div>
+
+    <div class="compare-grid">
+      <div class="compare-col">
+        <div class="compare-head blue">긍정적 차원</div>
+        <ul class="styled-list">
+          <li>결혼 만족도·행복</li>
+          <li>배우자로부터 받는 지지</li>
+        </ul>
+      </div>
+      <div class="compare-col">
+        <div class="compare-head pink">부정적 차원 ★</div>
+        <ul class="styled-list">
+          <li>배우자 간 갈등·긴장</li>
+          <li>비난, 부정적 상호작용</li>
+          <li><span class="hl-red">영향이 더 일관되고 강력</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="summary-box">
+      <div class="summary-title">💡 핵심 포인트 — 부정적 차원의 생리적 영향</div>
+      <p style="font-size:14px;color:var(--text-muted);line-height:1.8;">
+        부부간 갈등과 디스트레스는 <span class="hl">코티솔, 에피네프린, 노르에피네프린</span> 등 스트레스 호르몬을 생산하고 혈압·심박 증가 등의 심혈관 반응을 일으킴 (Burman &amp; Margolin, 1992). 만성화되면 질환 발생과 전반적 건강악화로 이어짐.
+      </p>
+      <ul class="styled-list" style="margin-top:10px;">
+        <li>결혼에 불만족하는 사람들 → <strong>관상동맥질환 유병률↑</strong></li>
+        <li>지속적 갈등 부부관계 → <strong>이혼보다 건강에 더 부정적</strong> (Hawkins &amp; Booth, 2005)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <!-- SECTION 5 남녀 차이 -->
+  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <div class="section" id="s5">
+    <div class="section-header">
+      <div class="section-num yellow">05</div>
+      <h2 class="section-title">결혼·부부관계의 남녀 차이 ★★★</h2>
+    </div>
+
+    <div class="def-box yellow">
+      <div class="def-label yellow">📖 Bernard(1972)의 명언</div>
+      "모든 결혼에는 두 개의 결혼, <strong>그의 결혼과 그녀의 결혼</strong>이 있고, 그의 결혼이 그녀의 결혼보다 더 좋다." — 결혼이 남성과 여성에게 상이한 보상과 비용을 가져옴
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title">결혼 만족도의 남녀 차이</div>
+      <ul class="styled-list">
+        <li>여성은 남성보다 결혼에서 시간·중요성을 더 투자하지만, 역설적으로 <span class="hl-red">만족도는 더 낮음</span></li>
+        <li>한국 47~55세 부부: 남편이 아내보다 부부관계를 더 지지적으로 인식, 긴장을 더 낮게 느낌 (손정연·한경혜, 2015)</li>
+        <li>2016 사회조사: 배우자 관계 만족 비율 — 유배우 남성 <strong>71.3%</strong> vs 여성 <strong>58.5%</strong> (약 13%p 차이)</li>
+        <li>이유: 여성은 결혼에 이상적 기대가 높은 반면, 남성은 기대보다 더 많이 얻음 (Atchley)</li>
+      </ul>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="sub-section">
+      <div class="sub-title">결혼이 건강에 미치는 영향의 남녀 차이 ★</div>
+      <table class="mech-table">
+        <thead>
+          <tr>
+            <th>혜택 종류</th>
+            <th>주로 혜택 받는 성별</th>
+            <th>이유</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>사회통제를 통한 건강 혜택</td>
+            <td><span class="hl">남성</span></td>
+            <td>흡연·음주 등 위험행동을 더 많이 하는 집단이 남성. 건강 정보 수집·가족 건강 관리는 주로 여성(아내)이 담당</td>
+          </tr>
+          <tr>
+            <td>정서적 지원</td>
+            <td><span class="hl">남성</span></td>
+            <td>여성은 표현적 역할, 남성은 도구적 역할 → 정서적 지원을 받는 쪽은 남성</td>
+          </tr>
+          <tr>
+            <td>경제적 자원 공유</td>
+            <td><span class="hl-red">여성</span></td>
+            <td>남편 소득 공유로 여성의 삶의 기회 향상. 단, 남성은 결혼을 통해 시장 소득 자체가 증가하는 효과도 있음</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="def-box">
+        <div class="def-label">결론</div>
+        결혼상태에 따른 사망률·건강 차이는 <strong>여성보다 남성에게 더 크고 명확</strong>하게 나타남 → 결혼의 건강보호효과를 더 많이 누리는 쪽은 남성 (박경애, 1994; Lillard &amp; Waite, 1995)
+      </div>
+    </div>
+  </div>
+
+  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <!-- SECTION 6 중노년기 부부관계 변화 -->
+  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <div class="section" id="s6">
+    <div class="section-header">
+      <div class="section-num green">06</div>
+      <h2 class="section-title">중노년기 부부관계의 변화</h2>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title">심리적 노화 — Jung의 개별화(individuation)</div>
+      <div class="def-box">
+        <div class="def-label">📖 교재 내용</div>
+        Jung의 표현을 빌자면, 중년 이후에는 <strong>'개별화(individuation)'</strong>를 통해 개인 안의 남성성과 여성성이 균형을 이루는 성숙과정을 겪게 되는 것이다.
+      </div>
+      <div class="compare-grid">
+        <div class="compare-col">
+          <div class="compare-head blue">남성의 변화</div>
+          <p style="font-size:13px;color:var(--text-muted)">억눌러왔던 <strong>여성성(anima)</strong>이 발현 → 보다 <strong>친밀하고 양육적</strong>으로 변화</p>
+        </div>
+        <div class="compare-col">
+          <div class="compare-head pink">여성의 변화</div>
+          <p style="font-size:13px;color:var(--text-muted)">억눌러왔던 <strong>남성성(animus)</strong>이 발현 → <strong>독립성과 자기주장성</strong>이 커짐</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title">은퇴가 부부관계에 미치는 영향</div>
+      <ul class="styled-list">
+        <li>소득 감소 + 직업 관련 사회관계 약화</li>
+        <li>남성: 일 이외에서 자신의 가치 찾기, <strong>'일상 재구조화'</strong> 문제에 직면</li>
+        <li>여성: 가족 돌봄·가사 주된 책임을 맡아왔기에 은퇴로 인한 정체성 상실이 남성보다 적음</li>
+        <li>부부가 같은 공간에서 많은 시간 → 감소된 수입 적응 → 갈등 원인</li>
+      </ul>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title">부부관계 중요성의 연령별 변화 (Umberson 등, 2006)</div>
+      <div class="def-box green">
+        <div class="def-label green">핵심 연구 결과</div>
+        24~96세 미국 기혼자를 8년간 종단 분석 → <strong>부부관계의 질이 건강에 미치는 영향은 연령이 높을수록 더 크다</strong>
+        <ul class="styled-list" style="margin-top:8px;">
+          <li>부정적 경험이 높은 고령자 → 건강악화 정도 가장 큼</li>
+          <li>부정적 경험이 낮은 고령자 → 긴장 부재 혜택이 가장 큼</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title"><span class="icon">❓</span> 이유는?</div>
+        <ul class="styled-list">
+          <li><strong>사회정서 선택성 증가</strong>: 연령↑ → 부부관계가 삶·사회관계에서 차지하는 비중↑ → 건강에 미치는 영향↑</li>
+          <li><strong>스트레스 취약성 증가</strong>: 면역기능 손상 + 대처 자원 감소 → 부부관계의 부정적 경험에 더 취약</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <!-- SECTION 7 결혼만족도 -->
+  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <div class="section" id="s7">
+    <div class="section-header">
+      <div class="section-num orange">07</div>
+      <h2 class="section-title">생애과정에 따른 결혼만족도 변화 ★★★</h2>
+    </div>
+
+    <div class="def-box">
+      <div class="def-label">📖 U자형 곡선 (전통적 정설)</div>
+      신혼기 → 자녀 양육기(하락) → 자녀 청소년기(최저) → 빈둥지기·은퇴기(상승). 결혼만족도가 <strong>U자형</strong>으로 변화한다는 주장이 오랫동안 정설로 간주됨.
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title">📌 U자형 곡선에 대한 비판</div>
+      <ul class="styled-list">
+        <li><strong>Glenn(1998)</strong>: 횡단연구에서 관찰된 차이는 <span class="hl-yellow">코호트 효과</span>일 뿐, 생애과정에 따른 변화가 아님</li>
+        <li>노년기 부부들은 젊은 연령집단에 비해 전통적 가치·결혼 헌신도 높음 → 코호트 차이</li>
+        <li>횡단연구의 위험성: <span class="hl-red">연령 차이(age difference)를 연령 변화(age change)로 잘못 해석</span></li>
+      </ul>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title">📌 종단연구 결과</div>
+      <table class="mech-table">
+        <thead>
+          <tr><th>연구자</th><th>방법</th><th>결과</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>VanLaningham 등 (2001)</td>
+            <td>17년 종단</td>
+            <td>횡단자료 → U자형. 종단자료 → 결혼지속년수 증가할수록 행복감 <span class="hl-red">감소</span></td>
+          </tr>
+          <tr>
+            <td>Vaillant &amp; Vaillant (1993)</td>
+            <td>40년 추적</td>
+            <td>회고적 자료 → U자형 발견. 추적조사 → U자형 미관찰</td>
+          </tr>
+          <tr>
+            <td>Kamp Dush 등 (2008, 2012)</td>
+            <td>20년 종단</td>
+            <td>단일한 U자형이 아닌 <span class="hl">질적으로 상이한 몇 개의 궤적</span>이 존재</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title">노년기 결혼만족도 향상 가능 이유 (Carstensen 등, 1996)</div>
+      <ul class="styled-list">
+        <li>장기간 결혼생활 → 갈등의 소지가 될 수 있는 문제들이 <strong>소멸</strong></li>
+        <li>갈등이 <strong>습관화</strong>되어 민감성·부정적 영향 완화</li>
+        <li><span class="hl">사회정서 선택성 증가</span> → 최적 정서상태 유지 원함 → 강한 말다툼 지양</li>
+        <li>오랜 결혼 정당화를 위해 만족한다고 응답하는 경향</li>
+      </ul>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title">노년기 부부적응을 위한 6가지 (홍숙자, 2010) ★</div>
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div class="step-content"><strong>현실이해와 수용</strong> — 건강 쇠퇴·수입 감소 등 부정적 상황을 그대로 이해하고 수용·인정</div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div class="step-content"><strong>역할의 재조정</strong> — 가사 포함 부부 서로의 일을 어떻게 협력·분담할지 함께 의논하여 융통성 있게 조정</div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">3</div>
+          <div class="step-content"><strong>부부관계의 재정비</strong> — 서로 격려·인정하여 정서적·심리적으로 친밀한 관계가 되도록 노력</div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">4</div>
+          <div class="step-content"><strong>부부 상호작용의 활성화</strong> — 신체적·생리적 노화 현상을 서로 이해하고 어려움을 타개할 수 있도록 도움</div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">5</div>
+          <div class="step-content"><strong>부부공동의 활동과 독립된 영역 발전</strong> — 함께 즐길 수 있는 공동 작업 개발 + 각자 독립된 영역 유지</div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">6</div>
+          <div class="step-content"><strong>노년기 부부의 성적 적응</strong> — 노화로 인한 생리적 변화를 이해·수용하여 정서적으로 만족스러운 성적 적응</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="summary-box">
+      <div class="summary-title">💡 한국 사회 특이점</div>
+      <p style="font-size:14px;color:var(--text-muted);line-height:1.8;">
+        서구와 달리 한국은 <span class="hl-red">연령이 높을수록 결혼생활 만족 비율이 더 낮음</span>. 이는 이혼율이 낮아 결혼에 불만족해도 이혼 대신 결혼을 유지하는 경우가 많기 때문.
+      </p>
+    </div>
+  </div>
+
+  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <!-- SECTION 8 이혼 -->
+  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <div class="section" id="s8">
+    <div class="section-header">
+      <div class="section-num">08</div>
+      <h2 class="section-title">중노년기 이혼 (황혼이혼)</h2>
+    </div>
+
+    <div class="term-grid">
+      <div class="term-card">
+        <div class="term-name">황혼이혼</div>
+        <div class="term-desc">법적·제도적 용어는 아니지만, 대략 <strong>20년 이상 동거한 부부들이 이혼하는 것</strong></div>
+      </div>
+      <div class="term-card">
+        <div class="term-name">나리타 이혼</div>
+        <div class="term-desc">일본에서 사용. 막내자녀를 결혼시키고 나리타 공항에서 신혼여행을 배웅한 후 이혼한다는 의미</div>
+      </div>
+      <div class="term-card">
+        <div class="term-name">조이혼율 (crude divorce rate)</div>
+        <div class="term-desc">한 해 동안 이루어진 이혼건수를 해당연도의 총인구수로 나눈 것. 이혼의 증감 추세 파악</div>
+      </div>
+      <div class="term-card">
+        <div class="term-name">분할연금제도</div>
+        <div class="term-desc">1999년 도입. 이혼한 전 배우자의 연금을 분할받을 수 있는 제도 → 황혼이혼 장벽 완화</div>
+      </div>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title">황혼이혼 증가 배경</div>
+      <ul class="styled-list">
+        <li><strong>수명 연장</strong> — 중노년기 부부가 함께해야 할 기간이 길어짐</li>
+        <li><strong>베이비붐 세대 중년 진입</strong> — 50대 이상 인구 규모 증가</li>
+        <li><strong>연금제도 변화(1999년 분할연금)</strong> — 경제적 보상 가능성 확대</li>
+        <li><strong>이혼에 대한 부정적 인식 감소</strong> — 특히 50대 이상에서 크게 완화</li>
+        <li>1990년 전체 이혼 중 혼인지속 5년 미만 최다(39.5%) → 2017년 20년 이상이 최다(31.2%)</li>
+      </ul>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title">이혼에 대한 적응 — 남녀 차이 ★</div>
+      <div class="compare-grid">
+        <div class="compare-col">
+          <div class="compare-head blue">여성의 적응</div>
+          <ul class="styled-list">
+            <li>경제적 어려움 더 크게 경험</li>
+            <li>그러나 <span class="hl-green">전반적 적응 수준은 더 높음</span></li>
+            <li>이혼에 더 긍정적, 통제감·안녕감↑</li>
+            <li>이유: 이혼을 <strong>먼저 제안</strong>하는 경향 — 정서적·심리적으로 먼저 준비</li>
+            <li>황혼이혼은 여성이 주도하는 비율 특히 높음</li>
+          </ul>
+        </div>
+        <div class="compare-col">
+          <div class="compare-head pink">남성의 적응</div>
+          <ul class="styled-list">
+            <li>더 늦게, 더 심각하게 반응</li>
+            <li>이혼이 배우자(신뢰할 수 있는 사람, confidants) 상실</li>
+            <li>배우자가 지지·사회적 상호작용·정서적 안녕 제공 → 상실 타격 큼</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="def-box">
+      <div class="def-label">📖 이혼의 6가지 측면 (Bohannan, 1970)</div>
+      이혼은 <strong>법적, 경제적, 정서적, 심리적, 부모 역할, 지역사회</strong>의 여섯 가지 측면에서 진행되는 다측면적인 과정이다.
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title">교환론적 시각: 이혼 결정</div>
+      <div class="def-box yellow">
+        <div class="def-label yellow">핵심 개념</div>
+        결혼관계에서 얻는 <strong>보상(rewards)</strong>과 이혼으로 인한 <strong>비용(costs)</strong>의 비교점에서 이혼 여부가 결정됨
+        <br><br>
+        가장 큰 이혼 장애요인: <strong>가족에 대한 걱정</strong>
+        <br>남성: 이혼에 대한 사회적 통념, 이혼 후 정서적 측면 염려
+        <br>여성: 이혼 후 도구적 측면(경제 등)에 대한 염려
+      </div>
+    </div>
+  </div>
+
+  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <!-- SECTION 9 사별 -->
+  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <div class="section" id="s9">
+    <div class="section-header">
+      <div class="section-num green">09</div>
+      <h2 class="section-title">사별</h2>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat-item">
+        <span class="stat-value">55.5%</span>
+        <span class="stat-label">65세 이상 여성노인 사별 비율</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">11.1%</span>
+        <span class="stat-label">65세 이상 남성노인 사별 비율</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">7.1%</span>
+        <span class="stat-label">85세 이상 여성 중 유배우자 비율</span>
+      </div>
+    </div>
+
+    <div class="summary-box">
+      <div class="summary-title">💡 사별이 주로 여성의 문제인 이유</div>
+      <ul class="styled-list">
+        <li>기대수명 차이: 2016년 기준 남성 79.3세, <strong>여성 85.4세</strong> (여성이 약 6년 더 장수)</li>
+        <li>남편연상형 결혼 지배적: 2016년 초혼 부부 중 <strong>67.7%</strong>가 남편 연상형</li>
+      </ul>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title">사별로 인한 객관적 조건의 남녀 차이</div>
+      <div class="compare-grid">
+        <div class="compare-col">
+          <div class="compare-head pink">여성 사별자 어려움</div>
+          <ul class="styled-list">
+            <li>경제적 어려움 (남편 소득 의존 세대)</li>
+            <li>빈곤층 전락 위험</li>
+          </ul>
+        </div>
+        <div class="compare-col">
+          <div class="compare-head blue">남성 사별자 어려움</div>
+          <ul class="styled-list">
+            <li>가족·친족 관계 유지 어려움 (관계 유지는 주로 여성 담당)</li>
+            <li>가사(식사·세탁·청소 등) 능력 부족</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title">사별로 인한 주관적 경험의 남녀 차이 ★</div>
+      <div class="def-box orange">
+        <div class="def-label orange">핵심</div>
+        전반적으로 <strong>남성노인이 여성노인보다 사별로 인한 심리적 어려움을 더 크게 경험</strong> (더 우울, 사망률도 더 높음)
+      </div>
+      <ul class="styled-list">
+        <li>남성이 배우자로부터 더 많은 혜택을 누림 → 상실도 더 큼</li>
+        <li>남성에게 사별은 <strong>예측하지 못한 비규범적 사건</strong></li>
+        <li>여성은 <span class="hl">예기사회화(anticipatory socialization)</span> 가능 — 사별 가능성을 미리 예측하고 대비</li>
+        <li>남성 사별자는 수가 훨씬 적어 공감할 동료 만나기 어려움</li>
+        <li>이민아(2010): 여성노인은 사별자와 기혼자 간 우울 차이 없음. 남성노인은 사별자가 기혼자보다 우울 더 높음</li>
+      </ul>
+    </div>
+
+    <div class="def-box green">
+      <div class="def-label green">📖 예기사회화(anticipatory socialization) 정의</div>
+      사별 가능성이 높은 여성들이 미리 예측하고 사별 후 경험할 수 있는 다양한 문제들을 어떻게 다룰 것인가를 미리 생각해보는 것.
+    </div>
+  </div>
+
+  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <!-- SECTION 10 재혼 -->
+  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <div class="section" id="s10">
+    <div class="section-header">
+      <div class="section-num yellow">10</div>
+      <h2 class="section-title">재혼</h2>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat-item">
+        <span class="stat-value">2배↑</span>
+        <span class="stat-label">2000~2016년 65세 이상 남성노인 재혼 증가</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">5배↑</span>
+        <span class="stat-label">2000~2016년 65세 이상 여성노인 재혼 증가</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">2.3배</span>
+        <span class="stat-label">2016년 남성노인 재혼이 여성노인보다 많은 배수</span>
+      </div>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title">재혼 이유의 남녀 차이 (김애순, 2012)</div>
+      <div class="compare-grid">
+        <div class="compare-col">
+          <div class="compare-head blue">남성노인 재혼 이유</div>
+          <p style="font-size:13px;color:var(--text-muted);line-height:1.8;">동반자 관계, <strong>성적인 욕구</strong>, 신체 및 정서적 지지</p>
+        </div>
+        <div class="compare-col">
+          <div class="compare-head pink">여성노인 재혼 이유</div>
+          <p style="font-size:13px;color:var(--text-muted);line-height:1.8;">동반자 관계, <strong>경제</strong>, 가정유지</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title">재혼의 장애요인</div>
+      <ul class="styled-list">
+        <li>경제적 문제·건강문제 (개인적 자원 부족)</li>
+        <li>자녀의 반대</li>
+        <li>주위의 체면</li>
+        <li>부양·유산 상속 등 가족 이슈</li>
+        <li>연령 증가할수록 잠재적 상대자 감소, 남은 여생 단축, 자산 보호·유산 압력 증가</li>
+      </ul>
+    </div>
+
+    <div class="summary-box">
+      <div class="summary-title">💡 최근 추세</div>
+      <ul class="styled-list">
+        <li>전체 재혼 중 65세 이상 비율: 남성 <strong>5.9%</strong>, 여성 <strong>2.3%</strong> (2016년)</li>
+        <li>'사별 후 재혼' 비율 감소 + '<strong>이혼 후 재혼</strong>' 비율 증가 (황혼이혼 증가 반영)</li>
+        <li>남성이 여성보다 재혼 욕구 더 크고 잠재적 상대도 더 많음</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <!-- 시험 대비 퀴즈 -->
+  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <div class="section" id="quiz">
+    <div class="section-header">
+      <div class="section-num" style="background:#e97b6b;">★</div>
+      <h2 class="section-title">시험 대비 문제 풀어보기</h2>
+    </div>
+
+    <p style="font-size:13px;color:var(--text-muted);margin-bottom:20px;">각 문제를 클릭하면 정답이 나타납니다.</p>
+
+    <!-- ── O/X ── -->
+    <h3 style="font-size:13px;font-weight:700;color:var(--accent3);letter-spacing:2px;margin:16px 0 10px;">📗 O / X 문제</h3>
+
+    <div class="quiz-section">
+      <div class="quiz-header" onclick="toggleQuiz(this)">
+        <span class="quiz-type-tag tag-ox">O/X</span>
+        <span class="quiz-q">1. 기혼자들은 비기혼자들에 비해 더 오래 살고 더 건강하다.</span>
+        <span class="quiz-toggle">＋</span>
+      </div>
+      <div class="quiz-body">
+        <div class="quiz-answer-label">ANSWER</div>
+        <div class="quiz-answer"><span class="ox-badge ox-o">O</span> <strong>O</strong> — 기혼자들이 비기혼자들에 비해 더 오래 살고 더 건강한 것은 대부분의 국가에서 관찰되는 공통된 현상이다.</div>
+      </div>
+    </div>
+
+    <div class="quiz-section">
+      <div class="quiz-header" onclick="toggleQuiz(this)">
+        <span class="quiz-type-tag tag-ox">O/X</span>
+        <span class="quiz-q">2. 결혼상태에 따른 사망률 차이는 여성보다 남성에게 더 크고 명확하게 나타난다.</span>
+        <span class="quiz-toggle">＋</span>
+      </div>
+      <div class="quiz-body">
+        <div class="quiz-answer-label">ANSWER</div>
+        <div class="quiz-answer"><span class="ox-badge ox-o">O</span> <strong>O</strong> — 결혼상태에 따른 사망률이나 건강·복지감 수준의 차이는 여성보다 남성에게 더 크고 명확하게 관찰된다.</div>
+      </div>
+    </div>
+
+    <div class="quiz-section">
+      <div class="quiz-header" onclick="toggleQuiz(this)">
+        <span class="quiz-type-tag tag-ox">O/X</span>
+        <span class="quiz-q">3. 결혼해체로 인한 스트레스는 이혼·사별 후 시간이 지나도 지속적으로 동일한 수준을 유지한다.</span>
+        <span class="quiz-toggle">＋</span>
+      </div>
+      <div class="quiz-body">
+        <div class="quiz-answer-label">ANSWER</div>
+        <div class="quiz-answer"><span class="ox-badge ox-x">X</span> <strong>X</strong> — 결혼해체에 따른 스트레스와 긴장은 결혼해체 후 <strong>어느 정도의 시간이 지나면 상당히 감소</strong>된다. 일정 기간 경과 후 정신건강 수준에서 기혼자와 차이가 없는 것으로 나타나기도 한다.</div>
+      </div>
+    </div>
+
+    <div class="quiz-section">
+      <div class="quiz-header" onclick="toggleQuiz(this)">
+        <span class="quiz-type-tag tag-ox">O/X</span>
+        <span class="quiz-q">4. 부부관계의 질이 건강에 미치는 영향은 연령이 낮을수록 더 크다.</span>
+        <span class="quiz-toggle">＋</span>
+      </div>
+      <div class="quiz-body">
+        <div class="quiz-answer-label">ANSWER</div>
+        <div class="quiz-answer"><span class="ox-badge ox-x">X</span> <strong>X</strong> — 부부관계의 질이 건강에 미치는 영향은 <strong>연령이 높을수록 더 크다</strong> (Umberson 등, 2006). 연령이 낮은 집단에서는 부정적 경험의 정도가 건강에 거의 영향을 미치지 않았다.</div>
+      </div>
+    </div>
+
+    <div class="quiz-section">
+      <div class="quiz-header" onclick="toggleQuiz(this)">
+        <span class="quiz-type-tag tag-ox">O/X</span>
+        <span class="quiz-q">5. 황혼이혼 후 전반적인 적응 수준은 여성보다 남성이 더 높다.</span>
+        <span class="quiz-toggle">＋</span>
+      </div>
+      <div class="quiz-body">
+        <div class="quiz-answer-label">ANSWER</div>
+        <div class="quiz-answer"><span class="ox-badge ox-x">X</span> <strong>X</strong> — 여성이 경제적 어려움을 더 크게 경험함에도 불구하고 <strong>전반적인 적응 수준은 여성이 더 높다</strong>. 이혼을 먼저 제안하는 경향이 있는 여성이 정서적·심리적 적응도 먼저 시작하기 때문이다.</div>
+      </div>
+    </div>
+
+    <div class="quiz-section">
+      <div class="quiz-header" onclick="toggleQuiz(this)">
+        <span class="quiz-type-tag tag-ox">O/X</span>
+        <span class="quiz-q">6. 사별로 인한 심리적 어려움은 여성노인보다 남성노인이 더 크게 경험한다.</span>
+        <span class="quiz-toggle">＋</span>
+      </div>
+      <div class="quiz-body">
+        <div class="quiz-answer-label">ANSWER</div>
+        <div class="quiz-answer"><span class="ox-badge ox-o">O</span> <strong>O</strong> — 전반적으로 남성노인이 여성노인보다 사별로 인한 심리적 어려움을 더 크게 경험한다. 남성노인은 사별 후 더 우울해하며 사망률도 더 높다.</div>
+      </div>
+    </div>
+
+    <div class="quiz-section">
+      <div class="quiz-header" onclick="toggleQuiz(this)">
+        <span class="quiz-type-tag tag-ox">O/X</span>
+        <span class="quiz-q">7. Jung의 개별화(individuation) 개념에 따르면, 중년 이후 여성은 독립성과 자기주장성이 강해진다.</span>
+        <span class="quiz-toggle">＋</span>
+      </div>
+      <div class="quiz-body">
+        <div class="quiz-answer-label">ANSWER</div>
+        <div class="quiz-answer"><span class="ox-badge ox-o">O</span> <strong>O</strong> — 여성은 억눌러왔던 남성성(animus)이 발현되어 <strong>독립성과 자기주장성이 커지게 된다</strong>.</div>
+      </div>
+    </div>
+
+    <div class="quiz-section">
+      <div class="quiz-header" onclick="toggleQuiz(this)">
+        <span class="quiz-type-tag tag-ox">O/X</span>
+        <span class="quiz-q">8. 한국의 결혼만족도는 서구와 마찬가지로 노년기에 U자형으로 증가하는 경향이 뚜렷하다.</span>
+        <span class="quiz-toggle">＋</span>
+      </div>
+      <div class="quiz-body">
+        <div class="quiz-answer-label">ANSWER</div>
+        <div class="quiz-answer"><span class="ox-badge ox-x">X</span> <strong>X</strong> — 한국의 경우 서구와 달리 <strong>연령이 높을수록 결혼생활에 만족하는 비율이 더 낮았다</strong>. 이혼율이 낮아 불만족해도 결혼을 유지하는 경우가 많기 때문으로 분석된다.</div>
+      </div>
+    </div>
+
+    <!-- ── 단답형 ── -->
+    <h3 style="font-size:13px;font-weight:700;color:var(--accent);letter-spacing:2px;margin:24px 0 10px;">📘 단답형 문제</h3>
+
+    <div class="quiz-section">
+      <div class="quiz-header" onclick="toggleQuiz(this)">
+        <span class="quiz-type-tag tag-short">단답형</span>
+        <span class="quiz-q">1. 자녀가 모두 독립한 후 노부부만 남는 가족생활주기 단계를 무엇이라 하는가?</span>
+        <span class="quiz-toggle">＋</span>
+      </div>
+      <div class="quiz-body">
+        <div class="quiz-answer-label">ANSWER</div>
+        <div class="quiz-answer"><strong>축소완료기</strong> (빈둥지기, empty nest)</div>
+      </div>
+    </div>
+
+    <div class="quiz-section">
+      <div class="quiz-header" onclick="toggleQuiz(this)">
+        <span class="quiz-type-tag tag-short">단답형</span>
+        <span class="quiz-q">2. 결혼상태와 건강의 연계 메커니즘 세 가지를 쓰시오.</span>
+        <span class="quiz-toggle">＋</span>
+      </div>
+      <div class="quiz-body">
+        <div class="quiz-answer-label">ANSWER</div>
+        <div class="quiz-answer"><strong>① 결혼의 보호기능(결혼자원모델)</strong>, <strong>② 결혼해체로 인한 스트레스(위기 모델)</strong>, <strong>③ 선택효과(selection effect)</strong></div>
+      </div>
+    </div>
+
+    <div class="quiz-section">
+      <div class="quiz-header" onclick="toggleQuiz(this)">
+        <span class="quiz-type-tag tag-short">단답형</span>
+        <span class="quiz-q">3. Jung 이론에서 중년 이후 남성이 억눌러왔던 여성성을 무엇이라 부르는가?</span>
+        <span class="quiz-toggle">＋</span>
+      </div>
+      <div class="quiz-body">
+        <div class="quiz-answer-label">ANSWER</div>
+        <div class="quiz-answer"><strong>아니마(anima)</strong></div>
+      </div>
+    </div>
+
+    <div class="quiz-section">
+      <div class="quiz-header" onclick="toggleQuiz(this)">
+        <span class="quiz-type-tag tag-short">단답형</span>
+        <span class="quiz-q">4. 이혼을 법적·경제적·정서적·심리적·부모 역할·지역사회의 6가지 측면으로 구분한 학자는 누구인가?</span>
+        <span class="quiz-toggle">＋</span>
+      </div>
+      <div class="quiz-body">
+        <div class="quiz-answer-label">ANSWER</div>
+        <div class="quiz-answer"><strong>Bohannan (1970)</strong></div>
+      </div>
+    </div>
+
+    <div class="quiz-section">
+      <div class="quiz-header" onclick="toggleQuiz(this)">
+        <span class="quiz-type-tag tag-short">단답형</span>
+        <span class="quiz-q">5. 우리나라에서 1999년에 도입된 것으로, 이혼한 전 배우자의 연금을 나눠 받을 수 있는 제도는?</span>
+        <span class="quiz-toggle">＋</span>
+      </div>
+      <div class="quiz-body">
+        <div class="quiz-answer-label">ANSWER</div>
+        <div class="quiz-answer"><strong>분할연금제도</strong></div>
+      </div>
+    </div>
+
+    <div class="quiz-section">
+      <div class="quiz-header" onclick="toggleQuiz(this)">
+        <span class="quiz-type-tag tag-short">단답형</span>
+        <span class="quiz-q">6. 여성이 남성보다 사별에 미리 대비할 수 있는 이유를 설명하는 개념은?</span>
+        <span class="quiz-toggle">＋</span>
+      </div>
+      <div class="quiz-body">
+        <div class="quiz-answer-label">ANSWER</div>
+        <div class="quiz-answer"><strong>예기사회화(anticipatory socialization)</strong> — 사별 가능성이 높은 여성들이 미리 예측하고 대비하는 것</div>
+      </div>
+    </div>
+
+    <div class="quiz-section">
+      <div class="quiz-header" onclick="toggleQuiz(this)">
+        <span class="quiz-type-tag tag-short">단답형</span>
+        <span class="quiz-q">7. 결혼만족도가 결혼지속기간에 따라 어떤 형태로 변화한다는 것이 오랫동안 정설로 간주되어 왔는가?</span>
+        <span class="quiz-toggle">＋</span>
+      </div>
+      <div class="quiz-body">
+        <div class="quiz-answer-label">ANSWER</div>
+        <div class="quiz-answer"><strong>U자형</strong> — 신혼기에 높고 자녀 양육기에 낮아졌다가 빈둥지기 이후 다시 증가</div>
+      </div>
+    </div>
+
+    <div class="quiz-section">
+      <div class="quiz-header" onclick="toggleQuiz(this)">
+        <span class="quiz-type-tag tag-short">단답형</span>
+        <span class="quiz-q">8. 노년기 부부의 가장 중요한 재혼 이유는?</span>
+        <span class="quiz-toggle">＋</span>
+      </div>
+      <div class="quiz-body">
+        <div class="quiz-answer-label">ANSWER</div>
+        <div class="quiz-answer"><strong>외로움 해소</strong>와 <strong>동반자의 필요성</strong></div>
+      </div>
+    </div>
+
+    <!-- ── 주관식 ── -->
+    <h3 style="font-size:13px;font-weight:700;color:var(--accent4);letter-spacing:2px;margin:24px 0 10px;">📒 주관식 문제</h3>
+
+    <div class="quiz-section">
+      <div class="quiz-header" onclick="toggleQuiz(this)">
+        <span class="quiz-type-tag tag-essay">주관식</span>
+        <span class="quiz-q">1. 결혼의 보호기능이 작동하는 세 가지 경로를 설명하시오.</span>
+        <span class="quiz-toggle">＋</span>
+      </div>
+      <div class="quiz-body">
+        <div class="quiz-answer-label">ANSWER</div>
+        <div class="quiz-answer">
+          <strong>① 사회통제</strong>: 배우자·자녀 등 가족에 대한 애정·책임감이 과도한 음주, 약물, 난폭 운전 등 위험행동을 감소시키고 건강한 생활양식을 촉진한다.<br><br>
+          <strong>② 사회통합</strong>: 결혼을 통해 배우자 및 친족 관계망에 연계되어 사회적 지원을 얻게 되며, 이는 질병 예방과 건강·복지 유지에 핵심적 역할을 한다.<br><br>
+          <strong>③ 경제적 자원의 공유</strong>: 결혼을 통해 공유하게 되는 경제적 자원이 기혼자들의 건강 향상에 영향을 미친다.
+        </div>
+      </div>
+    </div>
+
+    <div class="quiz-section">
+      <div class="quiz-header" onclick="toggleQuiz(this)">
+        <span class="quiz-type-tag tag-essay">주관식</span>
+        <span class="quiz-q">2. 노년기 부부 적응을 위한 홍숙자(2010)의 6가지 내용을 간략히 설명하시오.</span>
+        <span class="quiz-toggle">＋</span>
+      </div>
+      <div class="quiz-body">
+        <div class="quiz-answer-label">ANSWER</div>
+        <div class="quiz-answer">
+          <strong>① 현실이해와 수용</strong>: 건강 쇠퇴·수입 감소 등 부정적 상황을 그대로 인정하고 수용<br>
+          <strong>② 역할의 재조정</strong>: 가사 등 부부 역할을 함께 의논하여 융통성 있게 분담<br>
+          <strong>③ 부부관계의 재정비</strong>: 격려·인정으로 정서적·심리적으로 친밀한 관계 형성<br>
+          <strong>④ 부부 상호작용의 활성화</strong>: 상대방의 신체적·생리적 노화 현상 이해하고 돕기<br>
+          <strong>⑤ 부부공동의 활동과 독립된 영역 발전</strong>: 공동 활동 개발 + 각자의 독립된 영역 유지<br>
+          <strong>⑥ 노년기 부부의 성적 적응</strong>: 노화로 인한 생리적 변화를 이해·수용하여 정서적으로 만족스러운 성적 적응
+        </div>
+      </div>
+    </div>
+
+    <div class="quiz-section">
+      <div class="quiz-header" onclick="toggleQuiz(this)">
+        <span class="quiz-type-tag tag-essay">주관식</span>
+        <span class="quiz-q">3. 노년기 여성 사별자와 남성 사별자가 각각 경험하는 어려움의 차이를 객관적·주관적 측면으로 나눠 설명하시오.</span>
+        <span class="quiz-toggle">＋</span>
+      </div>
+      <div class="quiz-body">
+        <div class="quiz-answer-label">ANSWER</div>
+        <div class="quiz-answer">
+          <strong>【객관적 조건】</strong><br>
+          여성 사별자: 경제적 어려움이 크다. 현 세대 여성노인들이 남편 소득에 의존해 온 경향이 있어 사별 후 빈곤층 전락 위험이 높다.<br>
+          남성 사별자: 가족·친족 관계 유지 어려움(관계 유지는 주로 여성 담당). 가사(식사·세탁·청소 등)를 처리하는 능력이 부족하다.<br><br>
+          <strong>【주관적 경험】</strong><br>
+          남성 사별자가 더 큰 심리적 어려움 경험. 남성은 배우자로부터 더 많은 혜택을 누리므로 상실감도 더 크고, 사별이 예측하지 못한 비규범적 사건이며, 예기사회화가 어렵다. 또한 남성 사별자 수가 적어 공감할 동료 찾기 어렵다. 반면 여성은 예기사회화를 통해 미리 대비 가능하다.
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 서술형 ── -->
+    <h3 style="font-size:13px;font-weight:700;color:var(--accent2);letter-spacing:2px;margin:24px 0 10px;">📕 서술형 문제</h3>
+
+    <div class="quiz-section">
+      <div class="quiz-header" onclick="toggleQuiz(this)">
+        <span class="quiz-type-tag tag-desc">서술형</span>
+        <span class="quiz-q">1. 결혼상태가 건강에 미치는 영향에서 남녀 차이가 나타나는 이유를 결혼의 보호기능 관점에서 서술하시오.</span>
+        <span class="quiz-toggle">＋</span>
+      </div>
+      <div class="quiz-body">
+        <div class="quiz-answer-label">MODEL ANSWER</div>
+        <div class="quiz-answer">
+          결혼상태에 따른 건강 차이는 여성보다 남성에게 더 크고 명확하게 나타난다. 이는 주로 결혼의 건강보호기능에서 성별 차이가 존재하기 때문이다.<br><br>
+          결혼의 건강보호기능은 사회통제, 사회통합, 경제적 자원 공유의 세 경로로 작동하는데, 각 경로에서 혜택을 받는 성별이 다르다.<br><br>
+          먼저 <strong>사회통제</strong>를 통한 혜택은 주로 남성에게 돌아간다. 흡연이나 과음 등 건강에 해로운 위험행동을 더 많이 하는 집단은 남성이며, 건강 정보를 수집하고 가족의 건강을 관리하는 역할은 주로 여성(아내)이 담당한다. 따라서 결혼을 통해 위험행동을 줄이고 건강한 생활습관을 갖게 되는 혜택은 대부분 남성이 얻는다.<br><br>
+          다음으로 <strong>정서적 지원</strong>도 주로 남성이 얻는다. 여성은 가족에서 표현적 역할을 담당하는 반면 남성은 도구적 역할을 담당하기 때문에, 정서적 지원을 받게 되는 것은 주로 남성이다.<br><br>
+          반면 <strong>경제적 자원 공유</strong>를 통한 혜택은 여성이 상대적으로 더 많이 얻는다. 그러나 이는 남편의 소득을 공유하는 것으로 여성 개인의 소득이 증가하는 것이 아니며, 남성은 결혼 자체가 시장 소득을 증가시키는 효과도 있다.<br><br>
+          종합하면 여성은 주로 경제적 자원 공유를, 남성은 사회통제와 정서적 지원을 결혼을 통해 얻는다. 이러한 점들을 고려할 때 남성이 여성에 비해 결혼으로부터 건강 혜택을 더 많이 얻게 되고, 결과적으로 결혼상태에 따른 건강 차이가 남성에게 더 크고 명확하게 나타나는 것이다.
+        </div>
+      </div>
+    </div>
+
+    <div class="quiz-section">
+      <div class="quiz-header" onclick="toggleQuiz(this)">
+        <span class="quiz-type-tag tag-desc">서술형</span>
+        <span class="quiz-q">2. 결혼만족도의 U자형 곡선에 대한 논쟁을 종단연구와 횡단연구의 차이를 중심으로 서술하시오.</span>
+        <span class="quiz-toggle">＋</span>
+      </div>
+      <div class="quiz-body">
+        <div class="quiz-answer-label">MODEL ANSWER</div>
+        <div class="quiz-answer">
+          결혼만족도가 U자형으로 변화한다는 주장은 오랫동안 정설로 간주되어 왔다. 즉 신혼기에 만족도가 높다가 자녀 양육기를 거치면서 하락하여 자녀 청소년기에 최저를 기록한 후, 빈둥지기·은퇴시기에 다시 상승한다는 것이다.<br><br>
+          그러나 이 U자형 곡선은 주로 <strong>횡단연구</strong>에서 관찰된 것으로, 이에 대한 비판이 존재한다. 횡단연구는 서로 다른 연령집단을 한 시점에 비교하는 것이므로, 노년기 부부가 젊은 부부보다 만족도가 높게 나타나는 것이 연령이 증가함에 따른 변화(연령변화)가 아닌 코호트 간의 차이(연령차이)일 수 있다는 것이다. 즉 노년층 부부는 보다 전통적 가치관을 지니고 결혼에 더 헌신적인 코호트이기 때문에 결혼만족도가 높게 나타날 수 있다(Glenn, 1998).<br><br>
+          반면 <strong>종단연구</strong>들은 다른 결과를 보여준다. VanLaningham 등(2001)은 17년간의 종단자료를 분석한 결과 횡단자료에서는 U자형이 나타났지만 종단자료에서는 결혼지속년수가 증가함에 따라 행복감이 <strong>감소</strong>하는 경향이 관찰되었다. Vaillant &amp; Vaillant(1993)도 40년간 추적한 종단자료에서 U자형이 관찰되지 않았다. 또한 Kamp Dush 등(2012)은 단일한 U자형 패턴이 아니라 질적으로 상이한 몇 개의 궤적이 존재한다고 보고한다.<br><br>
+          결론적으로 현재까지의 연구 결과들은 결혼만족도가 보편적으로 U자형으로 변화한다기보다는 개인·커플의 자원, 상황, 성격특성에 따라 다양한 변화패턴이 존재함을 시사하며, 이를 명확히 규명하기 위해서는 코호트 효과, 시기효과, 탈락으로 인한 선택효과를 면밀히 통제한 장기 종단연구가 더 필요하다.
+        </div>
+      </div>
+    </div>
+
+    <div class="quiz-section">
+      <div class="quiz-header" onclick="toggleQuiz(this)">
+        <span class="quiz-type-tag tag-desc">서술형</span>
+        <span class="quiz-q">3. 중노년기 이혼이 증가하는 사회적 배경과 이혼 후 적응의 남녀 차이를 서술하시오.</span>
+        <span class="quiz-toggle">＋</span>
+      </div>
+      <div class="quiz-body">
+        <div class="quiz-answer-label">MODEL ANSWER</div>
+        <div class="quiz-answer">
+          <strong>【중노년기 이혼 증가의 사회적 배경】</strong><br>
+          중노년기 이혼이 증가하는 원인은 크게 네 가지로 정리할 수 있다.<br>
+          첫째, <strong>수명 연장</strong>으로 인해 중노년기 부부가 함께해야 할 기간이 길어지면서 새로운 관계를 정립하는 데 따른 긴장·갈등이 증가하였다. 수명이 짧았던 과거에는 이혼을 선택할 가능성이 낮았지만, 수명이 길어지면서 이혼을 행동으로 옮길 가능성이 높아졌다.<br>
+          둘째, <strong>베이비붐 세대</strong>가 중년층으로 진입하면서 50대 이상 인구 규모 자체가 커진 구조적 요인이 작용했다.<br>
+          셋째, <strong>1999년 분할연금제도 도입</strong>으로 이혼 후 경제적 보상 가능성이 확대되었다. 자녀 때문에 참고 살다가 이혼을 원하면서도 경제적 문제로 주저했던 여성노인들에게 제도적 장치가 마련된 것이다.<br>
+          넷째, <strong>이혼에 대한 부정적 인식이 감소</strong>하였다. 특히 50대 이상 고령집단에서 이혼에 대한 부정적 태도가 크게 완화되었다.<br><br>
+          <strong>【이혼 후 적응의 남녀 차이】</strong><br>
+          여성은 남성보다 이혼 후 경제적 어려움을 더 크게 경험하지만, 전반적인 적응 수준은 여성이 더 높다. 여성은 이혼에 더 긍정적으로 평가하고 통제감·안녕감이 높다. 이는 황혼이혼이 여성 주도로 이루어지는 비율이 높기 때문이다. 이혼을 먼저 제안한 사람은 정서적·심리적으로 먼저 이혼과정을 시작하므로 적응도 더 빨리 하게 된다.<br>
+          반면 남성은 더 늦게, 더 심각하게 반응하는 경향이 있다. 남성노인에게 배우자는 신뢰할 수 있는 사람(confidants)으로서 지지·사회적 상호작용·정서적 안녕을 제공하는 핵심 원천이기 때문에, 이혼은 사회적 관계와 지원 원천의 상실로 이어진다.
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  CH09 사회적 노화 II: 중노년기 부부관계 · 시험대비 정리본
+</div>
+
+<script>
+function toggleQuiz(header) {
+  const body = header.nextElementSibling;
+  const toggle = header.querySelector('.quiz-toggle');
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  toggle.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(45deg)';
+  toggle.textContent = isOpen ? '＋' : '×';
+}
+</script>
+</body>
+</html>
