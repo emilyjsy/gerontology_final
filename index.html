@@ -10,7 +10,7 @@
             --primary-green: #2d6a4f;
             --light-green: #d8f3dc;
             --accent: #52b788;
-            --paper-blue: #2b6cb0; /* 논문 섹션용 포인트 컬러 */
+            --paper-blue: #2b6cb0;
             --bg: #f0faf3;
         }
 
@@ -62,7 +62,6 @@
             border-radius: 2px;
         }
 
-        /* 그리드 레이아웃 */
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -107,7 +106,6 @@
             margin-bottom: 25px;
         }
 
-        /* 이동 버튼 */
         .btn-enter {
             text-decoration: none;
             text-align: center;
@@ -117,9 +115,7 @@
             transition: opacity 0.2s;
         }
 
-        /* 챕터 버튼 색상 */
         .btn-chapter { background: var(--primary-green); color: white; }
-        /* 논문 버튼 색상 */
         .btn-paper { background: var(--paper-blue); color: white; }
 
         .btn-enter:hover { opacity: 0.9; }
@@ -146,18 +142,18 @@
             <div>
                 <div class="category-tag" style="color: var(--accent);">Chapter 08</div>
                 <div class="title">사회적 노화 Ⅰ: 세대 및 친족관계</div>
-                <p class="description">콩깍지형 가족, 세대 간 결속도 모델, 양가성 모델 등 핵심 이론과 한국적 맥락 정리.</p>
+                <p class="description">콩깍지형 가족, 세대 간 결속도 모델, 양가성 모델 등 핵심 이론 정리.</p>
             </div>
             <a href="gerontology_ch08_study.html" class="btn-enter btn-chapter">학습 시작하기 →</a>
         </div>
         
-        <div class="card" style="opacity: 0.6;">
+        <div class="card">
             <div>
-                <div class="category-tag" style="color: #999;">Chapter 09</div>
-                <div class="title">사회적 노화 Ⅱ: 퇴직 및 사회활동</div>
-                <p class="description">업데이트 예정입니다.</p>
+                <div class="category-tag" style="color: var(--accent);">Chapter 09</div>
+                <div class="title">사회적 노화 Ⅱ: 중노년기 부부관계</div>
+                <p class="description">중노년기 이혼 증가 배경, 분할연금제도, 빈 둥지 증후군 및 부부 적응 정리.</p>
             </div>
-            <span class="btn-enter" style="background: #ccc;">준비중</span>
+            <a href="ch09_gerontology_study.html" class="btn-enter btn-chapter">학습 시작하기 →</a>
         </div>
     </div>
 
@@ -167,7 +163,7 @@
             <div>
                 <div class="category-tag" style="color: var(--paper-blue);">Research Paper</div>
                 <div class="title">Suitor et al. (2014): 편애와 형제 관계</div>
-                <p class="description">부모의 편애 지각이 성인 자녀의 형제간 갈등과 우울에 미치는 영향 분석 및 퀴즈 정리.</p>
+                <p class="description">부모의 편애 지각이 성인 자녀의 형제간 갈등과 우울에 미치는 영향 분석 및 퀴즈.</p>
             </div>
             <a href="suitor2014_study_guide.html" class="btn-enter btn-paper">논문 분석 보기 📄</a>
         </div>
