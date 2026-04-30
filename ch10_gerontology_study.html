@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CH10 사회적 노화 III: 친구·이웃관계, 사회 관계망 — 시험대비 정리</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Noto+Serif+KR:wght@400;700&display=swap');
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --surface2: #222638;
+    --border: #2e3351;
+    --accent: #6c8fef;
+    --accent2: #e97b6b;
+    --accent3: #56c9a4;
+    --accent4: #f0c96b;
+    --text: #e8eaf6;
+    --text-muted: #8892b0;
+    --text-dim: #5a6785;
+    --def-bg: #141b2d;
+    --tag-green: #1e3a2f;
+    --tag-green-text: #56c9a4;
+    --tag-red: #3a1e1e;
+    --tag-red-text: #e97b6b;
+    --tag-blue: #1a2a4a;
+    --tag-blue-text: #6c8fef;
+    --tag-yellow: #3a2e10;
+    --tag-yellow-text: #f0c96b;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Noto Sans KR', sans-serif; font-size: 15px; line-height: 1.8; }
+  .hero { background: linear-gradient(135deg, #0f1117 0%, #1a2040 50%, #0f1117 100%); border-bottom: 1px solid var(--border); padding: 48px 32px 40px; text-align: center; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 0%, rgba(108,143,239,0.12) 0%, transparent 70%); }
+  .hero-label { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; font-weight: 500; }
+  .hero h1 { font-family: 'Noto Serif KR', serif; font-size: clamp(22px, 4vw, 36px); font-weight: 700; color: #fff; line-height: 1.4; margin-bottom: 12px; }
+  .hero-sub { color: var(--text-muted); font-size: 13px; }
+  .hero-badges { display: flex; justify-content: center; gap: 8px; margin-top: 20px; flex-wrap: wrap; }
+  .badge { padding: 4px 14px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.5px; }
+  .badge-blue { background: var(--tag-blue); color: var(--tag-blue-text); border: 1px solid var(--accent); }
+  .badge-green { background: var(--tag-green); color: var(--tag-green-text); border: 1px solid var(--accent3); }
+  .badge-red { background: var(--tag-red); color: var(--tag-red-text); border: 1px solid var(--accent2); }
+  .badge-yellow { background: var(--tag-yellow); color: var(--tag-yellow-text); border: 1px solid var(--accent4); }
+  .container { max-width: 900px; margin: 0 auto; padding: 0 20px 80px; }
+  .toc { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px 28px; margin: 32px 0; }
+  .toc-title { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; font-weight: 700; }
+  .toc-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+  .toc-list li a { color: var(--text-muted); text-decoration: none; font-size: 13px; display: flex; align-items: center; gap: 8px; padding: 4px 0; transition: color 0.2s; }
+  .toc-list li a:hover { color: var(--accent); }
+  .toc-num { color: var(--text-dim); font-size: 11px; min-width: 20px; }
+  .section { margin-top: 48px; scroll-margin-top: 20px; }
+  .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
+  .section-num { background: var(--accent); color: #fff; width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+  .section-num.green { background: var(--accent3); color: #0f1117; }
+  .section-num.orange { background: var(--accent2); }
+  .section-num.yellow { background: var(--accent4); color: #0f1117; }
+  .section-title { font-family: 'Noto Serif KR', serif; font-size: 20px; font-weight: 700; color: #fff; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; margin-bottom: 14px; }
+  .def-box { background: var(--def-bg); border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; padding: 16px 20px; margin: 12px 0; font-size: 14px; line-height: 1.9; color: #c8d0e8; }
+  .def-box.green { border-color: var(--accent3); }
+  .def-box.orange { border-color: var(--accent2); }
+  .def-box.yellow { border-color: var(--accent4); }
+  .def-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; display: block; }
+  .def-label.green { color: var(--accent3); }
+  .def-label.orange { color: var(--accent2); }
+  .def-label.yellow { color: var(--accent4); }
+  .term-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; margin: 16px 0; }
+  .term-card { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; }
+  .term-name { font-size: 13px; font-weight: 700; color: var(--accent); margin-bottom: 6px; }
+  .term-name.green { color: var(--accent3); }
+  .term-name.orange { color: var(--accent2); }
+  .term-name.yellow { color: var(--accent4); }
+  .term-desc { font-size: 13px; color: var(--text-muted); line-height: 1.7; }
+  .mech-table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 13.5px; }
+  .mech-table th { background: var(--surface2); padding: 10px 14px; text-align: left; font-weight: 700; color: var(--accent); border: 1px solid var(--border); font-size: 12px; letter-spacing: 0.5px; }
+  .mech-table td { padding: 10px 14px; border: 1px solid var(--border); color: var(--text-muted); vertical-align: top; background: var(--surface); }
+  .mech-table tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+  .mech-table td:first-child { color: var(--accent4); font-weight: 700; }
+  .styled-list { list-style: none; margin: 12px 0; }
+  .styled-list li { padding: 8px 0 8px 20px; position: relative; font-size: 14px; color: var(--text-muted); border-bottom: 1px solid rgba(255,255,255,0.04); }
+  .styled-list li:last-child { border-bottom: none; }
+  .styled-list li::before { content: '▸'; position: absolute; left: 0; color: var(--accent); font-size: 10px; top: 10px; }
+  .styled-list li strong { color: var(--text); }
+  .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 14px 0; }
+  .compare-col { background: var(--surface2); border-radius: 8px; padding: 16px; border: 1px solid var(--border); }
+  .compare-head { font-size: 12px; font-weight: 700; letter-spacing: 1px; text-align: center; padding: 6px 12px; border-radius: 6px; margin-bottom: 12px; }
+  .compare-head.blue { background: var(--tag-blue); color: var(--tag-blue-text); }
+  .compare-head.pink { background: var(--tag-red); color: var(--tag-red-text); }
+  .compare-head.green { background: var(--tag-green); color: var(--tag-green-text); }
+  .compare-head.yellow { background: var(--tag-yellow); color: var(--tag-yellow-text); }
+  .quiz-section { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 16px; overflow: hidden; }
+  .quiz-header { background: var(--surface2); padding: 14px 20px; display: flex; align-items: center; gap: 10px; cursor: pointer; user-select: none; }
+  .quiz-type-tag { font-size: 10px; font-weight: 700; letter-spacing: 2px; padding: 3px 10px; border-radius: 4px; white-space: nowrap; }
+  .tag-ox { background: var(--tag-green); color: var(--tag-green-text); }
+  .tag-short { background: var(--tag-blue); color: var(--tag-blue-text); }
+  .tag-essay { background: var(--tag-yellow); color: var(--tag-yellow-text); }
+  .tag-desc { background: var(--tag-red); color: var(--tag-red-text); }
+  .quiz-q { font-size: 14px; font-weight: 500; color: var(--text); flex: 1; }
+  .quiz-toggle { color: var(--text-dim); font-size: 18px; transition: transform 0.3s; margin-left: 8px; }
+  .quiz-body { display: none; padding: 16px 20px; border-top: 1px solid var(--border); }
+  .quiz-body.open { display: block; }
+  .quiz-answer-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; color: var(--accent3); margin-bottom: 8px; display: block; }
+  .quiz-answer { font-size: 14px; color: var(--text-muted); line-height: 1.8; }
+  .quiz-answer strong { color: var(--accent4); }
+  .ox-badge { display: inline-block; width: 36px; height: 36px; border-radius: 50%; font-size: 18px; font-weight: 900; line-height: 36px; text-align: center; margin-right: 10px; vertical-align: middle; }
+  .ox-o { background: var(--tag-green); color: var(--tag-green-text); }
+  .ox-x { background: var(--tag-red); color: var(--tag-red-text); }
+  .summary-box { background: linear-gradient(135deg, #141b2d, #1a2040); border: 1px solid #3a4f8a; border-radius: 10px; padding: 20px 24px; margin: 20px 0; }
+  .summary-title { font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+  .hl { background: rgba(108,143,239,0.15); color: var(--accent); padding: 1px 6px; border-radius: 4px; font-weight: 700; }
+  .hl-green { background: rgba(86,201,164,0.15); color: var(--accent3); padding: 1px 6px; border-radius: 4px; font-weight: 700; }
+  .hl-red { background: rgba(233,123,107,0.15); color: var(--accent2); padding: 1px 6px; border-radius: 4px; font-weight: 700; }
+  .hl-yellow { background: rgba(240,201,107,0.15); color: var(--accent4); padding: 1px 6px; border-radius: 4px; font-weight: 700; }
+  .divider { height: 1px; background: var(--border); margin: 28px 0; }
+  .sub-section { margin: 24px 0; }
+  .sub-title { font-size: 15px; font-weight: 700; color: var(--accent4); margin-bottom: 14px; padding-left: 12px; border-left: 3px solid var(--accent4); }
+  .sub-title.green { color: var(--accent3); border-color: var(--accent3); }
+  .sub-title.orange { color: var(--accent2); border-color: var(--accent2); }
+  .sub-title.blue { color: var(--accent); border-color: var(--accent); }
+  .step-list { margin: 12px 0; }
+  .step-item { display: flex; gap: 14px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04); align-items: flex-start; }
+  .step-item:last-child { border-bottom: none; }
+  .step-num { background: var(--surface2); border: 1px solid var(--border); color: var(--accent4); min-width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; }
+  .step-content { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+  .step-content strong { color: var(--text); }
+  .stat-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; margin: 14px 0; }
+  .stat-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 14px; text-align: center; }
+  .stat-value { font-size: 22px; font-weight: 900; color: var(--accent); display: block; line-height: 1.2; margin-bottom: 4px; }
+  .stat-label { font-size: 11px; color: var(--text-muted); line-height: 1.4; }
+  .info-box { background: rgba(26,42,74,0.5); border: 1px solid var(--tag-blue); border-radius: 8px; padding: 14px 18px; margin: 12px 0; font-size: 13.5px; color: var(--tag-blue-text); line-height: 1.8; }
+  .footer { text-align: center; padding: 32px; color: var(--text-dim); font-size: 12px; border-top: 1px solid var(--border); margin-top: 48px; }
+  @media (max-width: 600px) { .compare-grid { grid-template-columns: 1fr; } .toc-list { grid-template-columns: 1fr; } .stat-row { grid-template-columns: 1fr 1fr; } }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-label">GERONTOLOGY · CHAPTER 10</div>
+  <h1>사회적 노화 III<br>친구·이웃관계, 사회 관계망</h1>
+  <p class="hero-sub">핵심 개념 완전정복 + 단답형·O/X·주관식·서술형 시험 대비</p>
+  <div class="hero-badges">
+    <span class="badge badge-green">친구·이웃관계</span>
+    <span class="badge badge-blue">콘보이 모델</span>
+    <span class="badge badge-red">사회적 지원</span>
+    <span class="badge badge-yellow">건강·복지 연계</span>
+  </div>
+</div>
+
+<div class="container">
+
+<div class="toc">
+  <div class="toc-title">📋 목차</div>
+  <ul class="toc-list">
+    <li><a href="#s1"><span class="toc-num">01</span> 친구관계의 특성</a></li>
+    <li><a href="#s2"><span class="toc-num">02</span> 이웃관계의 특성</a></li>
+    <li><a href="#s3"><span class="toc-num">03</span> 노년기 친구·이웃관계 실태</a></li>
+    <li><a href="#s4"><span class="toc-num">04</span> 성별·거주지에 따른 차이</a></li>
+    <li><a href="#s5"><span class="toc-num">05</span> 사회 관계망의 정의와 특성</a></li>
+    <li><a href="#s6"><span class="toc-num">06</span> 콘보이 모델</a></li>
+    <li><a href="#s7"><span class="toc-num">07</span> 사회 관계망의 기능 — 사회적 지원</a></li>
+    <li><a href="#s8"><span class="toc-num">08</span> 위계적 보완 모델</a></li>
+    <li><a href="#s9"><span class="toc-num">09</span> 과업 전문화 모델</a></li>
+    <li><a href="#s10"><span class="toc-num">10</span> 노화와 사회 관계망 변화</a></li>
+    <li><a href="#s11"><span class="toc-num">11</span> 사회정서 선택성 이론</a></li>
+    <li><a href="#s12"><span class="toc-num">12</span> 사회적 관계와 건강·복지</a></li>
+    <li><a href="#quiz"><span class="toc-num">★</span> 시험 문제 풀어보기</a></li>
+  </ul>
+</div>
+
+<!-- S1 -->
+<div class="section" id="s1">
+  <div class="section-header">
+    <div class="section-num">01</div>
+    <h2 class="section-title">친구관계의 특성</h2>
+  </div>
+  <p style="font-size:14px;color:var(--text-muted);margin-bottom:16px;">친구는 배우자나 부모-자녀 등의 가족관계 다음으로 중요한 사회적 관계로서, 때로는 형제자매보다 더 자주 만나고 친밀한 관계이기도 하다. 가족·친족의 혈연관계와 비교해 친구관계가 가지는 핵심 특성은 <span class="hl-green">자발성</span>과 <span class="hl">동질성</span>이다.</p>
+  <div class="compare-grid">
+    <div class="compare-col">
+      <div class="compare-head green">① 자발성 — 선택에 기반한 관계</div>
+      <p style="font-size:13.5px;color:var(--text-muted);line-height:1.8;">부모-자녀, 형제자매 관계는 개인의 의사와 상관없이 주어지는 <strong style="color:var(--text)">귀속적 관계</strong>. 반면 친구는 상호 간의 선택에 기반한 <strong style="color:var(--text)">자발적 관계</strong> (Lang &amp; Carstensen, 1998). 상호 신뢰, <strong style="color:var(--text)">호혜성(reciprocity)</strong>, 공유된 규범에 따르는 것이 중요</p>
+    </div>
+    <div class="compare-col">
+      <div class="compare-head blue">② 동질성 — 구조적 동등성</div>
+      <p style="font-size:13.5px;color:var(--text-muted);line-height:1.8;">부부관계는 성별 이질성, 부모-자녀 관계는 연령·세대 이질성 기반. 반면 친구는 대부분 <strong style="color:var(--text)">성별, 연령, 교육수준 등이 유사한 사람들</strong>로 구성 → 관계 구성원 간 구조적 <strong style="color:var(--text)">동등성(equality)</strong>이 큼</p>
+    </div>
+  </div>
+  <div class="sub-section">
+    <div class="sub-title">노년기 친구관계의 3가지 특성 (홍숙자, 2010) ★</div>
+    <div class="def-box">
+      <div class="def-label">📖 교재 정리</div>
+      노년기 친구관계의 특성: <strong>① 선택에 기초한 성취관계, ② 동질적이며, ③ 자아가치의 재확신과 자아검증에 기여</strong>
+    </div>
+    <ul class="styled-list">
+      <li>외부로부터 제약이 많아지는 노년기, 선택에 의해 형성·유지되는 친구관계는 노인들의 <strong>통제감에 기여</strong></li>
+      <li>자신도 누군가의 친구로 선택되어 있다는 데서 <strong>자기 가치 확인</strong> → 노인들에게 긍정적으로 작용</li>
+      <li>동시대 사회역사적 사건, 유사한 삶의 단계 → 서로를 이해하고 공감하는 능력이 뛰어남 → <strong>즐거움의 원천, 정서적 지원 기능</strong></li>
+    </ul>
+  </div>
+</div>
+
+<!-- S2 -->
+<div class="section" id="s2">
+  <div class="section-header">
+    <div class="section-num orange">02</div>
+    <h2 class="section-title">이웃관계의 특성</h2>
+  </div>
+  <div class="def-box orange">
+    <div class="def-label orange">📖 교재 정의</div>
+    이웃이란 <strong>지리적 범위를 기초로 하여 가까이 사는 사람들을 일컫는 말</strong>이다. 이웃은 무엇보다 <strong>지리적 근접성(geographic proximity)</strong>을 특성으로 하는 관계이다.
+  </div>
+  <ul class="styled-list">
+    <li>급할 때 간단한 물품을 빌리거나 잠시 집을 비울 때 집을 <strong>모니터링</strong>해 주는 기능</li>
+    <li>노화와 함께 일상생활 반경이 거주지 주변으로 축소되는 노년기의 특성상, <strong>이웃관계의 중요성이 다른 시기보다 더 클 수 있음</strong></li>
+  </ul>
+  <div class="sub-section">
+    <div class="sub-title orange">도시지역 이웃관계의 위계성 ★ (한경혜 외, 2009)</div>
+    <div class="def-box orange">
+      <div class="def-label orange">연구 결과</div>
+      2009년 서울·전주·청주·광주 지역 50·60대 남녀 1,713명 조사 → 이웃과의 상호작용에서 위계성 존재<br><br>
+      <strong>인사(99.19%) → 담소(96.55%) → 방문(88.33%) → 도움(87.16%) → 지역활동 함께(77%)</strong>
+    </div>
+  </div>
+</div>
+
+<!-- S3 -->
+<div class="section" id="s3">
+  <div class="section-header">
+    <div class="section-num green">03</div>
+    <h2 class="section-title">노년기 친구·이웃관계 실태</h2>
+  </div>
+  <div class="stat-row">
+    <div class="stat-item"><span class="stat-value">57.1%</span><span class="stat-label">65세 이상 중 친한 친구·이웃·지인이 있는 비율 (2017 노인실태조사)</span></div>
+    <div class="stat-item"><span class="stat-value">1.4명</span><span class="stat-label">친한 친구·이웃·지인 평균 규모</span></div>
+    <div class="stat-item"><span class="stat-value">76.8%</span><span class="stat-label">주 1회 이상 친구·이웃·지인과 왕래하는 노인 비율</span></div>
+    <div class="stat-item"><span class="stat-value">64.2%</span><span class="stat-label">주 1회 이상 연락하는 비율 → 왕래 비율이 더 높음 (대면 접촉 중심)</span></div>
+    <div class="stat-item"><span class="stat-value">6.12명</span><span class="stat-label">도시 50·60대의 친한 친구 규모 (노년층보다 훨씬 많음, 이지현·한경혜 2012)</span></div>
+    <div class="stat-item"><span class="stat-value">5~10명</span><span class="stat-label">서구 노인의 친구 규모 (한국보다 상대적으로 큰 편)</span></div>
+  </div>
+  <div class="summary-box">
+    <div class="summary-title">💡 핵심 포인트</div>
+    <ul class="styled-list">
+      <li>한국 노인의 친구 관계망 규모는 서구에 비해 <strong>상대적으로 작은 편</strong></li>
+      <li>친구·이웃·지인과 서로 얼굴을 보는 <strong>왕래 비율이 연락 비율보다 더 높음</strong> → 현재 노년층의 가족 외 비공식 사회관계는 <strong>대면 접촉 위주</strong></li>
+    </ul>
+  </div>
+</div>
+
+<!-- S4 -->
+<div class="section" id="s4">
+  <div class="section-header">
+    <div class="section-num yellow">04</div>
+    <h2 class="section-title">성별·거주지에 따른 차이 ★★</h2>
+  </div>
+  <div class="sub-section">
+    <div class="sub-title">친구관계의 성별 차이 (김애순, 2012)</div>
+    <div class="compare-grid">
+      <div class="compare-col">
+        <div class="compare-head blue">남성의 우정 — 행위주체적(agentic)</div>
+        <ul class="styled-list">
+          <li>친구 사이에 <strong>활동과 흥미를 공유</strong>하며 <strong>병렬적으로 연결</strong></li>
+          <li>정서적 친밀감은 약함</li>
+          <li>친구관계에서 <span class="hl">'사회적 자극'</span> 기능이 행복감과 유의한 관련성</li>
+          <li>은퇴 후 일 관련 친구관계 약화 → 새로운 관계 형성 어려움</li>
+        </ul>
+      </div>
+      <div class="compare-col">
+        <div class="compare-head pink">여성의 우정 — 공유적(communal)</div>
+        <ul class="styled-list">
+          <li>상호관심, 심리 및 <strong>정서적 지지</strong>를 통해 형성</li>
+          <li><strong>자기 노출</strong>을 많이 함으로써 친밀성을 높임</li>
+          <li>친구관계에서 <span class="hl-green">'경청자'</span> 기능이 행복감과 관련성</li>
+          <li>생활주기(life cycle)상 공통점 → 공동의 화제 용이</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="sub-section">
+    <div class="sub-title">거주지(도시 vs 농촌)에 따른 차이</div>
+    <div class="compare-grid">
+      <div class="compare-col">
+        <div class="compare-head blue">도시지역</div>
+        <ul class="styled-list">
+          <li>익명성이 특징</li>
+          <li>잦은 이사 → 이웃 관계 단절</li>
+          <li>친구·이웃·지인과 거의 매일 왕래: <strong>40.8%</strong></li>
+        </ul>
+      </div>
+      <div class="compare-col">
+        <div class="compare-head green">농촌지역 (읍·면부)</div>
+        <ul class="styled-list">
+          <li>오랜 유대 관계에 기초한 <strong>공동체 문화</strong> 상대적으로 높게 유지</li>
+          <li>이주가 적어 이웃 관계 오래 지속</li>
+          <li>친구·이웃·지인과 거의 매일 왕래: <strong>64.5%</strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S5 -->
+<div class="section" id="s5">
+  <div class="section-header">
+    <div class="section-num">05</div>
+    <h2 class="section-title">사회 관계망의 정의와 특성 ★★★</h2>
+  </div>
+  <div class="def-box">
+    <div class="def-label">📖 교재 정의</div>
+    <strong>사회 관계망(social networks)</strong>이란 개인의 모든 사회적 대인접촉을 포함하는 것으로 가족, 친구, 친척, 이웃 등 공식적·비공식적 지원들을 포함하는 다양한 관계로 구성되며 <strong>일생동안 상호 간 역할에 따른 의무와 관계의 동적인 변화에 기초를 둔 집단</strong>을 말한다 (정순둘·문진영·김성원, 2010).
+  </div>
+  <div class="sub-section">
+    <div class="sub-title">사회 관계망의 두 가지 측면 (House &amp; Kahn, 1985) ★</div>
+    <div class="compare-grid">
+      <div class="compare-col">
+        <div class="compare-head blue">구조적 측면</div>
+        <ul class="styled-list">
+          <li><strong>구성</strong>: 어떠한 사람들로 이루어져 있는지</li>
+          <li><strong>관계망의 크기</strong>: 관계망의 규모</li>
+          <li><strong>지리적 근접성</strong>: 관계망 성원들이 얼마나 가까운 거리에 거주하는지</li>
+          <li><strong>접촉·연락 빈도</strong>: 얼마나 자주 만나고 연락하는지</li>
+          <li><strong>동질성(homogeneity)</strong>: 성별·연령 등 배경 특성이 얼마나 유사한지</li>
+        </ul>
+      </div>
+      <div class="compare-col">
+        <div class="compare-head green">내용적 측면</div>
+        <ul class="styled-list">
+          <li>관계망 성원들이 <strong>어떤 기능을 하는지</strong>와 관련</li>
+          <li>관계를 통해 교환되는 <strong>다양한 지원(혹은 갈등)</strong>을 의미</li>
+          <li>과거에는 사회 관계망 = 지원망으로 이해했지만, <strong>갈등도 기능적 특성</strong>으로 포함</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S6 -->
+<div class="section" id="s6">
+  <div class="section-header">
+    <div class="section-num orange">06</div>
+    <h2 class="section-title">콘보이 모델 (Convoy Model) ★★★</h2>
+  </div>
+  <div class="def-box orange">
+    <div class="def-label orange">📖 교재 정의 — Kahn &amp; Antonucci (1980)</div>
+    콘보이(convoy)란 우리말로 풀이하면 <strong>'호위대'</strong>를 의미하는데, 우리는 자신에게 중요하고 도움을 주고 받는 일련의 사람들로 구성된 호위대에 둘러싸여 삶을 살아가게 된다. 가운데의 '나'를 중심으로 한 <strong>세 개의 위계적인 동심원</strong>으로 콘보이 모델을 설명한다.
+  </div>
+  <div class="sub-section">
+    <div class="sub-title orange">세 개의 동심원 구조</div>
+    <table class="mech-table">
+      <thead><tr><th>동심원</th><th>구성</th><th>특징</th></tr></thead>
+      <tbody>
+        <tr><td>내부 동심원</td><td>가장 친밀한 지원 제공자 (배우자·자녀 등) — 3분의 2 이상이 배우자와 자녀</td><td>단순 역할 관계를 넘어 <strong>애착을 형성</strong>하고 있는 사람들. 가장 안정적</td></tr>
+        <tr><td>중간 동심원</td><td>중요하고 도움이 되지만 내부보다 친밀성이 조금 덜한 사람들. 형제자매 등 가족 성원이 두드러짐</td><td>내부와 외부의 중간 수준 친밀성</td></tr>
+        <tr><td>외부 동심원</td><td>주로 <strong>직장 동료·상사, 이웃 등 역할에 기초한 관계</strong></td><td>역할에 한정된 관계 → 역할 변화(은퇴 등) 시 감소 가능성 높음</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="sub-section">
+    <div class="sub-title orange">콘보이 모델의 3가지 특성 ★★</div>
+    <div class="step-list">
+      <div class="step-item">
+        <div class="step-num">①</div>
+        <div class="step-content"><strong>보호 기능 계층(protective layers)</strong>에 둘러싸여 삶을 살아감. 콘보이는 삶을 살아가면서 직면하게 되는 크고 작은 도전·과제들에 성공적으로 적응하고 협상하는 데 도움을 주는 사람들로 이루어진 일종의 호위대. 각 층이 제공하는 보호 기능 정도는 서로 차등적</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">②</div>
+        <div class="step-content"><strong>생애과정에 걸쳐 안정적이면서 동시에 역동적</strong>. 콘보이 구조는 기본적으로 <strong>역할(role)과 애착(attachment)</strong>에 기반. 역할에 한정된 관계(주로 외부 동심원)는 변화 가능성이 높은 반면, 역할을 초월한 관계(주로 내부 동심원)는 안정적으로 유지되는 경향</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">③</div>
+        <div class="step-content"><strong>개인적 특성과 상황적 특성에 의해 결정</strong>. 성별·연령 등 인구학적 특성, 성격 같은 개인적 특성, 그리고 직업·가족·역할 등과 연관된 상황적 특성들이 개인의 콘보이 구조를 결정</div>
+      </div>
+    </div>
+  </div>
+  <div class="sub-section">
+    <div class="sub-title orange">콘보이의 크기 — 한·미 비교</div>
+    <table class="mech-table">
+      <thead><tr><th>구분</th><th>미국 (Antonucci &amp; Akiyama, 1987)</th><th>한국 (한경혜·김주현·김경민, 2003)</th></tr></thead>
+      <tbody>
+        <tr><td>중년층 크기</td><td>15~35명</td><td>0~6명 정도</td></tr>
+        <tr><td>노년층 크기</td><td>5~15명</td><td>— (상당히 작은 편)</td></tr>
+        <tr><td>구성 비율</td><td>82% 가족, 18% 친구</td><td>배우자 포함 가족원이 주를 이룸 (유사)</td></tr>
+        <tr><td>내부 동심원</td><td>3분의 2 이상이 배우자와 자녀</td><td>유사</td></tr>
+        <tr><td>외부 동심원</td><td>주로 친구들로 구성</td><td>—</td></tr>
+      </tbody>
+    </table>
+    <div class="info-box">한국의 콘보이 크기가 작은 이유: 내부 두 개 동심원만 조사한 측정 방식의 차이 + <strong>친밀성 정도에 대한 해석이 문화에 따라 상이</strong>하기 때문</div>
+  </div>
+</div>
+
+<!-- S7 -->
+<div class="section" id="s7">
+  <div class="section-header">
+    <div class="section-num green">07</div>
+    <h2 class="section-title">사회 관계망의 기능 — 사회적 지원 ★★★</h2>
+  </div>
+  <div class="def-box green">
+    <div class="def-label green">📖 교재 정의 — 사회적 지원(social support) (성규탁, 1990)</div>
+    <strong>'정서적 지지, 충고, 안내, 정보 제공, 물질적 원조, 필요할 때 친구가 되어 주는 것, 어려움을 보살펴 주는 것, 전문적 서비스를 받도록 돕는 것 등 다양한 형태의 보호 및 서비스'</strong>를 의미한다.
+  </div>
+  <div class="sub-section">
+    <div class="sub-title green">사회적 지원이 건강·복지에 미치는 두 가지 방식 ★★★</div>
+    <div class="compare-grid">
+      <div class="compare-col">
+        <div class="compare-head green">직접 효과 (direct effect)</div>
+        <p style="font-size:13.5px;color:var(--text-muted);line-height:1.8;">사회적 지원 자체가 개인의 건강과 복지를 <strong style="color:var(--text)">유지·향상시키는 것</strong>. 사회적 지원이 존재하는 것 자체가 긍정적 영향</p>
+      </div>
+      <div class="compare-col">
+        <div class="compare-head yellow">완충 효과 (buffering effect)</div>
+        <p style="font-size:13.5px;color:var(--text-muted);line-height:1.8;">사별·은퇴 같은 부정적 사건이 건강·복지에 미치는 해로운 영향을 <strong style="color:var(--text)">완충·경감시키는 것</strong>. 스트레스 상황에서 지원의 역할이 중요</p>
+      </div>
+    </div>
+  </div>
+  <div class="sub-section">
+    <div class="sub-title green">지원의 이용 가능성(availability)에 대한 인지 ★</div>
+    <div class="def-box green">
+      <div class="def-label green">핵심 포인트</div>
+      사회적 지원은 반드시 실제로 제공받은 지원만을 의미하는 것은 아니다. <strong>자신이 필요로 할 때 지원을 받을 수 있다는 믿음, 즉 지원의 이용 가능성(availability)에 대한 인지</strong> 역시 실제 받은 지원만큼이나 중요한 역할을 한다.
+      <ul class="styled-list" style="margin-top:8px;">
+        <li>지원의 가용성 인지 → <strong>자기지향적 행동 촉진</strong> → 통제감 향상, 자신의 가치 증진 (Wethington &amp; Kessler, 1986)</li>
+        <li>지원의 가용성 인지 → <strong>스트레스에 대한 생리적 반응(혈압) 완화</strong> (Kamarch 등, 1990 실험)</li>
+      </ul>
+    </div>
+  </div>
+  <div class="sub-section">
+    <div class="sub-title green">사회적 지원이 항상 긍정적인 것은 아니다 ★</div>
+    <ul class="styled-list">
+      <li>너무 과도한 관여나 과보호 → 개인의 <strong>독립성·문제해결능력 약화</strong></li>
+      <li>마지못해 제공된 지원이나 공감·민감성이 결여된 지원 → 효과 발휘 어려움</li>
+      <li><strong>지원이 효과적이려면, 받을 사람의 필요(need)와 지원의 유형·양이 잘 부합</strong>되어야 함</li>
+      <li><span class="hl-red">부정적 측면(갈등, 긴장, 과도한 요구, 비난)이 긍정적 측면보다 건강·안녕에 더 큰 영향</span>을 가지는 것으로 보고됨 (Krause, 2001)</li>
+    </ul>
+  </div>
+</div>
+
+<!-- S8 -->
+<div class="section" id="s8">
+  <div class="section-header">
+    <div class="section-num">08</div>
+    <h2 class="section-title">위계적 보완 모델 (Hierarchical Compensatory Model) ★★★</h2>
+  </div>
+  <div class="def-box">
+    <div class="def-label">📖 교재 정의 — Marjorie Cantor (1979) 제안</div>
+    지원이 제공되는 데 노인과 관계망 성원 간 <strong>관계의 우선성(primacy), 선호</strong>가 중요하게 작용한다고 본다. 노인과 관계망 성원들 간의 <strong>관계 우선성(혹은 우선적으로 선호되는 관계)에 따라 순차적이고 위계적으로 지원 제공자가 선택되고 요청</strong>된다는 것이다.
+  </div>
+  <div class="sub-section">
+    <div class="sub-title">지원 요청의 위계 순서</div>
+    <div class="step-list">
+      <div class="step-item"><div class="step-num">1순위</div><div class="step-content"><strong>배우자·성인자녀</strong> 등 가족원 — 가장 중요한 관계로 지원 제공 대상으로도 가장 선호</div></div>
+      <div class="step-item"><div class="step-num">2순위</div><div class="step-content"><strong>친척, 친구, 이웃</strong> 같은 비공식 2차 집단 — 가족원이 지원 제공 불가 시</div></div>
+      <div class="step-item"><div class="step-num">3순위</div><div class="step-content"><strong>공식적 조직</strong> — 비공식 보호가 충분하지 못할 때 보완하는 역할</div></div>
+    </div>
+  </div>
+  <div class="summary-box">
+    <div class="summary-title">💡 정책적 함의</div>
+    <p style="font-size:14px;color:var(--text-muted);line-height:1.8;">노인의 공식적 보호서비스 이용은 가족이나 친구 같은 <strong>비공식 보호자원이 있으면 그만큼 감소</strong>할 것으로 예측 가능. 즉 비공식 보호가 충분하지 못할 때 공식 보호가 그 역할을 보완함</p>
+  </div>
+</div>
+
+<!-- S9 -->
+<div class="section" id="s9">
+  <div class="section-header">
+    <div class="section-num yellow">09</div>
+    <h2 class="section-title">과업 전문화 모델 (Task-specific Model) ★★★</h2>
+  </div>
+  <div class="def-box yellow">
+    <div class="def-label yellow">📖 교재 정의 — Eugene Litwak (1985) 개발</div>
+    <strong>사회적 관계의 특성에 따라 효율적으로 제공할 수 있는 지원의 유형이 다르다</strong>고 본다. 즉 노인이 필요로 하는 지원의 성격과 지원 제공자의 특성들이 고려되어 지원 제공자가 결정된다고 보는 것이다.
+  </div>
+  <div class="sub-section">
+    <div class="sub-title yellow">비공식·공식 집단의 지원 특성</div>
+    <div class="compare-grid">
+      <div class="compare-col">
+        <div class="compare-head green">비공식 집단 (가족, 친구, 이웃)</div>
+        <ul class="styled-list">
+          <li>대면접촉, 애정, 장기적인 헌신 등의 특성</li>
+          <li><strong>지리적 근접성과 지속적인 헌신이 필요한 과업</strong> 수행에 적절</li>
+        </ul>
+      </div>
+      <div class="compare-col">
+        <div class="compare-head blue">공식 집단 (전문 기관)</div>
+        <ul class="styled-list">
+          <li>기술적 전문성이라는 특성</li>
+          <li><strong>기술적 숙련을 필요로 하는 과업</strong> 수행에 적절</li>
+        </ul>
+      </div>
+    </div>
+    <div class="info-box">Litwak 등은 도움이 필요한 분야와 비공식 지원망의 특성을 <strong>근접성(proximity), 개입의 기간(length of commitment), 생활방식의 유사성(commonality of lifestyle), 지원 동기(source of motivation), 노동의 분업(division of labor)</strong> 등 6가지 항목으로 분류한 후, 역할이나 임무가 갖는 특성과 도움을 주는 사람의 특성이 일치하는 방향으로 도움을 요청한다고 주장</div>
+  </div>
+  <div class="sub-section">
+    <div class="sub-title yellow">두 모델 비교 ★★</div>
+    <table class="mech-table">
+      <thead><tr><th>구분</th><th>위계적 보완 모델 (Cantor, 1979)</th><th>과업 전문화 모델 (Litwak, 1985)</th></tr></thead>
+      <tbody>
+        <tr><td>핵심 원리</td><td>관계의 우선성에 따라 위계적으로 지원 제공자 결정</td><td>필요한 지원 유형과 관계의 특성 간 <strong>적합성</strong>에 따라 지원 제공자 결정</td></tr>
+        <tr><td>가장 중요한 것</td><td>가장 우선시되는 관계(배우자·자녀)가 먼저 지원 제공</td><td>다양한 사회적 관계를 고루 가지는 것이 중요</td></tr>
+        <tr><td>특정 관계 결핍 시</td><td>다음 순위 관계로 이동</td><td>해당 관계와 관련된 지원도 제공받기 어려울 수 있음</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- S10 -->
+<div class="section" id="s10">
+  <div class="section-header">
+    <div class="section-num">10</div>
+    <h2 class="section-title">노화와 사회 관계망의 변화</h2>
+  </div>
+  <div class="sub-section">
+    <div class="sub-title">콘보이 모델의 예측</div>
+    <ul class="styled-list">
+      <li>노년기의 가장 대표적인 역할 변화: <span class="hl-yellow">은퇴</span></li>
+      <li>은퇴 같은 역할 상실 → 주로 <strong>외부 동심원</strong>에서 감소 예측 (역할에 한정된 관계 多)</li>
+      <li>역할을 초월한 관계들(주로 내부 동심원) → 안정적으로 유지되는 경향</li>
+      <li>노년기에 사회 관계망이 감소될 때 새로운 관계들로 대체 못 하면 → 전체 관계망 크기 감소 위험</li>
+    </ul>
+  </div>
+  <div class="sub-section">
+    <div class="sub-title">종단연구 결과 (Lang, 2000)</div>
+    <div class="def-box">
+      <div class="def-label">연구 결과</div>
+      독일의 70~103세 노인 대상, 4~5년 종단 연구: <strong>친밀한 관계망(core network) 크기의 변화는 상당히 작은 반면, 덜 친밀한 관계에서의 감소는 상대적으로 두드러짐</strong>. 연속적이지 않은 관계의 절반 이상을 노인들이 의도적으로 감소시키거나 배제. 자신의 죽음이 멀지 않다고 느끼는 사람일수록 덜 친밀한 관계를 감소시키고 친밀한 관계의 사람들과 정서적 친밀감을 증가시키는 방향으로 행동
+    </div>
+  </div>
+</div>
+
+<!-- S11 -->
+<div class="section" id="s11">
+  <div class="section-header">
+    <div class="section-num orange">11</div>
+    <h2 class="section-title">사회정서 선택성 이론 ★★★</h2>
+  </div>
+  <div class="def-box orange">
+    <div class="def-label orange">📖 교재 정의 — Carstensen (1991, 1995, 1998)</div>
+    <strong>사회정서 선택성 이론(socio-emotional selectivity theory)</strong>은 노화과정에 따라 전체적인 관계망 크기, 특히 덜 친밀한 주변적 관계가 감소한다고 보는 점에서는 콘보이 모델과 유사하지만, <strong>왜 이러한 관계망 축소가 일어나는지에 대해서는 다소 상이한 시각</strong>을 가지고 있다.
+  </div>
+  <div class="sub-section">
+    <div class="sub-title orange">두 가지 기본 동기의 생애과정 변화 ★</div>
+    <div class="compare-grid">
+      <div class="compare-col">
+        <div class="compare-head blue">정보 추구 동기</div>
+        <p style="font-size:13.5px;color:var(--text-muted);line-height:1.8;">새로운 정보를 얻거나 미래를 위한 자원을 축적하는 <strong style="color:var(--text)">장기적 목표</strong>. 노년기에는 미래가 제한된다고 느낌에 따라 이 동기의 중요성은 <span class="hl-red">감소</span></p>
+      </div>
+      <div class="compare-col">
+        <div class="compare-head green">정서 조절 동기</div>
+        <p style="font-size:13.5px;color:var(--text-muted);line-height:1.8;">보다 <strong style="color:var(--text)">현재 지향적인</strong> 동기. 노년기에는 이 동기가 <span class="hl-green">중요해지는 방향으로 동기가 재구조화</span> → 시간과 에너지를 보다 친밀하고 정서적으로 만족스러운 사람들에게 집중</p>
+      </div>
+    </div>
+  </div>
+  <div class="sub-section">
+    <div class="sub-title orange">이론의 예측</div>
+    <ul class="styled-list">
+      <li>노화과정이 진행되더라도 <strong>정서적으로 친밀한 사람들의 수는 상당히 안정적으로 유지</strong></li>
+      <li>보다 피상적인 관계에 있는 사람들의 수는 <strong>감소할 것으로 예측</strong></li>
+      <li>노년기 관계망 크기 감소는 <strong>정서적 보상을 덜 제공하는 대상과의 접촉을 줄이고자 하는 동기</strong>가 반영된 결과 (Baltes &amp; Carstensen, 1999)</li>
+    </ul>
+  </div>
+  <div class="sub-section">
+    <div class="sub-title orange">노년기 사회적 상호작용 감소를 보는 이론 비교 ★</div>
+    <table class="mech-table">
+      <thead><tr><th>이론</th><th>노년기 사회적 상호작용 감소를 어떻게 봄?</th></tr></thead>
+      <tbody>
+        <tr><td>활동이론 (activity theory)</td><td>강제 퇴직·연령차별 등 <strong>사회적·정치적 환경</strong>에 의해 발생하는 <strong>'문제(problem)'</strong></td></tr>
+        <tr><td>은퇴이론 (disengagement theory)</td><td>죽음이 가까워지면서 나타나는 노인과 사회 간 상호적·심리적인 <strong>'거리두기'</strong> — 노인 자신이나 사회에 적응적인 행동</td></tr>
+        <tr><td>사회정서 선택성 이론</td><td><strong>인지적 동기 요인</strong>이 작용하여 나타나는 <strong>적응적인 과정</strong>. 모든 관계에서 일괄적이 아니라 <strong>관계의 친밀성·중요도에 따라 선택적</strong>으로 진행</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="summary-box">
+    <div class="summary-title">💡 함의</div>
+    <p style="font-size:14px;color:var(--text-muted);line-height:1.8;">사회정서 선택성 이론을 감안하면, 노인들에게 <strong>'적당한 수준의 사회활동'</strong>이 아닌 무조건적인 사회활동 강요 혹은 중년기와 동일한 수준의 활동성 유지를 강요하는 것은 자연스러운 노화과정·노년기 적응에 도움이 되지 않을 수 있다.</p>
+  </div>
+</div>
+
+<!-- S12 -->
+<div class="section" id="s12">
+  <div class="section-header">
+    <div class="section-num green">12</div>
+    <h2 class="section-title">사회적 관계와 건강·복지 간 연계 ★★★</h2>
+  </div>
+  <div class="def-box green">
+    <div class="def-label green">역사적 기원 — Emile Durkheim, 『자살론(Suicide)』(1897)</div>
+    배우자가 있는 사람이 그렇지 않은 사람보다 자살률이 더 낮고, 가톨릭 국가의 자살률이 개신교 국가보다 더 낮음 → 자살이 <strong>사회통합</strong>과 관련됨. 개인은 <strong>애착(attachment)과 규제(regulation)</strong>라는 두 가지 형태의 통합에 의해 사회와 연결됨. 자살률이 개인이 속한 사회집단의 통합 정도에 반비례 → 사회통합과 응집력이 사망률에 영향을 주는지 이해하는 데 크게 기여
+  </div>
+  <div class="sub-section">
+    <div class="sub-title green">두 가지 핵심 메커니즘</div>
+    <div class="compare-grid">
+      <div class="compare-col">
+        <div class="compare-head green">① 사회적 지원 제공</div>
+        <ul class="styled-list">
+          <li>정서적 지원, 경제적 도움, 도구적 지원, 유용한 정보 제공</li>
+          <li><strong>직접 효과</strong>: 지원 자체가 건강·복지 향상</li>
+          <li><strong>완충 효과</strong>: 부정적 사건의 해로운 영향 완화</li>
+        </ul>
+      </div>
+      <div class="compare-col">
+        <div class="compare-head blue">② 사회 참여의 촉진</div>
+        <ul class="styled-list">
+          <li><strong>사회 참여(social engagement)</strong>: 친구 어울리기, 사회적 행사, 직업·사회적 역할, 레크리에이션, 교회 활동 등</li>
+          <li>사회적 관계 → 사회 참여 기회 제공·촉진 → <strong>가치와 소속감, 애착의식 제공</strong> (Berkman &amp; Glass, 2000)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="sub-section">
+    <div class="sub-title green">사회적 영향 (social influence)</div>
+    <div class="def-box green">
+      <div class="def-label green">📖 교재 내용</div>
+      사회적 관계가 건강·복지에 영향을 미치는 방식은 사회적 지원이나 사회 참여의 촉진 외에도 관계망 성원들이 가지고 있는 <strong>가치나 규범, 태도 등에 기인</strong>하기도 한다. 자신이 소속되어 있는 집단의 구성원들이 어떠한 태도를 가지고 있는지, 집단 내에서 기대되는 행동 방식은 무엇인지와 같은 일종의 <strong>하위문화</strong>가 구성원들의 의식과 행동에 강력한 영향을 미치게 되는 것이다. (예: 청소년기 또래 집단의 흡연, 음주 영향)
+    </div>
+  </div>
+  <div class="sub-section">
+    <div class="sub-title green">사회적 관계의 중요성 4가지 결론 (Rowe &amp; Kahn, 1998) ★★</div>
+    <div class="step-list">
+      <div class="step-item"><div class="step-num">①</div><div class="step-content"><strong>사회적 관계·유대의 결핍은 건강을 해치는 강력한 위험 요인이다.</strong></div></div>
+      <div class="step-item"><div class="step-num">②</div><div class="step-content"><strong>사회적 지원은 정서적 도움과 실제적 도움 등 여러 형태로 건강에 직접적이고도 긍정적인 영향을 미친다.</strong></div></div>
+      <div class="step-item"><div class="step-num">③</div><div class="step-content"><strong>사회적 지원은 사별, 이혼과 같은 부정적인 사건 혹은 상황이 건강에 미치는 부정적인 영향을 일부분 완화하거나 줄일 수 있다.</strong></div></div>
+      <div class="step-item"><div class="step-num">④</div><div class="step-content"><strong>어떤 한 종류의 지원이 모든 사람과 모든 상황에 똑같이 효과적이지는 않다. 지원이 갖는 효과는 상황, 사람, 그리고 그 사람이 요구하는 바에 따라 달라진다.</strong></div></div>
+    </div>
+  </div>
+  <div class="summary-box">
+    <div class="summary-title">💡 앨러메다 카운티 연구 (Berkman &amp; Syme, 1979)</div>
+    <p style="font-size:14px;color:var(--text-muted);line-height:1.8;">미국 캘리포니아주 엘러메다 카운티 거주자 대상 9년간 추적 조사(1965~74년). 타인과의 유대가 부족한 사람들이 유대 정도가 높은 사람들에 비해 사망률이 <strong>남성은 2.3배, 여성은 2.8배 더 높은 것</strong>으로 나타남</p>
+  </div>
+</div>
+
+<!-- QUIZ -->
+<div class="section" id="quiz">
+  <div class="section-header">
+    <div class="section-num" style="background:var(--accent2);">★</div>
+    <h2 class="section-title">시험 대비 문제 풀어보기</h2>
+  </div>
+  <p style="font-size:13px;color:var(--text-muted);margin-bottom:20px;">각 문제를 클릭하면 정답이 나타납니다.</p>
+
+  <h3 style="font-size:13px;font-weight:700;color:var(--accent3);letter-spacing:2px;margin:16px 0 10px;">📗 O / X 문제</h3>
+
+  <div class="quiz-section"><div class="quiz-header" onclick="toggleQuiz(this)"><span class="quiz-type-tag tag-ox">O/X</span><span class="quiz-q">1. 친구관계는 가족관계와 달리 선택에 기반한 자발적 관계이며, 대부분 성별·연령·교육수준 등이 유사한 사람들로 구성된다는 점에서 동질성이 크다.</span><span class="quiz-toggle">＋</span></div><div class="quiz-body"><div class="quiz-answer-label">ANSWER</div><div class="quiz-answer"><span class="ox-badge ox-o">O</span><strong>O</strong> — 친구관계의 두 핵심 특성인 <strong>자발성</strong>(선택에 기반)과 <strong>동질성</strong>(구조적 동등성)에 해당한다.</div></div></div>
+
+  <div class="quiz-section"><div class="quiz-header" onclick="toggleQuiz(this)"><span class="quiz-type-tag tag-ox">O/X</span><span class="quiz-q">2. 콘보이 모델에서 '내부 동심원'은 주로 직장 동료나 이웃 등 역할에 기초한 관계로 구성된다.</span><span class="quiz-toggle">＋</span></div><div class="quiz-body"><div class="quiz-answer-label">ANSWER</div><div class="quiz-answer"><span class="ox-badge ox-x">X</span><strong>X</strong> — 직장 동료·이웃 등 역할에 기초한 관계는 <strong>외부 동심원</strong>을 구성한다. 내부 동심원은 단순한 역할 관계를 넘어 <strong>애착을 형성하고 있는 사람들</strong>(배우자·자녀 등)로 구성된다.</div></div></div>
+
+  <div class="quiz-section"><div class="quiz-header" onclick="toggleQuiz(this)"><span class="quiz-type-tag tag-ox">O/X</span><span class="quiz-q">3. 사회정서 선택성 이론에 따르면, 노년기에 사회 관계망이 감소하는 이유는 강제 퇴직·연령차별 같은 사회적·정치적 환경 때문이다.</span><span class="quiz-toggle">＋</span></div><div class="quiz-body"><div class="quiz-answer-label">ANSWER</div><div class="quiz-answer"><span class="ox-badge ox-x">X</span><strong>X</strong> — 그것은 <strong>활동이론(activity theory)</strong>의 관점이다. 사회정서 선택성 이론은 노년기 관계망 감소가 <strong>인지적 동기 요인</strong>(정서 조절 동기의 우선시)이 작용하여 나타나는 <strong>적응적인 과정</strong>이라고 본다.</div></div></div>
+
+  <div class="quiz-section"><div class="quiz-header" onclick="toggleQuiz(this)"><span class="quiz-type-tag tag-ox">O/X</span><span class="quiz-q">4. 위계적 보완 모델에서는 가족원이 지원을 제공할 수 없을 때에야 친척·친구·이웃 같은 비공식 2차 집단에 지원을 요청하게 된다.</span><span class="quiz-toggle">＋</span></div><div class="quiz-body"><div class="quiz-answer-label">ANSWER</div><div class="quiz-answer"><span class="ox-badge ox-o">O</span><strong>O</strong> — 위계적 보완 모델(Cantor, 1979)에서는 관계의 우선성에 따라 ① 배우자·자녀 등 가족 → ② 친척·친구·이웃(비공식 2차 집단) → ③ 공식적 조직 순으로 지원 제공자가 선택된다.</div></div></div>
+
+  <div class="quiz-section"><div class="quiz-header" onclick="toggleQuiz(this)"><span class="quiz-type-tag tag-ox">O/X</span><span class="quiz-q">5. 사회적 지원은 실제로 받은 지원뿐 아니라, 필요할 때 지원을 받을 수 있다는 믿음(이용 가능성에 대한 인지)도 건강과 복지에 중요한 역할을 한다.</span><span class="quiz-toggle">＋</span></div><div class="quiz-body"><div class="quiz-answer-label">ANSWER</div><div class="quiz-answer"><span class="ox-badge ox-o">O</span><strong>O</strong> — 지원의 이용 가능성(availability)에 대한 인지는 실제 받은 지원만큼이나 중요하다. 자기지향적 행동 촉진, 통제감 향상, 스트레스에 대한 생리적 반응 완화 등의 효과가 있다.</div></div></div>
+
+  <div class="quiz-section"><div class="quiz-header" onclick="toggleQuiz(this)"><span class="quiz-type-tag tag-ox">O/X</span><span class="quiz-q">6. 사회적 지원은 많을수록 항상 건강에 긍정적이므로, 과도한 지원도 개인의 건강을 증진시킨다.</span><span class="quiz-toggle">＋</span></div><div class="quiz-body"><div class="quiz-answer-label">ANSWER</div><div class="quiz-answer"><span class="ox-badge ox-x">X</span><strong>X</strong> — 너무 과도한 관여나 과보호 같은 지원은 오히려 개인의 <strong>독립성과 문제해결능력을 약화</strong>시킬 수 있다. 지원이 효과적이려면 받을 사람의 필요(need)와 지원의 유형·양이 잘 부합되어야 한다.</div></div></div>
+
+  <div class="quiz-section"><div class="quiz-header" onclick="toggleQuiz(this)"><span class="quiz-type-tag tag-ox">O/X</span><span class="quiz-q">7. 이웃관계는 지리적 근접성을 특성으로 하며, 노년기에는 일상생활 반경이 거주지 주변으로 축소되기 때문에 다른 시기보다 이웃관계의 중요성이 더 커질 수 있다.</span><span class="quiz-toggle">＋</span></div><div class="quiz-body"><div class="quiz-answer-label">ANSWER</div><div class="quiz-answer"><span class="ox-badge ox-o">O</span><strong>O</strong> — 이웃관계는 지리적 근접성(geographic proximity)을 핵심 특성으로 하며, 노년기에는 생활 반경이 거주지와 그 주변으로 축소되기 때문에 이웃관계의 중요성이 상대적으로 더 커질 수 있다.</div></div></div>
+
+  <div class="quiz-section"><div class="quiz-header" onclick="toggleQuiz(this)"><span class="quiz-type-tag tag-ox">O/X</span><span class="quiz-q">8. 2017 노인실태조사에 의하면 한국 노인들은 문자나 전화 등 연락 비율이 직접 얼굴을 보는 왕래 비율보다 더 높게 나타난다.</span><span class="quiz-toggle">＋</span></div><div class="quiz-body"><div class="quiz-answer-label">ANSWER</div><div class="quiz-answer"><span class="ox-badge ox-x">X</span><strong>X</strong> — 반대이다. <strong>왕래 비율(76.8%)이 연락 비율(64.2%)보다 더 높다</strong>. 현재 노년층의 가족 외 비공식 사회관계는 직접적인 <strong>대면 접촉 위주</strong>로 이루어지고 있다.</div></div></div>
+
+  <h3 style="font-size:13px;font-weight:700;color:var(--accent);letter-spacing:2px;margin:24px 0 10px;">📘 단답형 문제</h3>
+
+  <div class="quiz-section"><div class="quiz-header" onclick="toggleQuiz(this)"><span class="quiz-type-tag tag-short">단답형</span><span class="quiz-q">1. 친구관계를 가족·친족의 혈연관계와 구별하는 두 가지 핵심 특성을 쓰시오.</span><span class="quiz-toggle">＋</span></div><div class="quiz-body"><div class="quiz-answer-label">ANSWER</div><div class="quiz-answer"><strong>자발성</strong> (선택에 기반한 자발적 관계)과 <strong>동질성</strong> (구조적 동등성)</div></div></div>
+
+  <div class="quiz-section"><div class="quiz-header" onclick="toggleQuiz(this)"><span class="quiz-type-tag tag-short">단답형</span><span class="quiz-q">2. 콘보이 모델(Convoy Model)을 제안한 학자와 연도를 쓰시오.</span><span class="quiz-toggle">＋</span></div><div class="quiz-body"><div class="quiz-answer-label">ANSWER</div><div class="quiz-answer"><strong>Kahn &amp; Antonucci (1980)</strong></div></div></div>
+
+  <div class="quiz-section"><div class="quiz-header" onclick="toggleQuiz(this)"><span class="quiz-type-tag tag-short">단답형</span><span class="quiz-q">3. 위계적 보완 모델(Hierarchical Compensatory Model)을 제안한 학자와 연도는?</span><span class="quiz-toggle">＋</span></div><div class="quiz-body"><div class="quiz-answer-label">ANSWER</div><div class="quiz-answer"><strong>Marjorie Cantor (1979)</strong></div></div></div>
+
+  <div class="quiz-section"><div class="quiz-header" onclick="toggleQuiz(this)"><span class="quiz-type-tag tag-short">단답형</span><span class="quiz-q">4. 과업 전문화 모델(Task-specific Model)을 개발한 학자와 연도는?</span><span class="quiz-toggle">＋</span></div><div class="quiz-body"><div class="quiz-answer-label">ANSWER</div><div class="quiz-answer"><strong>Eugene Litwak (1985)</strong></div></div></div>
+
+  <div class="quiz-section"><div class="quiz-header" onclick="toggleQuiz(this)"><span class="quiz-type-tag tag-short">단답형</span><span class="quiz-q">5. 사회적 지원이 건강·복지에 영향을 미치는 두 가지 방식(효과)의 명칭을 쓰시오.</span><span class="quiz-toggle">＋</span></div><div class="quiz-body"><div class="quiz-answer-label">ANSWER</div><div class="quiz-answer"><strong>직접 효과(direct effect)</strong>: 사회적 지원 자체가 건강·복지를 유지·향상시키는 것<br><strong>완충 효과(buffering effect)</strong>: 부정적 사건이 건강·복지에 미치는 해로운 영향을 완충·경감시키는 것</div></div></div>
+
+  <div class="quiz-section"><div class="quiz-header" onclick="toggleQuiz(this)"><span class="quiz-type-tag tag-short">단답형</span><span class="quiz-q">6. 사회정서 선택성 이론(Carstensen)에서 제시하는 인간의 사회적 상호작용을 동기화하는 두 가지 기본 동기를 쓰시오.</span><span class="quiz-toggle">＋</span></div><div class="quiz-body"><div class="quiz-answer-label">ANSWER</div><div class="quiz-answer"><strong>① 정보 추구 동기</strong> (장기적 목표 — 노년기에 중요성 감소)<br><strong>② 정서 조절 동기</strong> (현재 지향적 — 노년기에 중요성 증가)</div></div></div>
+
+  <div class="quiz-section"><div class="quiz-header" onclick="toggleQuiz(this)"><span class="quiz-type-tag tag-short">단답형</span><span class="quiz-q">7. 사회 관계망의 구조적 측면에 포함되는 요소 4가지 이상을 쓰시오.</span><span class="quiz-toggle">＋</span></div><div class="quiz-body"><div class="quiz-answer-label">ANSWER</div><div class="quiz-answer"><strong>구성, 관계망의 크기, 지리적 근접성, 접촉·연락 빈도, 동질성(homogeneity)</strong></div></div></div>
+
+  <div class="quiz-section"><div class="quiz-header" onclick="toggleQuiz(this)"><span class="quiz-type-tag tag-short">단답형</span><span class="quiz-q">8. 콘보이(convoy)의 우리말 의미는?</span><span class="quiz-toggle">＋</span></div><div class="quiz-body"><div class="quiz-answer-label">ANSWER</div><div class="quiz-answer"><strong>호위대</strong></div></div></div>
+
+  <div class="quiz-section"><div class="quiz-header" onclick="toggleQuiz(this)"><span class="quiz-type-tag tag-short">단답형</span><span class="quiz-q">9. 사회적 관계와 건강·복지 간 연계의 역사적 기원을 제공한 학자와 저서는?</span><span class="quiz-toggle">＋</span></div><div class="quiz-body"><div class="quiz-answer-label">ANSWER</div><div class="quiz-answer"><strong>Emile Durkheim</strong>의 저서 <strong>『자살론(Suicide)』(1897)</strong>. 자살률이 사회통합 정도에 반비례한다는 것을 보여주어 사회통합과 응집력이 사망률에 영향을 주는지 이해하는 데 크게 기여</div></div></div>
+
+  <div class="quiz-section"><div class="quiz-header" onclick="toggleQuiz(this)"><span class="quiz-type-tag tag-short">단답형</span><span class="quiz-q">10. 이웃관계의 핵심 특성이 되는 개념은? (영어 포함)</span><span class="quiz-toggle">＋</span></div><div class="quiz-body"><div class="quiz-answer-label">ANSWER</div><div class="quiz-answer"><strong>지리적 근접성(geographic proximity)</strong></div></div></div>
+
+  <h3 style="font-size:13px;font-weight:700;color:var(--accent4);letter-spacing:2px;margin:24px 0 10px;">📒 주관식 문제</h3>
+
+  <div class="quiz-section"><div class="quiz-header" onclick="toggleQuiz(this)"><span class="quiz-type-tag tag-essay">주관식</span><span class="quiz-q">1. 콘보이 모델의 세 가지 주요 특성을 설명하시오.</span><span class="quiz-toggle">＋</span></div><div class="quiz-body"><div class="quiz-answer-label">ANSWER</div><div class="quiz-answer"><strong>① 보호 기능 계층(protective layers)</strong>: 개인이 보호 기능을 제공하는 층에 둘러싸여 삶을 살아가게 됨. 콘보이는 삶을 살아가면서 직면하게 되는 크고 작은 도전과 과제들에 성공적으로 적응하고 협상하는 데 도움을 주는 사람들로 이루어진 일종의 호위대이다. 각 층이 제공하는 보호 기능 정도는 서로 차등적이다.<br><br><strong>② 생애과정에 걸쳐 안정적이면서 동시에 역동적</strong>: 콘보이 구조는 기본적으로 역할(role)과 애착(attachment)에 기반한다. 생애과정에 따라 역할 구조가 변화하게 되면 역할에 한정되어 있는 관계들(주로 외부 동심원)은 변화될 가능성이 높은 반면, 역할을 초월한 관계들(주로 내부 동심원)은 안정적으로 유지되는 경향이 있다.<br><br><strong>③ 개인적 특성과 상황적 특성에 의해 결정</strong>: 성별·연령 등 인구학적 특성, 성격과 같은 개인적 특성, 그리고 직업·가족·역할 등과 연관된 상황적 특성들이 개인의 콘보이 구조를 결정한다.</div></div></div>
+
+  <div class="quiz-section"><div class="quiz-header" onclick="toggleQuiz(this)"><span class="quiz-type-tag tag-essay">주관식</span><span class="quiz-q">2. 위계적 보완 모델과 과업 전문화 모델의 차이점을 비교하여 설명하시오.</span><span class="quiz-toggle">＋</span></div><div class="quiz-body"><div class="quiz-answer-label">ANSWER</div><div class="quiz-answer">노인이 사회적 지원을 필요로 할 때 어떤 사람들이 지원 제공자로 선택(요청)되는가와 관련하여 두 모델은 다소 상이한 입장을 취한다.<br><br><strong>위계적 보완 모델(Cantor, 1979)</strong>에서는 관계의 우선성을 중시한다. 노인에게 가장 중요하고 우선시되는 관계(주로 배우자나 자녀)가 지원 제공자로 선택되고, 이들이 지원을 제공할 수 없을 때에야 다음 순서인 친척·친구·이웃, 그 다음은 공식적 조직으로 넘어가게 된다.<br><br>반면 <strong>과업 전문화 모델(Litwak, 1985)</strong>에서는 필요로 하는 지원 유형과 관계의 특성 간의 적합성을 중시한다. 비공식적 집단(가족, 친구, 이웃 등)은 대면접촉·애정·장기적 헌신 등의 특성을 가지므로 지리적 근접성과 지속적인 헌신이 필요한 과업에 적절하고, 공식 기관은 기술적 전문성을 가지므로 기술적 숙련을 필요로 하는 과업에 적절하다는 것이다. 개인은 다양한 사회적 관계들을 고루 가지는 것이 중요하며, 특정 관계의 결핍·부재는 해당 관계와 관련된 지원 역시 제공받기 어려울 수 있음을 시사한다.</div></div></div>
+
+  <div class="quiz-section"><div class="quiz-header" onclick="toggleQuiz(this)"><span class="quiz-type-tag tag-essay">주관식</span><span class="quiz-q">3. 친구관계에서 남성과 여성의 우정의 차이를 설명하시오.</span><span class="quiz-toggle">＋</span></div><div class="quiz-body"><div class="quiz-answer-label">ANSWER</div><div class="quiz-answer">남성의 우정은 <strong>행위주체적(agentic)</strong>이며 목적의식이 있기 때문에 친구 사이에 활동과 흥미를 공유하며 다양한 활동을 통해 병렬적으로 연결되어 있지만 정서적 친밀감은 약하다.<br><br>반면 여성의 우정은 <strong>공유적(communal)</strong>이며 복합적이기 때문에 상호관심, 심리 및 정서적 지지를 통해 형성되고 자기 노출을 많이 함으로써 친밀성을 높여가는 것이다.<br><br>이러한 기질적 차이와 함께 성별에 따라 상이하게 형성된 사회적 역할과 기대 등의 구조적 요인이 상호작용하여 남성과 여성의 가족 외부 비공식 관계를 다르게 형성하게 된다. 특히 노년기 남성은 은퇴와 함께 일이나 활동에 관련된 친구관계가 약화되고 이를 대체할 새로운 관계를 형성하는 데 어려움을 경험할 수 있다.</div></div></div>
+
+  <h3 style="font-size:13px;font-weight:700;color:var(--accent2);letter-spacing:2px;margin:24px 0 10px;">📕 서술형 문제</h3>
+
+  <div class="quiz-section"><div class="quiz-header" onclick="toggleQuiz(this)"><span class="quiz-type-tag tag-desc">서술형</span><span class="quiz-q">1. 사회정서 선택성 이론을 설명하고, 활동이론·은퇴이론과 비교하여 노년기 사회적 상호작용 감소를 어떻게 다르게 해석하는지 서술하시오.</span><span class="quiz-toggle">＋</span></div><div class="quiz-body"><div class="quiz-answer-label">MODEL ANSWER</div><div class="quiz-answer">Carstensen(1991, 1995, 1998)의 <strong>사회정서 선택성 이론(socio-emotional selectivity theory)</strong>은 노화과정에 따라 전체적인 관계망 크기, 특히 덜 친밀한 주변적 관계가 감소한다고 본다.<br><br><strong>이론의 핵심 메커니즘</strong>: 인간의 사회적 상호작용을 동기화하는 두 가지 기본 동기인 정보 추구 동기와 정서 조절 동기는 생애과정에 따라 상이한 발달적 궤적을 따른다. 노년기에는 미래(남아있는 시간)가 제한되어 있다고 느끼게 됨에 따라, 장기적 목표인 정보 추구 동기의 중요성은 감소하고 대신 보다 현재 지향적인 정서 조절 동기가 중요해지는 방향으로 동기가 재구조화된다. 그 결과 노인들은 자신의 시간과 에너지를 보다 친밀하고 정서적으로 만족스러운 사람들에게 집중하고 대신 피상적인 관계로부터는 거리를 두게 된다.<br><br><strong>다른 이론과의 비교</strong>: 노년기에 사회적 상호작용이 감소하는 현상에 대해 활동이론(activity theory)에서는 강제 퇴직이나 연령차별과 같은 사회적·정치적 환경에 의해 발생하는 '문제(problem)'로 보는 반면, 은퇴이론(disengagement theory)에서는 죽음이 가까워지면서 나타나는 노인과 사회 간 상호적이고 심리적인 '거리두기'로 노인 자신이나 사회에 적응적인 행동이라고 간주해 왔다.<br><br>이에 비해 사회정서 선택성 이론은 노년기 사회적 상호작용 감소를 인지적인 동기 요인이 작용하여 나타나는 적응적인 과정이라는 점에서, 그리고 사회적 상호작용의 감소가 모든 관계에서 일괄적으로 나타나는 것이 아니라 관계의 친밀성·중요도에 따라 선택적으로 진행된다는 점에서 은퇴이론과 일견 맥을 같이한다. 사회정서 선택성 이론을 감안하면, 노인들에게 무조건적인 사회활동 강요나 중년기와 동일한 수준의 활동성 유지를 강요하는 것은 자연스러운 노화과정·노년기 적응에 도움이 되지 않을 수 있다.</div></div></div>
+
+  <div class="quiz-section"><div class="quiz-header" onclick="toggleQuiz(this)"><span class="quiz-type-tag tag-desc">서술형</span><span class="quiz-q">2. 사회적 관계가 개인의 건강 및 복지에 중요하게 작용하도록 하는 핵심 메커니즘을 Rowe와 Kahn(1998)의 네 가지 결론을 중심으로 서술하시오.</span><span class="quiz-toggle">＋</span></div><div class="quiz-body"><div class="quiz-answer-label">MODEL ANSWER</div><div class="quiz-answer">사회적 관계와 건강 및 복지 간 연계의 핵심은 관계를 통한 ① 사회적 지원 제공과 ② 사회 참여의 촉진이라 할 수 있다.<br><br>사회적 지원(social support)이란 정서적 지지, 충고, 안내, 정보 제공, 물질적 원조 등 다양한 형태의 보호 및 서비스를 의미한다. 사회적 지원이 건강·복지에 영향을 미치는 방식은 두 가지인데, 하나는 사회적 지원 자체가 개인의 건강과 복지를 유지·향상시키는 직접 효과(direct effect)이고, 다른 하나는 사별·은퇴 같은 부정적 사건이 건강·복지에 미치는 해로운 영향을 완충·경감시키는 완충 효과(buffering effect)이다.<br><br>또한 사회 참여(social engagement) — 친구와 어울리기, 사회적 행사 참여, 직업 또는 사회적 역할 참여, 레크리에이션, 교회 활동 등 — 를 통해 가치와 소속감, 그리고 애착의식이 제공되며 이것이 건강·복지에 긍정적으로 작용한다.<br><br>이와 관련하여 Rowe와 Kahn(1998)은 사회적 관계의 중요성을 건강과 관련하여 다음 네 가지로 결론 짓고 있다: 첫째, 사회적 관계·유대의 결핍은 건강을 해치는 강력한 위험 요인이다. 둘째, 사회적 지원은 정서적 도움과 실제적 도움 등 여러 형태로 건강에 직접적이고도 긍정적인 영향을 미친다. 셋째, 사회적 지원은 사별·이혼과 같은 부정적인 사건이 건강에 미치는 부정적인 영향을 일부분 완화하거나 줄일 수 있다. 넷째, 어떤 한 종류의 지원이 모든 사람과 모든 상황에 똑같이 효과적이지는 않으며, 지원이 갖는 효과는 상황·사람·그 사람이 요구하는 바에 따라 달라진다.</div></div></div>
+
+  <div class="quiz-section"><div class="quiz-header" onclick="toggleQuiz(this)"><span class="quiz-type-tag tag-desc">서술형</span><span class="quiz-q">3. 사회 관계망의 개념을 정의하고, 구조적 특성과 기능적 특성으로 나누어 설명하시오.</span><span class="quiz-toggle">＋</span></div><div class="quiz-body"><div class="quiz-answer-label">MODEL ANSWER</div><div class="quiz-answer"><strong>사회 관계망(social networks)</strong>이란 개인의 모든 사회적 대인접촉을 포함하는 것으로 가족, 친구, 친척, 이웃 등 공식적·비공식적 지원들을 포함하는 다양한 관계로 구성되며 일생동안 상호 간 역할에 따른 의무와 관계의 동적인 변화에 기초를 둔 집단을 말한다(정순둘·문진영·김성원, 2010).<br><br>사회 관계망의 특성은 <strong>구조적 측면</strong>과 <strong>내용적 측면</strong>으로 구분할 수 있다(House &amp; Kahn, 1985).<br><br>구조적 측면은 사회 관계망이 어떠한 사람들로 이루어져 있는지를 나타내는 구성, 관계망의 크기, 관계망 성원들과 얼마나 가까운 거리에 거주하는지를 의미하는 지리적 근접성, 관계망 성원들과 얼마나 자주 만나고 연락하는지를 의미하는 접촉·연락 빈도, 그리고 관계망 성원들이 성별이나 연령 등과 같은 배경 특성들이 얼마나 유사한지를 의미하는 동질성(homogeneity) 등을 포함한다.<br><br>내용적 측면은 사회 관계망의 기능과 관련된 부분으로, 주로 관계를 통해 교환되는 다양한 지원(혹은 갈등)을 의미한다. 과거에는 사회 관계망을 지원망과 거의 동일한 개념으로 이해했지만, 관계망 성원들이 갈등과 긴장을 제공하기도 한다는 점이 여러 연구들을 통해 확인되었기 때문에 갈등 또한 사회 관계망의 기능적 특성으로 언급될 수 있다.</div></div></div>
+
+</div>
+</div>
+
+<div class="footer">CH10 사회적 노화 III: 친구·이웃관계, 사회 관계망 · 시험대비 정리본</div>
+
+<script>
+function toggleQuiz(header) {
+  const body = header.nextElementSibling;
+  const toggle = header.querySelector('.quiz-toggle');
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  toggle.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(45deg)';
+  toggle.textContent = isOpen ? '＋' : '×';
+}
+</script>
+</body>
+</html>
