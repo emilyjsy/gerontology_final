@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CH11 노년기 일과 은퇴 — 시험대비 정리</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Noto+Serif+KR:wght@400;700&display=swap');
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --surface2: #222638;
+    --border: #2e3351;
+    --accent: #6c8fef;
+    --accent2: #e97b6b;
+    --accent3: #56c9a4;
+    --accent4: #f0c96b;
+    --text: #e8eaf6;
+    --text-muted: #8892b0;
+    --text-dim: #5a6785;
+    --def-bg: #141b2d;
+    --tag-green: #1e3a2f;
+    --tag-green-text: #56c9a4;
+    --tag-red: #3a1e1e;
+    --tag-red-text: #e97b6b;
+    --tag-blue: #1a2a4a;
+    --tag-blue-text: #6c8fef;
+    --tag-yellow: #3a2e10;
+    --tag-yellow-text: #f0c96b;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Noto Sans KR', sans-serif; font-size: 15px; line-height: 1.8; }
+  .hero { background: linear-gradient(135deg, #0f1117 0%, #1a2040 50%, #0f1117 100%); border-bottom: 1px solid var(--border); padding: 48px 32px 40px; text-align: center; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 0%, rgba(108,143,239,0.12) 0%, transparent 70%); }
+  .hero-label { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; font-weight: 500; }
+  .hero h1 { font-family: 'Noto Serif KR', serif; font-size: clamp(22px, 4vw, 36px); font-weight: 700; color: #fff; line-height: 1.4; margin-bottom: 12px; }
+  .hero-sub { color: var(--text-muted); font-size: 13px; }
+  .hero-badges { display: flex; justify-content: center; gap: 8px; margin-top: 20px; flex-wrap: wrap; }
+  .badge { padding: 4px 14px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.5px; }
+  .badge-blue { background: var(--tag-blue); color: var(--tag-blue-text); border: 1px solid var(--accent); }
+  .badge-green { background: var(--tag-green); color: var(--tag-green-text); border: 1px solid var(--accent3); }
+  .badge-red { background: var(--tag-red); color: var(--tag-red-text); border: 1px solid var(--accent2); }
+  .badge-yellow { background: var(--tag-yellow); color: var(--tag-yellow-text); border: 1px solid var(--accent4); }
+  .container { max-width: 900px; margin: 0 auto; padding: 0 20px 80px; }
+  .toc { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px 28px; margin: 32px 0; }
+  .toc-title { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; font-weight: 700; }
+  .toc-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+  .toc-list li a { color: var(--text-muted); text-decoration: none; font-size: 13px; display: flex; align-items: center; gap: 8px; padding: 4px 0; transition: color 0.2s; }
+  .toc-list li a:hover { color: var(--accent); }
+  .toc-num { color: var(--text-dim); font-size: 11px; min-width: 20px; }
+  .section { margin-top: 48px; scroll-margin-top: 20px; }
+  .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
+  .section-num { background: var(--accent); color: #fff; width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+  .section-num.green { background: var(--accent3); color: #0f1117; }
+  .section-num.orange { background: var(--accent2); }
+  .section-num.yellow { background: var(--accent4); color: #0f1117; }
+  .section-title { font-family: 'Noto Serif KR', serif; font-size: 20px; font-weight: 700; color: #fff; }
+  .def-box { background: var(--def-bg); border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; padding: 16px 20px; margin: 12px 0; font-size: 14px; line-height: 1.9; color: #c8d0e8; }
+  .def-box.green { border-color: var(--accent3); }
+  .def-box.orange { border-color: var(--accent2); }
+  .def-box.yellow { border-color: var(--accent4); }
+  .def-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; display: block; }
+  .def-label.green { color: var(--accent3); }
+  .def-label.orange { color: var(--accent2); }
+  .def-label.yellow { color: var(--accent4); }
+  .mech-table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 13.5px; }
+  .mech-table th { background: var(--surface2); padding: 10px 14px; text-align: left; font-weight: 700; color: var(--accent); border: 1px solid var(--border); font-size: 12px; letter-spacing: 0.5px; }
+  .mech-table td { padding: 10px 14px; border: 1px solid var(--border); color: var(--text-muted); vertical-align: top; background: var(--surface); }
+  .mech-table tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+  .mech-table td:first-child { color: var(--accent4); font-weight: 700; }
+  .styled-list { list-style: none; margin: 12px 0; }
+  .styled-list li { padding: 8px 0 8px 20px; position: relative; font-size: 14px; color: var(--text-muted); border-bottom: 1px solid rgba(255,255,255,0.04); }
+  .styled-list li:last-child { border-bottom: none; }
+  .styled-list li::before { content: '▸'; position: absolute; left: 0; color: var(--accent); font-size: 10px; top: 10px; }
+  .styled-list li strong { color: var(--text); }
+  .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 14px 0; }
+  .compare-col { background: var(--surface2); border-radius: 8px; padding: 16px; border: 1px solid var(--border); }
+  .compare-head { font-size: 12px; font-weight: 700; letter-spacing: 1px; text-align: center; padding: 6px 12px; border-radius: 6px; margin-bottom: 12px; }
+  .compare-head.blue { background: var(--tag-blue); color: var(--tag-blue-text); }
+  .compare-head.pink { background: var(--tag-red); color: var(--tag-red-text); }
+  .compare-head.green { background: var(--tag-green); color: var(--tag-green-text); }
+  .compare-head.yellow { background: var(--tag-yellow); color: var(--tag-yellow-text); }
+  .quiz-section { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 16px; overflow: hidden; }
+  .quiz-header { background: var(--surface2); padding: 14px 20px; display: flex; align-items: center; gap: 10px; cursor: pointer; user-select: none; }
+  .quiz-type-tag { font-size: 10px; font-weight: 700; letter-spacing: 2px; padding: 3px 10px; border-radius: 4px; white-space: nowrap; }
+  .tag-ox { background: var(--tag-green); color: var(--tag-green-text); }
+  .tag-short { background: var(--tag-blue); color: var(--tag-blue-text); }
+  .tag-essay { background: var(--tag-yellow); color: var(--tag-yellow-text); }
+  .tag-desc { background: var(--tag-red); color: var(--tag-red-text); }
+  .quiz-q { font-size: 14px; font-weight: 500; color: var(--text); flex: 1; }
+  .quiz-toggle { color: var(--text-dim); font-size: 18px; transition: transform 0.3s; margin-left: 8px; }
+  .quiz-body { display: none; padding: 16px 20px; border-top: 1px solid var(--border); }
+  .quiz-body.open { display: block; }
+  .quiz-answer-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; color: var(--accent3); margin-bottom: 8px; display: block; }
+  .quiz-answer { font-size: 14px; color: var(--text-muted); line-height: 1.8; }
+  .quiz-answer strong { color: var(--accent4); }
+  .ox-badge { display: inline-block; width: 36px; height: 36px; border-radius: 50%; font-size: 18px; font-weight: 900; line-height: 36px; text-align: center; margin-right: 10px; vertical-align: middle; }
+  .ox-o { background: var(--tag-green); color: var(--tag-green-text); }
+  .ox-x { background: var(--tag-red); color: var(--tag-red-text); }
+  .summary-box { background: linear-gradient(135deg, #141b2d, #1a2040); border: 1px solid #3a4f8a; border-radius: 10px; padding: 20px 24px; margin: 20px 0; }
+  .summary-title { font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+  .hl { background: rgba(108,143,239,0.15); color: var(--accent); padding: 1px 6px; border-radius: 4px; font-weight: 700; }
+  .hl-green { background: rgba(86,201,164,0.15); color: var(--accent3); padding: 1px 6px; border-radius: 4px; font-weight: 700; }
+  .hl-red { background: rgba(233,123,107,0.15); color: var(--accent2); padding: 1px 6px; border-radius: 4px; font-weight: 700; }
+  .hl-yellow { background: rgba(240,201,107,0.15); color: var(--accent4); padding: 1px 6px; border-radius: 4px; font-weight: 700; }
+  .sub-section { margin: 24px 0; }
+  .sub-title { font-size: 15px; font-weight: 700; color: var(--accent4); margin-bottom: 14px; padding-left: 12px; border-left: 3px solid var(--accent4); }
+  .sub-title.green { color: var(--accent3); border-color: var(--accent3); }
+  .sub-title.orange { color: var(--accent2); border-color: var(--accent2); }
+  .sub-title.blue { color: var(--accent); border-color: var(--accent); }
+  .step-list { margin: 12px 0; }
+  .step-item { display: flex; gap: 14px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04); align-items: flex-start; }
+  .step-item:last-child { border-bottom: none; }
+  .step-num { background: var(--surface2); border: 1px solid var(--border); color: var(--accent4); min-width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; }
+  .step-content { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+  .step-content strong { color: var(--text); }
+  .stat-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; margin: 14px 0; }
+  .stat-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 14px; text-align: center; }
+  .stat-value { font-size: 22px; font-weight: 900; color: var(--accent); display: block; line-height: 1.2; margin-bottom: 4px; }
+  .stat-label { font-size: 11px; color: var(--text-muted); line-height: 1.4; }
+  .info-box { background: rgba(26,42,74,0.5); border: 1px solid var(--tag-blue); border-radius: 8px; padding: 14px 18px; margin: 12px 0; font-size: 13.5px; color: var(--tag-blue-text); line-height: 1.8; }
+  .term-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; margin: 16px 0; }
+  .term-card { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; }
+  .term-name { font-size: 13px; font-weight: 700; color: var(--accent); margin-bottom: 6px; }
+  .term-name.green { color: var(--accent3); }
+  .term-name.orange { color: var(--accent2); }
+  .term-name.yellow { color: var(--accent4); }
+  .term-desc { font-size: 13px; color: var(--text-muted); line-height: 1.7; }
+  .footer { text-align: center; padding: 32px; color: var(--text-dim); font-size: 12px; border-top: 1px solid var(--border); margin-top: 48px; }
+  @media (max-width: 600px) { .compare-grid { grid-template-columns: 1fr; } .toc-list { grid-template-columns: 1fr; } .stat-row { grid-template-columns: 1fr 1fr; } }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-label">GERONTOLOGY · CHAPTER 11</div>
+  <h1>노년기 일과 은퇴</h1>
+  <p class="hero-sub">핵심 개념 완전정복 + 단답형·O/X·주관식·서술형 시험 대비</p>
+  <div class="hero-badges">
+    <span class="badge badge-blue">노년기 일의 의미</span>
+    <span class="badge badge-green">은퇴의 의미</span>
+    <span class="badge badge-red">은퇴적응 이론</span>
+    <span class="badge badge-yellow">은퇴준비교육</span>
+  </div>
+</div>
+
+<div class="container">
+
+<div class="toc">
+  <div class="toc-title">📋 목차</div>
+  <ul class="toc-list">
+    <li><a href="#s1"><span class="toc-num">01</span> 노년기 일의 현황 및 배경</a></li>
+    <li><a href="#s2"><span class="toc-num">02</span> 노년기 일의 의미 (개인적·사회적)</a></li>
+    <li><a href="#s3"><span class="toc-num">03</span> 노인 일자리 관련 논쟁</a></li>
+    <li><a href="#s4"><span class="toc-num">04</span> 연령경영(Age Management)</a></li>
+    <li><a href="#s5"><span class="toc-num">05</span> 은퇴제도의 역사</a></li>
+    <li><a href="#s6"><span class="toc-num">06</span> 은퇴의 의미 — 사건·과정·역할</a></li>
+    <li><a href="#s7"><span class="toc-num">07</span> 가교일자리(bridge job)</a></li>
+    <li><a href="#s8"><span class="toc-num">08</span> 은퇴준비</a></li>
+    <li><a href="#s9"><span class="toc-num">09</span> 은퇴적응 이론 ★★★</a></li>
+    <li><a href="#s10"><span class="toc-num">10</span> 은퇴 후 적응유형</a></li>
+    <li><a href="#s11"><span class="toc-num">11</span> 은퇴적응 관련요인</a></li>
+    <li><a href="#s12"><span class="toc-num">12</span> 은퇴와 가족관계</a></li>
+    <li><a href="#quiz"><span class="toc-num">★</span> 시험 문제 풀어보기</a></li>
+  </ul>
+</div>
+
+<!-- S1 -->
+<div class="section" id="s1">
+  <div class="section-header">
+    <div class="section-num">01</div>
+    <h2 class="section-title">노년기 일의 현황 및 배경</h2>
+  </div>
+  <div class="stat-row">
+    <div class="stat-item"><span class="stat-value">48.1%</span><span class="stat-label">은퇴 후에도 일을 하고 있는 노인 인구 비율 (통계청, 2014)</span></div>
+    <div class="stat-item"><span class="stat-value">62%</span><span class="stat-label">일을 하고 싶어하는 노인 비율 (통계청, 2014)</span></div>
+    <div class="stat-item"><span class="stat-value">17.9%</span><span class="stat-label">한국 75세 이상 고용률 — OECD 5년 연속 1위 (2015)</span></div>
+    <div class="stat-item"><span class="stat-value">30.6%</span><span class="stat-label">한국 65세 이상 고용률 (vs OECD 평균 13.8%)</span></div>
+    <div class="stat-item"><span class="stat-value">53세</span><span class="stat-label">우리나라 평균 퇴직연령 (2005년 이후 별 변화 없음)</span></div>
+    <div class="stat-item"><span class="stat-value">72세</span><span class="stat-label">실제 노동시장을 완전히 떠나는 유효은퇴연령 (남성 72.0세, 여성 72.2세 — OECD 최고)</span></div>
+  </div>
+  <div class="info-box">
+    55~79세 취업자의 직업 분포: 단순노무자 <strong>48.9%</strong>, 농림어업 종사자 <strong>15.5%</strong> → 경제적 필요에 의해 열악한 환경에서 일을 계속하고 있음을 시사<br>
+    한국 노인소득 중 <strong>근로소득 63.0%</strong> (OECD 최고) / 공적 이전소득 16.3% (OECD 평균 58.6%보다 훨씬 낮음)
+  </div>
+  <div class="sub-section">
+    <div class="sub-title blue">노년기 일 지속 증가 배경</div>
+    <ul class="styled-list">
+      <li><strong>수명연장</strong>으로 은퇴 이후 삶의 기간이 은퇴 이전 길이와 거의 동일해짐</li>
+      <li><strong>활찬한 노후 패러다임(active aging paradigm)</strong> 및 활동적 신노년에 대한 담론 등장</li>
+      <li>노부모 부양 규범 약화 → 자녀로부터 경제적 지원 기대 어려움</li>
+      <li>노인 건강수준 전반 향상, <strong>노인 분기점이 65→70세로 이동</strong> (정경희, 2011)</li>
+      <li>고학력 노인 비율 증가</li>
+    </ul>
+  </div>
+</div>
+
+<!-- S2 -->
+<div class="section" id="s2">
+  <div class="section-header">
+    <div class="section-num green">02</div>
+    <h2 class="section-title">노년기 일의 의미</h2>
+  </div>
+  <div class="sub-section">
+    <div class="sub-title green">일의 다양한 의미 (개인적 차원)</div>
+    <div class="term-grid">
+      <div class="term-card">
+        <div class="term-name">경제적 보상</div>
+        <div class="term-desc">생존에 필요한 자원 제공. 노인이 현재 일을 하는 가장 중요한 이유: <strong>생계비 마련 73.0%</strong> (노인실태조사, 2017)</div>
+      </div>
+      <div class="term-card">
+        <div class="term-name">일상의 구조화</div>
+        <div class="term-desc">하루 중 일정 시간을 일정 장소에 있게 함으로써 일상의 패턴 형성에 막강한 영향을 행사</div>
+      </div>
+      <div class="term-card">
+        <div class="term-name">자아정체감의 기반</div>
+        <div class="term-desc">직업은 자신을 표현할 수 있는 창구이며 직장 일원으로서의 소속감은 자아정체감의 상당 부분 차지</div>
+      </div>
+      <div class="term-card">
+        <div class="term-name">사회적 관계의 창구</div>
+        <div class="term-desc">누구를 만나고, 어떤 교류를 하며, 어떤 경험을 공유하는가 — 사회적 관계 맺음의 상당 부분이 직업생활과 연결</div>
+      </div>
+    </div>
+  </div>
+  <div class="sub-section">
+    <div class="sub-title green">계층·젠더에 따른 차이</div>
+    <div class="compare-grid">
+      <div class="compare-col">
+        <div class="compare-head blue">학력별 일의 이유 차이</div>
+        <ul class="styled-list">
+          <li>초·중학교 졸업: <strong>생계비 마련</strong> 비율 76.4%로 높음</li>
+          <li>전문대학 이상: 생계비 50.3% / <strong>능력 발휘·경력 활용</strong> 비율 현저히 높음</li>
+          <li>계층에 따라 노년기 일의 의미가 달라짐</li>
+        </ul>
+      </div>
+      <div class="compare-col">
+        <div class="compare-head pink">젠더별 차이</div>
+        <ul class="styled-list">
+          <li><strong>남성노인</strong>: 재취업이 자아정체성 및 생애통합의 과정 (송인주, 2008)</li>
+          <li><strong>여성노인</strong>: 생계형 취업이 대부분, '여성과 연령'이라는 이중 굴레. 젊지 않은 나이에 노동시장에 나서는 것은 막막한 생계·불안한 노후에 대한 대처행동 (서미경, 2012)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="sub-section">
+    <div class="sub-title green">사회적 의미</div>
+    <ul class="styled-list">
+      <li>건강한 노년집단의 등장과 <strong>활동적 노화(active aging)</strong>를 바람직한 것으로 바라보는 사회적 분위기 반영 → 노년기 노동을 부정적으로 보는 시각이 과거에 비해 줄어듦</li>
+      <li>은퇴가 젊은 근로자들에게 노동의 자리를 내어주는 개념 → 이제는 노년에도 일을 선택할 기회가 부여되어야 한다는 방향으로 사회적 시각 변화</li>
+      <li>정부·지자체·민간 시니어 취업 지원프로그램 증가, 연금 수령 나이를 늦추고 근로 기간을 더 늘리는 방향으로 정책 기조 설정</li>
+    </ul>
+  </div>
+</div>
+
+<!-- S3 -->
+<div class="section" id="s3">
+  <div class="section-header">
+    <div class="section-num orange">03</div>
+    <h2 class="section-title">노인 일자리 관련 논쟁 ★★</h2>
+  </div>
+  <div class="sub-section">
+    <div class="sub-title orange">논쟁 1: 노인은 생산성이 낮은가?</div>
+    <div class="compare-grid">
+      <div class="compare-col">
+        <div class="compare-head pink">생산성 저하 주장</div>
+        <ul class="styled-list">
+          <li><strong>Decremental Theory</strong> (Giniger, Dispenzieri, &amp; Eisenberg, 1983): 연령증가에 따른 생산성 저하 주장</li>
+          <li>손의 민첩함, 반응속도, 청력, 시력과 같은 <strong>지각능력이 감퇴</strong>하는 것으로 나타남</li>
+        </ul>
+      </div>
+      <div class="compare-col">
+        <div class="compare-head green">생산성 저하에 반대</div>
+        <ul class="styled-list">
+          <li>노인은 결석률, 이직률, 병가, 사고율이 낮음</li>
+          <li>McEvoy &amp; Cascio(1989): 22년간 96편 메타분석 — <strong>연령과 업무수행능력은 관련 없음</strong></li>
+          <li>Ng &amp; Feldman(2008): 380편 메타분석으로 동일 결론</li>
+          <li>Skirbekk(2004): <strong>결정성 지능</strong>(경험·지식 축적에 따라 향상)이 유동적 지능 감퇴를 보완</li>
+        </ul>
+      </div>
+    </div>
+    <div class="info-box">결론: 노인 생산성 감소에 대한 증거는 불충분하다. 그럼에도 노인이 생산성이 떨어진다는 사회적 시각은 뿌리 깊고 팽배하며, 이는 노인의 노동시장 참여에 장애요인으로 작용한다.</div>
+  </div>
+  <div class="sub-section">
+    <div class="sub-title orange">논쟁 2: 노인 일자리의 보장은 청년 일자리의 감소를 가져오는가?</div>
+    <div class="def-box orange">
+      <div class="def-label orange">노동총량설 (Lump of Labor Theory)</div>
+      노동시장 내의 일자리 총량은 고정되어 있기 때문에 고령자가 은퇴하지 않고 노동시장에 남아 있으면 청년층에게 돌아갈 일자리가 부족하게 된다고 본다. (Kalwij, Kapteyn, &amp; De Vos, 2010)
+    </div>
+    <div class="def-box">
+      <div class="def-label">대체관계 가설</div>
+      노동자가 고령에 진입하게 되면 보다 생산적인 젊은 연령층으로 대체된다고 보는 이론
+    </div>
+    <div class="summary-box">
+      <div class="summary-title">💡 실증연구 결론</div>
+      <ul class="styled-list">
+        <li>'노동총량설'이나 대체관계 가설이 실증연구에 의해 지지받지 못함</li>
+        <li>지은정(2012): OECD 15개국 분석 — <strong>중고령층 고용률이 높을수록 청년층의 고용률도 높게 나타남</strong> → 대체관계가 아닌 것으로 나타남</li>
+        <li>두 집단은 대체관계라기보다는 <strong>상호 보완적인 요소</strong>가 더 많음 (전병유 외, 2008)</li>
+        <li>그럼에도 고령층 노동에 대한 사회적 시각이 부정적인 것은 <strong>연령차별(Ageism)</strong>적 시각이 반영된 것</li>
+      </ul>
+    </div>
+    <div class="def-box orange">
+      <div class="def-label orange">📖 연령차별(Ageism) — Macnicol (2010)</div>
+      일자리에서의 연령차별을 <strong>개인의 업무수행능력과 관계없이 연령을 기준으로 하여 고용, 승진, 교육 등의 기회에서 배제하는 것</strong>이라고 정의했다.
+    </div>
+    <ul class="styled-list" style="margin-top:8px;">
+      <li>우리나라: 「고용상 연령차별금지 및 고령자 고용촉진에 관한 법률」 시행규칙을 2012년 공포, 2016년 대통령령으로 시행령 공포</li>
+    </ul>
+  </div>
+</div>
+
+<!-- S4 -->
+<div class="section" id="s4">
+  <div class="section-header">
+    <div class="section-num yellow">04</div>
+    <h2 class="section-title">연령경영 (Age Management) ★</h2>
+  </div>
+  <div class="def-box yellow">
+    <div class="def-label yellow">📖 교재 정의 — Naegele &amp; Walker (2006)</div>
+    '연령경영'은 최근 부상하고 있는 일터의 분위기 변화를 보여주는 개념으로 <strong>연령장벽(age barriers)을 없애고 기업 내 연령 다양성(age heterogeneity)을 증진시키는 경영방식</strong>이다. 중·고령자에게 채용, 교육, 승진의 기회를 동등하게 제공하고, 근무시간 및 은퇴시기 결정에 대한 유연성과 자율성을 부여하며, 신체적 노화를 고려한 근무환경을 제공하는 등의 방식을 통해 실현될 수 있다.
+  </div>
+  <div class="sub-section">
+    <div class="sub-title yellow">BMW 사례 — 연령경영의 실제 적용</div>
+    <ul class="styled-list">
+      <li>2017년까지 공장근로자 평균연령이 39→47세로 증가할 것이라는 예측</li>
+      <li>공장 생산라인 중 한 라인을 선정하여 Pilot project 시행 → 노동자의 건강관리, 근로환경 및 근로자의 기술 향상 정책, part-time 정책 등 다양한 변화 적용</li>
+      <li><strong>Work Ability Index(WAI)</strong> 개발: 근로자의 능력과 특정 업무의 강도 사이의 적합도를 평가하는 척도</li>
+      <li>결과: 연간 생산성 <strong>7% 향상</strong>, 중고령 노동자의 결석률이 공장 평균보다 <strong>2% 아래로 감소</strong></li>
+      <li>미국 AARP의 <strong>"Age friendly workplace"</strong>상 수상</li>
+    </ul>
+    <div class="info-box">연령경영이 확산된 대표적 국가: 핀란드, 독일, 네덜란드. 중·고령자에게 유급휴가 제공, 근무시간을 줄여주는 등 노동시간을 유연하게 조정할 수 있도록 함 → 점진적 퇴직 가능, 은퇴 후 생활에 잘 적응할 수 있도록 도움</div>
+  </div>
+</div>
+
+<!-- S5 -->
+<div class="section" id="s5">
+  <div class="section-header">
+    <div class="section-num">05</div>
+    <h2 class="section-title">은퇴제도의 역사</h2>
+  </div>
+  <div class="step-list">
+    <div class="step-item">
+      <div class="step-num">①</div>
+      <div class="step-content"><strong>전통사회</strong>: 육체적 쇠약으로 일을 할 수 없는 상태가 되지 않는 이상 사망 직전까지 일을 하였기에 '은퇴(retirement)'라는 개념 자체가 없었음</div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">②</div>
+      <div class="step-content"><strong>은퇴제도화 배경</strong> (최성재·장인협, 2010): 노동력 수요의 감소, 생산 기술과 지식의 급속한 발전, 생산조직의 관료화, 노후 소득보장제도의 발전이라는 네 가지 요인</div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">③</div>
+      <div class="step-content"><strong>1889년</strong>: 독일 비스마르크가 세계 최초 노령연금 제도 도입 (빌헬름 1세의 주장에 근거). 70세가 되면 현직에서 물러나 연금 수령 → 이것이 은퇴연령이 됨</div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">④</div>
+      <div class="step-content"><strong>1935년 미국</strong>: 루스벨트 대통령이 독일 모델을 좇아 사회보장법에서 연금 지급 연령(은퇴연령)을 <strong>65세</strong>로 정함. 당시 미국인의 평균수명은 63세 → 은퇴연령이 평균수명보다 높게 설정돼 많은 사람이 혜택을 받지 못함 → 이후 62세로 낮춤</div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">⑤</div>
+      <div class="step-content"><strong>1929년 대공황</strong>: 은퇴가 대중화됨. 루스벨트와 뉴딜 정책 입안자들이 젊은이에게 일자리를 주기 위해 사회보장연금을 지급해 고령자들을 은퇴시키는 계획을 세움</div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">⑥</div>
+      <div class="step-content"><strong>1950년대</strong>: 연금 액수가 늘어나자 은퇴의 개념이 과거의 '가난'에서 '풍요로움의 상징'으로 바뀜. 미국의 금융회사들이 은퇴 후 호수에서 낚시나 골프로 소일하는 이상형을 만들고 은퇴대비용 상품 판매에 박차. 평균 은퇴연령도 1930년대의 70세에서 62세로 떨어짐</div>
+    </div>
+  </div>
+</div>
+
+<!-- S6 -->
+<div class="section" id="s6">
+  <div class="section-header">
+    <div class="section-num green">06</div>
+    <h2 class="section-title">은퇴의 의미 — 사건·과정·역할 ★★</h2>
+  </div>
+  <div class="def-box green">
+    <div class="def-label green">은퇴의 개념</div>
+    은퇴는 업격히 말하면 노동시장으로부터의 완전 철수를 의미한다. 하지만 자신이 일생 동안 경험하였던 직업들 중 가장 중요한 직업인 <strong>생애 주직업(life time main job)</strong>으로부터의 퇴직을 일컫는 용어로도 많이 사용된다.
+  </div>
+  <div class="term-grid">
+    <div class="term-card">
+      <div class="term-name">사건(life event)으로서의 은퇴</div>
+      <div class="term-desc">은퇴 전/은퇴 후를 이분법적으로 구분. 퇴임식이나 퇴직연금 수령이 분기점. 완전한 전환으로 봄</div>
+    </div>
+    <div class="term-card">
+      <div class="term-name">과정(process)으로서의 은퇴</div>
+      <div class="term-desc">은퇴준비가 시작되며, 은퇴결정, 실질적인 은퇴, 그 이후의 적응까지의 단계적 절차까지를 은퇴과정으로 봄. 점진적 이탈 강조</div>
+    </div>
+    <div class="term-card">
+      <div class="term-name">역할(role)로서의 은퇴</div>
+      <div class="term-desc">소위 '은퇴자' 또는 '퇴직자'라고 불리는 지위에 따르는 권리 및 의무와 그에 관련된 사회규범을 의미. Kimmel(1974)은 이를 '지위로서의 은퇴'라 함</div>
+    </div>
+    <div class="term-card">
+      <div class="term-name">제2의 일 / 앙코르 커리어</div>
+      <div class="term-desc">second career 혹은 encore career. 생산적 노화(productive aging)가 노년기의 중요한 가치로 등장하면서 은퇴 후에도 생산적 역할을 하는 사회구성원으로 남고자 하는 욕구 증가</div>
+    </div>
+  </div>
+</div>
+
+<!-- S7 -->
+<div class="section" id="s7">
+  <div class="section-header">
+    <div class="section-num orange">07</div>
+    <h2 class="section-title">가교일자리 (Bridge Job) ★★</h2>
+  </div>
+  <div class="def-box orange">
+    <div class="def-label orange">📖 교재 정의 — Ruhm (1990)</div>
+    주요일자리 퇴직과 노동시장에서의 완전은퇴까지의 중간단계라는 점에 주목하여 <strong>가교일자리(bridge job)</strong>라고 칭하였다. 가교일자리는 급격한 소득단절로 인한 어려움을 줄이고 <strong>은퇴자로서의 새로운 자아정체감을 확립할 때까지 점진적 적응이 이루어질 수 있도록 시간적 여유를 제공</strong>한다는 점에서 의미가 크다.
+  </div>
+  <div class="compare-grid">
+    <div class="compare-col">
+      <div class="compare-head green">기회</div>
+      <ul class="styled-list">
+        <li>자아효능감</li>
+        <li>경제적·사회적 균형잡기</li>
+      </ul>
+    </div>
+    <div class="compare-col">
+      <div class="compare-head pink">도전</div>
+      <ul class="styled-list">
+        <li>낮은 임금 재훈련</li>
+        <li>지위변화</li>
+        <li>다른 환경</li>
+        <li>신체적 한계</li>
+      </ul>
+    </div>
+  </div>
+  <div class="info-box">한국의 경우 OECD 어느 국가보다도 노년기 노동시장 참여율이 높다는 점에서 볼 때, 일반적 기업퇴직연령(약 55세)과 공적연금수령 연령(65세) 사이의 공백을 <strong>가교일자리가 보완</strong>한다는 것을 알 수 있다.</div>
+  <div class="sub-section">
+    <div class="sub-title orange">지속이론과의 연계</div>
+    <p style="font-size:14px;color:var(--text-muted);line-height:1.8;">지속이론에서는 선행연구들이 중고령자의 가교일자리 취업이 삶의 만족도에 미치는 영향을 설명하는 데 활용됨. 가교일자리는 은퇴자들로 하여금 은퇴 이전의 생활패턴과 정체성을 유지할 수 있도록 돕고, 삶의 만족도를 높여준다 (Kim &amp; Feldman, 2000). 또한 Dingeman &amp; Henkens(2014)는 비자발적인 은퇴가 삶의 만족도에 미치는 부정적 영향을 가교일자리가 완화함을 보여주었다.</p>
+  </div>
+</div>
+
+<!-- S8 -->
+<div class="section" id="s8">
+  <div class="section-header">
+    <div class="section-num yellow">08</div>
+    <h2 class="section-title">은퇴준비 ★</h2>
+  </div>
+  <div class="def-box yellow">
+    <div class="def-label yellow">은퇴준비의 개념</div>
+    은퇴이후에 나타날 수 있는 경제 상태와 건강상태의 변화, 심리적 문제에 대한 사전 인식이 부족할수록 은퇴생활에 잘 적응하지 못한다는 연구결과들이 발표되면서, 은퇴준비의 필요성에 대한 사회적 인식이 확산되고 있다. 은퇴준비는 <strong>은퇴 후 자금을 마련하는 재정적 측면과 건강관리, 여가생활 준비, 심리적 대비 등의 비재정적 측면을 함께 포괄</strong>하는 개념이다.
+  </div>
+  <div class="sub-section">
+    <div class="sub-title yellow">은퇴준비에 영향을 미치는 요인</div>
+    <table class="mech-table">
+      <thead><tr><th>요인 유형</th><th>구체적 요인</th><th>연구 결과</th></tr></thead>
+      <tbody>
+        <tr><td>사회인구학적</td><td>성별, 연령, 교육수준</td><td>재정적 준비수준은 남성이 여성보다 높음 (Glass &amp; Kilpatrick, 1998); 연령·교육수준이 높을수록 준비가 잘 됨</td></tr>
+        <tr><td>심리적</td><td>은퇴 후 삶에 대한 태도, 은퇴에 대한 지식</td><td>인지적 요인도 은퇴준비에 영향</td></tr>
+        <tr><td>직업적</td><td>건강수준, 근무 환경, 은퇴에 대한 긍정적 태도, 직무몰입도, 직업만족도</td><td>Topa 등(2009) 341편 메타분석: 건강수준 낮고, 근무 환경 부정적이고, 은퇴에 긍정적 태도 지닐수록 준비 정도가 높음; 직무몰입·직업만족도 높을수록 준비 정도 낮음</td></tr>
+        <tr><td>한국 베이비부머</td><td>은퇴 후 삶에 대한 긍정적 태도, 은퇴에 대한 지식수준</td><td>긍정적 태도 → 재정적 준비수준 높음; 은퇴 지식 높을수록 재정 준비와 건강 준비 수준 높음 (한경혜 등, 2012)</td></tr>
+      </tbody>
+    </table>
+    <div class="info-box">Noone 등(2010): 은퇴 전에 배우자와 은퇴에 대해 논의하고 퇴직연금과 저축을 준비한 사람들이 은퇴 후 삶에 대한 만족도가 높으며, 주관적으로 인지한 신체적·정신적 건강 수준도 높은 것으로 나타남</div>
+  </div>
+</div>
+
+<!-- S9 -->
+<div class="section" id="s9">
+  <div class="section-header">
+    <div class="section-num">09</div>
+    <h2 class="section-title">은퇴적응 이론 ★★★</h2>
+  </div>
+  <p style="font-size:14px;color:var(--text-muted);margin-bottom:16px;">은퇴적응 과정 및 요인을 설명하는 이론에는 역할이론, 지속이론, 단계이론, 라이프코스 관점 등이 있다 (Wang, Henkens, &amp; van Solinge, 2011).</p>
+
+  <div class="sub-section">
+    <div class="sub-title blue">역할이론 (Role Theory)</div>
+    <div class="def-box">
+      <div class="def-label">📖 교재 내용</div>
+      은퇴로 인한 <strong>역할 퇴장과 역할 전환 과정을 강조</strong>한다. 역할이론에 의하면 은퇴는 우울, 자존감 저하 등 부정적 결과를 가져올 수 있는데, 직업역할이 많은 사람들에게 정체성, 자존감, 삶에 대한 만족의 원천이기 때문이다 (Hullin, 2002).
+    </div>
+    <ul class="styled-list">
+      <li>한경혜(2002): 남녀 모두 직업역할을 점유한 응답자가 그렇지 않은 응답자에 비하여 <strong>정신건강이 양호</strong>한 것으로 나타남</li>
+      <li>강지숙(2008): 은퇴 적응과정 연구 — 은퇴노인들은 역할 상실에 따른 의욕 저하와 새로운 역할에 적응해야 한다는 부담감을 느낀 경험을 한 것으로 나타남</li>
+      <li><span class="hl-green">단, 직업생활에 대한 몰입도가 낮고 일이 자아정체성의 핵심이 아닌 경우 은퇴적응이 상대적으로 쉬운 것으로 나타남</span> (Crouter &amp; Manke, 1994)</li>
+    </ul>
+  </div>
+
+  <div class="sub-section">
+    <div class="sub-title blue">지속이론 (Continuity Theory)</div>
+    <div class="def-box">
+      <div class="def-label">📖 교재 내용</div>
+      그런가하면 지속이론은 은퇴를 중고령자에게 부정적인 영향을 미치는 역할 상실로 바라보지 않고, <strong>은퇴 전의 라이프스타일의 지속성을 유지하면 은퇴 후에도 개인의 웰빙 수준에 큰 변화가 없을 것</strong>이라고 본다.
+    </div>
+    <ul class="styled-list">
+      <li>역할이론에서 설명하는 역할 퇴장 및 전환으로 인한 심리적 스트레스를 부정하지 않지만 <strong>은퇴 후 심리적 안녕감을 위해선 삶의 연속성을 유지하는 것이 중요함</strong>을 강조 (두송화·장재윤, 2015)</li>
+      <li>지속이론에 따르면 개인의 정체성은 매우 점진적으로 발달하는 것이기 때문에, 은퇴와 같은 생애사건이 정체성에 미치는 영향은 역할이론에서 가정하는 것보다 작다고 봄 (Atchley, 1982)</li>
+      <li>Henning 등(2016): 1990년 이후 출판된 종단 자료 분석 논문 32편 메타분석 — <strong>은퇴자의 대부분이 은퇴 이후에도 은퇴 전의 웰빙 수준을 유지</strong>하는 것으로 나타남</li>
+    </ul>
+  </div>
+
+  <div class="sub-section">
+    <div class="sub-title blue">단계이론 (Stage Theory) — Atchley의 8단계 모델</div>
+    <div class="def-box">
+      <div class="def-label">📖 교재 내용</div>
+      은퇴적응에서의 <strong>시간성(temporality)을 강조</strong>하는 이론이다. 즉 은퇴적응의 양상이 시간의 흐름에 따라 단계적으로 변화한다고 보았다.
+    </div>
+    <div class="step-list">
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-content"><strong>밀월단계(honeymoon stage)</strong>: 은퇴 직후 새로운 경험들을 하면서 즐거움을 느끼고 휴식의 행복을 누리기도 하는 단계</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-content"><strong>환상 깨짐(disenchantment stage)</strong>: 은퇴에 대한 비현실적인 기대를 하고 있었음을 깨닫게 되고 자원이 부족하다는 것을 느끼게 되는 시기</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-content"><strong>재적응 단계(reorientation stage)</strong>: 자신의 상황과 한계를 수용하고 새로운 환경에 적응하는 시기</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-content"><strong>안정기(Stability stage)</strong>: 마침내 은퇴자들이 안정기에 이르게 됨 (Wang, Henkens, &amp; van Solinge, 2011)</div>
+      </div>
+    </div>
+    <div class="info-box"><strong>단계이론의 한계</strong>: 실증연구로 거의 입증되지 못했다. 은퇴 후 적응과정은 각자의 상황에 따라 다를 수 있으며 모두가 8단계를 거치지 않는다는 등의 비판이 제기되었다 (김지경·송현주, 2010).</div>
+  </div>
+
+  <div class="sub-section">
+    <div class="sub-title blue">라이프코스 관점 (Life-course Perspective)</div>
+    <div class="def-box">
+      <div class="def-label">📖 교재 내용</div>
+      은퇴를 <strong>생애전이(transition)로서 개념화</strong>하고 전이의 맥락(context), 시간성, 생애과정의 상호 조건성, 상이한 생활영역간의 연계성 등에 주목한다.
+    </div>
+    <ul class="styled-list">
+      <li><strong>맥락</strong>: 각 은퇴자가 처한 환경을 의미하며 개인의 은퇴경험을 구체화함. 주요한 맥락: <strong>젠더</strong>, 은퇴의 자발성 여부 등</li>
+      <li><strong>시간성(temporality)</strong>: 언제 은퇴를 하느냐 하는 시기(timing)에 따라 은퇴적응이 달라짐. 예상보다 이른 은퇴는 '<strong>시간표상에서 벗어난 전이(off-time transition)</strong>'로 은퇴적응에 어려움을 유발할 수 있다 (Calvo, Sarkisian, &amp; Tamborini, 2012)</li>
+      <li><strong>상호의존성(inter-contingent lives)</strong>: 은퇴경험과 적응이 주변의 중요한 타자와 상호 영향을 주고받는다는 점을 강조. 은퇴를 부부단위의 경험으로 보거나, 부모세대의 은퇴를 자녀세대와 관련지어 살펴보는 연구들이 나타남</li>
+      <li>은퇴의 <strong>자발성 여부</strong>는 실증연구에서 은퇴 후 삶의 질에 영향을 미치는 변수로 상당히 일관적으로 관찰되는 변수 (Dingemans &amp; Henkens, 2013)</li>
+    </ul>
+  </div>
+
+  <div class="summary-box">
+    <div class="summary-title">📊 은퇴적응 이론 비교표</div>
+    <table class="mech-table">
+      <thead><tr><th>이론</th><th>핵심 주장</th><th>초점</th></tr></thead>
+      <tbody>
+        <tr><td>역할이론</td><td>은퇴로 역할 퇴장·전환 → 우울·자존감 저하 등 부정적 결과 가능</td><td>역할 상실의 부정적 영향</td></tr>
+        <tr><td>지속이론</td><td>은퇴 전 라이프스타일 지속성 유지 → 은퇴 후 웰빙 큰 변화 없음</td><td>연속성·삶의 질 유지</td></tr>
+        <tr><td>단계이론</td><td>밀월→환상 깨짐→재적응→안정 단계 순서로 변화</td><td>시간에 따른 단계적 변화</td></tr>
+        <tr><td>라이프코스 관점</td><td>은퇴를 생애전이로 보고 맥락·시간성·상호의존성 강조</td><td>맥락·젠더·자발성·시간성</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- S10 -->
+<div class="section" id="s10">
+  <div class="section-header">
+    <div class="section-num orange">10</div>
+    <h2 class="section-title">은퇴 후 적응유형 ★</h2>
+  </div>
+  <div class="def-box orange">
+    <div class="def-label orange">📖 Hornstein &amp; Wapner (1985)</div>
+    은퇴 후 적응방식은 I. 노년기로의 전환형, II. 새로운 시작형, III. 일 지속형, IV. 강요된 분열형의 4개의 유형으로 나타난다.
+  </div>
+  <div class="compare-grid">
+    <div class="compare-col">
+      <div class="compare-head blue">I. 노년기로의 전환형</div>
+      <ul class="styled-list">
+        <li>은퇴를 <strong>휴식으로 느낌</strong></li>
+        <li>은퇴에 따른 좌절감이 없음</li>
+        <li>스트레스가 높은 직종에 종사했던 경우</li>
+      </ul>
+    </div>
+    <div class="compare-col">
+      <div class="compare-head green">II. 새로운 시작형</div>
+      <ul class="styled-list">
+        <li>은퇴는 <strong>새로운 삶의 단계의 시작점</strong></li>
+        <li>은퇴 이후 삶에 대한 높은 열의와 자신이 새로운 사람이 될 수 있다는 기대</li>
+      </ul>
+    </div>
+  </div>
+  <div class="compare-grid">
+    <div class="compare-col">
+      <div class="compare-head yellow">III. 일 지속형</div>
+      <ul class="styled-list">
+        <li>일하는 것이 <strong>가장 중요한 것</strong></li>
+        <li>은퇴를 다른직업의 전직으로 여김</li>
+        <li>은퇴로 인한 변화가 거의 없음</li>
+        <li>은퇴가 그다지 주요한 생애사건이 아님</li>
+      </ul>
+    </div>
+    <div class="compare-col">
+      <div class="compare-head pink">IV. 강요된 분열형</div>
+      <ul class="styled-list">
+        <li>은퇴를 <strong>가장 가치 있다고 생각했던 활동의 상실</strong>로 인식</li>
+        <li>생산성과 독립성의 상실, 좌절감 경험</li>
+        <li>일을 중요시하지만 비자발적 이유로 일을 계속할 수 없기 때문에 좌절이 큼</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- S11 -->
+<div class="section" id="s11">
+  <div class="section-header">
+    <div class="section-num yellow">11</div>
+    <h2 class="section-title">은퇴적응 관련요인 ★★</h2>
+  </div>
+  <div class="sub-section">
+    <div class="sub-title yellow">은퇴 후 적응의 주요 축</div>
+    <div class="step-list">
+      <div class="step-item">
+        <div class="step-num">①</div>
+        <div class="step-content"><strong>경제적 변화에 대한 적응</strong>: 은퇴하면 수입이 급격하게 줄어들거나 상실되는 반면 지출은 지속적으로 이루어지기 때문에 경제적 어려움을 경험할 가능성이 높아지게 됨</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">②</div>
+        <div class="step-content"><strong>건강 적응</strong>: 은퇴 이후에 신체적 건강상태나 정신건강이 악화될 가능성이 높다고 알려져 있고 이에 대한 적응이 필요함. 은퇴 후의 건강상태가 은퇴생활에 대한 적응의 지표로 여겨지기도 함</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">③</div>
+        <div class="step-content"><strong>사회관계망 변화 적응</strong>: 은퇴와 함께 직장동료와의 관계 단절, 사회활동 참여 저하 등으로 사회적 관계망의 축소가 일어날 가능성이 크고, 잘 적응하지 못하면 사회적 소외와 고독을 경험할 가능성이 높음. 단, 은퇴 전에 풍부한 사회적 관계망을 가지고 활발한 교류를 해 온 사람들은 사회적 소외를 경험하지는 않는 것으로 나타남 (Reitzes &amp; Mutran, 2004)</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">④</div>
+        <div class="step-content"><strong>자아정체감 적응</strong>: 은퇴는 자아정체감을 지탱해 왔던 직업적 지위를 상실하게 되는 큰 변화이므로 자존감의 저하가 나타날 가능성이 큼. <strong>직업 지위에 기반하지 않는 새로운 자아정체감 형성이 은퇴 후 적응에 중요한 부분</strong></div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">⑤</div>
+        <div class="step-content"><strong>여가 적응</strong>: 퇴직 이후 여가시간은 증가하지만 일반적으로 여가활동의 참여도는 줄어듦. <strong>은퇴자로서 갑자기 늘어난 시간을 TV 시청 같은 소극적 여가로 채우기보다 적극적이고 의미 있는 여가생활을 구축</strong>하는 것이 적응의 또 다른 중요한 측면</div>
+      </div>
+    </div>
+  </div>
+  <div class="sub-section">
+    <div class="sub-title yellow">통합적 은퇴 적응 모델 (Wang et al., 2011)</div>
+    <div class="def-box yellow">
+      <div class="def-label yellow">자원-역동성 관점</div>
+      은퇴 후 적응 수준의 변화를 <strong>자원의 변화를 통해 설명</strong>할 수 있다고 봄. 은퇴 후 보유 자원이 감소하면 은퇴 후 적응이 어려워지고, 보유자원이 증가하면 적응이 원만해지는 등 보유자원의 변화와 적응수준의 변화가 방향을 같이 한다고 보았다. 은퇴자의 자원은 <strong>신체적, 인지적, 동기적(motivational), 경제적, 사회적, 정서적 자원</strong>으로 구성된다.
+    </div>
+    <div class="sub-title yellow" style="margin-top:14px;">이러한 은퇴 후 보유자원에 영향을 미칠 수 있는 선행요인(antecedents)</div>
+    <div class="compare-grid">
+      <div class="compare-col">
+        <div class="compare-head blue">거시적 차원</div>
+        <p style="font-size:13.5px;color:var(--text-muted);line-height:1.8;">사회적 규범, 정부정책 등</p>
+      </div>
+      <div class="compare-col">
+        <div class="compare-head green">조직적 차원</div>
+        <p style="font-size:13.5px;color:var(--text-muted);line-height:1.8;">회사조직 분위기나 인적 자원 관리</p>
+      </div>
+      <div class="compare-col">
+        <div class="compare-head yellow">직업적 차원</div>
+        <p style="font-size:13.5px;color:var(--text-muted);line-height:1.8;">직무환경, 직무애착</p>
+      </div>
+      <div class="compare-col">
+        <div class="compare-head pink">개인적 차원</div>
+        <p style="font-size:13.5px;color:var(--text-muted);line-height:1.8;">건강 증진 행동, 심리적 레질리언스</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S12 -->
+<div class="section" id="s12">
+  <div class="section-header">
+    <div class="section-num green">12</div>
+    <h2 class="section-title">은퇴와 가족관계</h2>
+  </div>
+  <div class="info-box">
+    은퇴는 가족관계 전반에 여러 측면의 변화를 가져온다. 특히 부부관계가 많이 변화하게 되는데 은퇴가 부부관계에 미치는 영향에 대한 실증연구 결과들은 일관적이지 않다.
+  </div>
+  <div class="compare-grid">
+    <div class="compare-col">
+      <div class="compare-head green">긍정적 연구 결과</div>
+      <ul class="styled-list">
+        <li>Kupperbusch 등(2003): 은퇴 이전의 부부관계가 정서적으로 애정적이고 안정적이었던 남성은 은퇴 이후의 삶에 더 만족하는 것으로 나타남</li>
+        <li>Fitzpatrick &amp; Vinick(2003): 남편의 은퇴는 아내의 결혼만족도에 영향을 미치지 않는 것으로 나타남</li>
+      </ul>
+    </div>
+    <div class="compare-col">
+      <div class="compare-head pink">부정적 연구 결과</div>
+      <ul class="styled-list">
+        <li>Moen 등(2001): 은퇴 이후 남편과 아내 모두 결혼만족도가 감소하고 부부갈등이 증가하는 것으로 나타남</li>
+        <li>부부간 응집성(cohesion), 갈등 변화에 대한 연구들도 존재</li>
+      </ul>
+    </div>
+  </div>
+  <div class="summary-box">
+    <div class="summary-title">💡 결론</div>
+    <p style="font-size:14px;color:var(--text-muted);line-height:1.8;">지금까지 축적된 연구결과들을 종합하면 <strong>은퇴는 복합적 과정이며 은퇴 후 적응에 많은 개인차가 존재하는 이질적 경험</strong>이라고 결론 지을 수 있다. 은퇴 후 삶을 풍요로운 경험으로 만들기 위한 개인적, 사회적 노력이 요구됨을 알 수 있다. 라이프코스 관점에서 은퇴 후 삶에 적응하는 데에 <strong>부부관계와 자녀관계가 사회적, 정서적 자원으로 작용하며 영향을 미침</strong>을 보여주었다.</p>
+  </div>
+</div>
+
+<!-- QUIZ -->
+<div class="section" id="quiz">
+  <div class="section-header">
+    <div class="section-num" style="background:var(--accent2);">★</div>
+    <h2 class="section-title">시험 대비 문제 풀어보기</h2>
+  </div>
+  <p style="font-size:13px;color:var(--text-muted);margin-bottom:20px;">각 문제를 클릭하면 정답이 나타납니다.</p>
+
+  <h3 style="font-size:13px;font-weight:700;color:var(--accent3);letter-spacing:2px;margin:16px 0 10px;">📗 O / X 문제</h3>
+
+  <div class="quiz-section"><div class="quiz-header" onclick="toggleQuiz(this)"><span class="quiz-type-tag tag-ox">O/X</span><span class="quiz-q">1. 우리나라 75세 이상 고용률은 OECD 국가 중 5년 연속 1위이며, 65세 이상 고용률도 OECD 평균보다 훨씬 높다.</span><span class="quiz-toggle">＋</span></div><div class="quiz-body"><div class="quiz-answer-label">ANSWER</div><div class="quiz-answer"><span class="ox-badge ox-o">O</span><strong>O</strong> — 한국 75세 이상 고용률은 17.9%로 OECD 5년 연속 1위. 65세 이상 고용률도 30.6%로 OECD 평균 13.8%보다 훨씬 높다.</div></div></div>
+
+  <div class="quiz-section"><div class="quiz-header" onclick="toggleQuiz(this)"><span class="quiz-type-tag tag-ox">O/X</span><span class="quiz-q">2. '노동총량설'은 노동시장 내의 일자리 총량은 고정되어 있기 때문에 고령자가 은퇴하지 않으면 청년층에게 돌아갈 일자리가 부족해진다고 본다. 이는 실증연구에 의해 지지받고 있다.</span><span class="quiz-toggle">＋</span></div><div class="quiz-body"><div class="quiz-answer-label">ANSWER</div><div class="quiz-answer"><span class="ox-badge ox-x">X</span><strong>X</strong> — 노동총량설은 실증연구에 의해 지지받지 못한다. 오히려 지은정(2012)의 연구에서 중고령층 고용률이 높을수록 청년층의 고용률도 높게 나타나 대체관계가 아닌 것으로 확인되었다. 두 집단은 상호 보완적인 요소가 더 많다.</div></div></div>
+
+  <div class="quiz-section"><div class="quiz-header" onclick="toggleQuiz(this)"><span class="quiz-type-tag tag-ox">O/X</span><span class="quiz-q">3. 역할이론은 은퇴로 인한 역할 퇴장과 역할 전환 과정을 강조하며, 직업생활에 대한 몰입도가 높을수록 은퇴 적응이 더 쉬운 것으로 본다.</span><span class="quiz-toggle">＋</span></div><div class="quiz-body"><div class="quiz-answer-label">ANSWER</div><div class="quiz-answer"><span class="ox-badge ox-x">X</span><strong>X</strong> — 반대이다. 직업생활에 대한 <strong>몰입도가 낮고</strong> 일이 자아정체성의 핵심이 아닌 경우 은퇴적응이 상대적으로 쉬운 것으로 나타난다 (Crouter &amp; Manke, 1994). 몰입도가 높을수록 역할 상실로 인한 충격이 더 크다.</div></div></div>
+
+  <div class="quiz-section"><div class="quiz-header" onclick="toggleQuiz(this)"><span class="quiz-type-tag tag-ox">O/X</span><span class="quiz-q">4. 단계이론(Atchley)에 의하면 은퇴 직후에는 밀월단계를 거치며, 이후 환상이 깨지는 시기(disenchantment stage)를 경험하게 된다.</span><span class="quiz-toggle">＋</span></div><div class="quiz-body"><div class="quiz-answer-label">ANSWER</div><div class="quiz-answer"><span class="ox-badge ox-o">O</span><strong>O</strong> — 단계이론(Atchley)에서는 은퇴 직후 밀월단계(honeymoon stage) → 환상 깨짐(disenchantment stage) → 재적응(reorientation stage) → 안정기(stability stage)의 순서로 변화한다고 본다.</div></div></div>
+
+  <div class="quiz-section"><div class="quiz-header" onclick="toggleQuiz(this)"><span class="quiz-type-tag tag-ox">O/X</span><span class="quiz-q">5. 지속이론에 따르면 은퇴와 같은 생애사건이 정체성에 미치는 영향은 역할이론에서 가정하는 것보다 크다고 본다.</span><span class="quiz-toggle">＋</span></div><div class="quiz-body"><div class="quiz-answer-label">ANSWER</div><div class="quiz-answer"><span class="ox-badge ox-x">X</span><strong>X</strong> — 반대이다. 지속이론에 따르면 개인의 정체성은 매우 점진적으로 발달하는 것이기 때문에, 은퇴와 같은 생애사건이 정체성에 미치는 영향은 역할이론에서 가정하는 것보다 <strong>작다</strong>고 본다 (Atchley, 1982).</div></div></div>
+
+  <div class="quiz-section"><div class="quiz-header" onclick="toggleQuiz(this)"><span class="quiz-type-tag tag-ox">O/X</span><span class="quiz-q">6. 가교일자리(bridge job)는 주요일자리 퇴직과 완전은퇴 사이의 중간 단계 일자리로, 급격한 소득단절을 줄이고 점진적 적응이 이루어질 수 있도록 시간적 여유를 제공한다.</span><span class="quiz-toggle">＋</span></div><div class="quiz-body"><div class="quiz-answer-label">ANSWER</div><div class="quiz-answer"><span class="ox-badge ox-o">O</span><strong>O</strong> — Ruhm(1990)의 가교일자리 정의에 정확히 해당한다. 급격한 소득단절로 인한 어려움을 줄이고 은퇴자로서의 새로운 자아정체감을 확립할 때까지 점진적 적응이 이루어질 수 있도록 시간적 여유를 제공한다.</div></div></div>
+
+  <div class="quiz-section"><div class="quiz-header" onclick="toggleQuiz(this)"><span class="quiz-type-tag tag-ox">O/X</span><span class="quiz-q">7. 연령경영(Age Management)은 연령장벽을 없애고 기업 내 연령 다양성(age heterogeneity)을 증진시키는 경영방식이다. BMW의 사례는 고령 근로자의 생산성이 향상되었음을 보여준다.</span><span class="quiz-toggle">＋</span></div><div class="quiz-body"><div class="quiz-answer-label">ANSWER</div><div class="quiz-answer"><span class="ox-badge ox-o">O</span><strong>O</strong> — Naegele &amp; Walker(2006)의 연령경영 정의에 해당한다. BMW의 파일럿 프로젝트 결과 연간 생산성이 7% 향상되었으며 중고령 노동자의 결석률이 공장 평균보다 2% 아래로 감소하였다.</div></div></div>
+
+  <div class="quiz-section"><div class="quiz-header" onclick="toggleQuiz(this)"><span class="quiz-type-tag tag-ox">O/X</span><span class="quiz-q">8. 라이프코스 관점에서 은퇴의 '자발성 여부'는 은퇴 후 삶의 질에 영향을 미치는 변수로 실증연구에서 상당히 일관적으로 관찰된다.</span><span class="quiz-toggle">＋</span></div><div class="quiz-body"><div class="quiz-answer-label">ANSWER</div><div class="quiz-answer"><span class="ox-badge ox-o">O</span><strong>O</strong> — 라이프코스 관점에서 은퇴의 자발성 여부는 실증연구에서 은퇴 후 삶의 질에 영향을 미치는 변수로 상당히 일관적으로 관찰되는 변수이다 (Dingemans &amp; Henkens, 2013).</div></div></div>
+
+  <h3 style="font-size:13px;font-weight:700;color:var(--accent);letter-spacing:2px;margin:24px 0 10px;">📘 단답형 문제</h3>
+
+  <div class="quiz-section"><div class="quiz-header" onclick="toggleQuiz(this)"><span class="quiz-type-tag tag-short">단답형</span><span class="quiz-q">1. 연령경영(Age Management)의 개념을 정의한 학자(연도)는?</span><span class="quiz-toggle">＋</span></div><div class="quiz-body"><div class="quiz-answer-label">ANSWER</div><div class="quiz-answer"><strong>Naegele &amp; Walker (2006)</strong></div></div></div>
+
+  <div class="quiz-section"><div class="quiz-header" onclick="toggleQuiz(this)"><span class="quiz-type-tag tag-short">단답형</span><span class="quiz-q">2. 가교일자리(bridge job)를 최초로 명명한 학자(연도)는?</span><span class="quiz-toggle">＋</span></div><div class="quiz-body"><div class="quiz-answer-label">ANSWER</div><div class="quiz-answer"><strong>Ruhm (1990)</strong></div></div></div>
+
+  <div class="quiz-section"><div class="quiz-header" onclick="toggleQuiz(this)"><span class="quiz-type-tag tag-short">단답형</span><span class="quiz-q">3. 은퇴적응에서 시간성(temporality)을 강조하며, 밀월단계·환상 깨짐·재적응·안정기 등 8단계 모델을 제시한 이론과 학자는?</span><span class="quiz-toggle">＋</span></div><div class="quiz-body"><div class="quiz-answer-label">ANSWER</div><div class="quiz-answer"><strong>단계이론 (Stage theory)</strong> — 대표적 학자는 <strong>Atchley</strong></div></div></div>
+
+  <div class="quiz-section"><div class="quiz-header" onclick="toggleQuiz(this)"><span class="quiz-type-tag tag-short">단답형</span><span class="quiz-q">4. 은퇴 전의 라이프스타일의 지속성을 유지하면 은퇴 후에도 개인의 웰빙 수준에 큰 변화가 없을 것이라고 보는 이론은?</span><span class="quiz-toggle">＋</span></div><div class="quiz-body"><div class="quiz-answer-label">ANSWER</div><div class="quiz-answer"><strong>지속이론 (Continuity Theory)</strong></div></div></div>
+
+  <div class="quiz-section"><div class="quiz-header" onclick="toggleQuiz(this)"><span class="quiz-type-tag tag-short">단답형</span><span class="quiz-q">5. 일자리에서의 연령차별을 "개인의 업무수행능력과 관계없이 연령을 기준으로 하여 고용, 승진, 교육 등의 기회에서 배제하는 것"이라고 정의한 학자는?</span><span class="quiz-toggle">＋</span></div><div class="quiz-body"><div class="quiz-answer-label">ANSWER</div><div class="quiz-answer"><strong>Macnicol (2010)</strong></div></div></div>
+
+  <div class="quiz-section"><div class="quiz-header" onclick="toggleQuiz(this)"><span class="quiz-type-tag tag-short">단답형</span><span class="quiz-q">6. Hornstein &amp; Wapner(1985)에 따른 은퇴 후 적응 4가지 유형을 쓰시오.</span><span class="quiz-toggle">＋</span></div><div class="quiz-body"><div class="quiz-answer-label">ANSWER</div><div class="quiz-answer"><strong>① 노년기로의 전환형, ② 새로운 시작형, ③ 일 지속형, ④ 강요된 분열형</strong></div></div></div>
+
+  <div class="quiz-section"><div class="quiz-header" onclick="toggleQuiz(this)"><span class="quiz-type-tag tag-short">단답형</span><span class="quiz-q">7. 은퇴를 '지위로서의 은퇴'라고 명명한 학자는?</span><span class="quiz-toggle">＋</span></div><div class="quiz-body"><div class="quiz-answer-label">ANSWER</div><div class="quiz-answer"><strong>Kimmel (1974)</strong></div></div></div>
+
+  <div class="quiz-section"><div class="quiz-header" onclick="toggleQuiz(this)"><span class="quiz-type-tag tag-short">단답형</span><span class="quiz-q">8. 한국 노인이 현재 일을 하는 가장 중요한 이유는 무엇이며, 그 비율은? (노인실태조사, 2017)</span><span class="quiz-toggle">＋</span></div><div class="quiz-body"><div class="quiz-answer-label">ANSWER</div><div class="quiz-answer"><strong>생계비 마련 (73.0%)</strong></div></div></div>
+
+  <div class="quiz-section"><div class="quiz-header" onclick="toggleQuiz(this)"><span class="quiz-type-tag tag-short">단답형</span><span class="quiz-q">9. 은퇴를 '생애전이(transition)'로서 개념화하고 전이의 맥락, 시간성, 생애과정의 상호 조건성 등에 주목하는 은퇴적응 이론은?</span><span class="quiz-toggle">＋</span></div><div class="quiz-body"><div class="quiz-answer-label">ANSWER</div><div class="quiz-answer"><strong>라이프코스 관점 (Life-course perspective)</strong></div></div></div>
+
+  <div class="quiz-section"><div class="quiz-header" onclick="toggleQuiz(this)"><span class="quiz-type-tag tag-short">단답형</span><span class="quiz-q">10. Wang et al.(2011)의 통합적 은퇴 적응 모델에서 제시하는 은퇴자의 자원 6가지를 쓰시오.</span><span class="quiz-toggle">＋</span></div><div class="quiz-body"><div class="quiz-answer-label">ANSWER</div><div class="quiz-answer"><strong>신체적, 인지적, 동기적(motivational), 경제적, 사회적, 정서적 자원</strong></div></div></div>
+
+  <h3 style="font-size:13px;font-weight:700;color:var(--accent4);letter-spacing:2px;margin:24px 0 10px;">📒 주관식 문제</h3>
+
+  <div class="quiz-section"><div class="quiz-header" onclick="toggleQuiz(this)"><span class="quiz-type-tag tag-essay">주관식</span><span class="quiz-q">1. 노인의 생산성 저하에 대한 두 가지 입장을 비교하여 설명하시오.</span><span class="quiz-toggle">＋</span></div><div class="quiz-body"><div class="quiz-answer-label">ANSWER</div><div class="quiz-answer">노인이 과연 젊은이만큼 일을 잘 할 수 있을까 하는 질문에 대해서는 학자들 간에도 의견이 다르다.<br><br><strong>생산성 저하 주장</strong>: Decremental Theory(Giniger, Dispenzieri, &amp; Eisenberg, 1983)에 기반하여 연령증가에 따른 생산성 저하를 주장하는 학자들이 있다. 손의 민첩함, 반응속도, 청력, 시력과 같은 지각능력이 감퇴하는 것으로 나타난 연구결과에 기초하여 이러한 능력들이 업무수행능력과 높은 관련이 있다는 이유에서이다.<br><br><strong>생산성 저하에 반대</strong>: 반대로 노인은 결석률이나 이직률, 병가, 사고율이 낮다는 점을 들어 노년기 생산성 저하 가설에 반대하는 학자들도 상당수 존재한다. McEvoy와 Cascio(1989)는 22년간 발행된 96편의 논문에 대한 메타분석을 통하여 연령과 업무수행능력은 전반적으로 관련이 없었음을 밝혔다. 또한 Skirbekk(2004)은 결정성 지능은 노화에 따른 능력의 저하가 훨씬 적음을 지적하면서, 직장에서 두 지능의 상대적인 가치가 노인의 생산성을 결정한다고 보았다. 오래된 업무 경험과 지식이 지적능력의 감퇴치를 능가하면, 노년기 근로자의 지적능력감퇴는 생산성 저하로 귀결되지 않는다고 주장하였다.<br><br>결론적으로, 노인 생산성 감소에 대한 증거는 불충분하다. 그럼에도 노인이 생산성이 떨어진다는 사회적 시각은 뿌리 깊고 팽배하며, 이는 연령차별적 시각이 반영된 것이지만 실제로 노인의 노동시장 참여에 장애요인으로 작용하는 것이 현실이다.</div></div></div>
+
+  <div class="quiz-section"><div class="quiz-header" onclick="toggleQuiz(this)"><span class="quiz-type-tag tag-essay">주관식</span><span class="quiz-q">2. 은퇴 후 적응의 주요 축 5가지를 서술하시오.</span><span class="quiz-toggle">＋</span></div><div class="quiz-body"><div class="quiz-answer-label">ANSWER</div><div class="quiz-answer">은퇴생활에 얼마나 잘 적응하는가는 개개인이 놓여 있는 상황과 특성에 따라 차이가 있다. 실증연구를 통해 밝혀진 은퇴적응의 주요 내용은 아래와 같다.<br><br><strong>① 경제적 변화에 대한 적응</strong>: 은퇴하면 수입이 급격하게 줄어들거나 상실되는 반면 지출은 지속적으로 이루어지기 때문에 경제적 어려움을 경험할 가능성이 높아지게 되기 때문이다.<br><br><strong>② 건강 적응</strong>: 은퇴 이후에 신체적 건강상태나 정신건강이 악화될 가능성이 높다고 알려져 있고 이에 대한 적응이 필요하다. 그런가하면 은퇴 후의 건강상태가 은퇴생활에 대한 적응의 지표로 여겨지기도 한다.<br><br><strong>③ 사회관계망 변화 적응</strong>: 은퇴와 함께 직장동료와의 관계 단절, 사회활동 참여 저하 등으로 사회적 관계망의 축소가 일어날 가능성이 크고, 잘 적응하지 못하면 사회적 소외와 고독을 경험할 가능성이 높은 것으로 지적된다.<br><br><strong>④ 자아정체감 적응</strong>: 은퇴는 자아정체감을 지탱해 왔던 직업적 지위를 상실하게 되는 큰 변화이므로 자존감의 저하가 나타날 가능성이 크다. 직업 지위에 기반하지 않는 새로운 자아정체감 형성이 은퇴 후 적응에 중요한 부분이다.<br><br><strong>⑤ 여가 적응</strong>: 퇴직 이후 여가시간은 증가하지만 일반적으로 여가활동의 참여도는 줄어든다. 은퇴자로서 갑자기 늘어난 시간을 TV 시청 같은 소극적 여가로 채우기보다 적극적이고 의미 있는 여가생활을 구축하는 것이 적응의 또 다른 중요한 측면이다.</div></div></div>
+
+  <div class="quiz-section"><div class="quiz-header" onclick="toggleQuiz(this)"><span class="quiz-type-tag tag-essay">주관식</span><span class="quiz-q">3. 라이프코스 관점에서 은퇴를 개념화할 때 강조하는 핵심 요소들을 설명하시오.</span><span class="quiz-toggle">＋</span></div><div class="quiz-body"><div class="quiz-answer-label">ANSWER</div><div class="quiz-answer">라이프코스 관점(Life-course perspective)은 은퇴를 생애전이(transition)로서 개념화하고 전이의 맥락(context), 시간성, 생애과정의 상호 조건성, 상이한 생활영역간의 연계성 등에 주목한다.<br><br><strong>맥락(context)</strong>은 각 은퇴자가 처한 환경을 의미하며 개인의 은퇴경험을 구체화한다. 은퇴경험을 차별화하는 주요한 맥락에는 젠더, 은퇴의 자발성 여부 등이 있다. 젠더는 생애과정 전반에 걸쳐 삶의 기회, 주어진 자원, 기대, 의무 등에 있어서의 남녀차이를 만들어 내고, 이는 은퇴 후 삶의 질에서도 차이가 나타나게 만든다. 은퇴의 자발성 여부는 실증연구에서 은퇴 후 삶의 질에 영향을 미치는 변수로 상당히 일관적으로 관찰되는 변수이다.<br><br><strong>시간성(temporality)</strong>은 언제 은퇴를 하느냐 하는 시기(timing)에 따라 은퇴적응이 달라짐을 강조한다. 예상보다 이른 은퇴는 '시간표상에서 벗어난 전이(off-time transition)'로 은퇴적응에 어려움을 유발할 수 있다.<br><br><strong>상호의존성(inter-contingent lives)</strong>은 은퇴경험과 적응이 주변의 중요한 타자와 상호 영향을 주고받는다는 점을 강조한다. 이러한 점에서 은퇴를 부부단위의 경험으로 보거나, 부모세대의 은퇴를 자녀세대와 관련지어 살펴보는 연구들이 나타나고 있다. 라이프코스 관점을 적용한 많은 선행연구들이 은퇴 후 삶에 적응하는 데에 부부관계와 자녀관계가 사회적, 정서적 자원으로 작용하며 영향을 미침을 보여주었다.</div></div></div>
+
+  <h3 style="font-size:13px;font-weight:700;color:var(--accent2);letter-spacing:2px;margin:24px 0 10px;">📕 서술형 문제</h3>
+
+  <div class="quiz-section"><div class="quiz-header" onclick="toggleQuiz(this)"><span class="quiz-type-tag tag-desc">서술형</span><span class="quiz-q">1. 역할이론, 지속이론, 단계이론, 라이프코스 관점을 각각 설명하고 차이점을 비교하여 서술하시오.</span><span class="quiz-toggle">＋</span></div><div class="quiz-body"><div class="quiz-answer-label">MODEL ANSWER</div><div class="quiz-answer">은퇴적응 과정 및 요인을 설명하는 이론에는 역할이론, 지속이론, 단계이론, 라이프코스 관점 등이 있다.<br><br><strong>역할이론(role theory)</strong>은 은퇴로 인한 역할 퇴장과 역할 전환 과정을 강조한다. 역할이론에 의하면 은퇴는 우울, 자존감 저하 등 부정적 결과를 가져올 수 있는데, 직업역할이 많은 사람들에게 정체성, 자존감, 삶에 대한 만족의 원천이기 때문이다. 단, 직업생활에 대한 몰입도가 낮고 일이 자아정체성의 핵심이 아닌 경우 은퇴적응이 상대적으로 쉬운 것으로 나타난다.<br><br><strong>지속이론(continuity theory)</strong>은 은퇴를 중고령자에게 부정적인 영향을 미치는 역할 상실로 바라보지 않고, 은퇴 전의 라이프스타일의 지속성을 유지하면 은퇴 후에도 개인의 웰빙 수준에 큰 변화가 없을 것이라고 본다. 지속이론도 역할이론에서 설명하는 역할 퇴장 및 전환으로 인한 심리적 스트레스를 부정하지 않지만 은퇴 후 심리적 안녕감을 위해선 삶의 연속성을 유지하는 것이 중요함을 강조한다는 점에서 차이가 있다.<br><br><strong>단계이론(stage theory)</strong>은 은퇴적응에서의 시간성(temporality)을 강조하는 이론이다. 은퇴적응의 양상이 시간의 흐름에 따라 단계적으로 변화한다고 보았으며, 대표적 학자는 Atchley이다. 단계이론에 따르면 은퇴 직후에는 밀월단계(honeymoon stage)가 있지만 그 후로 환상이 깨지는 시기(disenchantment stage)를 경험하게 된다. 이후 재적응 단계(reorientation stage)를 거쳐 마침내 안정기(stability stage)에 이르게 된다. 하지만 단계이론은 실증연구로 거의 입증되지 못했다.<br><br><strong>라이프코스 관점(life-course perspective)</strong>은 은퇴를 생애전이(transition)로서 개념화하고 전이의 맥락(context), 시간성, 생애과정의 상호 조건성, 상이한 생활영역간의 연계성 등에 주목한다. 라이프코스 관점에서는 은퇴의 자발성 여부, 젠더 등 맥락을 중요시하며, 언제 은퇴를 하느냐 하는 시기(timing)에 따라 은퇴적응이 달라짐을 강조하고, 은퇴경험과 적응이 주변의 중요한 타자와 상호 영향을 주고받는다는 상호의존성 개념을 강조한다는 점에서 다른 이론들과 차이가 있다.</div></div></div>
+
+  <div class="quiz-section"><div class="quiz-header" onclick="toggleQuiz(this)"><span class="quiz-type-tag tag-desc">서술형</span><span class="quiz-q">2. 노년기 일의 개인적 의미와 사회적 의미를 설명하고, 계층과 젠더에 따라 일의 의미가 어떻게 달라지는지 서술하시오.</span><span class="quiz-toggle">＋</span></div><div class="quiz-body"><div class="quiz-answer-label">MODEL ANSWER</div><div class="quiz-answer">우리에게 일은 경제적 소득원으로서의 의미뿐 아니라 다양한 의미가 있다.<br><br><strong>개인적 의미</strong>: 첫째, 생존에 필요한 자원을 제공한다는 점에서 경제적 보상이 일의 가장 중요한 의미이다. 둘째, 일은 우리의 일상생활을 구조화하고 규정하는 기능을 한다. 하루 중 일정 시간을 일정 장소에 있게 함으로써 일상의 패턴 형성에 막강한 영향을 행사한다. 셋째, 일은 자아정체감의 기본으로 작동한다. 많은 사람에게 직업은 자신을 표현할 수 있는 창구이며 직장의 일원으로서의 소속감은 자아정체감의 상당부분을 차지한다. 넷째, 일은 사회적 관계의 중요한 창구 역할을 한다. 누구를 만나고, 어떤 교류를 하며, 어떤 경험을 공유하는가와 같은 사회적 관계 맺음은 상당부분 직업생활과 연결되어 있다.<br><br><strong>사회적 의미</strong>: 거시 사회적 측면에서 노년기 노동의 사회적 의미는 건강한 노년집단의 등장과 활동적 노화(active aging)를 바람직한 것으로 바라보는 사회적 분위기가 반영되어 노년기 노동을 부정적으로 보는 시각이 과거에 비해 현저히 줄어들었다. 노년기 경제활동을 생산적 노화의 지표이자 성공적 노화 달성에 중요한 것으로 바라보는 사회적 시각의 확대가 반영된 결과이다.<br><br><strong>계층에 따른 차이</strong>: 2017 노인실태조사에 의하면 노인이 현재 일을 하는 가장 중요한 이유는 생계비 마련 때문(73.0%)이다. 그런데 노년기에 일을 하는 가장 중요한 이유에 있어 교육수준별로 차이가 있다. 전문대학 졸업 이상의 학력을 가진 노인들은 생계비 때문에 일을 한다는 비율이 50%에 불과하고 낮은 학력의 노인들에 비하여 능력 발휘, 경력 활용 목적으로 일을 한다는 비율이 월등히 높다. 계층에 따라 노년기 일의 의미가 달라짐을 알 수 있다.<br><br><strong>젠더에 따른 차이</strong>: 퇴직한 남성노인에게 있어 퇴직하고 다시 일을 찾는 것이 단순한 일자리 탐색의 의미를 넘어서는 자아정체성 및 생애통합의 과정인 것으로 나타난다(송인주, 2008). 한편, 여성노인의 일의 의미는 남성노인과 조금은 다른 것으로 나타난다. 고령 여성의 경우 생계형 취업이 대부분이며, '여성과 연령'이라는 이중적 굴레를 가진다. 젊지 않은 나이에 노동시장에 나서는 것은 막막한 생계, 불안한 노후에 대한 대처행동이며, 힘하고 지위가 낮은 일이 힘들지라도 노동시장에서 버텨내는 것이 중요하다.</div></div></div>
+
+  <div class="quiz-section"><div class="quiz-header" onclick="toggleQuiz(this)"><span class="quiz-type-tag tag-desc">서술형</span><span class="quiz-q">3. 노인 일자리 보장이 청년 일자리의 감소를 가져오는가에 대한 찬반 논쟁을 설명하고, 연령차별(Ageism)의 개념을 서술하시오.</span><span class="quiz-toggle">＋</span></div><div class="quiz-body"><div class="quiz-answer-label">MODEL ANSWER</div><div class="quiz-answer">노인과 청년이 일자리를 놓고 경합한다는 주장은 '노동총량설' 혹은 청년층 고용과 중노년층 고용 간 '대체관계 가설'에 기초한다.<br><br><strong>노동총량설</strong>은 노동시장 내의 일자리 총량은 고정되어 있기 때문에 고령자가 은퇴하지 않고 노동시장에 남아 있으면 청년층에게 돌아갈 일자리가 부족하게 된다고 본다. <strong>대체관계 가설</strong>은 노동자가 고령에 진입하게 되면 보다 생산적인 젊은 연령층으로 대체된다고 보는 이론이다.<br><br>그러나 '노동총량설'이나 대체관계 가설이 실증연구에 의해 지지받지 못하고 있음에도 불구하고 고령층 노동에 대한 사회적 시각이 부정적인 것은 연령차별(Ageism)적 시각이 반영된 것일 수 있다. 최근의 실증 연구 결과들은 중고령자 노동과 젊은 층 노동이 서로 경쟁하지 않으며 여러 의미에서 보완적 관계를 가진다는 점을 보여주고 있다. 실제로 지은정(2012)의 연구에 의하면 OECD 15개국 분석에서 중고령층 고용률이 높을수록 청년층의 고용률도 높게 나타나서 청년층 고용과 중고령층 고용은 대체관계가 아닌 것으로 나타났다.<br><br><strong>연령차별(Ageism)</strong>: Macnicol(2010)은 일자리에서의 연령차별을 개인의 업무수행능력과 관계없이 연령을 기준으로 하여 고용, 승진, 교육 등의 기회에서 배제하는 것이라고 정의했다. 국내 실증연구에 의하면 연령 기준 때문에 노동시장 진입에 어려움을 겪으며, 취업에 성공한 경우라도 차별적 표현 혹은 욕설, 반말을 듣는 경우가 많은 것으로 나타난다. 우리나라는 일자리에서의 연령차별을 금지하기 위해 「고용상 연령차별금지 및 고령자 고용촉진에 관한 법률」 시행규칙을 2012년에 공포하였다.</div></div></div>
+
+</div>
+</div>
+
+<div class="footer">CH11 노년기 일과 은퇴 · 시험대비 정리본</div>
+
+<script>
+function toggleQuiz(header) {
+  const body = header.nextElementSibling;
+  const toggle = header.querySelector('.quiz-toggle');
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  toggle.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(45deg)';
+  toggle.textContent = isOpen ? '＋' : '×';
+}
+</script>
+</body>
+</html>
