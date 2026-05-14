@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calvo et al. (2018) 논문 정리</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0f14;
+    --surface: #16181f;
+    --surface2: #1e2029;
+    --border: #2a2d3a;
+    --accent1: #e8b86d;
+    --accent2: #6d9ee8;
+    --accent3: #e86d8a;
+    --accent4: #6de8b8;
+    --text: #e8e9ef;
+    --text-muted: #8b8fa8;
+    --text-dim: #5a5e75;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 300;
+    line-height: 1.8;
+    min-height: 100vh;
+  }
+
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 2.5rem 2rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .header-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    align-items: flex-end;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .paper-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--accent1);
+    border: 1px solid var(--accent1);
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+
+  .header-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.4;
+  }
+
+  .header-sub {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-top: 0.25rem;
+  }
+
+  .nav-tabs {
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    gap: 0.25rem;
+    padding: 1rem 2rem 0;
+    border-bottom: 1px solid var(--border);
+    overflow-x: auto;
+  }
+
+  .tab-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 0.82rem;
+    padding: 0.6rem 1.1rem;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active {
+    color: var(--accent1);
+    border-bottom-color: var(--accent1);
+    font-weight: 500;
+  }
+
+  main {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  .section { display: none; animation: fadeIn 0.3s ease; }
+  .section.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .block-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+
+  .c-gold { color: var(--accent1); } .dot-gold { background: var(--accent1); }
+  .c-blue { color: var(--accent2); } .dot-blue { background: var(--accent2); }
+  .c-pink { color: var(--accent3); } .dot-pink { background: var(--accent3); }
+  .c-teal { color: var(--accent4); } .dot-teal { background: var(--accent4); }
+
+  .kv-row {
+    display: flex;
+    gap: 0.75rem;
+    padding: 0.65rem 0;
+    border-bottom: 1px solid var(--border);
+    align-items: baseline;
+    flex-wrap: wrap;
+  }
+  .kv-row:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .kv-key {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    min-width: 170px;
+    flex-shrink: 0;
+  }
+
+  .kv-val {
+    font-size: 0.88rem;
+    color: var(--text);
+    flex: 1;
+  }
+
+  .kv-val strong { color: var(--accent1); font-weight: 500; }
+  .kv-val em    { color: var(--accent4); font-style: normal; }
+  .kv-val mark  {
+    background: rgba(232,184,109,0.15);
+    color: var(--accent1);
+    padding: 0 0.3em;
+    border-radius: 3px;
+  }
+
+  .hl-box {
+    border-left: 3px solid var(--accent1);
+    background: rgba(232,184,109,0.07);
+    padding: 0.9rem 1rem;
+    border-radius: 0 6px 6px 0;
+    margin: 0.75rem 0;
+    font-size: 0.88rem;
+    line-height: 1.75;
+  }
+  .hl-box.blue { border-left-color: var(--accent2); background: rgba(109,158,232,0.07); }
+  .hl-box.pink { border-left-color: var(--accent3); background: rgba(232,109,138,0.07); }
+  .hl-box.teal { border-left-color: var(--accent4); background: rgba(109,232,184,0.07); }
+
+  /* 3-concept grid */
+  .tri-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.85rem;
+    margin-top: 0.5rem;
+  }
+
+  @media (max-width: 640px) {
+    .tri-grid { grid-template-columns: 1fr; }
+  }
+
+  .tri-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1rem;
+  }
+
+  .tri-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--accent1);
+    opacity: 0.35;
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+
+  .tri-title {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--accent1);
+    margin-bottom: 0.4rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+  }
+
+  .tri-ko {
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 0.3rem;
+  }
+
+  .tri-desc {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.55;
+  }
+
+  /* sequence type cards */
+  .seq-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 0.85rem;
+    margin-top: 0.5rem;
+  }
+
+  .seq-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .seq-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+  }
+
+  .sc-early::before    { background: var(--accent3); }
+  .sc-complete::before { background: var(--accent2); }
+  .sc-partial::before  { background: var(--accent1); }
+  .sc-late::before     { background: var(--accent4); }
+  .sc-ambig::before    { background: #b48ef5; }
+  .sc-compact::before  { background: #f5b8e0; }
+
+  .seq-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    margin-bottom: 0.3rem;
+  }
+
+  .seq-name {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 0.25rem;
+  }
+
+  .seq-pct {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .seq-desc {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.55;
+  }
+
+  /* two col */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  @media (max-width: 600px) {
+    .two-col { grid-template-columns: 1fr; }
+    .kv-key { min-width: 120px; }
+  }
+
+  .mini-block {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1rem;
+  }
+
+  .mini-title {
+    font-size: 0.72rem;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--text-muted);
+    margin-bottom: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+  }
+
+  .mini-list {
+    list-style: none;
+    font-size: 0.82rem;
+    line-height: 1.72;
+    color: var(--text);
+  }
+
+  .mini-list li::before {
+    content: '·';
+    color: var(--accent1);
+    margin-right: 0.5rem;
+    font-weight: 700;
+  }
+
+  /* table */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.83rem;
+    margin-top: 0.5rem;
+  }
+
+  th {
+    background: var(--surface2);
+    color: var(--text-muted);
+    font-weight: 500;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    padding: 0.6rem 0.9rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+
+  td {
+    padding: 0.6rem 0.9rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+    vertical-align: top;
+  }
+
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(255,255,255,0.02); }
+
+  td.val  { color: var(--accent1); font-family: 'JetBrains Mono', monospace; }
+  td.pos  { color: var(--accent4); }
+  td.neg  { color: var(--accent3); }
+
+  /* section */
+  .sec-heading {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--accent1);
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .sub-heading {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 1.5rem 0 0.75rem;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* quiz */
+  .quiz-list { display: flex; flex-direction: column; gap: 1rem; }
+
+  .quiz-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+
+  .quiz-card:hover { border-color: var(--accent1); }
+
+  .quiz-q {
+    padding: 1rem 1.25rem;
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .qnum {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    min-width: 28px;
+    padding-top: 0.15rem;
+  }
+
+  .qtype {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 3px;
+    min-width: fit-content;
+    margin-top: 0.1rem;
+  }
+  .qt-ox   { background: rgba(109,232,184,0.15); color: var(--accent4); }
+  .qt-fill { background: rgba(232,184,109,0.15); color: var(--accent1); }
+  .qt-mc   { background: rgba(109,158,232,0.15); color: var(--accent2); }
+
+  .qtext {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    flex: 1;
+  }
+
+  .quiz-arrow {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    transition: transform 0.2s;
+    padding-top: 0.15rem;
+    flex-shrink: 0;
+  }
+
+  .quiz-a {
+    display: none;
+    padding: 0.85rem 1.25rem 1rem;
+    border-top: 1px solid var(--border);
+    background: var(--surface2);
+  }
+
+  .quiz-a.shown { display: block; animation: fadeIn 0.2s ease; }
+
+  .answer-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--text-dim);
+    margin-bottom: 0.4rem;
+  }
+
+  .answer-text {
+    font-size: 0.87rem;
+    line-height: 1.7;
+    color: var(--text);
+  }
+
+  .answer-text strong { color: var(--accent1); font-weight: 500; }
+  .ox-o { color: var(--accent4); font-size: 1.1rem; font-weight: 700; }
+  .ox-x { color: var(--accent3); font-size: 1.1rem; font-weight: 700; }
+
+  /* index pills */
+  .index-row {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin: 0.5rem 0;
+  }
+
+  .index-pill {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.6rem 1rem;
+    flex: 1;
+    min-width: 140px;
+  }
+
+  .ip-name {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--accent1);
+    margin-bottom: 0.3rem;
+  }
+
+  .ip-desc {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  /* hyp cards */
+  .hyp-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .hyp-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.1rem;
+  }
+
+  .hyp-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--accent1);
+    opacity: 0.35;
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+
+  .hyp-tag {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-family: 'JetBrains Mono', monospace;
+    padding: 0.15rem 0.5rem;
+    border-radius: 3px;
+    margin-bottom: 0.5rem;
+  }
+  .ht-gold { background: rgba(232,184,109,0.2); color: var(--accent1); }
+  .ht-blue { background: rgba(109,158,232,0.2); color: var(--accent2); }
+
+  .hyp-text {
+    font-size: 0.84rem;
+    line-height: 1.65;
+    color: var(--text);
+  }
+
+  @media (max-width: 600px) {
+    header { padding: 1.5rem 1rem 1rem; }
+    main { padding: 1.5rem 1rem; }
+    .nav-tabs { padding: 0.75rem 1rem 0; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <span class="paper-badge">The Gerontologist · 2018 · Vol.58 No.6 · pp.1166–1176</span>
+    <div>
+      <div class="header-title">Calvo, Madero-Cabib & Staudinger (2018) — 논문 정리 노트</div>
+      <div class="header-sub">Retirement Sequences of Older Americans: Moderately Destandardized and Highly Stratified Across Gender, Class, and Race</div>
+    </div>
+  </div>
+</header>
+
+<div class="nav-tabs">
+  <button class="tab-btn active" onclick="showTab('overview')">① 개요 & 핵심 개념</button>
+  <button class="tab-btn" onclick="showTab('theory')">② 이론 & 가설</button>
+  <button class="tab-btn" onclick="showTab('method')">③ 연구 방법</button>
+  <button class="tab-btn" onclick="showTab('results')">④ 결과</button>
+  <button class="tab-btn" onclick="showTab('discussion')">⑤ 논의 & 함의</button>
+  <button class="tab-btn" onclick="showTab('quiz')">⑥ 퀴즈 연습</button>
+</div>
+
+<main>
+
+<!-- ════ ① 개요 ════ -->
+<div class="section active" id="sec-overview">
+  <div class="sec-heading">개요 & 핵심 개념</div>
+
+  <div class="block">
+    <div class="block-title c-gold"><span class="dot dot-gold"></span>논문 기본 정보</div>
+    <div class="kv-row">
+      <div class="kv-key">저자</div>
+      <div class="kv-val">Esteban Calvo (Columbia Univ.) / Ignacio Madero-Cabib (Univ. of Chile) / Ursula M. Staudinger (Columbia Univ.)</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">게재지</div>
+      <div class="kv-val"><em>The Gerontologist</em>, 2018, Vol. 58, No. 6, pp. 1166–1176</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">핵심 주장 (한 줄)</div>
+      <div class="kv-val">미국 노인의 은퇴 시퀀스는 <strong>중간 정도로 탈표준화</strong>되었고, 성별·계급·인종에 따라 <strong>고도로 계층화</strong>되어 있다</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">기존 연구 비판</div>
+      <div class="kv-val">기존 문헌은 개별 지위(status)나 전환(transition)에 집중 → 연속적 과정이 단편적 스냅샷으로 표현되면서 탈표준화가 <em>과대평가</em>됨</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">방법론적 기여</div>
+      <div class="kv-val">은퇴를 연속적 <strong>시퀀스(sequence)</strong>로 개념화하여, 사회집단 간 차이를 체계적으로 분석한 미국 대표 종단자료 활용 첫 연구</div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-title c-blue"><span class="dot dot-blue"></span>핵심 개념 3종 — 탈표준화의 정의 (Destandardization)</div>
+    <div class="tri-grid">
+      <div class="tri-card">
+        <div class="tri-num">①</div>
+        <div class="tri-title">unconventional type</div>
+        <div class="tri-ko">비관행적 유형</div>
+        <div class="tri-desc">65세 전후 풀타임 직장에서의 완전 은퇴라는 <em>관행적 모형</em>과 다른 패턴. 이것이 아닌 다른 유형이 존재할 때 해당</div>
+      </div>
+      <div class="tri-card">
+        <div class="tri-num">②</div>
+        <div class="tri-title">reversible order</div>
+        <div class="tri-ko">가역적 순서</div>
+        <div class="tri-desc">지위 변화가 <em>역전</em>되는 경우 (예: 은퇴 후 재취업, 노동시장 재진입). 표준화된 시퀀스는 비가역적·선형적 진행을 따름</div>
+      </div>
+      <div class="tri-card">
+        <div class="tri-num">③</div>
+        <div class="tri-title">flexible timing</div>
+        <div class="tri-ko">유연한 시기</div>
+        <div class="tri-desc">동일한 전환이 다양한 연령에서 발생. 표준화된 시퀀스는 특정 전환에 특정 연령이 고정되어 있음 (age-grading)</div>
+      </div>
+    </div>
+    <div class="hl-box" style="margin-top:1rem;">
+      <strong>고도 탈표준화</strong> = 세 조건 모두 충족 / <strong>고도 표준화</strong> = 세 조건 모두 부재<br>
+      이 연구의 결론: <strong>중간 정도 탈표준화 (moderate destandardization)</strong> = 적어도 하나, 그러나 전부는 아닌 조건 충족
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-title c-teal"><span class="dot dot-teal"></span>핵심 개념 — 지위·전환·시퀀스 비교</div>
+    <table>
+      <thead><tr><th>개념</th><th>영어</th><th>정의</th><th>기존 방법론</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>지위</strong></td>
+          <td class="val">status</td>
+          <td>순간적 또는 영구적 상태 (스냅샷)</td>
+          <td>횡단면 회귀, 사건사 분석</td>
+        </tr>
+        <tr>
+          <td><strong>전환</strong></td>
+          <td class="val">transition</td>
+          <td>지위의 변화 (스냅샷과 스냅샷 사이)</td>
+          <td>잠재 전환 모형</td>
+        </tr>
+        <tr>
+          <td><strong>시퀀스</strong></td>
+          <td class="val">sequence</td>
+          <td>시간순으로 정렬된 지위와 전환의 집합 → <em>영화</em></td>
+          <td><strong>순서 분석 (sequence analysis)</strong></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="hl-box teal" style="margin-top:0.75rem;">
+      저자들의 핵심 은유: "스냅샷(snapshot)에서 영화(movie)로" — 연속적 과정을 단편적으로 보면 패턴이 사라지고 탈표준화가 과대평가됨
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-title c-pink"><span class="dot dot-pink"></span>노동력 지위 7가지 (Labor-Force Status)</div>
+    <div class="two-col">
+      <div class="mini-block">
+        <ul class="mini-list">
+          <li>풀타임 취업 (working full-time)</li>
+          <li>파트타임 취업 (working part-time)</li>
+          <li>부분 은퇴 (partly retired)</li>
+          <li>완전 은퇴 (completely retired)</li>
+        </ul>
+      </div>
+      <div class="mini-block">
+        <ul class="mini-list">
+          <li>실업 (unemployed)</li>
+          <li>장애 (disabled)</li>
+          <li>노동시장 비참여 (not in the labor force)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════ ② 이론 & 가설 ════ -->
+<div class="section" id="sec-theory">
+  <div class="sec-heading">이론적 배경 & 가설</div>
+
+  <div class="block">
+    <div class="block-title c-gold"><span class="dot dot-gold"></span>탈표준화 가설의 배경</div>
+    <div class="kv-row">
+      <div class="kv-key">생애과정 탈표준화<br>(destandardization)</div>
+      <div class="kv-val">현대 사회가 삶의 방식·시기에 대한 규정을 점점 덜 제공 → 다양한 생애과정, 비선형적 변화. <em>반론</em>도 존재 (Kohli, 2007; Mayer, 2009)</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">은퇴의 재개념화</div>
+      <div class="kv-val">은퇴 = 풀타임 → 완전 은퇴의 일회성 전환이 아니라, <strong>시간에 걸쳐 펼쳐지는 복잡한 과정</strong> (Szinovacz, 2013)</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">은퇴 유연화 원인</div>
+      <div class="kv-val">
+        기대수명↑ + 은퇴 자원 부족 → 정책입안자의 계속 고용 촉진 / 브릿지 직업(bridge jobs) / 단계적 은퇴(phased retirement) / 파트타임 근무 증가<br>
+        은퇴 연령 범위 확장 원인: 완전 은퇴연령 65→67세 상향, 조기 은퇴 패널티, 70세까지 은퇴 연기 크레딧, 강제 은퇴 폐지, 연령 차별 금지 법률, 확정기여형 전환, 신체적으로 힘든 직업 감소, 건강·수명 개선
+      </div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">연령 규범<br>(age norms)</div>
+      <div class="kv-val">Settersten(2006): 생애과정 구조는 규범적 연령 기대에 근본적으로 의존 → 문화·제도적 과정이 고도 표준화를 유도하는 <strong>시계 장치(clocking device)</strong>로 작동</div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-title c-blue"><span class="dot dot-blue"></span>사회 계층화 가설 — 성별·계급·인종</div>
+    <table>
+      <thead><tr><th>범주</th><th>더 탈표준화된 집단</th><th>근거</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>성별 (Gender)</strong></td>
+          <td class="neg">여성</td>
+          <td>더 다양한 경력 경로, 결혼·출산 시 노동시장 이탈, 돌봄 역할 위한 조기 은퇴, 이후 파트타임 복귀 (Levy & Widmer, 2013)</td>
+        </tr>
+        <tr>
+          <td><strong>계급 (Class)</strong><br><small>교육 수준으로 측정</small></td>
+          <td class="neg">저학력자</td>
+          <td>단속적 근무, 저숙련·파트타임 직업, 실업·장애, 노동시장 진출입 반복, 국가 연금 수급 연령 이후 계속 근무 기대↓ (Lynch & Brown, 2011)</td>
+        </tr>
+        <tr>
+          <td><strong>인종 (Race)</strong></td>
+          <td class="neg">흑인(Black)</td>
+          <td>해고 가능성↑, 승진↓, 임금↓, 연금 소득 부족, 취업 어려움, 65세 이후 저임금·파트타임 비율↑ (McNamara & Williamson, 2004)</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="hl-box blue" style="margin-top:0.75rem;">
+      고학력자 역설: 소득이 높아 <em>일찍 은퇴 가능</em>하지만, 동시에 더 나은 건강·근무조건·흥미로운 직업 때문에 <em>더 오래 일하도록 동기 부여</em>됨
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-title c-pink"><span class="dot dot-pink"></span>연구 가설 (Research Hypotheses)</div>
+    <div class="hyp-grid">
+      <div class="hyp-card">
+        <div class="hyp-num">H1</div>
+        <span class="hyp-tag ht-gold">탈표준화 가설</span>
+        <div class="hyp-text">
+          미국 노인의 은퇴 시퀀스는 <strong>중간 정도로 탈표준화</strong>되어 있다 — 비관행적 유형, 가역적 순서, 유연한 시기 중 적어도 하나 이상(전부는 아님)의 근거를 발견할 것
+        </div>
+      </div>
+      <div class="hyp-card">
+        <div class="hyp-num">H2</div>
+        <span class="hyp-tag ht-blue">사회 계층화 가설</span>
+        <div class="hyp-text">
+          <strong>여성, 저학력자, 흑인</strong>이 각각 남성, 고학력자, 비흑인보다 더 탈표준화된 은퇴 시퀀스를 보일 것
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════ ③ 방법 ════ -->
+<div class="section" id="sec-method">
+  <div class="sec-heading">연구 방법</div>
+
+  <div class="block">
+    <div class="block-title c-gold"><span class="dot dot-gold"></span>데이터 (Data)</div>
+    <div class="kv-row">
+      <div class="kv-key">데이터셋</div>
+      <div class="kv-val"><strong>HRS</strong> (Health and Retirement Study) — 미국 노인 및 배우자 대상 전국 대표 패널 조사, 2년마다 실시, 1992년부터</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">출생 코호트</div>
+      <div class="kv-val"><strong>1931–1941년</strong>생 / 1992년 조사 응답자 원래 9,752명</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">분석 기간</div>
+      <div class="kv-val">만 <strong>60–61세 → 70–71세</strong> (10년) / 6회 연속 관찰</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">최종 표본</div>
+      <div class="kv-val"><strong>7,881명</strong> (70–71세 이전 사망한 1,871명 제외) / 총 <strong>47,286개</strong> 관측치</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">결측치 처리</div>
+      <div class="kv-val">전체 데이터의 <strong>4.23%</strong> 결측 → 연쇄 방정식 단순 확률 대체법(single stochastic imputation by chained equations)</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">수집 주기</div>
+      <div class="kv-val">2년마다 (biannually) — 한계: 고용주·직종 변화 미측정, 단기 노동시장 변화 및 브릿지 직업 일부 미관찰 가능</div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-title c-blue"><span class="dot dot-blue"></span>측정 변수</div>
+    <div class="sub-heading" style="margin-top:0;">사회 계층화 변수</div>
+    <div class="kv-row">
+      <div class="kv-key">성별 (gender)</div>
+      <div class="kv-val">더미변수: 여성=1, 남성=0</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">계급 (class)</div>
+      <div class="kv-val">교육 연수 기반 3수준: <strong>저학력</strong>(12년 미만) / <strong>중학력</strong>(12년, 고졸) / <strong>고학력</strong>(12년 초과)</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">인종 (race)</div>
+      <div class="kv-val">3범주: <strong>백인 비히스패닉(White)</strong> / <strong>흑인 비히스패닉(Black)</strong> / <strong>히스패닉(Hispanic)</strong></div>
+    </div>
+    <div class="sub-heading">기술 통계 (Table 1 주요 수치)</div>
+    <table>
+      <thead><tr><th>변수</th><th>전체 평균</th><th>60–61세</th><th>70–71세</th></tr></thead>
+      <tbody>
+        <tr><td>풀타임 취업</td><td class="val">26.52%</td><td class="val">44.23%</td><td class="val">8.81%</td></tr>
+        <tr><td>파트타임 취업</td><td class="val">6.19%</td><td class="val">9.16%</td><td class="val">3.22%</td></tr>
+        <tr><td>부분 은퇴</td><td class="val">10.32%</td><td class="val">6.93%</td><td class="val">13.70%</td></tr>
+        <tr><td>완전 은퇴</td><td class="val">44.12%</td><td class="val">23.47%</td><td class="val">64.76%</td></tr>
+        <tr><td>실업</td><td class="val">1.46%</td><td class="val">1.98%</td><td class="val">0.93%</td></tr>
+        <tr><td>장애</td><td class="val">2.84%</td><td class="val">4.09%</td><td class="val">1.59%</td></tr>
+        <tr><td>노동시장 비참여</td><td class="val">8.56%</td><td class="val">10.14%</td><td class="val">6.99%</td></tr>
+        <tr><td>여성 비율</td><td class="val">55.13%</td><td>—</td><td>—</td></tr>
+        <tr><td>백인 비히스패닉</td><td class="val">73.18%</td><td>—</td><td>—</td></tr>
+        <tr><td>흑인 비히스패닉</td><td class="val">15.30%</td><td>—</td><td>—</td></tr>
+        <tr><td>히스패닉</td><td class="val">9.45%</td><td>—</td><td>—</td></tr>
+        <tr><td>저학력</td><td class="val">26.32%</td><td>—</td><td>—</td></tr>
+        <tr><td>중학력</td><td class="val">36.37%</td><td>—</td><td>—</td></tr>
+        <tr><td>고학력</td><td class="val">37.32%</td><td>—</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="block">
+    <div class="block-title c-teal"><span class="dot dot-teal"></span>분석 전략 (Analytic Strategy)</div>
+    <div class="kv-row">
+      <div class="kv-key">핵심 방법</div>
+      <div class="kv-val"><strong>순서 분석 (sequence analysis)</strong> — 개인 시퀀스 생성 후 유사도 비교 → 거리 행렬(distance matrix) → 클러스터 분석</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">거리 계산</div>
+      <div class="kv-val"><strong>최적 매칭 분석 (OMA: Optimal Matching Analysis)</strong> — 대체(substitution) + 삽입/삭제(insertion/deletion) 비용 모두 고려. 모든 지위에 동일 비용 부여 (이론적 자의성 회피)</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">클러스터링</div>
+      <div class="kv-val"><strong>Ward 계층적 군집분석</strong> (Ward hierarchical clustering) → 시퀀스 유형 수 결정: <strong>평균 실루엣 폭 기준 (average silhouette width)</strong></div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">내부 동력성 지표</div>
+      <div class="kv-val">엔트로피(entropy) / 복잡성(complexity) / 난기류(turbulence) — 유연한 시기 검증에 사용</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">계층화 검증</div>
+      <div class="kv-val">단순 및 다요인 불일치 분석 (simple and multifactor discrepancy analyses) → 집단 간 시퀀스 차이 유의성 검증</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">소프트웨어</div>
+      <div class="kv-val">R (TraMineR package)</div>
+    </div>
+
+    <div class="sub-heading">내부 동력성 지표 설명</div>
+    <div class="index-row">
+      <div class="index-pill">
+        <div class="ip-name">entropy (엔트로피)</div>
+        <div class="ip-desc">0 = 모든 응답자가 동일 지위 / 1 = 모든 가능한 지위에 균등 분포. 높을수록 다양한 지위가 혼재</div>
+      </div>
+      <div class="index-pill">
+        <div class="ip-name">complexity (복잡성)</div>
+        <div class="ip-desc">0 = 개인 간 지위 완전 동일하고 전환 없음 / 1 = 반대. 높을수록 다양한 전환 경험</div>
+      </div>
+      <div class="index-pill">
+        <div class="ip-name">turbulence (난기류)</div>
+        <div class="ip-desc">하나의 시퀀스에서 구성 가능한 별개 하위시퀀스 수. 높을수록 지위·전환이 시간적으로 가변적</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════ ④ 결과 ════ -->
+<div class="section" id="sec-results">
+  <div class="sec-heading">결과 (Results)</div>
+
+  <div class="block">
+    <div class="block-title c-gold"><span class="dot dot-gold"></span>6가지 은퇴 시퀀스 유형 (Figure 1)</div>
+    <div class="seq-grid">
+      <div class="seq-card sc-early">
+        <div class="seq-label">A) EARLY RETIREMENT</div>
+        <div class="seq-name">조기 은퇴 시퀀스</div>
+        <div class="seq-pct" style="color:var(--accent3)">36.66% (2,889명) — 가장 많음</div>
+        <div class="seq-desc">62세 이전 또는 62세에 완전 은퇴. 모든 사회집단에서 일관되게 나타남</div>
+      </div>
+      <div class="seq-card sc-complete">
+        <div class="seq-label">B) COMPLETE RETIREMENT</div>
+        <div class="seq-name">완전 은퇴 시퀀스</div>
+        <div class="seq-pct" style="color:var(--accent2)">18.35% (1,446명)</div>
+        <div class="seq-desc"><em>관행적 모형</em>: 풀타임으로 시작 → 66세에 완전 은퇴. 남성, 흑인 비히스패닉에서 두드러짐</div>
+      </div>
+      <div class="seq-card sc-partial">
+        <div class="seq-label">C) PARTIAL RETIREMENT</div>
+        <div class="seq-name">부분 은퇴 시퀀스</div>
+        <div class="seq-pct" style="color:var(--accent1)">15.53% (1,224명)</div>
+        <div class="seq-desc">풀타임으로 시작 → 66세에 대다수가 부분 은퇴 상태. 중·고학력, 백인에서 두드러짐</div>
+      </div>
+      <div class="seq-card sc-late">
+        <div class="seq-label">D) LATE RETIREMENT</div>
+        <div class="seq-name">만기 은퇴 시퀀스</div>
+        <div class="seq-pct" style="color:var(--accent4)">11.67% (920명)</div>
+        <div class="seq-desc">풀타임으로 시작 → 66세 이후까지 계속 풀타임 근무. 모든 집단에 존재하나 남성에서 더 많음</div>
+      </div>
+      <div class="seq-card sc-ambig">
+        <div class="seq-label">E) AMBIGUOUS</div>
+        <div class="seq-name">모호한 시퀀스</div>
+        <div class="seq-pct" style="color:#b48ef5">10.99% (866명)</div>
+        <div class="seq-desc">노동시장 비참여에서 은퇴로 이동. 저·중학력 여성, 흑인(장애 집중)에서 두드러짐. 가역성(unretirement) 관찰</div>
+      </div>
+      <div class="seq-card sc-compact">
+        <div class="seq-label">F) COMPACT</div>
+        <div class="seq-name">압축 시퀀스</div>
+        <div class="seq-pct" style="color:#f5b8e0">6.80% (536명)</div>
+        <div class="seq-desc">파트타임으로 시작 → 부분 은퇴로 마무리. 중학력 여성에서만 두드러짐. 가장 높은 난기류(turbulence=4.11)</div>
+      </div>
+    </div>
+    <div class="hl-box" style="margin-top:1rem;">
+      <strong>핵심:</strong> 관행적 완전 은퇴 모형(complete retirement sequence)은 6가지 유형 중 하나에 불과하며, <em>가장 많은 유형이 아님</em> (조기 은퇴가 36.66%로 1위) → <strong>비관행적 유형 가설(H1 중 첫 번째 조건) 완전 지지</strong>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-title c-blue"><span class="dot dot-blue"></span>가역적 순서 가설 검증 결과</div>
+    <div class="hl-box blue">
+      <strong>→ 소폭 지지 (only modest support)</strong><br>
+      대부분의 시퀀스 유형은 <em>비가역적(largely irreversible)</em>. 즉 진행 방향이 일방적.<br>
+      단, 개인 시퀀스 수준에서 재취업·은퇴 해제(unretirement)·장애/비참여 반복 전환 일부 관찰.<br>
+      전체 표본에서 가장 많이 나타나는 역전 전환: <strong>은퇴 → 부분 은퇴 (15.71%)</strong><br>
+      결론: 역전 전환이 충분히 유사하지 않아 <em>별도의 시퀀스 유형 형성에는 이르지 못함</em>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-title c-teal"><span class="dot dot-teal"></span>유연한 시기 가설 검증 결과</div>
+    <div class="hl-box teal">
+      <strong>→ 부분적 지지 (only partly supported)</strong><br>
+      대부분의 시퀀스가 어느 정도 <em>연령 등급화(age-graded)</em>되어 있지만, 일부 다른 연령에서의 전환도 관찰.<br>
+      가장 명확한 사례: <strong>조기 은퇴와 만기 은퇴 유형이 동시에 존재</strong>.<br>
+      엔트로피·복잡성·난기류 지표: <strong>부분·모호·압축 시퀀스</strong>가 가장 시간 가변적(flexible).<br>
+      법적 은퇴 연령(62세 조기, 65–67세 완전)이 여전히 <em>제도적 기준점</em>으로 작동
+    </div>
+    <div class="hl-box" style="margin-top:0.5rem;">
+      <strong>전체 결론:</strong> 비관행적 유형은 강하게 지지되었으나, 일부 비가역성과 연령 등급화는 유지됨 → <strong>중간 정도 탈표준화 가설 지지</strong>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-title c-pink"><span class="dot dot-pink"></span>사회 계층화 결과 (Table 3 주요 내용)</div>
+    <table>
+      <thead><tr><th>집단</th><th>특징적 시퀀스</th><th>주요 발견</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>남성</strong></td>
+          <td>조기·완전·부분·만기</td>
+          <td>실업·파트타임 에피소드 적음, 연령 등급화 더 강함, 완전 은퇴 시퀀스 주도</td>
+        </tr>
+        <tr>
+          <td><strong>여성</strong></td>
+          <td>조기·모호·압축·만기</td>
+          <td>더 많은 유형의 비관행적 시퀀스, 실업·파트타임 많음, 연령 등급화 약함 (더 유연한 시기)</td>
+        </tr>
+        <tr>
+          <td><strong>저학력</strong></td>
+          <td>조기·모호·만기</td>
+          <td>장애·비참여 비율 높음, 실업·파트타임 많음, 연령 등급화 약함</td>
+        </tr>
+        <tr>
+          <td><strong>중학력</strong></td>
+          <td>다양 (가장 비관행적)</td>
+          <td><em>비관행적 시퀀스의 전형</em> — 여성에서 모호·압축 두드러짐</td>
+        </tr>
+        <tr>
+          <td><strong>고학력</strong></td>
+          <td>조기·부분·만기</td>
+          <td>관행적·비단속적 경력, 파트타임·실업 에피소드 적음</td>
+        </tr>
+        <tr>
+          <td><strong>백인</strong></td>
+          <td>조기·부분 중심</td>
+          <td>부분 은퇴 가장 높음(31.21%), 상대적으로 더 표준화된 시퀀스</td>
+        </tr>
+        <tr>
+          <td><strong>흑인</strong></td>
+          <td>조기·완전·모호·만기</td>
+          <td><em>비관행적 시퀀스의 전형</em>, 장애 집중, 완전 은퇴 25.37%로 비교적 높음</td>
+        </tr>
+        <tr>
+          <td><strong>히스패닉</strong></td>
+          <td>조기·만기</td>
+          <td>만기 은퇴 가장 높음(32.75%), 노동시장 비참여→은퇴 전환 많음</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="hl-box pink" style="margin-top:0.75rem;">
+      <strong>역전 전환의 집단별 차이:</strong><br>
+      은퇴→부분은퇴: 남성 18.41%, 중학력 16.19%, 고학력 17.48%, 백인 16.39%<br>
+      은퇴→노동시장 비참여: <strong>여성 18.02%</strong>, 히스패닉 18.12%
+    </div>
+  </div>
+</div>
+
+<!-- ════ ⑤ 논의 ════ -->
+<div class="section" id="sec-discussion">
+  <div class="sec-heading">논의 & 함의</div>
+
+  <div class="block">
+    <div class="block-title c-gold"><span class="dot dot-gold"></span>"스냅샷에서 영화로" — 방법론적 기여</div>
+    <div class="kv-row">
+      <div class="kv-key">핵심 논점</div>
+      <div class="kv-val">연속적 과정을 스냅샷(개별 지위/전환)으로 표현하면 → 시퀀스의 전반적 패턴이 사라지고 탈표준화가 <strong>과대평가</strong>됨</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">개인·사회적 스크립트</div>
+      <div class="kv-val">모든 시퀀스가 비가역적 진행으로 이루어진 것은, 개인들이 은퇴 시기와 순서에 대한 <strong>개인적·사회적 스크립트</strong>를 따름을 시사 (Szinovacz, 2013) — 선택(선호·기대) + 개인적 제약(돈·건강) + 사회적 제약(노동시장·사회 제도)의 조합으로 강화</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">연령 규범의 작동 방식</div>
+      <div class="kv-val">
+        조기 은퇴 시퀀스: 62세 이전 느슨한 연령 기준 → 62세 이후 완전 은퇴 압력 강화<br>
+        만기 은퇴 시퀀스: 65–67세 이전 풀타임 근무 엄격 → 이후 느슨해짐<br>
+        완전 은퇴 시퀀스: 조기 은퇴연령 이전 풀타임 + 완전 은퇴연령 이후 완전 은퇴 압력 강하
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-title c-blue"><span class="dot dot-blue"></span>"평균에서 집단 차이로" — 계층화의 함의</div>
+    <div class="kv-row">
+      <div class="kv-key">계층화의 의미</div>
+      <div class="kv-val">탈표준화의 계층화는 남성·고학력·백인이 생애과정에서 누리는 <strong>유리함을 재생산</strong>함 → 정책입안자에게 중요한 시사점</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">불평등의 연결고리</div>
+      <div class="kv-val">여성·저중학력자의 모호·압축 시퀀스 (실업·파트타임 높음) → 더 나쁜 건강 궤적과 재정 비용과 연관 가능 (Azar et al., 2017)</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">정책 함의</div>
+      <div class="kv-val">이러한 위험을 완충할 <strong>사회정책 수단 개발</strong> 필요</div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-title c-pink"><span class="dot dot-pink"></span>한계 & 향후 연구</div>
+    <div class="kv-row">
+      <div class="kv-key">한계 1</div>
+      <div class="kv-val">2년 주기 수집 → 고용주·직종 변화 미반영, 단기 노동시장 변화 및 브릿지 직업 일부 누락</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">한계 2</div>
+      <div class="kv-val">결과가 특정 연령(60–70대)·코호트(1931–41년생)·시기에 한정 (age-period-cohort 문제)</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">향후 연구 방향</div>
+      <div class="kv-val">
+        ① 70대 이후까지 추적 / ② 더 긴 역사적 기간 / ③ 더 젊은 코호트 포함<br>
+        ④ 회고적 생애사 데이터로 가족 역할 시퀀스 병행 분석<br>
+        ⑤ 시퀀스의 결정 요인과 결과 탐색<br>
+        ⑥ 국가 간 비교 (노동시장·사회보장 규정 차이)
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-title c-teal"><span class="dot dot-teal"></span>이 논문의 기여 (Contribution)</div>
+    <div class="hl-box teal">
+      미국 노인 대상 전국 대표 종단자료를 사용하여 <strong>노동력 참여 패턴에 순서 분석 접근법을 적용한 최초의 논문</strong>.<br>
+      탈표준화의 세 차원(유형·순서·시기)을 명확히 정의하고, 성별·계급·인종 계층화를 체계적으로 결합한 통합 모형 제시.
+    </div>
+  </div>
+</div>
+
+<!-- ════ ⑥ 퀴즈 ════ -->
+<div class="section" id="sec-quiz">
+  <div class="sec-heading">퀴즈 연습</div>
+  <p style="font-size:0.83rem; color:var(--text-muted); margin-bottom:1.5rem;">각 문제를 클릭하면 정답이 표시됩니다.</p>
+
+  <div class="sub-heading">O/X 퀴즈</div>
+  <div class="quiz-list">
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">01</span>
+        <span class="qtype qt-ox">O/X</span>
+        <span class="qtext">Calvo et al.(2018)에 따르면, 미국 노인의 은퇴 시퀀스는 고도로(highly) 탈표준화되어 있다.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text"><span class="ox-x">X</span> — 논문의 핵심 결론은 <strong>중간 정도 탈표준화(moderately destandardized)</strong>. 비관행적 유형은 강하게 지지되었으나, 비가역성과 연령 등급화가 여전히 일부 유지됨.</div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">02</span>
+        <span class="qtype qt-ox">O/X</span>
+        <span class="qtext">이 연구에서 가장 많이 관찰된 은퇴 시퀀스 유형은 65세 전후 풀타임에서 완전 은퇴하는 관행적 완전 은퇴 시퀀스이다.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text"><span class="ox-x">X</span> — 가장 많은 유형은 <strong>조기 은퇴 시퀀스(early retirement sequence, 36.66%)</strong>. 완전 은퇴 시퀀스는 18.35%로 2위.</div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">03</span>
+        <span class="qtype qt-ox">O/X</span>
+        <span class="qtext">이 연구에서 탈표준화(destandardization)의 세 조건은 비관행적 유형, 가역적 순서, 유연한 시기이며, 고도의 탈표준화는 이 세 조건을 모두 충족할 때 정의된다.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text"><span class="ox-o">O</span> — unconventional type + reversible order + flexible timing 모두 충족 = 고도 탈표준화. 반대로 세 조건 모두 부재 = 고도 표준화.</div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">04</span>
+        <span class="qtype qt-ox">O/X</span>
+        <span class="qtext">Calvo et al.(2018)는 사회적 계층화(social stratification) 가설에서, 여성·저학력자·흑인이 각각의 반대 집단보다 더 탈표준화된 은퇴 시퀀스를 보일 것이라 예상했고 이 가설은 지지되었다.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text"><span class="ox-o">O</span> — 사회 계층화 가설 지지됨. 여성·저중학력·흑인에서 더 비관행적이고 탈표준화된 시퀀스 확인.</div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">05</span>
+        <span class="qtype qt-ox">O/X</span>
+        <span class="qtext">이 연구에서 분석 대상 코호트는 1931–1941년생이며, 60–61세부터 70–71세까지 총 11회 관찰되었다.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text"><span class="ox-x">X</span> — 코호트(1931–1941년생)는 맞지만, 관찰 횟수는 <strong>6회 연속(6 consecutive times)</strong>. 11파동의 HRS 데이터 중 해당 연령 구간을 추출하여 사용.</div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">06</span>
+        <span class="qtype qt-ox">O/X</span>
+        <span class="qtext">비관행적 은퇴 시퀀스(unconventional sequence)는 중간 학력(middle-level educated) 개인과 흑인(Blacks)에서 전형적으로 나타났다.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text"><span class="ox-o">O</span> — 논문 Abstract에 명시: "Unconventional sequences were archetypal for middle-level educated individuals and Blacks."</div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">07</span>
+        <span class="qtype qt-ox">O/X</span>
+        <span class="qtext">이 연구의 클러스터 수 결정에는 평균 실루엣 폭 기준(average silhouette width)이 사용되었으며, 그 결과 총 6가지 은퇴 시퀀스 유형이 도출되었다.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text"><span class="ox-o">O</span> — 평균 실루엣 폭 기준으로 6가지(early, complete, partial, late, ambiguous, compact) 유형 도출.</div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">08</span>
+        <span class="qtype qt-ox">O/X</span>
+        <span class="qtext">이 연구에서 가역적 순서 가설(reversible order hypothesis)은 강하게 지지되었다 — 대다수 시퀀스에서 역전 전환이 관찰되었기 때문이다.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text"><span class="ox-x">X</span> — <strong>소폭만 지지됨(only modest support)</strong>. 대부분의 시퀀스 유형은 비가역적. 역전 전환은 일부 개인 수준에서만 관찰되었고, 별도의 시퀀스 유형을 형성할 만큼 충분하지 않았음.</div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">09</span>
+        <span class="qtype qt-ox">O/X</span>
+        <span class="qtext">이 연구에서 계급(class)은 교육 수준으로 측정되었으며, 저학력은 12년 미만, 중학력은 12년(고졸), 고학력은 12년 초과로 구분된다.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text"><span class="ox-o">O</span> — 정확한 분류. Low(&lt;12년) / Middle(12년, typically high school) / High(&gt;12년).</div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">10</span>
+        <span class="qtype qt-ox">O/X</span>
+        <span class="qtext">이 연구에서 turbulence(난기류) 지표가 높다는 것은 하나의 시퀀스 안에서 별개 하위시퀀스가 많고, 지위·전환이 시간적으로 고정되어 있음을 의미한다.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text"><span class="ox-x">X</span> — 난기류 지표가 높다는 것은 별개 하위시퀀스가 많고, 지위·전환이 <strong>시간적으로 가변적(time-varying)</strong>임을 의미 — 즉 유연한 시기를 나타냄.</div></div>
+    </div>
+
+  </div>
+
+  <div class="sub-heading" style="margin-top:2rem;">단답형 / 내용 확인 퀴즈</div>
+  <div class="quiz-list">
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">11</span>
+        <span class="qtype qt-fill">단답</span>
+        <span class="qtext">이 연구에서 사용한 데이터셋의 이름, 조사 주기, 시작 연도를 모두 답하라.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text"><strong>HRS (Health and Retirement Study)</strong> / <strong>2년마다(biannually)</strong> / <strong>1992년</strong>부터</div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">12</span>
+        <span class="qtype qt-fill">단답</span>
+        <span class="qtext">최종 분석 표본의 인원수와 총 관측치 수를 답하라. 또한 몇 명이 표본에서 제외되었고 그 이유는?</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text">최종 표본: <strong>7,881명</strong> / 총 관측치: <strong>47,286개</strong><br>제외: <strong>1,871명</strong> — 70–71세 이전 <strong>사망</strong>한 사람</div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">13</span>
+        <span class="qtype qt-fill">단답</span>
+        <span class="qtext">이 연구에서 탈표준화(destandardization)를 조작적으로 정의한 세 가지 차원을 영어와 한국어로 모두 답하라.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text">① <strong>비관행적 유형 (unconventional type)</strong><br>② <strong>가역적 순서 (reversible order)</strong><br>③ <strong>유연한 시기 (flexible timing)</strong></div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">14</span>
+        <span class="qtype qt-fill">단답</span>
+        <span class="qtext">이 연구에서 도출된 6가지 은퇴 시퀀스 유형을 가장 많은 것부터 순서대로, 비율과 함께 나열하라.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text">
+        ① 조기 은퇴 (early) <strong>36.66%</strong><br>
+        ② 완전 은퇴 (complete) <strong>18.35%</strong><br>
+        ③ 부분 은퇴 (partial) <strong>15.53%</strong><br>
+        ④ 만기 은퇴 (late) <strong>11.67%</strong><br>
+        ⑤ 모호한 시퀀스 (ambiguous) <strong>10.99%</strong><br>
+        ⑥ 압축 시퀀스 (compact) <strong>6.80%</strong>
+      </div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">15</span>
+        <span class="qtype qt-fill">단답</span>
+        <span class="qtext">엔트로피(entropy), 복잡성(complexity), 난기류(turbulence) 지표의 값 범위와 각각 높은 값이 의미하는 바를 설명하라.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text">
+        <strong>entropy</strong>: 0(모두 동일 지위) → 1(모든 지위에 균등 분포). 높음 = 다양한 지위 혼재<br>
+        <strong>complexity</strong>: 0(지위 완전 동일, 전환 없음) → 1(반대). 높음 = 다양한 전환 경험<br>
+        <strong>turbulence</strong>: 별개 하위시퀀스 수에 기반. 높음 = 지위·전환이 시간적으로 가변적 (유연한 시기)
+      </div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">16</span>
+        <span class="qtype qt-fill">단답</span>
+        <span class="qtext">이 연구에서 사용한 거리 계산 방법(OMA)의 정식 명칭과, 이 방법이 고려하는 비용의 종류 두 가지를 답하라.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text"><strong>최적 매칭 분석 (OMA: Optimal Matching Analysis)</strong><br>고려하는 비용: ① <strong>대체 비용 (substitution cost)</strong> + ② <strong>삽입/삭제 비용 (insertion/deletion cost)</strong></div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">17</span>
+        <span class="qtype qt-mc">내용확인</span>
+        <span class="qtext">이 연구에서 "status(지위)", "transition(전환)", "sequence(시퀀스)"를 각각 정의하고, 왜 시퀀스 접근법이 더 정밀한지 설명하라.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text">
+        <strong>지위(status)</strong>: 순간적 또는 영구적 상태 (스냅샷)<br>
+        <strong>전환(transition)</strong>: 지위의 변화<br>
+        <strong>시퀀스(sequence)</strong>: 시간순으로 정렬된 지위와 전환의 집합 (Giele & Elder, 1998)<br><br>
+        <strong>왜 시퀀스가 더 정밀한가:</strong> 연속적 과정을 개별 스냅샷으로 표현하면 전반적인 패턴이 사라지고 탈표준화가 과대평가됨. 시퀀스는 유형·순서·시기를 동시에 고려하므로 은퇴 패턴을 더 정확하게 파악할 수 있음.
+      </div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">18</span>
+        <span class="qtype qt-mc">내용확인</span>
+        <span class="qtext">고학력자가 더 일찍 은퇴할 수 있음에도 오히려 더 오래 일하도록 동기 부여 받는 이유를 논문의 내용에 근거하여 설명하라.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text">
+        고학력자는 소득이 높아 <strong>일찍 은퇴할 재정 능력</strong>이 있음.<br>
+        하지만 동시에 <strong>더 나은 건강 상태</strong>, <strong>더 좋은 근무 조건</strong>, <strong>더 흥미로운 직업</strong>, <strong>더 늦은 경력 시작</strong> 등의 요인이 더 오래 일하도록 <em>동기 부여</em>함.<br>
+        따라서 고학력자는 관행적·비단속적 경력을 가지고, 은퇴 후 재취업 가능성도 더 높음.
+      </div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">19</span>
+        <span class="qtype qt-mc">내용확인</span>
+        <span class="qtext">이 연구에서 가역적 순서 가설이 소폭만 지지된 이유를 구체적으로 설명하고, 전체 표본에서 관찰된 가장 흔한 역전 전환의 비율을 답하라.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text">
+        <strong>이유:</strong> 대부분의 시퀀스 유형이 비가역적 진행으로 이루어짐. 일부 개인 수준에서 재취업·은퇴 해제(unretirement)·장애 반복 등이 관찰되었으나, 이러한 역전 전환들이 서로 충분히 유사하지 않아 <strong>별도의 시퀀스 유형을 형성하지 못함</strong>.<br><br>
+        <strong>가장 흔한 역전 전환:</strong> 은퇴 → 부분 은퇴 = <strong>15.71%</strong>
+      </div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">20</span>
+        <span class="qtype qt-mc">내용확인</span>
+        <span class="qtext">이 연구의 두 가지 주요 한계를 설명하고, 저자들이 제안하는 향후 연구 방향을 3가지 이상 서술하라.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text">
+        <strong>한계 1:</strong> 2년 주기 수집 → 고용주·직종 변화 미반영, 단기 노동시장 변화·브릿지 직업 누락 가능<br>
+        <strong>한계 2:</strong> 결과가 특정 연령(60–70대)·코호트(1931–41년생)·시기에 한정 (age-period-cohort 문제)<br><br>
+        <strong>향후 방향:</strong><br>
+        ① 70대 이후까지 개인 추적<br>
+        ② 더 긴 역사적 기간 커버<br>
+        ③ 더 젊은 코호트 포함<br>
+        ④ 회고적 생애사 데이터로 가족 역할 병행 분석<br>
+        ⑤ 은퇴 시퀀스의 결정 요인과 결과 탐색<br>
+        ⑥ 노동시장·사회보장 규정이 다른 국가 간 비교
+      </div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">21</span>
+        <span class="qtype qt-mc">내용확인</span>
+        <span class="qtext">은퇴 연령이 유연해진 최근 추세의 원인을 논문에서 제시한 제도적·경제적·인구학적 변화 중 4가지 이상 서술하라.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text">
+        ① 완전 은퇴연령 <strong>65세 → 67세</strong> 점진적 상향<br>
+        ② 조기 은퇴에 대한 <strong>연금 패널티</strong> 신설<br>
+        ③ 70세까지 은퇴 연기 시 <strong>지연 은퇴 크레딧</strong> 제공<br>
+        ④ 대부분 직종에서 <strong>강제 은퇴 폐지</strong><br>
+        ⑤ <strong>연령 차별 금지</strong> 강력 법제화<br>
+        ⑥ 확정급여형→<strong>확정기여형 연금</strong> 전환<br>
+        ⑦ 신체적으로 힘든 직업 감소<br>
+        ⑧ 근로자 건강 개선 및 수명 연장
+      </div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">22</span>
+        <span class="qtype qt-mc">내용확인</span>
+        <span class="qtext">압축 시퀀스(compact sequence)의 특징을 설명하고, 어떤 집단에서 두드러지게 나타났는지, 내부 동력성 지표(엔트로피·복잡성·난기류)에서 어떤 특성을 보이는지 서술하라.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text">
+        <strong>특징:</strong> 파트타임 근무로 시작하여 부분 은퇴로 마무리. 비교적 좁은(compact) 노동시장 참여 범위 내에서 이동.<br>
+        <strong>두드러진 집단:</strong> <strong>중학력 여성</strong>에서만 나타남 (6.80%, 536명)<br>
+        <strong>내부 동력성:</strong> 6가지 유형 중 <strong>가장 높은 난기류(turbulence=4.11)</strong>, 엔트로피=0.71, 복잡성=0.52 — 즉 지위·전환이 가장 시간 가변적이고 유연한 시기를 보임
+      </div></div>
+    </div>
+
+  </div>
+</div>
+
+</main>
+
+<script>
+function showTab(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('sec-' + id).classList.add('active');
+  event.currentTarget.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function toggleAnswer(el) {
+  const card = el.closest('.quiz-card');
+  const ans = card.querySelector('.quiz-a');
+  const arrow = el.querySelector('.quiz-arrow');
+  const shown = ans.classList.toggle('shown');
+  arrow.style.transform = shown ? 'rotate(180deg)' : 'rotate(0deg)';
+}
+</script>
+</body>
+</html>
