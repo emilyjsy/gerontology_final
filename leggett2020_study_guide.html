@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leggett et al. (2020) 논문 정리</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0f14;
+    --surface: #16181f;
+    --surface2: #1e2029;
+    --border: #2a2d3a;
+    --accent1: #e8b86d;
+    --accent2: #6d9ee8;
+    --accent3: #e86d8a;
+    --accent4: #6de8b8;
+    --text: #e8e9ef;
+    --text-muted: #8b8fa8;
+    --text-dim: #5a5e75;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 300;
+    line-height: 1.8;
+    min-height: 100vh;
+  }
+
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 2.5rem 2rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .header-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    align-items: flex-end;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .paper-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--accent1);
+    border: 1px solid var(--accent1);
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+
+  .header-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.4;
+  }
+
+  .header-sub {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-top: 0.25rem;
+  }
+
+  .nav-tabs {
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    gap: 0.25rem;
+    padding: 1rem 2rem 0;
+    border-bottom: 1px solid var(--border);
+    overflow-x: auto;
+  }
+
+  .tab-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 0.82rem;
+    padding: 0.6rem 1.1rem;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active { color: var(--accent1); border-bottom-color: var(--accent1); font-weight: 500; }
+
+  main { max-width: 960px; margin: 0 auto; padding: 2rem; }
+
+  .section { display: none; animation: fadeIn 0.3s ease; }
+  .section.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .block-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+  .c-gold { color: var(--accent1); } .dot-gold { background: var(--accent1); }
+  .c-blue { color: var(--accent2); } .dot-blue { background: var(--accent2); }
+  .c-pink { color: var(--accent3); } .dot-pink { background: var(--accent3); }
+  .c-teal { color: var(--accent4); } .dot-teal { background: var(--accent4); }
+
+  .kv-row {
+    display: flex;
+    gap: 0.75rem;
+    padding: 0.65rem 0;
+    border-bottom: 1px solid var(--border);
+    align-items: baseline;
+    flex-wrap: wrap;
+  }
+  .kv-row:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .kv-key {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    min-width: 175px;
+    flex-shrink: 0;
+  }
+
+  .kv-val { font-size: 0.88rem; color: var(--text); flex: 1; }
+  .kv-val strong { color: var(--accent1); font-weight: 500; }
+  .kv-val em    { color: var(--accent4); font-style: normal; }
+  .kv-val mark  { background: rgba(232,184,109,0.15); color: var(--accent1); padding: 0 0.3em; border-radius: 3px; }
+
+  .hl-box {
+    border-left: 3px solid var(--accent1);
+    background: rgba(232,184,109,0.07);
+    padding: 0.9rem 1rem;
+    border-radius: 0 6px 6px 0;
+    margin: 0.75rem 0;
+    font-size: 0.88rem;
+    line-height: 1.75;
+  }
+  .hl-box.blue { border-left-color: var(--accent2); background: rgba(109,158,232,0.07); }
+  .hl-box.pink { border-left-color: var(--accent3); background: rgba(232,109,138,0.07); }
+  .hl-box.teal { border-left-color: var(--accent4); background: rgba(109,232,184,0.07); }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.83rem;
+    margin-top: 0.5rem;
+  }
+  th {
+    background: var(--surface2);
+    color: var(--text-muted);
+    font-weight: 500;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    padding: 0.6rem 0.9rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  td {
+    padding: 0.6rem 0.9rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(255,255,255,0.02); }
+  td.val { color: var(--accent1); font-family: 'JetBrains Mono', monospace; }
+  td.pos { color: var(--accent4); }
+  td.neg { color: var(--accent3); }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+  @media (max-width: 600px) {
+    .two-col { grid-template-columns: 1fr; }
+    .kv-key { min-width: 120px; }
+    header { padding: 1.5rem 1rem 1rem; }
+    main { padding: 1.5rem 1rem; }
+    .nav-tabs { padding: 0.75rem 1rem 0; }
+  }
+
+  .mini-block {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1rem;
+  }
+  .mini-title {
+    font-size: 0.72rem;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--text-muted);
+    margin-bottom: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+  }
+  .mini-list { list-style: none; font-size: 0.82rem; line-height: 1.72; color: var(--text); }
+  .mini-list li::before { content: '·'; color: var(--accent1); margin-right: 0.5rem; font-weight: 700; }
+
+  .sec-heading {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--accent1);
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .sub-heading {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 1.5rem 0 0.75rem;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* hypothesis cards */
+  .hyp-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+  .hyp-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.1rem;
+  }
+  .hyp-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--accent1);
+    opacity: 0.35;
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+  .hyp-tag {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-family: 'JetBrains Mono', monospace;
+    padding: 0.15rem 0.5rem;
+    border-radius: 3px;
+    margin-bottom: 0.5rem;
+  }
+  .ht-gold { background: rgba(232,184,109,0.2); color: var(--accent1); }
+  .ht-blue { background: rgba(109,158,232,0.2); color: var(--accent2); }
+  .hyp-text { font-size: 0.84rem; line-height: 1.65; color: var(--text); }
+
+  /* HR display */
+  .hr-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+  }
+  .hr-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.85rem 1rem;
+  }
+  .hr-label { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.35rem; }
+  .hr-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--accent1);
+    margin-bottom: 0.2rem;
+  }
+  .hr-ci { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--text-dim); }
+  .hr-card.protect { border-left: 3px solid var(--accent4); }
+  .hr-card.risk    { border-left: 3px solid var(--accent3); }
+
+  /* quiz */
+  .quiz-list { display: flex; flex-direction: column; gap: 1rem; }
+
+  .quiz-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .quiz-card:hover { border-color: var(--accent1); }
+
+  .quiz-q {
+    padding: 1rem 1.25rem;
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    cursor: pointer;
+    user-select: none;
+  }
+  .qnum { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--text-dim); min-width: 28px; padding-top: 0.15rem; }
+  .qtype { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; padding: 0.15rem 0.5rem; border-radius: 3px; min-width: fit-content; margin-top: 0.1rem; }
+  .qt-ox   { background: rgba(109,232,184,0.15); color: var(--accent4); }
+  .qt-fill { background: rgba(232,184,109,0.15); color: var(--accent1); }
+  .qt-mc   { background: rgba(109,158,232,0.15); color: var(--accent2); }
+  .qtext { font-size: 0.88rem; line-height: 1.6; flex: 1; }
+  .quiz-arrow { font-size: 0.75rem; color: var(--text-dim); transition: transform 0.2s; padding-top: 0.15rem; flex-shrink: 0; }
+
+  .quiz-a {
+    display: none;
+    padding: 0.85rem 1.25rem 1rem;
+    border-top: 1px solid var(--border);
+    background: var(--surface2);
+  }
+  .quiz-a.shown { display: block; animation: fadeIn 0.2s ease; }
+  .answer-label { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: var(--text-dim); margin-bottom: 0.4rem; }
+  .answer-text { font-size: 0.87rem; line-height: 1.7; color: var(--text); }
+  .answer-text strong { color: var(--accent1); font-weight: 500; }
+  .ox-o { color: var(--accent4); font-size: 1.1rem; font-weight: 700; }
+  .ox-x { color: var(--accent3); font-size: 1.1rem; font-weight: 700; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <span class="paper-badge">Journal of Aging and Health · 2020 · Vol.32(7–8) · pp.871–879</span>
+    <div>
+      <div class="header-title">Leggett, Sonnega & Lohman (2020) — 논문 정리 노트</div>
+      <div class="header-sub">Till Death Do Us Part: Intersecting Health and Spousal Dementia Caregiving on Caregiver Mortality</div>
+    </div>
+  </div>
+</header>
+
+<div class="nav-tabs">
+  <button class="tab-btn active" onclick="showTab('overview')">① 개요 & 핵심 개념</button>
+  <button class="tab-btn" onclick="showTab('theory')">② 이론 & 가설</button>
+  <button class="tab-btn" onclick="showTab('method')">③ 연구 방법</button>
+  <button class="tab-btn" onclick="showTab('results')">④ 결과</button>
+  <button class="tab-btn" onclick="showTab('discussion')">⑤ 논의 & 함의</button>
+  <button class="tab-btn" onclick="showTab('quiz')">⑥ 퀴즈 연습</button>
+</div>
+
+<main>
+
+<!-- ════ ① 개요 ════ -->
+<div class="section active" id="sec-overview">
+  <div class="sec-heading">개요 & 핵심 개념</div>
+
+  <div class="block">
+    <div class="block-title c-gold"><span class="dot dot-gold"></span>논문 기본 정보</div>
+    <div class="kv-row">
+      <div class="kv-key">저자 / 게재지</div>
+      <div class="kv-val">Amanda N. Leggett, Amanda J. Sonnega (Univ. of Michigan) / Matthew C. Lohman (Univ. of South Carolina)<br><em>Journal of Aging and Health</em>, 2020, Vol. 32(7–8), pp. 871–879</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">핵심 질문</div>
+      <div class="kv-val">치매 배우자를 돌보는 것이 사망 위험을 <strong>낮추는가</strong>? 이 보호 효과는 건강 수준에 따라 다른가? 주요 사망 원인별로도 일관되는가?</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">데이터</div>
+      <div class="kv-val"><strong>HRS</strong> (Health and Retirement Study), 2000–2012, 총 <strong>10,650명</strong> (치매 돌봄자 <strong>917명</strong>)</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">분석 방법</div>
+      <div class="kv-val"><strong>Cox 비례위험 모형</strong> (Cox proportional hazards model) + <strong>경쟁위험 분석</strong> (competing risks analysis)</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">핵심 결론</div>
+      <div class="kv-val">치매 배우자 돌봄은 사망 위험을 <strong>낮춤</strong>. 이 보호 효과는 <strong>자기평가 건강이 낮을수록 더 강함</strong>. 심장질환·암·뇌혈관질환 사망에도 <strong>일관되게</strong> 보호 효과 존재</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">연구의 의의</div>
+      <div class="kv-val">미국 전국 대표 표본에서 PLWD(치매를 앓고 있는 사람, persons living with dementia) 돌봄자의 사망 위험 — 전체 원인 및 주요 사인별 — 을 최초로 조사한 연구</div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-title c-blue"><span class="dot dot-blue"></span>돌봄자 3가지 범주 정의</div>
+    <div class="kv-row">
+      <div class="kv-key">비돌봄자<br>(noncaregivers)</div>
+      <div class="kv-val">2000–2012년 어느 조사 시점에도 배우자가 <strong>일상생활활동(ADL) 도움을 받지 않았다</strong>고 보고한 응답자</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">비치매 돌봄자<br>(nondementia caregivers)</div>
+      <div class="kv-val">배우자가 ADL 도움을 받았다고 보고했으나, <strong>배우자에게 치매가 없는</strong> 응답자</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">치매 돌봄자<br>(dementia caregivers)</div>
+      <div class="kv-val">배우자가 ADL 도움을 받았으며, <strong>동일 조사 시점에 배우자가 치매로 분류된</strong> 응답자<br>(치매 판정: <strong>Langa-Weir 분류 기준</strong> — 즉각·지연 회상, 작업 기억, 정신 처리 속도 검사 기반)</div>
+    </div>
+    <div class="hl-box teal" style="margin-top:0.75rem;">
+      <strong>ADL (일상생활활동 / Activities of Daily Living)</strong><br>
+      방을 가로질러 걷기, 옷 입기, 목욕, 식사, 침대 오르내리기, 화장실 이용 (6개 항목)
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-title c-teal"><span class="dot dot-teal"></span>사망률 측정 방식</div>
+    <div class="kv-row">
+      <div class="kv-key">사망 확인</div>
+      <div class="kv-val"><strong>NDI</strong> (National Death Index, 국가사망지수) 연계 — 사망 원인 및 날짜 포함. <strong>자기보고 편향이 없는</strong> 공중보건상 명확한 지표</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">추적 기간</div>
+      <div class="kv-val">2000년(또는 치매 돌봄 첫 보고 시점)부터 2012년 NDI 최종 데이터까지 — <strong>12년</strong></div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">사망까지 시간</div>
+      <div class="kv-val">월 단위(time-to-death in months)로 계산. 2012년 생존자 및 탈락자는 마지막 관찰 시점에서 <strong>중도절단(censored)</strong></div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">주요 사망 원인 3가지</div>
+      <div class="kv-val"><strong>심장질환(heart disease)</strong> / <strong>암(cancer)</strong> / <strong>뇌혈관질환(cerebrovascular disease)</strong></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════ ② 이론 & 가설 ════ -->
+<div class="section" id="sec-theory">
+  <div class="sec-heading">이론적 배경 & 가설</div>
+
+  <div class="block">
+    <div class="block-title c-gold"><span class="dot dot-gold"></span>돌봄과 사망률 — 기존 연구 흐름</div>
+    <div class="kv-row">
+      <div class="kv-key">고전적 발견<br>(Schulz & Beach, 1999)</div>
+      <div class="kv-val">돌봄 부담(strain)을 경험한 돌봄자는 비돌봄자 동년배보다 사망 위험이 <strong>63% 높음</strong> — 이 연구가 "돌봄=사망 위험"의 근거가 됨</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">최근 연구들의 반전</div>
+      <div class="kv-val">다수 연구에서 돌봄자가 스트레스·우울에도 불구하고 <strong>더 낮은 사망 위험</strong>을 보임 (Brown et al., 2009; Caputo et al., 2016; Fredman et al., 2015; Maguire et al., 2017; O'Reilly et al., 2008, 2015 등)<br>→ 주 50시간 이상 집중 돌봄 상황에서도 사망 감소 효과 확인</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">선행 연구의 한계</div>
+      <div class="kv-val">
+        ① 건강 상태를 <em>공변인</em>으로만 통제, 건강 수준과 돌봄의 <strong>교호작용(interaction)</strong> 미검토<br>
+        ② 전체 원인 사망에만 집중, <strong>주요 사인별</strong> 분석 부재<br>
+        ③ 미국 전국 대표 표본으로 PLWD 돌봄자를 분석한 연구 없음
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-title c-blue"><span class="dot dot-blue"></span>핵심 이론적 틀 (Theoretical Frameworks)</div>
+    <div class="kv-row">
+      <div class="kv-key">건강 생존 효과<br>(healthy survivor effect)</div>
+      <div class="kv-val">건강이 좋지 않은 노인은 추적 중 사망·탈락하여, 생존자 집단이 상대적으로 건강한 사람들만 남는 현상 → 돌봄자 사망 위험 과소평가 가능성</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">건강한 돌봄자 가설<br>(Healthy Caregiver Hypothesis)</div>
+      <div class="kv-val">건강한 사람이 돌봄 역할에 진입하며, 돌봄 활동이 이후 <strong>건강을 유지시키는</strong> 방향으로 작용 (Bertrand et al., 2011; Fredman et al., 2010)<br>→ 이 연구는 이 가설을 확장: <strong>건강 수준별로</strong> 이 효과가 어떻게 다른지 검토</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">평균으로의 회귀<br>(regression to the mean)</div>
+      <div class="kv-val">이미 건강한 사람은 돌봄으로 더 개선할 여지가 적음 → <strong>건강이 나쁜 사람에게서 돌봄의 보호 효과가 더 크게</strong> 나타날 수 있음</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">살루토제닉 효과<br>(salutogenic effects)</div>
+      <div class="kv-val">돌봄 역할이 스트레스에도 불구하고 <strong>회복탄력성(resilience)</strong>을 높이는 긍정적 건강 효과 — 삶의 목적감, 헌신, 신체 활동 증가 등 (Cohen et al., 2002; Lopez et al., 2005)</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">에릭슨 발달 이론<br>(Erikson, Stage 7)</div>
+      <div class="kv-val">중년 후기~노년 초기 = 7단계 <strong>"생성감 vs. 침체감 (generativity vs. stagnation)"</strong> — 타인에게 돌려주는 것이 성공적 발달의 핵심. 돌봄이 이 단계의 발달 과업과 일치</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">돌봄자 시스템 모델<br>(caregiver system model)</div>
+      <div class="kv-val">Brown, Brown & Preston (2012): 감정·인지·신경생리를 포함하는 모델로, 도움 행동(helping behaviors)이 건강을 증진시키는 동기를 부여</div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-title c-pink"><span class="dot dot-pink"></span>연구 가설 (Research Hypotheses)</div>
+    <div class="hyp-grid">
+      <div class="hyp-card">
+        <div class="hyp-num">H1</div>
+        <span class="hyp-tag ht-gold">상호작용 가설</span>
+        <div class="hyp-text">
+          PLWD 돌봄과 사망의 연관 강도는 <strong>자기평가 건강 수준에 따라 다를 것</strong>이다 (건강한 돌봄자 가설 기반 — 건강 수준에 따라 효과 변조)
+        </div>
+      </div>
+      <div class="hyp-card">
+        <div class="hyp-num">H2</div>
+        <span class="hyp-tag ht-blue">원인별 사망 가설</span>
+        <div class="hyp-text">
+          돌봄은 <strong>스트레스 관련 사망 원인(예: 심혈관 질환)에서는 보호 효과가 약할 것</strong>이다 (스트레스가 주요 위험 인자인 질환에서는 돌봄의 보호 효과가 상쇄될 것으로 예상)
+        </div>
+      </div>
+    </div>
+    <div class="hl-box pink" style="margin-top:1rem;">
+      <strong>결과 미리 보기:</strong> H1 ✓ 지지 / H2 ✗ 기각 (반대 결과) — 오히려 3가지 주요 사인 모두에서 일관된 보호 효과 발견
+    </div>
+  </div>
+</div>
+
+<!-- ════ ③ 방법 ════ -->
+<div class="section" id="sec-method">
+  <div class="sec-heading">연구 방법</div>
+
+  <div class="block">
+    <div class="block-title c-gold"><span class="dot dot-gold"></span>표본 (Sample)</div>
+    <div class="kv-row">
+      <div class="kv-key">데이터셋</div>
+      <div class="kv-val"><strong>HRS</strong> (Health and Retirement Study) — 50세 이상 미국인 대상 전국 대표 2년 주기 종단조사 / 다단계 지역 확률 표집, 흑인·히스패닉 가구 과대표집</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">연구 기간</div>
+      <div class="kv-val"><strong>2000–2012년</strong> (12년 추적)</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">최종 표본</div>
+      <div class="kv-val">기혼 성인 <strong>10,650명</strong> (만 51세 이상) — 치매 돌봄자 <strong>917명</strong> (전체의 8.6%)</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">치매 판정 방법</div>
+      <div class="kv-val"><strong>Langa-Weir 분류</strong>: 정상 / 인지손상-비치매 / 치매 3범주 — 즉각·지연 회상, 작업 기억, 정신 처리 속도 검사 기반</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">HRS 데이터 출처</div>
+      <div class="kv-val">HRS 공개 자료 + RAND HRS 데이터 모두 활용 / 국립노화연구소(NIA) 지원, 미시간대학교 사회연구소 소장</div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-title c-blue"><span class="dot dot-blue"></span>측정 변수 (Measures)</div>
+    <div class="sub-heading" style="margin-top:0;">종속변수 & 효과 수정변수</div>
+    <div class="kv-row">
+      <div class="kv-key">종속변수</div>
+      <div class="kv-val">사망까지의 시간 (time-to-death, 월 단위) — NDI 기반 전체 원인 사망 및 3가지 주요 사인별 사망</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">효과 수정변수<br>(effect modifier)</div>
+      <div class="kv-val">자기평가 건강 상태 (self-rated health): <strong>5범주</strong> — 매우 좋음(excellent) / 아주 좋음(very good) / 좋음(good) / 보통(fair) / 나쁨(poor)</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">H1 측정 방식</div>
+      <div class="kv-val">돌봄 상태 × 건강 수준 → <strong>10범주 변수</strong> 생성 (비돌봄자 5 × 건강 수준 + 치매 돌봄자 5 × 건강 수준) / 참조 범주: <strong>우수한 건강의 비돌봄자</strong></div>
+    </div>
+
+    <div class="sub-heading">공변인 (Covariates)</div>
+    <div class="two-col">
+      <div class="mini-block">
+        <div class="mini-title">인구통계적 공변인</div>
+        <ul class="mini-list">
+          <li>연령 (age)</li>
+          <li>성별 (gender)</li>
+          <li>인종 (race): 백인/흑인/기타</li>
+          <li>배우자 사별 여부 (widowed): 추적 중 사별 발생 여부</li>
+        </ul>
+      </div>
+      <div class="mini-block">
+        <div class="mini-title">건강 공변인</div>
+        <ul class="mini-list">
+          <li>흡연력 (history of smoking)</li>
+          <li>우울 증상 (depressive symptoms): CESD 8문항, 0–8점</li>
+          <li>ADL 제한 (ADL limitations): 5가지 활동, 이분형</li>
+        </ul>
+      </div>
+    </div>
+    <div class="hl-box" style="margin-top:0.75rem;">
+      <strong>CESD (Center for Epidemiologic Studies Depression) 척도</strong> — 8문항: 우울함, 활동 못함, 무기력, 외로움, 삶 즐김, 수면 불안, 슬픔, 행복감. RAND가 응답 형식 차이 때문에 이분화 처리. 양성 문항 역코딩 후 합산 (0–8점)
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-title c-teal"><span class="dot dot-teal"></span>분석 전략 (Data Analysis)</div>
+    <div class="kv-row">
+      <div class="kv-key">Model 1</div>
+      <div class="kv-val">돌봄 유형(치매 돌봄자 vs. 비치매 돌봄자 vs. 비돌봄자)의 <strong>주효과</strong>만 추정 — 위험비(HR) 산출</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">Model 2 (H1 검증)</div>
+      <div class="kv-val">돌봄 상태 × 자기평가 건강의 <strong>10범주 교호작용</strong> HR 보고 / 먼저 omnibus test로 전체 상호작용 유의성 검증</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">H2 검증</div>
+      <div class="kv-val"><strong>경쟁위험 분석 (competing risks analysis)</strong> — 심장질환·암·뇌혈관질환 각각에 대한 원인별 위험도(cause-specific hazard) 추정<br>경쟁위험 모형: 다른 원인 사망이 먼저 발생하면 해당 원인 사망이 불가능해지는 상황 통제</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">분석 소프트웨어</div>
+      <div class="kv-val">STATA (SVY 모듈 활용 — 단, 경쟁위험 모형에서는 SVY 미지원으로 가중치 미적용)</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">공변인 측정 시점</div>
+      <div class="kv-val">비돌봄자: 첫 번째 데이터 시점 / 치매·비치매 돌봄자: <strong>돌봄 첫 보고 시점</strong> 기준</div>
+    </div>
+  </div>
+</div>
+
+<!-- ════ ④ 결과 ════ -->
+<div class="section" id="sec-results">
+  <div class="sec-heading">결과 (Results)</div>
+
+  <div class="block">
+    <div class="block-title c-gold"><span class="dot dot-gold"></span>표본 기술통계 (Table 1 주요 내용)</div>
+    <table>
+      <thead><tr><th>특성</th><th>전체</th><th>비돌봄자</th><th>비치매 돌봄자</th><th>치매 돌봄자</th></tr></thead>
+      <tbody>
+        <tr><td>N</td><td class="val">10,650</td><td class="val">7,841</td><td class="val">1,892</td><td class="val">917</td></tr>
+        <tr><td>여성 비율</td><td class="val">69.49%</td><td class="val">68.12%</td><td class="val">71.09%</td><td class="val"><strong>77.97%</strong></td></tr>
+        <tr><td>백인 비율</td><td class="val">86.93%</td><td class="val">86.55%</td><td class="val">86.89%</td><td class="val">90.29%</td></tr>
+        <tr><td>흡연력</td><td class="val">59.23%</td><td class="val">60.56%</td><td class="val">58.06%</td><td class="val"><strong>50.27%</strong></td></tr>
+        <tr><td>우울 증상 평균</td><td class="val">1.42</td><td class="val">1.20</td><td class="val">1.85</td><td class="val"><strong>2.36</strong></td></tr>
+        <tr><td>ADL 제한 평균</td><td class="val">0.23</td><td class="val">0.23</td><td class="val">0.25</td><td class="val">0.34</td></tr>
+        <tr><td>추적 중 사별(widowed)</td><td class="val">21.41%</td><td class="val">15.21%</td><td class="val">31.77%</td><td class="val"><strong>53.00%</strong></td></tr>
+        <tr><td>12년 추적 중 사망</td><td class="val">27.4%</td><td class="val">28.29%</td><td class="val">24.15%</td><td class="val">26.28%</td></tr>
+        <tr><td>중앙 생존 기간</td><td class="val">10.26년</td><td class="val">10.18년</td><td class="val">10.34년</td><td class="val">10.34년</td></tr>
+      </tbody>
+    </table>
+    <div class="hl-box" style="margin-top:0.75rem;">
+      치매 돌봄자의 주요 사인: <strong>심장질환 31.6%</strong>, 암 21.3%, 기타 15.8%
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-title c-blue"><span class="dot dot-blue"></span>Model 1 — 돌봄 유형의 주효과 (Table 2)</div>
+    <div class="hr-grid">
+      <div class="hr-card protect">
+        <div class="hr-label">치매 돌봄자 (vs. 비돌봄자)</div>
+        <div class="hr-value">HR = 0.71</div>
+        <div class="hr-ci">95% CI [0.63, 0.80]</div>
+      </div>
+      <div class="hr-card protect">
+        <div class="hr-label">비치매 돌봄자 (vs. 비돌봄자)</div>
+        <div class="hr-value">HR = 0.74</div>
+        <div class="hr-ci">95% CI [0.62, 0.89]</div>
+      </div>
+      <div class="hr-card risk">
+        <div class="hr-label">65–74세 (vs. 51–64세)</div>
+        <div class="hr-value">HR = 3.13</div>
+        <div class="hr-ci">95% CI [2.48, 3.95]</div>
+      </div>
+      <div class="hr-card risk">
+        <div class="hr-label">75–84세</div>
+        <div class="hr-value">HR = 8.44</div>
+        <div class="hr-ci">95% CI [7.45, 9.56]</div>
+      </div>
+      <div class="hr-card risk">
+        <div class="hr-label">85세 이상</div>
+        <div class="hr-value">HR = 19.27</div>
+        <div class="hr-ci">95% CI [17.31, 21.44]</div>
+      </div>
+      <div class="hr-card protect">
+        <div class="hr-label">사별(widowed)</div>
+        <div class="hr-value">HR = 0.42</div>
+        <div class="hr-ci">95% CI [0.39, 0.45]</div>
+      </div>
+    </div>
+    <div class="hl-box blue" style="margin-top:0.75rem;">
+      사망 위험 <strong>증가</strong> 요인: 연령↑, 흡연력(HR=1.50), ADL 제한(HR=1.19)<br>
+      사망 위험 <strong>감소</strong> 요인: 치매 돌봄자 상태, 비치매 돌봄자 상태, 사별(widowed)
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-title c-pink"><span class="dot dot-pink"></span>Model 2 — H1 검증: 돌봄 × 건강 수준 교호작용</div>
+    <div class="hl-box pink">
+      <strong>전체 상호작용 유의성:</strong> omnibus test F(4,52) = 38.61, p &lt; .01 → <strong>H1 지지</strong><br>
+      치매 돌봄자 상태는 사망 위험을 통계적으로 감소시키며, 특히 <strong>자기평가 건강이 낮은 수준에서 효과가 더 강함</strong>
+    </div>
+    <table>
+      <thead><tr><th>집단 (참조: 비돌봄자 · 우수 건강)</th><th>HR</th><th>95% CI</th></tr></thead>
+      <tbody>
+        <tr><td>비돌봄자 · 아주 좋음</td><td class="val">1.35</td><td>[1.04, 1.75]</td></tr>
+        <tr><td>비돌봄자 · 좋음</td><td class="val">1.69</td><td>[1.26, 2.27]</td></tr>
+        <tr><td>비돌봄자 · 보통</td><td class="val">3.00</td><td>[1.96, 4.59]</td></tr>
+        <tr><td><strong>비돌봄자 · 나쁨</strong></td><td class="val neg"><strong>4.78</strong></td><td>[2.79, 8.19]</td></tr>
+        <tr><td>치매 돌봄자 · 우수</td><td class="val">1.23</td><td>[0.79, 1.94] (n.s.)</td></tr>
+        <tr><td>치매 돌봄자 · 아주 좋음</td><td class="val pos">0.72</td><td>[0.47, 1.12] (n.s.)</td></tr>
+        <tr><td>치매 돌봄자 · 좋음</td><td class="val">1.98</td><td>[1.40, 2.81]</td></tr>
+        <tr><td>치매 돌봄자 · 보통</td><td class="val">2.18</td><td>[1.65, 2.88]</td></tr>
+        <tr><td><strong>치매 돌봄자 · 나쁨</strong></td><td class="val pos"><strong>1.51</strong></td><td>[0.85, 2.70] (n.s.)</td></tr>
+      </tbody>
+    </table>
+    <div class="hl-box" style="margin-top:0.75rem;">
+      <strong>핵심 대비:</strong> 비돌봄자·나쁨 HR = <strong>4.78</strong> vs. 치매 돌봄자·나쁨 HR = <strong>1.51</strong><br>
+      같은 나쁜 건강 상태에서도 치매 돌봄자가 비돌봄자보다 훨씬 낮은 사망 위험 → 보호 효과가 저건강 집단에서 가장 극적
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-title c-teal"><span class="dot dot-teal"></span>H2 검증: 경쟁위험 분석 — 주요 사인별 결과</div>
+    <div class="hr-grid">
+      <div class="hr-card protect">
+        <div class="hr-label">심장질환 사망</div>
+        <div class="hr-value">HR = 0.77</div>
+        <div class="hr-ci">95% CI [0.59, 0.99] *유의</div>
+      </div>
+      <div class="hr-card protect">
+        <div class="hr-label">암 사망</div>
+        <div class="hr-value">HR = 0.79</div>
+        <div class="hr-ci">95% CI [0.59, 1.05] n.s.</div>
+      </div>
+      <div class="hr-card protect">
+        <div class="hr-label">뇌혈관질환 사망</div>
+        <div class="hr-value">HR = 0.69</div>
+        <div class="hr-ci">95% CI [0.36, 1.30] n.s.</div>
+      </div>
+    </div>
+    <div class="hl-box teal" style="margin-top:0.75rem;">
+      <strong>H2 기각</strong> — 예상과 달리 스트레스 관련 사망(심혈관)에서도 보호 효과 존재. 암·뇌혈관은 통계적 유의성 미달이나 HR 값은 모두 1 미만으로 <strong>방향성은 일관</strong>되게 보호적.<br>
+      → 돌봄의 보호 효과는 특정 병리에 국한되지 않고 <strong>광범위하게 적용</strong>됨
+    </div>
+  </div>
+</div>
+
+<!-- ════ ⑤ 논의 ════ -->
+<div class="section" id="sec-discussion">
+  <div class="sec-heading">논의 & 함의</div>
+
+  <div class="block">
+    <div class="block-title c-gold"><span class="dot dot-gold"></span>주요 발견의 해석</div>
+    <div class="kv-row">
+      <div class="kv-key">역설적 발견</div>
+      <div class="kv-val">치매 돌봄은 부담·스트레스·우울을 증가시키는데도 사망 위험을 낮춤 → 특히 배우자 돌봄자는 가장 큰 스트레스를 보고하는 집단(Kaplan & Kronick, 2006), 그럼에도 보호 효과가 현저함</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">건강 유지 동기</div>
+      <div class="kv-val">치매 돌봄은 집중적 돌봄을 계속하기 위해 <strong>배우자가 스스로 건강을 유지해야 하는 동기</strong>를 제공 (Kaplan & Kronick, 2006)</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">Experience Corps 비교</div>
+      <div class="kv-val">Tan et al.(2006): 노인 자원봉사 프로그램(학교 배치) → 신체·정신 건강 개선, 특히 <strong>기초 활동 수준이 낮은 자원봉사자</strong>에서 신체 활동 개선이 두드러짐 → 돌봄의 효과와 유사한 패턴</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">사별(widowed) 역설</div>
+      <div class="kv-val">기존 연구들은 사별이 사망 위험 <strong>증가</strong>와 연관된다고 보고했으나, 이 연구에서는 사별이 사망 위험 <strong>감소</strong>와 연관(HR=0.42). 가능한 해석: 치매 돌봄자의 53%가 추적 중 사별 → 혼란 변수(confounding), 또는 사별 후 추적 기간이 짧아 인위적으로 낮은 위험 측정 가능성</div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-title c-blue"><span class="dot dot-blue"></span>돌봄의 긍정적 효과 메커니즘</div>
+    <div class="kv-row">
+      <div class="kv-key">삶의 목적감<br>(sense of life purpose)</div>
+      <div class="kv-val">Gruenewald et al.(2007): <strong>자신이 유용하다는 느낌</strong>이 노인의 사망 위험 감소와 연관 (MacArthur Study of Successful Aging)</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">에릭슨 7단계<br>(generativity)</div>
+      <div class="kv-val">돌봄자 대부분이 위치한 중년 후기~노년 초기 = 생성감(generativity) 단계 — 타인에게 돌려주는 것이 성공적 발달에 필수. 돌봄 행동이 이 발달 과업에 부합</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">친사회적 행동<br>(prosocial behavior)</div>
+      <div class="kv-val">Brown & Brown(2015): 친사회적 행동을 신경생물학적으로 설명 — 돕는 행동이 신체 건강 개선과 연결됨 / Poulin et al.(2013): 타인을 위해 베푸는 것이 스트레스-사망률 연관을 완화</div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-title c-pink"><span class="dot dot-pink"></span>연구의 한계 (Limitations)</div>
+    <div class="kv-row">
+      <div class="kv-key">한계 1 — 시간성</div>
+      <div class="kv-val">돌봄의 시작·종료 날짜 데이터 없음 → 돌봄 기간 또는 돌봄 종료 후 사망까지의 시간 통제 불가. <strong>선택 효과 및 역인과성(reverse causation)</strong> 검토 필요</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">한계 2 — 건강 측정</div>
+      <div class="kv-val">자기평가 건강은 실제 건강의 <strong>불완전한 대리 지표</strong>. 단, ADL 통제로 기능 능력을 일부 보완. 만성 질환은 해당 사인 사망과 공선성 → 자기평가 건강이 전반적 건강 지표로 적합</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">한계 3 — 표본 제한</div>
+      <div class="kv-val">표본 제한으로 저빈도 사인(예: 신장 질환) 탐색 불가</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">한계 4 — 돌봄 특수성</div>
+      <div class="kv-val">HRS는 심리사회·건강 정보에 강점이나 돌봄 전문 측정 미흡 — <strong>지각된 돌봄 부담(perceived burden)</strong> 등 사망률에 영향 가능한 변수 포함 안 됨</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">한계 5 — 사별 역설</div>
+      <div class="kv-val">사별이 사망 위험 감소와 연관된 예상 밖 결과 → 돌봄자 상태와의 혼란 변수 가능성, 혹은 짧은 추적 기간 효과. 향후 연구 필요</div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-title c-teal"><span class="dot dot-teal"></span>실천적 함의 & 결론</div>
+    <div class="hl-box teal">
+      임상가·연구자는 PLWD 돌봄의 <strong>신체·정신 건강 위험</strong>을 명심하면서도, 돌봄 역할에서 발생할 수 있는 <strong>이점과 성장</strong>도 강조해야 함.<br>
+      건강이 저하되는 상황에서도 <strong>활동과 웰빙을 유지하는 것</strong>이 돌봄 파트너 모두에게 수명 연장으로 이어질 수 있음.
+    </div>
+  </div>
+</div>
+
+<!-- ════ ⑥ 퀴즈 ════ -->
+<div class="section" id="sec-quiz">
+  <div class="sec-heading">퀴즈 연습</div>
+  <p style="font-size:0.83rem; color:var(--text-muted); margin-bottom:1.5rem;">각 문제를 클릭하면 정답이 표시됩니다.</p>
+
+  <div class="sub-heading">O/X 퀴즈</div>
+  <div class="quiz-list">
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">01</span><span class="qtype qt-ox">O/X</span>
+        <span class="qtext">Leggett et al.(2020)에 따르면, 치매 배우자를 돌보는 것은 비돌봄자에 비해 사망 위험을 낮추며, 이 보호 효과는 자기평가 건강이 좋을수록 더 강하게 나타난다.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text"><span class="ox-x">X</span> — 보호 효과는 자기평가 건강이 <strong>낮을수록(poor health)</strong> 더 강하게 나타남. 건강이 나쁜 비돌봄자 HR=4.78 vs. 건강이 나쁜 치매 돌봄자 HR=1.51의 극적 차이.</div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">02</span><span class="qtype qt-ox">O/X</span>
+        <span class="qtext">이 연구에서 치매 돌봄자 집단은 비돌봄자에 비해 우울 증상이 더 많았고 흡연력이 더 적었다.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text"><span class="ox-o">O</span> — 우울 증상 평균: 비돌봄자 1.20 vs. 치매 돌봄자 <strong>2.36</strong> / 흡연력: 비돌봄자 60.56% vs. 치매 돌봄자 <strong>50.27%</strong></div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">03</span><span class="qtype qt-ox">O/X</span>
+        <span class="qtext">이 연구의 두 번째 가설(H2)은 지지되었다 — 스트레스 관련 사망 원인인 심혈관 질환에서는 돌봄의 보호 효과가 통계적으로 유의하지 않았기 때문이다.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text"><span class="ox-x">X</span> — H2는 <strong>기각됨(contrary to H2)</strong>. 심장질환 사망에서 HR=0.77 (95% CI [0.59, 0.99])로 <em>유의하게</em> 보호 효과 확인. 오히려 심혈관 사망에서도 돌봄이 보호적이었음.</div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">04</span><span class="qtype qt-ox">O/X</span>
+        <span class="qtext">이 연구에서 치매 판정은 Langa-Weir 분류 기준을 따르며, 정상·인지손상-비치매·치매의 3범주로 구분된다.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text"><span class="ox-o">O</span> — Langa-Weir 분류: 정상(normal) / 인지손상-비치매(cognitively impaired but not demented) / 치매(demented). 즉각·지연 회상, 작업 기억, 정신 처리 속도 검사 기반.</div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">05</span><span class="qtype qt-ox">O/X</span>
+        <span class="qtext">건강한 돌봄자 가설(Healthy Caregiver Hypothesis)은 건강한 사람이 돌봄 역할에 진입하고, 돌봄 활동이 이후에도 건강을 유지시킨다고 주장한다.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text"><span class="ox-o">O</span> — Healthy Caregiver Hypothesis의 핵심 주장. 건강 선택 효과(입문) + 돌봄을 통한 건강 유지(유지) 두 단계로 구성.</div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">06</span><span class="qtype qt-ox">O/X</span>
+        <span class="qtext">이 연구에서 사망은 자기보고 방식으로 측정되었으며, 이는 자기보고 편향을 가진다는 한계가 있다.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text"><span class="ox-x">X</span> — 사망은 <strong>NDI(National Death Index, 국가사망지수)</strong>와의 연계를 통해 측정 — 자기보고 편향이 <em>없는</em> 방식이며, 공중보건상 명확한 지표로 제시됨.</div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">07</span><span class="qtype qt-ox">O/X</span>
+        <span class="qtext">이 연구의 참조 집단(referent category)은 자기평가 건강이 '우수(excellent)'한 비돌봄자이다.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text"><span class="ox-o">O</span> — Model 2에서 10범주 변수의 참조 범주는 <strong>비돌봄자 · 우수(excellent) 건강</strong>.</div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">08</span><span class="qtype qt-ox">O/X</span>
+        <span class="qtext">에릭슨의 7단계(generativity vs. stagnation)는 노년 후기에 해당하며, 이 연구에서 대부분의 돌봄자가 이 단계에 위치한다.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text"><span class="ox-x">X</span> — 에릭슨 7단계는 <strong>중년 후기~노년 초기(middle-adulthood to early late-life)</strong>에 해당. 대부분의 돌봄자가 이 단계에 위치한다고 논문에서 기술.</div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">09</span><span class="qtype qt-ox">O/X</span>
+        <span class="qtext">이 연구에서 12년 추적 기간 동안 치매 돌봄자의 사망 비율(26.28%)은 비돌봄자의 사망 비율(28.29%)보다 낮았다.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text"><span class="ox-o">O</span> — 치매 돌봄자 26.28% vs. 비돌봄자 28.29% vs. 비치매 돌봄자 24.15%. 치매 돌봄자가 비치매 돌봄자보다는 높으나 비돌봄자보다는 낮음.</div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">10</span><span class="qtype qt-ox">O/X</span>
+        <span class="qtext">경쟁위험 분석(competing risks analysis)은 하나의 사인으로 사망하면 다른 사인으로의 사망이 발생할 수 없는 상황을 통제하는 방법이다.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text"><span class="ox-o">O</span> — 경쟁위험 분석: 다른 원인 사망이 먼저 발생하면 관심 원인 사망이 불가능해지는 상황 통제. 표준 생존 분석의 일반화.</div></div>
+    </div>
+
+  </div>
+
+  <div class="sub-heading" style="margin-top:2rem;">단답형 / 내용 확인 퀴즈</div>
+  <div class="quiz-list">
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">11</span><span class="qtype qt-fill">단답</span>
+        <span class="qtext">이 연구의 표본 규모(전체, 치매 돌봄자), 데이터셋 이름, 연구 기간을 모두 답하라.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text">전체 <strong>10,650명</strong> / 치매 돌봄자 <strong>917명</strong> (8.6%) / <strong>HRS (Health and Retirement Study)</strong> / <strong>2000–2012년</strong></div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">12</span><span class="qtype qt-fill">단답</span>
+        <span class="qtext">Schulz & Beach(1999)의 연구에서 돌봄 부담(strain)을 경험한 돌봄자의 사망 위험은 비돌봄자보다 몇 % 높았는가?</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text"><strong>63%</strong> 더 높음 (Schulz & Beach, 1999 — 돌봄자 사망 위험의 고전적 연구)</div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">13</span><span class="qtype qt-fill">단답</span>
+        <span class="qtext">CESD 척도에서 측정하는 8가지 증상을 모두 답하라. 또한 점수 범위는?</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text">
+        우울함(depressed) / 활동 못함(could not get going) / 무기력(everything was an effort) / 외로움(lonely) / 삶 즐김(enjoyed life) / 수면 불안(sleep was restless) / 슬픔(sad) / 행복감(happy)<br>
+        점수 범위: <strong>0–8점</strong> (양성 문항 역코딩 후 합산)
+      </div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">14</span><span class="qtype qt-fill">단답</span>
+        <span class="qtext">Model 1에서 치매 돌봄자와 비치매 돌봄자의 전체 원인 사망 위험비(HR)와 95% CI를 각각 답하라.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text">치매 돌봄자: HR = <strong>0.71</strong>, 95% CI [0.63, 0.80]<br>비치매 돌봄자: HR = <strong>0.74</strong>, 95% CI [0.62, 0.89]</div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">15</span><span class="qtype qt-fill">단답</span>
+        <span class="qtext">H1 검증을 위한 상호작용의 전체 유의성 검증(omnibus test) 결과를 F값, df, p값과 함께 답하라.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text">F(<strong>4</strong>, <strong>52</strong>) = <strong>38.61</strong>, p &lt; <strong>.01</strong> → 상호작용 유의함, H1 지지</div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">16</span><span class="qtype qt-fill">단답</span>
+        <span class="qtext">경쟁위험 분석에서 심장질환, 암, 뇌혈관질환 사망에 대한 치매 돌봄자의 HR과 95% CI를 각각 답하라.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text">
+        심장질환: HR = <strong>0.77</strong>, CI [0.59, 0.99] (유의)<br>
+        암: HR = <strong>0.79</strong>, CI [0.59, 1.05] (n.s.)<br>
+        뇌혈관질환: HR = <strong>0.69</strong>, CI [0.36, 1.30] (n.s.)
+      </div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">17</span><span class="qtype qt-mc">내용확인</span>
+        <span class="qtext">건강한 돌봄자 가설(Healthy Caregiver Hypothesis)을 설명하고, 이 연구가 기존 가설을 어떻게 확장하는지 서술하라.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text">
+        <strong>건강한 돌봄자 가설:</strong> 건강한 개인이 돌봄 역할에 진입하고, 돌봄 활동이 이후에도 그 건강을 유지시킨다는 주장 (Bertrand et al., 2011; Fredman et al., 2010).<br><br>
+        <strong>이 연구의 확장:</strong> 기존 연구들은 건강을 단순 공변인으로만 통제했으나, 이 연구는 <strong>건강 수준에 따라 돌봄의 보호 효과 크기가 다를 것</strong>이라는 교호작용을 직접 검증. 특히 이미 건강한 사람은 평균으로의 회귀(regression to the mean) 때문에 개선 여지가 적고, 건강이 나쁜 돌봄자가 더 큰 이득을 볼 것이라는 가설로 확장.
+      </div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">18</span><span class="qtype qt-mc">내용확인</span>
+        <span class="qtext">Model 2에서 비돌봄자·나쁜 건강과 치매 돌봄자·나쁜 건강의 HR을 비교하며, 이 결과가 의미하는 바를 설명하라.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text">
+        비돌봄자·나쁨: HR = <strong>4.78</strong> (95% CI [2.79, 8.19])<br>
+        치매 돌봄자·나쁨: HR = <strong>1.51</strong> (95% CI [0.85, 2.70], n.s.)<br><br>
+        <strong>의미:</strong> 같은 나쁜 건강 상태에서도, 치매를 돌보는 배우자는 돌보지 않는 배우자에 비해 사망 위험이 훨씬 낮음. 즉 <strong>건강이 가장 나쁜 집단에서 돌봄의 보호 효과가 가장 극적으로 나타남</strong> — 평균으로의 회귀, 삶의 목적감 제공 등으로 해석 가능.
+      </div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">19</span><span class="qtype qt-mc">내용확인</span>
+        <span class="qtext">이 연구에서 사용한 우울 증상 척도(CESD)의 특징을 설명하고, RAND가 이 척도를 어떻게 처리했는지 서술하라.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text">
+        <strong>CESD 8문항 버전</strong>: 지난 주 동안 우울함, 활동 못함, 무기력, 외로움, 삶 즐김, 수면 불안, 슬픔, 행복감을 느낀 정도 측정. 점수 범위 0–8.<br><br>
+        <strong>RAND 처리 방식:</strong> 조사 시점 간 응답 범주 차이 때문에 <strong>이분화(dichotomize)</strong> 처리. 양성 문항(삶 즐김, 행복감)은 <strong>역코딩</strong> 후 합산하여 우울 증상 총점 생성 (Zivin et al., 2010).
+      </div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">20</span><span class="qtype qt-mc">내용확인</span>
+        <span class="qtext">이 논문이 치매 돌봄자 사망 보호 효과의 메커니즘으로 제시하는 설명들을 4가지 이상 서술하라.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text">
+        ① <strong>건강 유지 동기:</strong> 집중적 치매 돌봄을 계속하기 위해 스스로 건강을 유지해야 하는 동기 부여<br>
+        ② <strong>삶의 목적감:</strong> 자신이 유용하다는 느낌이 사망 위험 감소와 연관 (Gruenewald et al., 2007)<br>
+        ③ <strong>에릭슨 생성감 단계:</strong> 타인에게 돌려주는 행동이 성공적 발달에 필수적 — 돌봄이 이 발달 과업에 부합<br>
+        ④ <strong>살루토제닉 효과:</strong> 스트레스에도 불구하고 회복탄력성을 높이는 긍정적 효과 (Cohen et al., 2002)<br>
+        ⑤ <strong>친사회적 행동:</strong> 돕는 행동이 신경생물학적으로 신체 건강 개선과 연결 (Brown & Brown, 2015)<br>
+        ⑥ <strong>평균으로의 회귀:</strong> 건강이 나쁜 사람일수록 돌봄 역할이 제공하는 활동·목적감·헌신으로 인한 이득이 스트레스보다 더 크게 수명 연장에 기여
+      </div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">21</span><span class="qtype qt-mc">내용확인</span>
+        <span class="qtext">이 연구의 한계 중 '역인과성(reverse causation)' 문제를 설명하고, 이를 향후 어떻게 해결해야 하는지 논문의 제안을 서술하라.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text">
+        <strong>역인과성 문제:</strong> 건강한 사람이 돌봄 역할에 진입하고 유지하며, 건강이 나쁜 사람은 이미 집단(population)에서 탈락(사망·탈락)해 표본에 포함되지 않을 수 있음 → 돌봄자 집단이 인위적으로 건강해 보이는 <strong>선택 효과(selection effect)</strong>가 발생. 즉, 돌봄이 건강을 만드는 것이 아니라 건강한 사람이 돌봄을 하는 것일 수 있음.<br><br>
+        <strong>논문의 제안:</strong> 향후 연구에서 선택 효과와 역인과성을 고려하기 위해, 건강이 나쁜 사람들이 이미 집단에서 탈락했는지 여부를 구체적으로 검토해야 함.
+      </div></div>
+    </div>
+
+  </div>
+</div>
+
+</main>
+
+<script>
+function showTab(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('sec-' + id).classList.add('active');
+  event.currentTarget.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function toggleAnswer(el) {
+  const card = el.closest('.quiz-card');
+  const ans = card.querySelector('.quiz-a');
+  const arrow = el.querySelector('.quiz-arrow');
+  const shown = ans.classList.toggle('shown');
+  arrow.style.transform = shown ? 'rotate(180deg)' : 'rotate(0deg)';
+}
+</script>
+</body>
+</html>
