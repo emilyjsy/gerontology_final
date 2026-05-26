@@ -1,0 +1,1766 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>노년학 Ch.13 노년기 사회참여 — 기말고사 완벽 정리본</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700;900&family=Noto+Sans+KR:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f1117;
+    --surface: #181c27;
+    --surface2: #1f2535;
+    --border: #2a3149;
+    --accent: #7c9eff;
+    --accent2: #ff7c7c;
+    --accent3: #7cffb4;
+    --accent4: #ffd97c;
+    --accent5: #d47cff;
+    --text: #e8eaf6;
+    --text-dim: #8892b0;
+    --text-bright: #ffffff;
+    --correct: #4caf7d;
+    --wrong: #ff6b6b;
+    --highlight: #ffd97c22;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.7;
+  }
+
+  /* ===== HEADER ===== */
+  .hero {
+    background: linear-gradient(135deg, #0f1117 0%, #1a2040 50%, #0f1117 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 56px 32px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 50% 0%, #7c9eff18 0%, transparent 70%);
+  }
+  .hero-badge {
+    display: inline-block;
+    background: var(--accent);
+    color: #0f1117;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-bottom: 18px;
+    text-transform: uppercase;
+  }
+  .hero h1 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(26px, 5vw, 44px);
+    font-weight: 900;
+    color: var(--text-bright);
+    margin-bottom: 10px;
+    position: relative;
+  }
+  .hero h1 span { color: var(--accent); }
+  .hero-sub {
+    font-size: 14px;
+    color: var(--text-dim);
+    position: relative;
+  }
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-top: 28px;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  .stat-item {
+    text-align: center;
+  }
+  .stat-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 28px;
+    font-weight: 500;
+    color: var(--accent);
+    display: block;
+  }
+  .stat-label {
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+
+  /* ===== NAV ===== */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #0f111799;
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav::-webkit-scrollbar { display: none; }
+  .nav-btn {
+    padding: 14px 16px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-dim);
+    background: none;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+  .nav-btn:hover, .nav-btn.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+
+  /* ===== LAYOUT ===== */
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 40px 24px;
+  }
+
+  /* ===== SECTION ===== */
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* ===== SECTION HEADER ===== */
+  .section-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text-bright);
+    margin-bottom: 28px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-title .icon {
+    width: 32px; height: 32px;
+    background: var(--accent);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  /* ===== CARD ===== */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 16px;
+    transition: border-color 0.2s;
+  }
+  .card:hover { border-color: #3a4160; }
+  .card-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card-title .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+
+  /* ===== CONCEPT BLOCK ===== */
+  .concept-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 14px;
+    overflow: hidden;
+  }
+  .concept-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .concept-header:hover { background: var(--surface2); }
+  .concept-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    background: #7c9eff22;
+    color: var(--accent);
+    border: 1px solid #7c9eff44;
+    white-space: nowrap;
+  }
+  .concept-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-bright);
+    flex: 1;
+  }
+  .concept-arrow {
+    color: var(--text-dim);
+    font-size: 12px;
+    transition: transform 0.2s;
+  }
+  .concept-block.open .concept-arrow { transform: rotate(180deg); }
+  .concept-body {
+    display: none;
+    padding: 0 20px 20px;
+    border-top: 1px solid var(--border);
+  }
+  .concept-block.open .concept-body { display: block; }
+
+  .def-box {
+    background: #7c9eff0d;
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 16px;
+    margin: 14px 0 10px;
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.8;
+  }
+  .def-label {
+    font-size: 10px;
+    color: var(--accent);
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+  }
+  .memo-box {
+    background: #ffd97c0d;
+    border: 1px dashed #ffd97c44;
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 13px;
+    color: #ffd97c;
+    margin-top: 10px;
+  }
+  .memo-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+    opacity: 0.7;
+  }
+
+  /* ===== TABLE ===== */
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0;
+    font-size: 13px;
+  }
+  .compare-table th {
+    background: var(--surface2);
+    color: var(--accent);
+    padding: 10px 14px;
+    text-align: left;
+    font-size: 12px;
+    font-weight: 600;
+    border: 1px solid var(--border);
+  }
+  .compare-table td {
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.6;
+    color: var(--text);
+  }
+  .compare-table tr:nth-child(even) td { background: #ffffff04; }
+
+  /* ===== LIST ===== */
+  .info-list {
+    list-style: none;
+    margin: 10px 0;
+  }
+  .info-list li {
+    display: flex;
+    gap: 10px;
+    padding: 6px 0;
+    font-size: 13.5px;
+    color: var(--text);
+    border-bottom: 1px solid #ffffff08;
+  }
+  .info-list li:last-child { border-bottom: none; }
+  .info-list li::before {
+    content: '→';
+    color: var(--accent);
+    flex-shrink: 0;
+    font-size: 12px;
+    margin-top: 2px;
+  }
+
+  /* ===== NUMBER STEPS ===== */
+  .steps {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 12px 0;
+  }
+  .step {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .step-num {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #0f1117;
+    font-size: 12px;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .step-content {
+    flex: 1;
+    font-size: 13.5px;
+    padding-top: 4px;
+    line-height: 1.7;
+  }
+  .step-content strong { color: var(--text-bright); }
+
+  /* ===== HIGHLIGHT KEYWORD ===== */
+  .kw {
+    background: #7c9eff18;
+    color: var(--accent);
+    border-radius: 4px;
+    padding: 1px 5px;
+    font-weight: 600;
+    font-size: 0.95em;
+  }
+  .kw-red { background: #ff7c7c18; color: var(--accent2); }
+  .kw-green { background: #7cffb418; color: var(--accent3); }
+  .kw-yellow { background: #ffd97c18; color: var(--accent4); }
+  .kw-purple { background: #d47cff18; color: var(--accent5); }
+
+  /* ===== QUIZ SECTION ===== */
+  .quiz-area { margin-bottom: 28px; }
+  .quiz-title-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .quiz-type-badge {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 6px;
+    letter-spacing: 0.5px;
+  }
+  .badge-ox { background: #7cffb418; color: var(--accent3); border: 1px solid #7cffb444; }
+  .badge-short { background: #7c9eff18; color: var(--accent); border: 1px solid #7c9eff44; }
+  .badge-essay { background: #ffd97c18; color: var(--accent4); border: 1px solid #ffd97c44; }
+  .badge-fill { background: #d47cff18; color: var(--accent5); border: 1px solid #d47cff44; }
+
+  .quiz-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin-bottom: 12px;
+  }
+  .quiz-q {
+    font-size: 14px;
+    color: var(--text-bright);
+    margin-bottom: 12px;
+    line-height: 1.7;
+    font-weight: 500;
+  }
+  .quiz-q .qnum {
+    font-family: 'DM Mono', monospace;
+    color: var(--text-dim);
+    font-size: 12px;
+    margin-right: 8px;
+  }
+  .quiz-answer-btn {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    font-size: 13px;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: 'Noto Sans KR', sans-serif;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .quiz-answer-btn:hover {
+    background: #2a3149;
+    color: var(--text);
+    border-color: var(--accent);
+  }
+  .quiz-answer-box {
+    display: none;
+    margin-top: 12px;
+    background: #0a0d15;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-size: 13.5px;
+    line-height: 1.8;
+    color: var(--text);
+  }
+  .quiz-answer-box.show { display: block; animation: fadeIn 0.2s ease; }
+  .answer-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--correct);
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+  }
+
+  /* OX buttons */
+  .ox-choices {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .ox-btn {
+    flex: 1;
+    padding: 12px;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface2);
+    font-size: 22px;
+    cursor: pointer;
+    transition: all 0.15s;
+    color: var(--text);
+  }
+  .ox-btn:hover { border-color: var(--accent); }
+  .ox-btn.selected-o { border-color: var(--correct); background: #4caf7d18; color: var(--correct); }
+  .ox-btn.selected-x { border-color: var(--wrong); background: #ff6b6b18; color: var(--wrong); }
+  .ox-result {
+    font-size: 13px;
+    padding: 10px 14px;
+    border-radius: 6px;
+    display: none;
+    margin-top: 8px;
+  }
+  .ox-result.show { display: block; }
+  .ox-result.correct { background: #4caf7d18; border: 1px solid #4caf7d44; color: var(--correct); }
+  .ox-result.wrong { background: #ff6b6b18; border: 1px solid #ff6b6b44; color: var(--wrong); }
+
+  /* fill in blank */
+  .fill-input {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 13px;
+    padding: 8px 12px;
+    width: 100%;
+    margin: 8px 0;
+    transition: border-color 0.2s;
+  }
+  .fill-input:focus { outline: none; border-color: var(--accent); }
+  .fill-check-btn {
+    background: var(--accent);
+    color: #0f1117;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: 'Noto Sans KR', sans-serif;
+    transition: opacity 0.2s;
+  }
+  .fill-check-btn:hover { opacity: 0.85; }
+
+  /* ===== MINDMAP / SUMMARY ===== */
+  .mindmap {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 16px;
+  }
+  .mindmap-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-bright);
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .mindmap-root {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .mm-node {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .mm-node-icon {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+    margin-top: 2px;
+  }
+  .mm-children {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 6px;
+    padding-left: 14px;
+    border-left: 1px dashed var(--border);
+  }
+  .mm-leaf {
+    font-size: 13px;
+    color: var(--text);
+    padding: 3px 0;
+  }
+
+  /* ===== KEY POINTS BOX ===== */
+  .key-points {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+    margin: 14px 0;
+  }
+  .key-point {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px;
+    transition: border-color 0.2s;
+  }
+  .key-point:hover { border-color: var(--accent); }
+  .key-point-label {
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .key-point-value {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--text-bright);
+    line-height: 1.5;
+  }
+
+  /* ===== PROGRESS BAR ===== */
+  .progress-container {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .progress-label { font-size: 13px; color: var(--text-dim); white-space: nowrap; }
+  .progress-bar-wrap {
+    flex: 1;
+    height: 6px;
+    background: var(--surface2);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent3));
+    border-radius: 3px;
+    transition: width 0.4s ease;
+  }
+  .progress-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+
+  /* ===== TIMELINE ===== */
+  .timeline {
+    position: relative;
+    padding-left: 24px;
+    margin: 12px 0;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, var(--accent) 0%, var(--accent3) 100%);
+  }
+  .tl-item {
+    position: relative;
+    padding: 0 0 18px 20px;
+    font-size: 13px;
+  }
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: -5px;
+    top: 6px;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--bg);
+  }
+  .tl-year {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    margin-bottom: 2px;
+  }
+  .tl-content { color: var(--text); line-height: 1.6; }
+
+  /* ===== ANIMATIONS ===== */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .section.active { animation: fadeIn 0.3s ease; }
+
+  /* ===== GRID 2 ===== */
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 12px 0;
+  }
+  @media (max-width: 600px) { .grid-2 { grid-template-columns: 1fr; } }
+
+  /* ===== DIVIDER ===== */
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 24px 0;
+  }
+
+  /* ===== CHEAT SHEET ===== */
+  .cheatsheet-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 12px;
+  }
+  .cs-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 18px;
+    transition: border-color 0.2s;
+  }
+  .cs-item:hover { border-color: var(--accent); }
+  .cs-key {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent4);
+    font-weight: 500;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .cs-val {
+    font-size: 13.5px;
+    color: var(--text);
+    line-height: 1.7;
+  }
+  .cs-val strong { color: var(--text-bright); }
+
+  /* ===== IMPORTANT TAG ===== */
+  .imp {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: #ff7c7c18;
+    color: var(--accent2);
+    border: 1px solid #ff7c7c44;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+    vertical-align: middle;
+  }
+
+  /* ===== SCROLL TO TOP ===== */
+  .scroll-top {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 40px; height: 40px;
+    background: var(--accent);
+    color: #0f1117;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 20px #7c9eff44;
+    transition: opacity 0.2s;
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-badge">GERONTOLOGY · Chapter 13</div>
+  <h1>노년기 <span>사회참여</span></h1>
+  <p class="hero-sub">기말고사 완벽 대비 정리본 — 단답 · O/X · 주관식 · 서술형 전부 커버</p>
+  <div class="hero-stats">
+    <div class="stat-item">
+      <span class="stat-num">5</span>
+      <span class="stat-label">대주제</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">30+</span>
+      <span class="stat-label">핵심 개념</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">60+</span>
+      <span class="stat-label">예상 퀴즈</span>
+    </div>
+  </div>
+</div>
+
+<nav class="nav">
+  <button class="nav-btn active" onclick="showSection('개념', this)">📖 핵심 개념</button>
+  <button class="nav-btn" onclick="showSection('ox', this)">✅ O/X 퀴즈</button>
+  <button class="nav-btn" onclick="showSection('short', this)">✏️ 단답형</button>
+  <button class="nav-btn" onclick="showSection('essay', this)">📝 주관식·서술형</button>
+  <button class="nav-btn" onclick="showSection('cheat', this)">⚡ 핵심 요약</button>
+</nav>
+
+<!-- ===================== 핵심 개념 ===================== -->
+<div id="section-개념" class="section active">
+<div class="container">
+
+  <div class="section-title">
+    <div class="icon">📖</div>
+    핵심 개념 정리
+  </div>
+
+  <!-- 1. 활동적 노화 -->
+  <div class="concept-block open">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <span class="concept-tag">WHO · 2002</span>
+      <span class="concept-name">활동적 노화 (Active Aging)</span>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <div class="def-label">교재 정의</div>
+      <div class="def-box">
+        사람들이 나이 들어 가면서 <strong>삶의 질을 높이기 위해 참여, 건강, 안전의 기회를 최적화하는 과정</strong>이다.
+      </div>
+      <div class="def-label" style="margin-top:14px">상세 내용</div>
+      <ul class="info-list">
+        <li><strong>"활동적"</strong>이란 단순히 신체적 활동·직업 참여뿐 아니라 <span class="kw">사회적·경제적·문화적·영적·시민활동</span>에 계속 참여하는 것을 의미</li>
+        <li>세계보건기구(WHO)가 긍정적 노화를 위해 제시한 개념</li>
+        <li>핵심 3요소: <span class="kw-green">참여 · 건강 · 안전</span></li>
+      </ul>
+      <div class="memo-box">
+        <div class="memo-label">🔑 암기 포인트</div>
+        "참건안" — 참여, 건강, 안전의 기회를 최적화하는 과정!
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. 노화의 3가지 유형 -->
+  <div class="concept-block">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <span class="concept-tag">핵심 분류</span>
+      <span class="concept-name">노화의 3가지 유형</span>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>유형</th>
+            <th>개념 설명</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="kw-red">병리적 노화</span><br>(pathological aging)</td>
+            <td>질병과 장애로 점철된 노화. 정상적으로 나이 드는 과정이 아닌 <strong>질병에 의한 문제</strong>가 나타난 모습</td>
+          </tr>
+          <tr>
+            <td><span class="kw-yellow">일반적 노화</span><br>(normal/usual aging)</td>
+            <td>심각한 질환·기능장애는 없지만 연령 증가와 함께 변화가 나타남. 질환 위험요소를 가지고 있거나 <strong>사회적 세계가 축소되어 고독하고 활기차지 못한 모습</strong></td>
+          </tr>
+          <tr>
+            <td><span class="kw-green">성공적 노화</span><br>(successful/optimal aging)</td>
+            <td>일반적 노화를 <strong>개인의 노력과 환경에 대한 적절한 통제</strong>를 통해 극복하거나 지연시키는 것이 가능하다고 보는 것 (Baltes & Baltes, 1990; Rowe & Kahn, 1998)</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="memo-box">
+        <div class="memo-label">🔑 암기 포인트</div>
+        서구에서는 노화 = 치매·의존성·질병의 <strong>3D(Dementia, Dependence, Disease)</strong>로 연결해 왔음 → 이에 대한 반작용으로 노화 다양성 수용 주장
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. 성공적 노화 (Rowe & Kahn) -->
+  <div class="concept-block">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <span class="concept-tag">Rowe & Kahn 1998</span>
+      <span class="concept-name">성공적 노화의 3가지 요소 ⭐⭐</span>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <div class="def-label">교재 정의</div>
+      <div class="def-box">
+        ① <strong>질병과 장애의 회피</strong>, ② <strong>높은 수준의 인지적·신체적 기능 유지</strong>, ③ <strong>생산적 활동과 타인과의 관계를 통한 적극적인 인생참여</strong>라는 세 가지 주요 행동 또는 그 특성을 유지하는 능력
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num" style="background:#ff7c7c">①</div>
+          <div class="step-content">
+            <strong>질병과 장애의 회피</strong><br>
+            단순히 질병·장애가 없는 상태가 아니라 <span class="kw-red">위험요인들도 피하는 것</span>을 의미
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num" style="background:#ffd97c">②</div>
+          <div class="step-content">
+            <strong>높은 수준의 인지적·신체적 기능 유지</strong><br>
+            타인에게 의존하지 않고 <span class="kw-yellow">기본적 일상의 욕구 충족</span>, 독립적 일상생활 영위 가능한 신체·정신 기능 유지
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num" style="background:#7cffb4; color:#0f1117">③</div>
+          <div class="step-content">
+            <strong>적극적인 인생참여</strong><br>
+            다른 사람과 <span class="kw-green">친밀한 관계 유지</span> + <span class="kw-green">생산적 활동 참여</span>로 구성
+          </div>
+        </div>
+      </div>
+      <div class="def-box" style="border-left-color: #ffd97c; background:#ffd97c0d; margin-top:14px">
+        <div class="def-label" style="color:#ffd97c">위계적 관계</div>
+        질병·장애 없음 → 정신·신체 기능 유지 가능 → 적극적 인생참여 가능 (위에서 아래로 가능하게 해줌, 보장은 아님)
+      </div>
+      <div class="def-box" style="border-left-color: #7cffb4; background:#7cffb40d">
+        <div class="def-label" style="color:#7cffb4">생산적 활동의 범위</div>
+        유급 활동만이 아니라 집안일, 가족·친구 돌봄, 자원봉사 등 <strong>보수 여부에 상관없이 가치를 창출하는 모든 활동</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. 사회참여 정의 -->
+  <div class="concept-block">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <span class="concept-tag">Hooyman & Kiyak 2011</span>
+      <span class="concept-name">사회참여 (Civic Engagement) 정의 ⭐</span>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <div class="def-label">교재 정의</div>
+      <div class="def-box">
+        투표나 공동활동 참여, 자원봉사활동 등과 같은 개인적 또는 공동의 활동을 통해 <strong>지역사회의 삶에 적극적으로 참여하는 과정</strong>
+      </div>
+      <ul class="info-list">
+        <li>살만한 지역사회를 만들고 유지하는 데 매우 중요한 요소</li>
+        <li>형태: 교육참여, 자원봉사, 종교활동, 지역사회모임 등 다양</li>
+        <li>사회참여의 이점(개인): 삶의 의미·자존감 향상, 사회 공헌</li>
+        <li>사회참여의 이점(사회): 효율적 인적자원 활용</li>
+        <li>은퇴한 노인의 역할(civic engagement as a retiree's role) — Wilson & Harlow-Rosentraub, 2008</li>
+      </ul>
+      <div class="memo-box">
+        <div class="memo-label">🔑 Freedman(2002)</div>
+        노인의 사회참여는 "21세기 사회에 횡재를 만들 수 있으며 … 노년기 삶의 더 큰 충족감과 목적을 만드는 기회를 가져다 줄 수 있는" 사회와 노인 개인 모두에게 도움이 되는 활동
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+  <div class="section-title" style="font-size:18px">
+    <div class="icon" style="background:var(--accent3); color:#0f1117">📚</div>
+    노인교육
+  </div>
+
+  <!-- 5. 노인교육 개념 -->
+  <div class="concept-block">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <span class="concept-tag">핵심 개념</span>
+      <span class="concept-name">노인교육 정의와 범위 ⭐⭐</span>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <div class="def-label">교재 정의</div>
+      <div class="def-box">
+        노인을 대상으로 교육을 통해 노인문제를 스스로 해결할 수 있도록 하며 노인의 <strong>삶의 질을 향상시키고자 하는 사회참여 영역</strong>. 노인과 관련 있는 종사자들에게 노인과 노화에 대해 교육하는 것이며, 노인이 스스로 교수자가 되어 교육을 담당하는 것을 포함하는 매우 넓은 분야의 교육활동
+      </div>
+      <table class="compare-table" style="margin-top:14px">
+        <thead>
+          <tr>
+            <th>구분</th>
+            <th>학습자</th>
+            <th>목적 · 내용</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="kw">노인을 위한 교육</span></td>
+            <td>노인이 학습자</td>
+            <td>노인의 능력 향상·배움 욕구 충족. 사회통합, 여가, 직업교육 등. 노년기 역할·자기관리·인간관계·여가문화 학습</td>
+          </tr>
+          <tr>
+            <td><span class="kw-yellow">노인에 관한 교육</span></td>
+            <td>모든 연령대 (노인 관련 직업 종사자, 노년기 준비자)</td>
+            <td>노화와 노인에 관한 지식, 고령친화산업 이해, 고령친화 능력개발, 노인과 상호작용에 필요한 지식·기술</td>
+          </tr>
+          <tr>
+            <td><span class="kw-green">노인에 의한 교육</span></td>
+            <td>교수자가 노인</td>
+            <td>노인의 평생 지식·기술 활용. 개인적 삶의 의미·자기효능감 향상, 사회적 노인인적자원 활용. 역사·전통·자원봉사 포함</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="def-box" style="border-left-color:#7cffb4; background:#7cffb40d; margin-top:14px">
+        <div class="def-label" style="color:#7cffb4">노인교육의 가치 (송선희 외, 2011)</div>
+        사회통합(시민교육) · 능력개발(직업교육) · 삶의 질(여가문화)
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. 노인교육 목표 -->
+  <div class="concept-block">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <span class="concept-tag">Daniele 2016</span>
+      <span class="concept-name">노인교육(평생교육) 참여 목표</span>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">①</div>
+          <div class="step-content"><strong>경제적 이유(직업적)</strong> — 직업 경력 발전, 새 직업 준비 위해 직업교육 참여</div>
+        </div>
+        <div class="step">
+          <div class="step-num">②</div>
+          <div class="step-content"><strong>사회적/시민의식</strong> — 요구·흥미 변화 또는 사회구성원으로 더 잘 기능하기 위해 (예: 중년 여성이 자녀양육 이후 새 역할 준비)</div>
+        </div>
+        <div class="step">
+          <div class="step-num">③</div>
+          <div class="step-content"><strong>개인적 웰빙(삶의 질 향상)</strong> — 자신의 노화과정 이해, 여가활동 개발, 새로운 흥미 발견</div>
+        </div>
+      </div>
+      <div class="memo-box">
+        <div class="memo-label">🔑 McClusky의 노인 학습욕구</div>
+        대처욕구 · 표현욕구 · 공헌욕구 · 영향욕구 · 초월욕구
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. 노인교육 필요성 -->
+  <div class="concept-block">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <span class="concept-tag">한정란 2015</span>
+      <span class="concept-name">노인교육 필요성 ⭐</span>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <ul class="info-list">
+        <li>평생학습사회 출현 — 사회변화에 적응하기 위해 계속 학습 필요</li>
+        <li>핵가족화·세대 간 갈등 증가 — <strong>세대 간 이해를 위한 노인교육</strong> 요구</li>
+        <li>가치관 변화 — 노인 스스로 독립적·행복한 노년을 위해 학습 필요</li>
+        <li>노인의 다양한 욕구변화 및 노인에 대한 시각 변화</li>
+        <li><strong>임파워먼트(empowerment)</strong> — 교육을 통해 자신의 문제를 스스로 해결·예방하고 자신의 삶에 적극적으로 참여하게 함 → 노인교육의 가장 중요한 의의</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 8. 시민교육 -->
+  <div class="concept-block">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <span class="concept-tag">교육 프로그램</span>
+      <span class="concept-name">시민교육 (사회통합)</span>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <div class="def-label">시민교육 정의</div>
+      <div class="def-box">
+        변화하는 사회에서 구성원들이 적응할 수 있는 능력과 사회발전을 위해 <strong>훌륭한 시민으로서의 자질을 기르는 데 목적</strong>을 둔 교육. 현실에서의 문제를 해결하는 능력을 키우는 것에 중점 (서울대 교육연구소, 2011)
+      </div>
+      <div class="def-label" style="margin-top:14px">대표 사례</div>
+      <table class="compare-table">
+        <tr>
+          <th>사례</th>
+          <th>내용</th>
+        </tr>
+        <tr>
+          <td><span class="kw">독일 시민대학(VHS)</span><br>Volkshochschule</td>
+          <td>정부가 1970년 설립. 14세 이상 독일 내 거주자 수강 가능. 노인·성인·미취학 청소년 대상. 국가 지원으로 저렴, 실업자 무료. 단기강좌는 6주 과정이 가장 많음</td>
+        </tr>
+        <tr>
+          <td><span class="kw-green">U3A</span><br>(University of the Third Age)</td>
+          <td>1972년 Villas 제안 → 1973년 프랑스 툴루즈대학 시작. 1975년 AIUTA 결성. 50세 이상 대상. 정서적·인지적 능력 향상, 사회환경 변화 적응 목적. 학점 부여</td>
+        </tr>
+        <tr>
+          <td><span class="kw-yellow">한국</span></td>
+          <td>서울대 제3기 인생대학, 부산대 50+ 생애재설계 대학, 서울시 50플러스 등</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- 9. 직업교육 -->
+  <div class="concept-block">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <span class="concept-tag">교육 프로그램</span>
+      <span class="concept-name">직업교육 (능력개발)</span>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <ul class="info-list">
+        <li>은퇴로 인한 문제: <span class="kw-red">빈곤·질병·무위·고독</span> → 직업교육으로 해결</li>
+        <li><strong>노인취업교육</strong>: 근로 제공하고 임금을 받도록 교육</li>
+        <li>노인이 취업하려는 이유: 경제적 어려움 해결 + 활동 욕구 충족 + 자신의 능력 활용</li>
+        <li>취업교육 노인: <strong>고졸 이하가 가장 많고, 연령 낮을수록·남성일수록 취업률 높음</strong></li>
+        <li>지원 기관: 고용노동부, 보건복지부, 한국노인인력개발원, KOTRA, KOICA 등</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 10. 여가교육 -->
+  <div class="concept-block">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <span class="concept-tag">Kaplan 1960</span>
+      <span class="concept-name">여가교육 (삶의 질)</span>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <div class="def-label">여가(leisure) 정의</div>
+      <div class="def-box">
+        일과 반대되고 <strong>즐거움과 자발성</strong>을 가지고 있으며 <strong>의무성이 최소화</strong>되고 문화적 가치에 위배되지 않으며 다양한 관심과 놀이의 요소를 포함하고 있는 것
+      </div>
+      <ul class="info-list">
+        <li>여가교육 필요 이유: 교육목표·계획된 교육과정 필요 + 지식·기술 습득으로 삶의 질 향상하는 평생교육</li>
+        <li>여가지식 증진 교육 → 노인의 자존감·유능감 향상(Searle & Mahon, 1991)</li>
+        <li>대표 사례: <span class="kw">Road Scholar</span> (엘더호스텔 → 2010년 이름 변경, 1975년 뉴햄프셔 대학 시작, 7개 대륙 150개국)</li>
+        <li>한국: 노인복지관, 경로당, 평생교육기관 중심으로 운영</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 11. 웰다잉교육 -->
+  <div class="concept-block">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <span class="concept-tag">핵심 프로그램</span>
+      <span class="concept-name">웰다잉교육 ⭐</span>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <div class="def-label">교재 정의</div>
+      <div class="def-box">
+        갑자기 다가올 수 있는 죽음에 대비해 <strong>삶을 보다 의미 있고 제대로 살도록 하기 위한 교육</strong>(오진탁, 2008). 죽음의 참된 의미를 가르치고 죽음에 대한 바른 태도를 갖게 함으로 삶을 더 바람직하게 살아가도록 하는 교육 (이기숙, 2001)
+      </div>
+      <div class="def-label" style="margin-top:14px">웰다잉교육 대상</div>
+      <ul class="info-list">
+        <li>자신의 생을 잘 마무리하려는 사람 → 죽음에 대해 인식할 기회 제공</li>
+        <li>소중한 사람의 죽음을 경험한 사람 → 죽음 관련 고통 대처·극복</li>
+        <li>직업적으로 타인의 죽음을 경험하는 직업인(의료인·종교인·요양보호사·호스피스) → 죽어가는 사람과 가족 심리 이해</li>
+      </ul>
+      <div class="def-label" style="margin-top:14px">웰다잉교육 내용</div>
+      <ul class="info-list">
+        <li>자신의 삶 돌아보기·정리</li>
+        <li>유언장 쓰기 / 영정사진 찍기 / 타인과의 관계 회복</li>
+        <li>죽음의 과정 이해, 장례, 사별 후 생활 변화와 대처방법</li>
+        <li>사전의료의향서 작성 관련 교육</li>
+      </ul>
+      <div class="def-box" style="border-left-color:#d47cff; background:#d47cff0d; margin-top:14px">
+        <div class="def-label" style="color:#d47cff">유언장의 법적 효력 요건</div>
+        내용 + 작성날짜 + 주소 + 성명 + 날인 반드시 포함<br><br>
+        <strong>민법이 인정하는 5가지 유언장:</strong> 자필증서 · 녹음 · 공정증서 · 비밀증서 · 구수증서(받아쓴 유언증서)<br><br>
+        · 자필증서: 연월일·주소·성명 필수<br>
+        · 녹음: 증인 첨부 필요<br>
+        · 공정증서: 공증인 필요<br>
+        · 비밀증서: 봉투 봉인 + 2명 증인 + 확정일자인<br>
+        · 구수증서: 2인 이상 증인 + 7일 이내 법원 제출<br>
+        · 공통: 증인의 배우자·직계혈족·이익을 받는 자는 증인 불가
+      </div>
+      <div class="def-box" style="border-left-color:#ff7c7c; background:#ff7c7c0d; margin-top:10px">
+        <div class="def-label" style="color:#ff7c7c">사전의료의향서 (ADvance Directive)</div>
+        죽음에 임박한 상황에 대비해 개인이 자신의 의료행위에 대한 의사를 미리 작성하는 문서.<br>
+        2018년부터 시행된 <strong>"호스피스·완화의료 및 임종과정에 있는 환자의 연명의료결정에 관한 법률"</strong>(존엄사법)에 근거
+      </div>
+      <div class="def-label" style="margin-top:14px">자연친화적 장례 방법</div>
+      <ul class="info-list">
+        <li><span class="kw">수목장</span>: 나무의 뿌리 부분에 화장한 뼛가루를 묻는 방법. 1999년 스위스가 최초 도입</li>
+        <li><span class="kw-green">잔디장/화초장</span>: 뼛가루를 잔디 또는 꽃 아래 묻거나 뿌리는 방법</li>
+        <li>한국 수목장: 2004년 김장수 고려대 명예교수 장례식이 시초</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+  <div class="section-title" style="font-size:18px">
+    <div class="icon" style="background:var(--accent4); color:#0f1117">🤝</div>
+    노인자원봉사활동
+  </div>
+
+  <!-- 12. 자원봉사 -->
+  <div class="concept-block">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <span class="concept-tag">권중돈 2009</span>
+      <span class="concept-name">자원봉사 정의 ⭐</span>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <div class="def-label">어원</div>
+      <div class="def-box">
+        라틴어 <strong>'volo'(의지)</strong>에서 유래 → <strong>'voluntas'(자유의지)</strong>로 변화. 자유의사에 의한 자발적 행동 강조
+      </div>
+      <div class="def-label" style="margin-top:14px">교재 정의</div>
+      <div class="def-box">
+        '개인, 집단, 지역사회에서 발생하고 있는 여러 가지 사회문제를 예방하거나 통제·개선하고자 하는 노력으로서 공적 및 사적 조직에서 제공하는 서비스에 <strong>보수를 받지 않고 자발적으로 참여하는 개인의 지속적 활동</strong>'
+      </div>
+      <div class="def-label" style="margin-top:14px">자원봉사 관련 새 용어 (한경혜, 2010)</div>
+      <table class="compare-table">
+        <tr>
+          <th>용어</th>
+          <th>설명</th>
+        </tr>
+        <tr>
+          <td><span class="kw">볼런투어리즘</span><br>(voluntourism)</td>
+          <td>선진국 국민이 개발도상국가에 가서 노동을 하는 봉사활동</td>
+        </tr>
+        <tr>
+          <td><span class="kw-yellow">볼런테인먼트</span><br>(voluntainment)</td>
+          <td>부담없이 쉽고 재미있는 봉사활동</td>
+        </tr>
+        <tr>
+          <td><span class="kw-green">프로보노</span><br>(pro bono publico)</td>
+          <td>공익을 위한 전문직종의 사회공익봉사활동</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- 13. 자원봉사 장점 -->
+  <div class="concept-block">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <span class="concept-tag">효과</span>
+      <span class="concept-name">노인자원봉사활동의 필요성과 장점</span>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <div class="grid-2">
+        <div class="card" style="margin:0">
+          <div class="card-title"><div class="dot"></div>개인적 장점</div>
+          <ul class="info-list">
+            <li>새로운 지위·역할 제공</li>
+            <li>자아실현·사회적 가치 회복</li>
+            <li>자존심 유지·소외감 극복</li>
+            <li>경험·책임감 발휘 기회</li>
+            <li>세대 교류·연대 강화</li>
+            <li>신체적 활력 유지</li>
+            <li>자존감 향상, 고독감 감소</li>
+            <li>생활만족도 향상</li>
+          </ul>
+        </div>
+        <div class="card" style="margin:0">
+          <div class="card-title"><div class="dot" style="background:var(--accent3)"></div>사회적 장점</div>
+          <ul class="info-list">
+            <li>노인 이미지 긍정적 변화</li>
+            <li>시민단체·복지기관 인력·재정 부족 해소</li>
+            <li>지역사회 문제 해결</li>
+            <li>인적자원 제공으로 사회 발전</li>
+            <li>사회적 통합·안정에 기여</li>
+            <li>시민교육·복지교육 효과</li>
+            <li>공동체의식 강화</li>
+          </ul>
+        </div>
+      </div>
+      <div class="memo-box" style="margin-top:14px">
+        <div class="memo-label">📊 현황 (2017)</div>
+        전체인구 자원봉사 참여율 <strong>17.8%</strong> vs 60세 이상 노인 <strong>7.8%</strong> (낮은 편)<br>
+        자원봉사 참여 베이비부머의 82.3%가 <strong>한 달에 한 번 이상</strong> 봉사 (활동 강도는 높음)
+      </div>
+      <div class="memo-box" style="margin-top:10px; background:#7cffb40d; border-color:#7cffb444; color:#7cffb4">
+        <div class="memo-label" style="opacity:0.7">성별·교육수준별 차이</div>
+        자원봉사: 여성(14.1%) > 남성(11.6%)<br>
+        기부: 여성(38.0%) > 남성(35.2%)<br>
+        전문대졸 이상이 중졸 이하·고졸보다 참여율 높음
+      </div>
+    </div>
+  </div>
+
+  <!-- 14. 자원봉사 활성화 방안 -->
+  <div class="concept-block">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <span class="concept-tag">한경혜 2010</span>
+      <span class="concept-name">베이비붐세대 자원봉사 활성화 방안 ⭐</span>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <div class="steps">
+        <div class="step"><div class="step-num">①</div><div class="step-content">중년층을 타겟으로 하는 사회참여정책·프로그램 제공하여 선택으로 자원봉사 역할에 주목</div></div>
+        <div class="step"><div class="step-num">②</div><div class="step-content">베이비붐 세대의 <strong>성별·계층별 차이를 고려한 다양성</strong>에 주목</div></div>
+        <div class="step"><div class="step-num">③</div><div class="step-content">다양한 내용과 성격의 사회참여 기회 모색</div></div>
+        <div class="step"><div class="step-num">④</div><div class="step-content">사회참여 동기와 욕구 주시 → 성취감 얻을 수 있고 삶의 경험 활용·적용 가능하도록</div></div>
+        <div class="step"><div class="step-num">⑤</div><div class="step-content">민간영역과 비즈니스와의 연계 활성화</div></div>
+        <div class="step"><div class="step-num">⑥</div><div class="step-content">제도적 지원과 보상 체계화를 위해 홍보전략과 조직 형성</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+  <div class="section-title" style="font-size:18px">
+    <div class="icon" style="background:var(--accent5); color:#0f1117">🏘️</div>
+    지역사회활동
+  </div>
+
+  <!-- 15. 지역사회참여 -->
+  <div class="concept-block">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <span class="concept-tag">핵심 개념</span>
+      <span class="concept-name">지역사회조직 & 노인의 지역사회참여</span>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <div class="def-label">지역사회조직 정의</div>
+      <div class="def-box">
+        어떤 목적을 달성하기 위한 <strong>공통의 목적을 가지고 만들어진 집단</strong>. 종교기관·정당·취미집단·스포츠 관련 집단 등
+      </div>
+      <ul class="info-list">
+        <li>노인의 지역사회참여 효과: 사회와 연결, 정체감의 위기 극복, 긍정적 자아상, 성공적 노후생활에 도움</li>
+        <li>참여에 영향 미치는 요인: <strong>건강·소득·이동 문제</strong>가 노화 자체보다 더 영향</li>
+        <li>2017년 기준 평생교육 받아본 기관: 노인복지관(34.8%) > 경로당(19.2%)</li>
+      </ul>
+      <div class="def-label" style="margin-top:14px">Cutler & Hughes(1982) — 성차와 연령차</div>
+      <table class="compare-table">
+        <tr>
+          <th>성별</th>
+          <th>경향</th>
+        </tr>
+        <tr>
+          <td>남성</td>
+          <td>스포츠·직업·전문적 조직 참여가 중년기에 가장 높고 노년기에 다소 낮아짐</td>
+        </tr>
+        <tr>
+          <td>여성</td>
+          <td>스포츠 참여는 나이 들수록 감소. 취미·전문적 조직·토론·스터디 그룹은 상대적으로 안정적</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- 16. 종교기관 -->
+  <div class="concept-block">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <span class="concept-tag">Hooyman & Kiyak 2011</span>
+      <span class="concept-name">종교기관 참여 ⭐</span>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <ul class="info-list">
+        <li>노인이 <strong>가장 흔하게 선택하는</strong> 지역사회 모임</li>
+        <li>나이 들수록 종교기관 참여 증가, 리더십 지위도 노인에게 집중</li>
+        <li>종교기관 참여는 다른 기관보다 훨씬 오래도록 지속</li>
+        <li>미국 65세 이상 <strong>50% 이상이 일주일에 한 번 이상</strong> 종교기관 참석</li>
+        <li>노인의 <strong>60% 이상이 종교가 매우 중요</strong>하다고 응답</li>
+        <li>참여자 중 절반 정도 규칙적 참여, <strong>여성이 남성보다 더 자주</strong> 참여</li>
+        <li>교회 참여: 소득·교육수준 높고 거주기간 길수록 높아짐</li>
+      </ul>
+      <div class="def-box" style="border-left-color:#d47cff; background:#d47cff0d; margin-top:14px">
+        <div class="def-label" style="color:#d47cff">종교활동의 효과</div>
+        정신적·신체적 웰빙 향상, 삶의 마무리 단계 질 향상, 죽음 위험 감소, 면역력 증강, 인지적 기능, 혈압 감소, 수명 증가, 삶의 질·자존감·만족·유용감 향상
+      </div>
+      <div class="memo-box">
+        <div class="memo-label">한국 현황 (보건사회연구원, 2017)</div>
+        종교활동 참여율 10.7% / 여자노인(13.9%) > 남자노인(6.4%)
+      </div>
+    </div>
+  </div>
+
+  <!-- 17. 정치참여 -->
+  <div class="concept-block">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <span class="concept-tag">이인수 2001</span>
+      <span class="concept-name">정치 참여</span>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <ul class="info-list">
+        <li>나이 증가 → 투표참여·정당활동 등 정치적 관심·참여 증가</li>
+        <li>원인: 신체적 기능·사회참여 기회 감소 → <strong>사회에서의 위상강화 욕구 증가</strong></li>
+        <li>노인의 정치참여행동: <strong>투표·정당참여·정치행동집단참여</strong></li>
+        <li>가장 적극적인 정치참여: <strong>선거 참여</strong></li>
+        <li>정치적 힘(지혜)은 전문적 공부보다 <strong>경험에서 학습</strong></li>
+      </ul>
+      <div class="memo-box">
+        <div class="memo-label">📊 2016 제20대 국회의원선거</div>
+        60세 이상 투표율: <strong>64.3%</strong> (다른 연령층보다 높음)<br>
+        70대 투표율: <strong>73.3%</strong> (가장 높음)<br>
+        한국 노인 정치사회단체 활동 참여율: <strong>0.4%</strong> (매우 낮음, 참여자 중 76.2%가 월1회 이하 간헐적 참여)<br>
+        남자노인(0.8%) > 여자노인(0.1%), 연령 낮을수록 참여율 높음
+      </div>
+    </div>
+  </div>
+
+  <!-- 18. 사회참여 위계모델 -->
+  <div class="concept-block">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <span class="concept-tag">Katagiri 2006</span>
+      <span class="concept-name">사회참여 위계모델 ⭐</span>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <div class="def-label">동기 유형</div>
+      <ul class="info-list">
+        <li><span class="kw">자기지향동기</span>: 자신의 삶을 향상시키고자 하는 동기</li>
+        <li><span class="kw-yellow">관계지향동기</span>: 타인과 친밀한 관계를 맺고자 하는 동기</li>
+        <li><span class="kw-green">사회지향동기</span>: 사회에 기여하고자 하는 동기</li>
+      </ul>
+      <table class="compare-table" style="margin-top:12px">
+        <tr>
+          <th>수준</th>
+          <th>동기 조합</th>
+          <th>활동 형태</th>
+        </tr>
+        <tr>
+          <td>0수준 (고립)</td>
+          <td>세 가지 모두 낮음</td>
+          <td>사회에서 고립</td>
+        </tr>
+        <tr>
+          <td>1수준 (혼자 활동)</td>
+          <td>자기지향만 높음</td>
+          <td>혼자 하는 취미활동</td>
+        </tr>
+        <tr>
+          <td>2수준 (단체활동)</td>
+          <td>자기지향+관계지향 높음, 사회지향 낮음</td>
+          <td>모임/단체 활동</td>
+        </tr>
+        <tr>
+          <td>3수준 (자원봉사)</td>
+          <td>세 가지 모두 높음</td>
+          <td>자원봉사 등 생산적 활동</td>
+        </tr>
+      </table>
+      <div class="memo-box">
+        <div class="memo-label">한경혜 등(2011) 연구 결과</div>
+        50~60대 연소노인: 자기지향+관계지향 동기 높음<br>
+        관계지향·사회지향 동기 높을수록 사회참여 정도 높음 (자기지향 동기는 유의한 관련성 없음)<br>
+        남성 > 여성: 참여 단체 수, 동창회·향우회·직장모임, 사회지향 동기<br>
+        여성 > 남성: 종교기관 참여
+      </div>
+    </div>
+  </div>
+
+  <!-- 한국 베이비부머 -->
+  <div class="concept-block">
+    <div class="concept-header" onclick="toggleConcept(this)">
+      <span class="concept-tag">통계·현황</span>
+      <span class="concept-name">한국 베이비부머의 사회참여활동</span>
+      <span class="concept-arrow">▼</span>
+    </div>
+    <div class="concept-body">
+      <ul class="info-list">
+        <li>상당수가 <strong>2개 이상</strong>의 사회모임에 참여</li>
+        <li>주로 <strong>정서적 교류 기반 친목활동</strong> 참여</li>
+        <li>모임 유형: <span class="kw">동창모임(58.1%)</span> > 스포츠모임 > 지역사회단체 > 향우회 > 취미·교양모임</li>
+        <li>자원봉사 참여: <strong>13.3%</strong> / 기부 경험: <strong>37.0%</strong></li>
+        <li>정기 기부: <strong>15.5%</strong> / 비정기 기부: <strong>21.4%</strong></li>
+        <li>자원봉사 참여자의 82.3%가 월 1회 이상, 38.3%가 주 1회 이상 봉사</li>
+        <li>기부 금액: 10~19만원이 29.8%로 가장 많음, 100만원 이상도 15.4%</li>
+        <li><strong>53.6%</strong>가 "노인이 되었을 때 내 인생이 아무런 의미가 없을까봐 두렵다"</li>
+        <li><strong>47.5%</strong>가 "늙는다는 것은 쓸모없어지는 것이다"고 응답</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ===================== O/X 퀴즈 ===================== -->
+<div id="section-ox" class="section">
+<div class="container">
+  <div class="section-title">
+    <div class="icon">✅</div>
+    O/X 퀴즈 — 총 20문제
+  </div>
+
+  <div class="progress-container">
+    <span class="progress-label">진행률</span>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" id="oxProgress" style="width:0%"></div></div>
+    <span class="progress-num" id="oxCount">0 / 20</span>
+  </div>
+
+  <div id="ox-questions"></div>
+</div>
+</div>
+
+<!-- ===================== 단답형 ===================== -->
+<div id="section-short" class="section">
+<div class="container">
+  <div class="section-title">
+    <div class="icon">✏️</div>
+    단답형 퀴즈 — 빈칸 채우기 포함
+  </div>
+
+  <div id="short-questions"></div>
+</div>
+</div>
+
+<!-- ===================== 주관식·서술형 ===================== -->
+<div id="section-essay" class="section">
+<div class="container">
+  <div class="section-title">
+    <div class="icon">📝</div>
+    주관식 · 서술형 예상 문제
+  </div>
+
+  <div id="essay-questions"></div>
+</div>
+</div>
+
+<!-- ===================== 핵심 요약 ===================== -->
+<div id="section-cheat" class="section">
+<div class="container">
+  <div class="section-title">
+    <div class="icon">⚡</div>
+    시험 직전 핵심 요약 — 이것만은 꼭!
+  </div>
+
+  <div class="mindmap">
+    <div class="mindmap-title">Chapter 13 전체 구조</div>
+    <div class="mm-node">
+      <div class="mm-node-icon" style="background:var(--accent)">🌐</div>
+      <div style="flex:1">
+        <div style="font-weight:700; color:var(--text-bright); font-size:15px">노년기 사회참여</div>
+        <div class="mm-children">
+          <div class="mm-leaf">① <strong style="color:#7c9eff">사회참여와 삶의 질</strong> — 성공적 노화, 3D, 활동적 노화</div>
+          <div class="mm-leaf">② <strong style="color:#ffd97c">노인교육</strong> — 시민교육·직업교육·여가교육·웰다잉교육</div>
+          <div class="mm-leaf">③ <strong style="color:#7cffb4">노인자원봉사</strong> — 정의·필요성·현황·활성화방안</div>
+          <div class="mm-leaf">④ <strong style="color:#d47cff">지역사회활동</strong> — 노인기관·종교기관·정치참여</div>
+          <div class="mm-leaf">⑤ <strong style="color:#ff7c7c">사회참여 위계모델</strong> — Katagiri 0~3수준</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cheatsheet-grid" id="cheatsheet"></div>
+
+  <div class="divider"></div>
+
+  <div class="card">
+    <div class="card-title"><div class="dot" style="background:var(--accent2)"></div>수치 암기 총정리 <span class="imp">❗필수</span></div>
+    <table class="compare-table">
+      <tr><th>항목</th><th>수치</th><th>출처</th></tr>
+      <tr><td>U3A 시작 연도</td><td><strong>1973년</strong> (1972 Villas 제안)</td><td>프랑스 툴루즈대</td></tr>
+      <tr><td>AIUTA 결성</td><td><strong>1975년</strong></td><td>국제연합체</td></tr>
+      <tr><td>로드스칼라 시작</td><td><strong>1975년</strong> 엘더호스텔, 2010년 이름 변경</td><td>뉴햄프셔 대학</td></tr>
+      <tr><td>수목장 최초 도입</td><td><strong>1999년 스위스</strong></td><td>-</td></tr>
+      <tr><td>한국 수목장 시초</td><td><strong>2004년</strong> (김장수 고려대 교수)</td><td>-</td></tr>
+      <tr><td>존엄사법 시행</td><td><strong>2018년</strong></td><td>-</td></tr>
+      <tr><td>전체 자원봉사 참여율</td><td><strong>17.8%</strong> (2017)</td><td>통계청</td></tr>
+      <tr><td>60세 이상 자원봉사</td><td><strong>7.8%</strong> (2017)</td><td>통계청</td></tr>
+      <tr><td>베이비부머 자원봉사</td><td>남 11.6%, 여 14.1%</td><td>한경혜 등 2016</td></tr>
+      <tr><td>베이비부머 기부</td><td>남 35.2%, 여 38.0%</td><td>한경혜 등 2016</td></tr>
+      <tr><td>20대 총선 60세 이상 투표율</td><td><strong>64.3%</strong></td><td>중앙선관위</td></tr>
+      <tr><td>20대 총선 70대 투표율</td><td><strong>73.3%</strong> (최고)</td><td>중앙선관위</td></tr>
+      <tr><td>노인 정치사회단체 참여율</td><td><strong>0.4%</strong></td><td>보건사회연구원</td></tr>
+      <tr><td>미국 65세 이상 주1회 종교기관</td><td><strong>50% 이상</strong></td><td>Hooyman & Kiyak</td></tr>
+      <tr><td>노인의 종교 중요하다 응답</td><td><strong>60% 이상</strong></td><td>Hooyman & Kiyak</td></tr>
+      <tr><td>독일 VHS 설립</td><td><strong>1970년</strong>, 14세 이상</td><td>정부</td></tr>
+      <tr><td>베이비부머 동창모임 참여</td><td><strong>58.1%</strong></td><td>한국 베이비부머 패널</td></tr>
+      <tr><td>평생교육 기관: 노인복지관</td><td><strong>34.8%</strong></td><td>보건사회연구원 2017</td></tr>
+      <tr><td>평생교육 기관: 경로당</td><td><strong>19.2%</strong></td><td>보건사회연구원 2017</td></tr>
+      <tr><td>한국 종교활동 참여율</td><td><strong>10.7%</strong> (여 13.9%, 남 6.4%)</td><td>보건사회연구원 2017</td></tr>
+    </table>
+  </div>
+
+</div>
+</div>
+
+<button class="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+// ===== NAV =====
+function showSection(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('section-' + id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ===== CONCEPT TOGGLE =====
+function toggleConcept(header) {
+  const block = header.parentElement;
+  block.classList.toggle('open');
+}
+
+// ===== OX QUIZ DATA =====
+const oxData = [
+  { q: "활동적 노화는 WHO(2002)가 제시한 개념으로, 참여·건강·안전의 기회를 최적화하는 과정이다.", ans: true, exp: "맞아. WHO 2002년 제시. 핵심 3요소: 참여·건강·안전." },
+  { q: "서구에서는 노화를 치매(dementia), 의존성(dependence), 질병(disease)의 3D와 연결시켜 생각해 왔다.", ans: true, exp: "맞아. 서구의 노화에 대한 부정적 시각 = 3D." },
+  { q: "병리적 노화란 심각한 질환이나 기능장애는 없지만 사회적 세계가 축소되어 고독한 모습이다.", ans: false, exp: "틀려. 그건 일반적 노화. 병리적 노화는 질병과 장애로 점철된 노화야." },
+  { q: "Rowe와 Kahn(1998)의 성공적 노화 3요소 중 '적극적인 인생참여'는 타인과의 친밀한 관계 유지와 생산적 활동 참여로 구성된다.", ans: true, exp: "맞아. Rowe & Kahn의 성공적 노화 ③번째 요소." },
+  { q: "성공적 노화에서 질병·장애의 회피는 질병이나 장애가 없는 상태만을 의미한다.", ans: false, exp: "틀려. 위험요인들도 피하는 것까지 포함해야 해." },
+  { q: "생산적 활동이란 보수 여부에 상관없이 가치를 창출하는 모든 활동을 포함한다.", ans: true, exp: "맞아. 유급 활동뿐 아니라 집안일, 돌봄, 자원봉사 모두 포함." },
+  { q: "자원봉사(voluntas)는 라틴어 'volo(의지)'에서 유래했고 자발적 행동을 강조한다.", ans: true, exp: "맞아. volo → voluntas → 자유의사에 의한 자발적 행동." },
+  { q: "볼런테인먼트(voluntainment)는 선진국 국민이 개발도상국가에 가서 노동하는 봉사활동이다.", ans: false, exp: "틀려. 그건 볼런투어리즘(voluntourism). 볼런테인먼트는 쉽고 재미있는 봉사활동." },
+  { q: "2017년 기준 60세 이상 노인의 자원봉사 참여율은 전체 인구 참여율보다 높다.", ans: false, exp: "틀려. 전체 17.8% vs 60세 이상 7.8%로 훨씬 낮아." },
+  { q: "종교기관 참여는 노인이 가장 흔하게 선택하는 지역사회 모임이다.", ans: true, exp: "맞아. Hooyman & Kiyak(2011)에 따르면 종교기관 참여가 가장 흔함." },
+  { q: "나이가 들수록 종교기관 참여는 낮아지는 경향이 있다.", ans: false, exp: "틀려. 나이 들수록 종교기관 참여는 높아지고, 다른 기관보다 훨씬 오래 지속돼." },
+  { q: "미국 65세 이상 노인의 50% 이상이 일주일에 한 번 이상 종교기관에 참석한다.", ans: true, exp: "맞아. Hooyman & Kiyak(2011)에서 재인용된 통계야." },
+  { q: "노인의 종교활동은 공식적 종교활동 참여뿐 아니라 기도·명상 등 비공식적 종교활동도 정신·신체 건강에 영향을 미친다.", ans: true, exp: "맞아. 비공식적 종교활동도 웰빙에 영향." },
+  { q: "U3A(University of the Third Age)는 1972년 Villas가 제안하여 1973년 독일에서 시작되었다.", ans: false, exp: "틀려. 1973년 프랑스 툴루즈 대학에서 시작됐어." },
+  { q: "독일 시민대학(VHS)은 정부가 1970년 설립했으며 14세 이상 독일 내 거주자가 수강 가능하다.", ans: true, exp: "맞아. VHS = Volkshochschule, 1970년, 14세 이상." },
+  { q: "사회참여 위계모델에서 세 가지 동기(자기지향·관계지향·사회지향) 모두 낮은 경우는 자원봉사 참여를 의미한다.", ans: false, exp: "틀려. 세 가지 모두 낮은 건 0수준(고립). 자원봉사는 세 가지 모두 높은 3수준이야." },
+  { q: "민법에서 인정하는 유언장의 형태는 총 5가지이다.", ans: true, exp: "맞아. 자필증서·녹음·공정증서·비밀증서·구수증서(받아쓴 유언증서)." },
+  { q: "수목장을 세계 최초로 도입한 나라는 스위스로, 1999년 1월이다.", ans: true, exp: "맞아. 스위스가 1999년 1월 가장 먼저 수목장을 도입했어." },
+  { q: "한경혜 등(2011)의 연구에서 자기지향 동기는 사회참여 정도와 유의한 관련성을 보였다.", ans: false, exp: "틀려. 관계지향·사회지향 동기는 사회참여 정도와 유의한 관련성이 있었지만, 자기지향 동기는 유의한 관련성을 보이지 않았어." },
+  { q: "2016년 제20대 국회의원선거에서 70대의 투표율이 73.3%로 가장 높았다.", ans: true, exp: "맞아. 60세 이상 전체 64.3%, 70대 73.3%로 최고." },
+];
+
+// ===== RENDER OX =====
+let oxAnswered = 0;
+function renderOX() {
+  const container = document.getElementById('ox-questions');
+  oxData.forEach((item, i) => {
+    const div = document.createElement('div');
+    div.className = 'quiz-item';
+    div.innerHTML = `
+      <div class="quiz-q"><span class="qnum">Q${String(i+1).padStart(2,'0')}</span>${item.q}</div>
+      <div class="ox-choices">
+        <button class="ox-btn" onclick="checkOX(this, ${i}, true)">O</button>
+        <button class="ox-btn" onclick="checkOX(this, ${i}, false)">X</button>
+      </div>
+      <div class="ox-result" id="ox-result-${i}"></div>
+    `;
+    container.appendChild(div);
+  });
+}
+
+function checkOX(btn, idx, selected) {
+  const item = oxData[idx];
+  const result = document.getElementById('ox-result-' + idx);
+  const parent = btn.parentElement;
+  const btns = parent.querySelectorAll('.ox-btn');
+
+  btns.forEach(b => {
+    b.classList.remove('selected-o','selected-x');
+    b.disabled = true;
+  });
+
+  if (selected) btn.classList.add('selected-o');
+  else btn.classList.add('selected-x');
+
+  const correct = selected === item.ans;
+  result.classList.add('show', correct ? 'correct' : 'wrong');
+  result.innerHTML = (correct ? '✅ 정답!' : '❌ 오답!') + ' <strong>' + (item.ans ? 'O' : 'X') + '</strong> — ' + item.exp;
+
+  if (!btn.dataset.counted) {
+    btn.dataset.counted = '1';
+    oxAnswered++;
+    document.getElementById('oxCount').textContent = oxAnswered + ' / ' + oxData.length;
+    document.getElementById('oxProgress').style.width = (oxAnswered / oxData.length * 100) + '%';
+  }
+}
+
+// ===== SHORT QUIZ DATA =====
+const shortData = [
+  { type: 'fill', q: "활동적 노화는 사람들이 나이 들어 가면서 삶의 질을 높이기 위해 ___, ___, ___의 기회를 최적화하는 과정이다.", ans: "참여, 건강, 안전", hint: "WHO가 제시한 3요소" },
+  { type: 'fill', q: "Rowe와 Kahn(1998)의 성공적 노화 3요소: ① 질병과 장애의 ___, ② 높은 수준의 인지적·신체적 ___ 유지, ③ 생산적 활동과 타인과의 관계를 통한 적극적인 인생___.", ans: "회피, 기능, 참여", hint: "순서대로 기억하기" },
+  { type: 'short', q: "서구에서 노화를 연결시켜 생각해온 3D가 무엇인지 영어로 쓰시오.", ans: "Dementia(치매), Dependence(의존성), Disease(질병)" },
+  { type: 'short', q: "사회참여(civic engagement)의 정의를 기술한 학자와 연도를 쓰시오.", ans: "Hooyman & Kiyak (2011)" },
+  { type: 'fill', q: "노인교육은 크게 세 범위로 구분된다: 노인___교육, 노인에___교육, 노인에 의한 교육", ans: "을 위한, 관한", hint: "세 가지 범위" },
+  { type: 'short', q: "노인교육에서 임파워먼트(empowerment)란 무엇인지 한 문장으로 쓰시오.", ans: "교육을 통해 자신의 문제를 스스로 해결하고 예방하게 하여 자신의 삶에 적극적으로 참여하게 하는 것" },
+  { type: 'short', q: "여가(leisure)의 정의에서 핵심적인 특징 3가지를 쓰시오.", ans: "즐거움과 자발성, 의무성 최소화, 다양한 관심과 놀이 요소 포함" },
+  { type: 'fill', q: "자원봉사는 라틴어 '___'(의지)에서 유래되었고, '___'(자유의지)라는 용어로 변화되었다.", ans: "volo, voluntas", hint: "어원" },
+  { type: 'short', q: "볼런투어리즘(voluntourism)과 프로보노(pro bono)를 각각 설명하시오.", ans: "볼런투어리즘: 선진국 국민이 개발도상국가에 가서 노동하는 봉사활동 / 프로보노: 공익을 위한 전문직종의 사회공익봉사활동" },
+  { type: 'fill', q: "사회참여 위계모델에서 세 가지 동기가 모두 높은 3수준의 활동 형태는 ___이다.", ans: "자원봉사(생산적 활동)", hint: "Katagiri 2006" },
+  { type: 'short', q: "민법이 인정하는 유언장의 5가지 형태를 모두 쓰시오.", ans: "자필증서, 녹음, 공정증서, 비밀증서, 구수증서(받아쓴 유언증서)" },
+  { type: 'short', q: "수목장이란 무엇이며, 세계 최초로 도입한 나라와 연도를 쓰시오.", ans: "수목장: 나무의 뿌리 부분에 화장한 고인의 뼛가루를 묻는 방법. 스위스, 1999년 1월 최초 도입" },
+  { type: 'fill', q: "한경혜(2010)에 따르면 베이비붐세대 자원봉사 활성화를 위해 ___영역과 비즈니스와의 연계를 활성화해야 한다.", ans: "민간", hint: "5번째 방안" },
+  { type: 'short', q: "지역사회조직(community association)의 정의를 쓰시오.", ans: "어떤 목적을 달성하기 위한 공통의 목적을 가지고 만들어진 집단" },
+  { type: 'fill', q: "2016년 제20대 국회의원선거에서 60세 이상 투표율은 ___%이며, 그 중 70대 투표율이 ___%로 가장 높았다.", ans: "64.3, 73.3", hint: "중앙선관위 2016" },
+];
+
+function renderShort() {
+  const container = document.getElementById('short-questions');
+  shortData.forEach((item, i) => {
+    const div = document.createElement('div');
+    div.className = 'quiz-item quiz-area';
+    const badge = item.type === 'fill' ? '<span class="quiz-type-badge badge-fill">빈칸 채우기</span>' : '<span class="quiz-type-badge badge-short">단답형</span>';
+    div.innerHTML = `
+      <div class="quiz-title-row">${badge}</div>
+      <div class="quiz-q"><span class="qnum">Q${String(i+1).padStart(2,'0')}</span>${item.q}</div>
+      ${item.hint ? `<div style="font-size:12px; color:var(--text-dim); margin-bottom:8px">💡 힌트: ${item.hint}</div>` : ''}
+      <button class="quiz-answer-btn" onclick="toggleAnswer('sa-${i}', this)">▶ 정답 확인</button>
+      <div class="quiz-answer-box" id="sa-${i}">
+        <div class="answer-label">✅ 정답</div>
+        ${item.ans}
+      </div>
+    `;
+    container.appendChild(div);
+  });
+}
+
+function toggleAnswer(id, btn) {
+  const box = document.getElementById(id);
+  box.classList.toggle('show');
+  btn.textContent = box.classList.contains('show') ? '▲ 정답 닫기' : '▶ 정답 확인';
+}
+
+// ===== ESSAY QUIZ DATA =====
+const essayData = [
+  {
+    type: 'essay',
+    q: "Rowe와 Kahn(1998)의 성공적 노화의 세 가지 요소를 설명하고, 이 요소들이 위계적 관계를 갖는다는 것의 의미를 논하시오.",
+    ans: `<strong>① 질병과 장애의 회피</strong>: 단순히 질병·장애가 없는 상태가 아니라, 질병과 장애에 대한 위험요인들도 피하는 것을 의미한다.<br><br>
+<strong>② 높은 수준의 인지적·신체적 기능 유지</strong>: 타인에게 의존하지 않고 기본적인 일상의 욕구를 충족시키며 독립적으로 일상생활을 영위할 수 있는 신체적·정신적 기능을 유지하는 것이다.<br><br>
+<strong>③ 생산적 활동과 타인과의 관계를 통한 적극적인 인생참여</strong>: 다른 사람과 친밀한 관계 유지 + 생산적 활동 참여로 구성되며, 생산적 활동은 유급·무급 불문하고 가치를 창출하는 모든 활동을 포함한다.<br><br>
+<strong>위계적 관계의 의미</strong>: 질병과 장애가 없으면 정신적·신체적 기능을 유지하기가 더 쉽고, 정신적·신체적 기능을 유지함으로써 적극적인 인생참여가 가능해진다. 즉 각 요소가 상위 위계의 기능을 보장하지는 않지만, 가능하게 하고 용이하게 수행하도록 도와주는 관계이다.`
+  },
+  {
+    type: 'essay',
+    q: "노인교육의 세 가지 범위(노인을 위한 교육, 노인에 관한 교육, 노인에 의한 교육)를 각각 정의하고, 각 범위의 학습자와 주요 내용을 설명하시오.",
+    ans: `<strong>① 노인을 위한 교육</strong>: 노인이 학습자이며 노인의 능력 향상과 배움에 대한 욕구 충족이 목적이다. 주로 노인의 사회통합, 여가활용, 직업교육 등 다양한 욕구를 충족시키는 것을 목적으로 한다. 노년기 역할, 자기관리, 인간관계, 여가문화 등의 내용을 학습한다.<br><br>
+<strong>② 노인에 관한 교육</strong>: 어느 연령대이든 노인 관련 직업 종사자, 노년기를 준비하는 모든 사람이 학습자이다. 노화와 노인에 관한 지식, 고령친화산업 이해, 고령친화 능력개발, 노인과 상호작용하는 데 필요한 지식·기술 등을 학습한다.<br><br>
+<strong>③ 노인에 의한 교육</strong>: 교수자가 노인으로, 노인이 평생 동안 축적해 온 지식과 기술을 활용한다. 개인적으로는 삶의 의미와 자기효능감을 높이고 사회적으로는 노인 인적자원을 활용한다는 의의를 갖는다. 역사·전통·노인자원봉사·사회참여활동 등이 포함된다.`
+  },
+  {
+    type: 'essay',
+    q: "노인자원봉사활동의 개인적 장점과 사회적 장점을 각각 서술하시오.",
+    ans: `<strong>개인적 장점</strong>: 새로운 지위와 역할 제공, 자아실현 및 사회적 가치 회복, 자존심 유지, 소외감 극복, 경험과 책임감 발휘 기회 제공, 노인과 다른 세대의 교류·연대 강화, 신체적 활력 유지 및 형성, 자존감 향상, 은퇴 후 적응 및 고독감 감소, 생활만족도 향상 등이 있다.<br><br>
+<strong>사회적 장점</strong>: 노인에 대한 이미지를 긍정적으로 변화시키고, 시민단체나 복지기관 등의 인력·재정 부족에 도움을 제공하며, 지역사회문제 해결에 공헌한다. 사회에 인적자원을 제공하여 사회발전에 기여하고, 다양한 활동을 통해 사회적 통합과 안정에 도움이 되며 사회적 공동체의 약화를 방지한다. 자원봉사 전 사전교육을 통해 시민교육 및 복지 교육 효과도 얻을 수 있다.`
+  },
+  {
+    type: 'essay',
+    q: "사회참여(civic engagement)의 정의를 쓰고, 노년기 사회참여가 성공적 노화 및 활동적 노화와 어떤 관련이 있는지 설명하시오.",
+    ans: `<strong>사회참여 정의 (Hooyman & Kiyak, 2011)</strong>: 투표나 공동활동 참여, 자원봉사활동 등과 같은 개인적 또는 공동의 활동을 통해 지역사회의 삶에 적극적으로 참여하는 과정.<br><br>
+<strong>성공적·활동적 노화와의 관련성</strong>: Rowe & Kahn의 성공적 노화 세 번째 요소가 바로 '적극적인 인생참여'로, 사회참여는 성공적 노화의 핵심 구성요소이다. 또한 활동적 노화에서 강조하는 참여 기회의 최적화와도 직결된다. 노인의 사회참여는 개인의 책임과 자립, 기여를 강조한다는 점에서 두 개념과 깊이 관련된다. 사회참여는 삶의 의미를 찾게 하고 자존감을 향상시키며 사회에 공헌할 수 있는 등 개인의 삶의 질을 향상시키는 동시에 사회적으로 효율적인 인적자원의 활용 등의 이점이 있다.`
+  },
+  {
+    type: 'essay',
+    q: "웰다잉교육의 정의와 교육 대상, 주요 내용을 서술하시오. 또한 민법에서 인정하는 유언장의 종류를 모두 쓰시오.",
+    ans: `<strong>웰다잉교육 정의 (오진탁, 2008)</strong>: 갑자기 다가올 수 있는 죽음에 대비해 삶을 보다 의미 있고 제대로 살도록 하기 위한 교육. 죽음의 참된 의미를 가르치고 죽음에 대한 바른 태도를 갖게 함으로 삶을 더 바람직하게 살아가도록 하는 교육.<br><br>
+<strong>교육 대상</strong>: ① 자신의 생을 잘 마무리하고자 하는 이들, ② 소중한 사람의 죽음을 경험한 사람들, ③ 직업적으로 타인의 죽음을 자주 경험하는 직업인(의료인, 종교인, 요양보호사, 호스피스 등).<br><br>
+<strong>주요 내용</strong>: 자신의 삶 돌아보기·정리, 유언장 쓰기, 영정사진 찍기, 타인과의 관계 회복, 죽음의 과정 이해와 장례, 사별 후 생활 변화와 대처방법, 사전의료의향서 작성 교육 등.<br><br>
+<strong>민법이 인정하는 5가지 유언장</strong>: ① 자필증서(연월일·주소·성명 필수), ② 녹음(증인 첨부), ③ 공정증서(공증인 필요), ④ 비밀증서(봉투 봉인+2명 증인+확정일자인), ⑤ 구수증서(2인 이상 증인+7일 이내 법원 제출)`
+  },
+  {
+    type: 'essay',
+    q: "Katagiri(2006)의 사회참여 위계모델을 설명하고, 한경혜 등(2011)의 연구결과를 통해 노인 사회참여 활성화를 위한 시사점을 논하시오.",
+    ans: `<strong>사회참여 위계모델</strong>: 자기지향동기, 관계지향동기, 사회지향동기의 세 가지 동기에 따라 4수준으로 구분된다.<br>
+- 0수준(고립): 세 가지 동기 모두 낮음<br>
+- 1수준(혼자 하는 활동): 자기지향 동기만 높음<br>
+- 2수준(단체활동): 자기지향+관계지향 동기 높고, 사회지향 낮음<br>
+- 3수준(자원봉사): 세 가지 동기 모두 높음<br><br>
+<strong>한경혜 등(2011) 연구 결과</strong>: 도시 거주 50~60대 연소노인은 자기지향·관계지향 동기가 높았으며, 관계지향·사회지향 동기가 높을수록 사회참여 정도가 높았다. 반면 자기지향 동기는 사회참여 정도와 유의한 관련성을 보이지 않았다. 남성은 여성보다 참여 단체 수가 많고 동창회·향우회·직장 관련 모임 참여가 높았으며, 여성은 종교기관 참여가 높았다.<br><br>
+<strong>시사점</strong>: 노인의 사회참여 활성화를 위해서는 남녀 간의 차이, 연령, 거주지역을 고려해야 하며, 사회참여 동기별 접근이 필요하다. 특히 관계지향·사회지향 동기를 높이는 프로그램 개발이 효과적이다.`
+  },
+];
+
+function renderEssay() {
+  const container = document.getElementById('essay-questions');
+  essayData.forEach((item, i) => {
+    const div = document.createElement('div');
+    div.className = 'quiz-item quiz-area';
+    div.innerHTML = `
+      <div class="quiz-title-row"><span class="quiz-type-badge badge-essay">서술형 예상문제</span></div>
+      <div class="quiz-q"><span class="qnum">Q${String(i+1).padStart(2,'0')}</span>${item.q}</div>
+      <button class="quiz-answer-btn" onclick="toggleAnswer('ea-${i}', this)">▶ 모범 답안 보기</button>
+      <div class="quiz-answer-box" id="ea-${i}">
+        <div class="answer-label">📝 모범 답안</div>
+        ${item.ans}
+      </div>
+    `;
+    container.appendChild(div);
+  });
+}
+
+// ===== CHEATSHEET =====
+const csData = [
+  { key: "활동적 노화 (WHO 2002)", val: "참여·건강·안전의 기회를 최적화하는 과정" },
+  { key: "3D (서구의 노화 인식)", val: "Dementia·Dependence·Disease" },
+  { key: "성공적 노화 3요소 (Rowe & Kahn)", val: "①질병·장애 회피 ②인지적·신체적 기능 유지 ③적극적 인생참여" },
+  { key: "사회참여 정의", val: "지역사회 삶에 적극 참여하는 과정 (Hooyman & Kiyak, 2011)" },
+  { key: "노인교육 3범위", val: "노인을 위한 / 노인에 관한 / 노인에 의한 교육" },
+  { key: "노인교육의 가치 3가지", val: "사회통합·능력개발·삶의 질 (송선희 외, 2011)" },
+  { key: "McClusky 노인 학습욕구", val: "대처·표현·공헌·영향·초월욕구" },
+  { key: "임파워먼트 (노인교육 의의)", val: "교육으로 스스로 문제 해결·예방하여 삶에 적극 참여" },
+  { key: "독일 VHS", val: "1970년, 14세 이상, 정부 지원 저렴, 단기강좌 6주 최다" },
+  { key: "U3A 시작", val: "1972 Villas 제안 → 1973 프랑스 툴루즈 대학 → 1975 AIUTA" },
+  { key: "로드스칼라 (Road Scholar)", val: "1975 엘더호스텔 → 2010 이름 변경, 7대륙 150개국" },
+  { key: "여가(leisure) 정의", val: "즐거움·자발성, 의무성 최소화, 놀이요소 포함 (Kaplan, 1960)" },
+  { key: "웰다잉교육 정의", val: "죽음 대비해 삶을 의미 있고 제대로 살도록 하기 위한 교육" },
+  { key: "사전의료의향서", val: "2018년 존엄사법 근거, 의료행위에 대한 의사 사전 작성" },
+  { key: "유언장 5종류", val: "자필증서·녹음·공정증서·비밀증서·구수증서" },
+  { key: "수목장 최초", val: "1999년 스위스, 한국 2004년 김장수 교수" },
+  { key: "자원봉사 어원", val: "volo(의지) → voluntas(자유의지)" },
+  { key: "자원봉사 3신조어", val: "볼런투어리즘·볼런테인먼트·프로보노" },
+  { key: "2017 자원봉사 참여율", val: "전체 17.8%, 60세 이상 7.8%" },
+  { key: "베이비부머 자원봉사", val: "남 11.6%, 여 14.1% / 82.3%가 월1회 이상" },
+  { key: "사회참여 위계모델 (Katagiri)", val: "0(고립)→1(혼자 취미)→2(단체활동)→3(자원봉사)" },
+  { key: "한경혜(2011) 핵심결과", val: "관계지향·사회지향 동기↑ = 사회참여↑ / 자기지향은 무관" },
+  { key: "종교기관 참여", val: "노인이 가장 많이 선택, 나이 들수록 증가, 가장 오래 지속" },
+  { key: "미국 65세 이상 종교 통계", val: "주1회 이상 참석 50%↑, 종교 중요 60%↑" },
+  { key: "20대 총선 투표율", val: "60세 이상 64.3%, 70대 73.3% (최고)" },
+  { key: "노인 정치사회단체 참여율", val: "0.4% (남0.8%, 여0.1%, 연령↓=참여↑)" },
+  { key: "자원봉사 활성화 방안 (한경혜)", val: "①중년층 타겟 ②성·계층 다양성 ③다양한 기회 ④동기·욕구 ⑤민간연계 ⑥제도적 지원" },
+  { key: "베이비부머 동창모임 참여율", val: "58.1% (1위), 스포츠·지역사회·향우회·취미 순" },
+];
+
+function renderCheatsheet() {
+  const container = document.getElementById('cheatsheet');
+  csData.forEach(item => {
+    const div = document.createElement('div');
+    div.className = 'cs-item';
+    div.innerHTML = `<div class="cs-key">${item.key}</div><div class="cs-val">${item.val}</div>`;
+    container.appendChild(div);
+  });
+}
+
+// ===== INIT =====
+renderOX();
+renderShort();
+renderEssay();
+renderCheatsheet();
+</script>
+</body>
+</html>
