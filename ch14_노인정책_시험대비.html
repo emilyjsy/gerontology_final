@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CH.14 노인정책 — 기말고사 완벽 대비</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700;900&family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a2e;
+    --paper: #faf8f3;
+    --cream: #f2ede3;
+    --accent: #c0392b;
+    --accent2: #2c5f8a;
+    --accent3: #1a6b3c;
+    --gold: #b8860b;
+    --light-red: #fdf0ee;
+    --light-blue: #eef4fa;
+    --light-green: #eef7f2;
+    --light-gold: #fdf8ee;
+    --border: #d9d0be;
+    --muted: #6b6454;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.75;
+    font-size: 15px;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 48px 40px 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  .site-header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 20px,
+      rgba(255,255,255,.03) 20px,
+      rgba(255,255,255,.03) 21px
+    );
+  }
+  .header-badge {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    padding: 4px 12px;
+    border-radius: 2px;
+    margin-bottom: 14px;
+    text-transform: uppercase;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .site-header h1 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 900;
+    line-height: 1.2;
+    letter-spacing: -.02em;
+  }
+  .site-header h1 span { color: #d98c8c; }
+  .header-meta {
+    margin-top: 14px;
+    font-size: 13px;
+    color: rgba(255,255,255,.55);
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .toc-strip {
+    background: var(--accent2);
+    padding: 12px 40px;
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .toc-strip span { color: rgba(255,255,255,.5); font-size: 12px; }
+  .toc-strip a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 20px;
+    transition: background .2s;
+  }
+  .toc-strip a:hover { background: rgba(255,255,255,.15); }
+
+  /* ── LAYOUT ── */
+  .container { max-width: 960px; margin: 0 auto; padding: 48px 24px 80px; }
+
+  /* ── SECTION HEADINGS ── */
+  .section-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--ink);
+    margin: 56px 0 24px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid var(--ink);
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+  .section-title .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 400;
+  }
+
+  .sub-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--accent2);
+    margin: 36px 0 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .sub-title::before {
+    content: '';
+    display: inline-block;
+    width: 4px; height: 18px;
+    background: var(--accent2);
+    border-radius: 2px;
+  }
+
+  /* ── CONCEPT CARDS ── */
+  .concept-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+    margin: 16px 0;
+  }
+  .concept-card {
+    background: #fff;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    position: relative;
+    transition: box-shadow .2s, transform .2s;
+  }
+  .concept-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,.08); transform: translateY(-2px); }
+  .concept-card .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .concept-card h3 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+  .concept-card p { font-size: 13.5px; color: #3a3530; line-height: 1.7; }
+  .concept-card.red  { border-top: 4px solid var(--accent);  background: var(--light-red); }
+  .concept-card.blue { border-top: 4px solid var(--accent2); background: var(--light-blue); }
+  .concept-card.green { border-top: 4px solid var(--accent3); background: var(--light-green); }
+  .concept-card.gold  { border-top: 4px solid var(--gold);  background: var(--light-gold); }
+
+  /* ── DEFINITION BOX ── */
+  .def-box {
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 8px;
+    padding: 22px 26px;
+    margin: 14px 0;
+    font-size: 14px;
+    line-height: 1.8;
+    position: relative;
+  }
+  .def-box .def-term {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: #d98c8c;
+    margin-bottom: 8px;
+  }
+  .def-box .quote-mark {
+    position: absolute; top: 14px; right: 20px;
+    font-size: 48px; color: rgba(255,255,255,.07);
+    font-family: Georgia, serif; line-height: 1;
+  }
+  .highlight { background: rgba(255,220,0,.25); padding: 1px 3px; border-radius: 2px; }
+
+  /* ── TABLE ── */
+  .table-wrap { overflow-x: auto; margin: 16px 0; border-radius: 8px; border: 1.5px solid var(--border); }
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  thead tr { background: var(--ink); color: var(--paper); }
+  thead th { padding: 12px 16px; text-align: left; font-weight: 600; font-family: 'Noto Serif KR', serif; }
+  tbody tr:nth-child(even) { background: var(--cream); }
+  tbody td { padding: 10px 16px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tbody td:first-child { font-weight: 600; color: var(--accent2); white-space: nowrap; }
+  .badge {
+    display: inline-block;
+    font-size: 11px; font-weight: 700;
+    padding: 2px 8px; border-radius: 20px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .badge-red   { background: var(--light-red);   color: var(--accent); }
+  .badge-blue  { background: var(--light-blue);  color: var(--accent2); }
+  .badge-green { background: var(--light-green); color: var(--accent3); }
+  .badge-gold  { background: var(--light-gold);  color: var(--gold); }
+
+  /* ── PYRAMID / LAYER DIAGRAM ── */
+  .layer-diagram {
+    border: 2px solid var(--ink);
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 16px 0;
+    font-size: 13.5px;
+  }
+  .layer-row {
+    display: flex;
+    align-items: stretch;
+    border-bottom: 1px solid var(--border);
+  }
+  .layer-row:last-child { border-bottom: none; }
+  .layer-label {
+    min-width: 90px;
+    background: var(--ink);
+    color: var(--paper);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    text-align: center;
+    gap: 4px;
+  }
+  .layer-label .floor { font-size: 18px; font-weight: 900; }
+  .layer-content { flex: 1; padding: 12px 18px; background: #fff; }
+  .layer-content strong { color: var(--accent2); }
+
+  /* ── QUIZ SECTION ── */
+  .quiz-section { margin: 20px 0; }
+  .quiz-item {
+    background: #fff;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    margin: 10px 0;
+    overflow: hidden;
+    transition: box-shadow .2s;
+  }
+  .quiz-item:hover { box-shadow: 0 2px 12px rgba(0,0,0,.07); }
+  .quiz-q {
+    padding: 16px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    cursor: pointer;
+    user-select: none;
+  }
+  .quiz-q:hover { background: var(--cream); }
+  .quiz-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 4px;
+    padding: 2px 7px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .quiz-num.ox { background: var(--accent); }
+  .quiz-num.sub { background: var(--accent2); }
+  .quiz-num.essay { background: var(--accent3); }
+  .quiz-ans {
+    display: none;
+    padding: 14px 20px 16px 50px;
+    border-top: 1px dashed var(--border);
+    font-size: 13.5px;
+    line-height: 1.75;
+    background: var(--cream);
+  }
+  .quiz-ans.open { display: block; }
+  .quiz-ans .ans-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent3);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    display: block;
+    letter-spacing: .08em;
+  }
+  .quiz-ans strong { color: var(--accent); }
+  .toggle-hint {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  /* ── KEYWORD CHIPS ── */
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+  .chip {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 5px 14px;
+    border-radius: 20px;
+    border: 1.5px solid var(--border);
+    background: #fff;
+    color: var(--ink);
+    transition: all .15s;
+  }
+  .chip:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .chip.red   { border-color: var(--accent);  color: var(--accent); }
+  .chip.blue  { border-color: var(--accent2); color: var(--accent2); }
+  .chip.green { border-color: var(--accent3); color: var(--accent3); }
+  .chip.gold  { border-color: var(--gold);    color: var(--gold); }
+
+  /* ── FLOW / TIMELINE ── */
+  .timeline { margin: 16px 0; }
+  .tl-item {
+    display: flex;
+    gap: 16px;
+    margin: 0 0 2px;
+  }
+  .tl-year {
+    min-width: 60px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--accent2);
+    padding: 10px 0;
+    text-align: right;
+  }
+  .tl-line {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+  .tl-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--accent2);
+    margin-top: 13px;
+    flex-shrink: 0;
+  }
+  .tl-bar {
+    width: 2px;
+    flex: 1;
+    background: var(--border);
+    min-height: 20px;
+  }
+  .tl-content {
+    padding: 8px 0 16px;
+    font-size: 13.5px;
+    flex: 1;
+  }
+
+  /* ── COMPARE TABLE ── */
+  .compare-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 14px 0;
+  }
+  .compare-col {
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .compare-col .col-head {
+    padding: 10px 16px;
+    font-weight: 700;
+    font-size: 14px;
+    font-family: 'Noto Serif KR', serif;
+  }
+  .compare-col.c-red .col-head   { background: var(--accent);  color: #fff; }
+  .compare-col.c-blue .col-head  { background: var(--accent2); color: #fff; }
+  .compare-col .col-body { padding: 14px 16px; font-size: 13.5px; line-height: 1.75; background: #fff; }
+
+  /* ── INFO ALERT ── */
+  .alert {
+    border-left: 4px solid;
+    padding: 14px 18px;
+    border-radius: 0 6px 6px 0;
+    margin: 14px 0;
+    font-size: 13.5px;
+    line-height: 1.75;
+  }
+  .alert.warn  { border-color: var(--gold);   background: var(--light-gold); }
+  .alert.info  { border-color: var(--accent2); background: var(--light-blue); }
+  .alert.danger { border-color: var(--accent); background: var(--light-red); }
+  .alert-title { font-weight: 700; margin-bottom: 4px; }
+
+  /* ── SUMMARY STRIP ── */
+  .summary-strip {
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin: 20px 0;
+  }
+  .summary-strip h4 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 15px;
+    color: #d98c8c;
+    margin-bottom: 12px;
+  }
+  .summary-strip ul { padding-left: 18px; }
+  .summary-strip li { margin: 6px 0; font-size: 13.5px; line-height: 1.7; }
+  .summary-strip li::marker { color: #d98c8c; }
+
+  /* ── GRADE TABLE ── */
+  .grade-table { font-size: 13px; }
+  .grade-table td:last-child { color: var(--muted); font-size: 12.5px; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    color: rgba(255,255,255,.4);
+    text-align: center;
+    padding: 24px;
+    font-size: 12px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .compare-grid { grid-template-columns: 1fr; }
+    .concept-grid { grid-template-columns: 1fr; }
+    .toc-strip { padding: 12px 16px; }
+    .container { padding: 32px 16px 60px; }
+    .site-header { padding: 36px 20px 28px; }
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    .quiz-ans { display: block !important; }
+    .toggle-hint { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-badge">노년학 GERONTOLOGY</div>
+  <h1>CHAPTER <span>14</span><br>노인정책</h1>
+  <p class="header-meta">소득 보장 · 건강 보장 · 주거 보장 &nbsp;|&nbsp; 기말고사 완벽 대비 정리본</p>
+</header>
+
+<nav class="toc-strip">
+  <span>목차 →</span>
+  <a href="#s1">노인정책 개요</a>
+  <a href="#s2">소득 보장</a>
+  <a href="#s3">건강 보장</a>
+  <a href="#s4">주거 보장</a>
+  <a href="#q-short">단답·OX 퀴즈</a>
+  <a href="#q-essay">서술형 대비</a>
+</nav>
+
+<div class="container">
+
+  <!-- ================================================================ -->
+  <!-- SECTION 1: 노인정책 개요 -->
+  <!-- ================================================================ -->
+  <h2 class="section-title" id="s1">
+    <span class="num">01</span> 노인정책의 필요성과 현황
+  </h2>
+
+  <div class="sub-title">핵심 배경</div>
+
+  <div class="concept-grid">
+    <div class="concept-card red">
+      <div class="label">핵심 사실</div>
+      <h3>한국 노인 빈곤율</h3>
+      <p>한국 노인의 빈곤율은 <strong>34개 OECD 회원국 중 1위</strong>로 가장 높다. 국민연금·기초연금 포함해도 경제상태는 매우 불안정.</p>
+    </div>
+    <div class="concept-card blue">
+      <div class="label">통계청 2016</div>
+      <h3>65세 이상 상대적 빈곤율</h3>
+      <p>전국 빈곤율 14.7% vs. <strong>65세 이상 노인 46.5%</strong>. 노인의 절반 가까이가 소득빈곤 상태.</p>
+    </div>
+    <div class="concept-card green">
+      <div class="label">가치관 변화</div>
+      <h3>노인돌봄 의식 변화</h3>
+      <p>'스스로 해결' 비율: 2010년 18.4% → 2016년 <strong>27.2%</strong>로 증가. 가족 단독 부양 비중은 지속 감소.</p>
+    </div>
+    <div class="concept-card gold">
+      <div class="label">부양 의식</div>
+      <h3>누가 부양해야 하나?</h3>
+      <p>2016년 조사: 가족+정부·사회 책임 32.6%, 가족 책임 32.6%, 스스로 해결 27.2%. <strong>'모든 자녀'</strong>가 부양해야 한다는 견해 60.0%.</p>
+    </div>
+  </div>
+
+  <div class="sub-title">노인정책의 구분 기준</div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>구분 기준</th><th>예시</th><th>설명</th></tr></thead>
+      <tbody>
+        <tr><td>자격기준</td><td>노령연금 (연령), 국민기초생활 (요구자격)</td><td>누가 혜택을 받는지 기준</td></tr>
+        <tr><td>혜택 유형</td><td>직접(기초연금) / 간접(경로우대, 세제감면)</td><td>현금 직접 지급 vs. 지출 경감</td></tr>
+        <tr><td>재원방식</td><td>사회보험(국민연금) / 공적부조(기초생활수급)</td><td>기여 방식 vs. 비기여 방식</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="alert info">
+    <div class="alert-title">🔑 사회정책 정의 (Myles, 1989)</div>
+    국가에서 운영하는 사회복지정책들은 <strong>대다수 노인의 삶에 중요한 소득원</strong>이 된다. 노인정책은 노인의 욕구를 충족시키면서 공공부문과 사적 영역에서의 <strong>책임구분에 대한 사회의 결정</strong>이다.
+  </div>
+
+  <div class="sub-title">노년기 상대적 수입문제 3가지 요인</div>
+  <div class="concept-grid">
+    <div class="concept-card blue">
+      <div class="label">요인 1</div>
+      <h3>수입안정감의 결여</h3>
+      <p>생활수준이 상황변화에도 보호받는다는 느낌이 부족함</p>
+    </div>
+    <div class="concept-card blue">
+      <div class="label">요인 2</div>
+      <h3>생애전이와 소득 저하</h3>
+      <p>배우자 사망·이혼 등 생애전이와 함께 소득과 생활수준이 저하됨</p>
+    </div>
+    <div class="concept-card blue">
+      <div class="label">요인 3</div>
+      <h3>누적된 불평등</h3>
+      <p>젠더·인종 등에 따라 인생주기 동안 적절한 은퇴소득을 가져오는 일자리에 접할 기회를 얻지 못한 결과가 노년에도 지속됨</p>
+    </div>
+  </div>
+
+  <div class="sub-title">한국 노인정책의 발달사</div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-year">삼국~조선</div>
+      <div class="tl-line"><div class="tl-dot"></div><div class="tl-bar"></div></div>
+      <div class="tl-content">양로연(삼국), 시정(고려), 양민원(조선) — 노인정책의 역사적 기원</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">1960~70년대</div>
+      <div class="tl-line"><div class="tl-dot"></div><div class="tl-bar"></div></div>
+      <div class="tl-content">노인복지법 제정 이전 연금제도·의료보호제도 시작 — 현대적 노인정책의 출발</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">1981</div>
+      <div class="tl-line"><div class="tl-dot"></div><div class="tl-bar"></div></div>
+      <div class="tl-content"><strong>노인복지법 제정</strong> — 요보호노인을 주 대상으로 다양한 정책 수립</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">1990년대~</div>
+      <div class="tl-line"><div class="tl-dot"></div><div class="tl-bar"></div></div>
+      <div class="tl-content">노인복지법 개정 → 2000년대부터 재가복지, 고령친화산업, 기초연금, 노인고용정책 등 실시</div>
+    </div>
+  </div>
+
+
+  <!-- ================================================================ -->
+  <!-- SECTION 2: 소득 보장 -->
+  <!-- ================================================================ -->
+  <h2 class="section-title" id="s2">
+    <span class="num">02</span> 소득 보장
+  </h2>
+
+  <div class="sub-title">소득보장제도의 층위 구조</div>
+  <div class="layer-diagram">
+    <div class="layer-row">
+      <div class="layer-label"><span class="floor">4층</span>사적소득</div>
+      <div class="layer-content"><strong>사적 근로소득, 사적 이전소득 등</strong> — 일반소득계층·저소득층 모두 해당</div>
+    </div>
+    <div class="layer-row">
+      <div class="layer-label"><span class="floor">3층</span>추가보장</div>
+      <div class="layer-content"><strong>개인연금</strong> (사적 연금)</div>
+    </div>
+    <div class="layer-row">
+      <div class="layer-label"><span class="floor">2층</span>추가보장</div>
+      <div class="layer-content"><strong>퇴직금 / 기업연금</strong> (사적 연금)</div>
+    </div>
+    <div class="layer-row">
+      <div class="layer-label"><span class="floor">1층</span>공적연금</div>
+      <div class="layer-content"><strong>국민연금</strong> (피용자·자영자) / <strong>특수직연금</strong> (공무원·사학교원·군인연금)</div>
+    </div>
+    <div class="layer-row">
+      <div class="layer-label" style="background: var(--accent)"><span class="floor">0층</span>최종안전망</div>
+      <div class="layer-content" style="background: var(--light-red)">
+        <strong style="color:var(--accent)">기초연금</strong> (소득하위 70%) &nbsp;&nbsp; <strong style="color:var(--accent)">기초생활보장제도</strong> (빈곤선 이하)
+      </div>
+    </div>
+  </div>
+  <p style="font-size:12px; color: var(--muted); margin-top: 4px;">출처: 정경희(2009)</p>
+
+  <div class="sub-title">① 공공부조</div>
+
+  <div class="def-box">
+    <div class="def-term">공공부조 (Public Assistance)</div>
+    <span class="quote-mark">"</span>
+    법에서 정한 일정 자격기준을 조사하여 <span class="highlight">국가의 세금으로 재원을 충당</span>하는 공공부조는 해당 대상자의 최저 생활수준을 보장하는 제도이다.
+  </div>
+
+  <div class="concept-grid">
+    <div class="concept-card red">
+      <div class="label">공공부조 ①</div>
+      <h3>국민기초생활보장제도</h3>
+      <p>2000년 시행. <strong>소득인정액</strong>(소득평가액+재산의 소득환산액)이 기준 이하이고 부양의무자가 없거나 부양능력 없는 자. 전 국민 저소득층 대상.</p>
+    </div>
+    <div class="concept-card red">
+      <div class="label">공공부조 ②</div>
+      <h3>기초연금</h3>
+      <p><strong>만 65세 이상</strong>, 대한민국 국적, 소득인정액 <strong>하위 70%</strong> 이하. 2014년 기초연금으로 전환(경로연금→기초노령연금→기초연금).</p>
+    </div>
+  </div>
+
+  <div class="alert warn">
+    <div class="alert-title">⚠ 기초연금 연혁 흐름 — 꼭 암기!</div>
+    1991년 <strong>노령수당제도</strong> → 1998년 <strong>경로연금</strong> → 2007년 폐지 후 <strong>기초노령연금</strong> → <strong>2014년 기초연금</strong>으로 전환
+  </div>
+
+  <div class="def-box">
+    <div class="def-term">기초연금의 성격</div>
+    <span class="quote-mark">"</span>
+    현재 노인세대들 중 국민연금 가입기회를 갖지 못했거나 가입기간이 짧아 연금의 혜택을 받지 못하는 저소득 노인을 위한 공적연금의 보완적인 연금제도로 <span class="highlight">국민연금제도의 성숙까지 한시적으로 도입된 공공부조식 지원 체제</span>이다. (박선태 외, 2016)
+  </div>
+
+  <div class="sub-title">맞춤형 급여체계 (2013년 개편)</div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>구분</th><th>기존 통합급여 방식</th><th>개편 개별급여 방식</th></tr></thead>
+      <tbody>
+        <tr><td>방식</td><td>모든 급여 일괄 지원</td><td>생계·의료·주거·교육 별도 선정기준</td></tr>
+        <tr><td>문제/목적</td><td>소득↑시 급여 중단 → 자립 유인 부족</td><td>근로능력자 자활 유도, 사회보장 강화</td></tr>
+        <tr><td>부양의무자</td><td>기준 엄격</td><td>2017.11~ 65세↑ 노인이나 중증장애인(1~3등급) 있으면 기준 폐지</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sub-title">② 사회보험 — 국민연금</div>
+
+  <div class="def-box">
+    <div class="def-term">사회보험 정의</div>
+    <span class="quote-mark">"</span>
+    국가가 정책을 수행하기 위해 보험의 원리를 도입하여 만든 제도로, <span class="highlight">보험료를 국민들로부터 강제적으로 징수</span>하고 정형화된 보험금 지급을 특징으로 한다.
+  </div>
+
+  <div class="alert info">
+    <div class="alert-title">📋 한국의 5대 사회보험</div>
+    공적연금 / 국민건강보험 / 산재보험 / 고용(실업)보험 / <strong>노인장기요양보험</strong>
+  </div>
+
+  <div class="def-box">
+    <div class="def-term">국민연금 목적</div>
+    <span class="quote-mark">"</span>
+    모든 경제활동 계층을 대상으로 하여 가입자가 노령, 장애, 사망 등의 사회적 위험에 처해 소득이 감소되거나 상실되는 경우 <span class="highlight">본인이나 유족에게 경제적으로 안정적인 생활을 보장할 수 있도록 연금형태의 급여를 제공</span>함으로 노년기 소득보장과 빈곤예방을 위한 제도이다. (박선태 외, 2016)
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>급여 종류</th><th>수급 조건</th></tr></thead>
+      <tbody>
+        <tr><td>노령연금</td><td>10년 이상 가입 + 만 60세 도달 시 지급</td></tr>
+        <tr><td>감액노령연금</td><td>가입 10년↑~20년 미만, 60세</td></tr>
+        <tr><td>완전노령연금</td><td>가입 20년 이상, 60세 이상</td></tr>
+        <tr><td>조기노령연금</td><td>가입 10년↑, 55세~60세</td></tr>
+        <tr><td>장애연금</td><td>가입 중 사고·질병으로 신체·정신 장애 발생 시</td></tr>
+        <tr><td>유족연금</td><td>가입자 또는 10년↑ 가입자 사망 시</td></tr>
+        <tr><td>분할연금</td><td>혼인기간 5년↑ 배우자가 수급권자 → 혼인기간 연금액 분할 지급</td></tr>
+        <tr><td>반환일시금</td><td>10년 미만 가입자가 자격 상실 시</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="concept-grid">
+    <div class="concept-card blue">
+      <div class="label">보험료율 (2018년)</div>
+      <h3>사업장가입자</h3>
+      <p>기준소득월액의 <strong>각 4.5%</strong> (가입자 + 사용자, 합계 9%)</p>
+    </div>
+    <div class="concept-card blue">
+      <div class="label">보험료율</div>
+      <h3>기타(지역·임의·임의계속)</h3>
+      <p>본인이 <strong>9% 전액</strong> 납부</p>
+    </div>
+  </div>
+
+  <div class="sub-title">③ 간접소득보장제도</div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>제도</th><th>주요 내용</th></tr></thead>
+      <tbody>
+        <tr><td>경로우대제도</td><td>65세↑: 철도(통근열차 50%, 무궁화 30%, KTX 30%), 수도권전철·시내버스·고궁·박물관 100% 할인, 국내항공 10%, 국내여객선 20%</td></tr>
+        <tr><td>상속세 공제</td><td>상속인 중 <strong>65세 이상</strong>에게 3,000만 원 인적공제</td></tr>
+        <tr><td>소득세 기본공제</td><td>직계존속 <strong>60세 이상</strong> 1명당 연 150만 원</td></tr>
+        <tr><td>소득세 추가공제</td><td><strong>70세 이상</strong>(경로우대자) 1명당 연 100만 원 추가</td></tr>
+        <tr><td>양도소득세 면제</td><td>1세대 1주택자가 <strong>60세 이상</strong> 직계존속 동거봉양 위해 세대 합침 → 5년 내 양도 시 비과세</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <!-- ================================================================ -->
+  <!-- SECTION 3: 건강 보장 -->
+  <!-- ================================================================ -->
+  <h2 class="section-title" id="s3">
+    <span class="num">03</span> 건강 보장
+  </h2>
+
+  <div class="sub-title">국민건강보험</div>
+
+  <div class="def-box">
+    <div class="def-term">국민건강보험 정의 (보건복지부)</div>
+    <span class="quote-mark">"</span>
+    생활상의 질병·부상에 대한 예방·진단·치료·재활과 출산·사망 및 건강증진에 대하여 보험급여를 실시함으로써 국민보건을 향상시키고 사회보장을 증진함으로써 <span class="highlight">보험의 원리를 이용하여 의료비의 지출부담을 국민건강보험 가입자 모두에게 분산시켜 국민생활의 안정을 도모하기 위한 사회보험</span>이다.
+  </div>
+
+  <div class="sub-title">건강보험 주요 발달 연혁</div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-year">1963</div>
+      <div class="tl-line"><div class="tl-dot"></div><div class="tl-bar"></div></div>
+      <div class="tl-content">의료보험법 제정 (300인 이상 사업장 임의적용)</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">1977</div>
+      <div class="tl-line"><div class="tl-dot"></div><div class="tl-bar"></div></div>
+      <div class="tl-content"><strong>500인 이상</strong> 사업장 근로자 당연적용, 생활보호대상자 의료보호 실시</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">1979</div>
+      <div class="tl-line"><div class="tl-dot"></div><div class="tl-bar"></div></div>
+      <div class="tl-content">공무원 및 사립학교교직원 당연 적용</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">1988~1989</div>
+      <div class="tl-line"><div class="tl-dot"></div><div class="tl-bar"></div></div>
+      <div class="tl-content">농·어촌 지역의료보험 + 도시지역의료보험 → <strong>전 국민 의료보험 실시</strong></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">2000</div>
+      <div class="tl-line"><div class="tl-dot"></div><div class="tl-bar"></div></div>
+      <div class="tl-content">직장·공무원·사립학교교원·지역의료보험 → <strong>'국민건강보험'으로 통합</strong></div>
+    </div>
+  </div>
+
+  <div class="sub-title">급여 내용</div>
+  <div class="compare-grid">
+    <div class="compare-col c-blue">
+      <div class="col-head">현물급여</div>
+      <div class="col-body">
+        <strong>요양급여</strong>: 진찰·검사, 약제·치료재료, 처치·수술, 예방재활, 입원, 간호, 이송<br><br>
+        <strong>건강검진</strong>
+      </div>
+    </div>
+    <div class="compare-col c-red">
+      <div class="col-head">현금급여</div>
+      <div class="col-body">
+        요양비, 장애인보장구 급여비, 본인부담상한액, 임신·출산진료비 등 현금 지급
+      </div>
+    </div>
+  </div>
+
+  <div class="alert warn">
+    <div class="alert-title">⚠ 연금 vs. 건강보험 차이</div>
+    연금: 나중에 받는 급여액 ∝ 낸 연금액 (소득재분배 원칙 반영, 완전 비례는 아님)<br>
+    건강보험: 보험료 부담수준과 <strong>무관하게 균등하게 필요에 따라</strong> 급여 지급
+  </div>
+
+  <div class="sub-title">국민건강보험 평가 — 3대 이슈</div>
+  <div class="concept-grid">
+    <div class="concept-card red">
+      <div class="label">이슈 ①</div>
+      <h3>보장성</h3>
+      <p>2016년 건강보험 보장률 <strong>62.6%</strong>. 나머지 37.4%는 가계 직접 부담. OECD 평균(약 19.6%)보다 가계 부담이 높음. → 보장성 강화 개편 추진</p>
+    </div>
+    <div class="concept-card blue">
+      <div class="label">이슈 ②</div>
+      <h3>지속가능성</h3>
+      <p>건강보험은 <strong>부과식</strong>(해당 연도 비용 산출→보험료 부과). 고령인구 증가로 지출 급증 예측. 보장성과 재정 건전성 균형이 핵심 과제.</p>
+    </div>
+    <div class="concept-card green">
+      <div class="label">이슈 ③</div>
+      <h3>형평성</h3>
+      <p>직장가입자(보수월액 기준)와 지역가입자(소득+재산+자동차)의 부과기준 차이. 2018년 7월·2022년 7월 두 차례 단계적 개편.</p>
+    </div>
+  </div>
+
+  <div class="sub-title">의료급여 (공공부조)</div>
+  <div class="def-box">
+    <div class="def-term">의료급여 정의</div>
+    <span class="quote-mark">"</span>
+    <span class="highlight">생활유지 능력이 없거나 생활이 어려운 저소득 국민의 의료문제를 국가가 보장하는 공공부조</span>로 건강보험과 함께 국민 의료보장의 중요한 수단이 되는 사회보장제도이다.
+  </div>
+  <div class="concept-grid">
+    <div class="concept-card gold">
+      <div class="label">의료급여 재원</div>
+      <h3>재원 구성</h3>
+      <p>국고보조금 <strong>80%</strong> + 지방자치단체 출연금 <strong>20%</strong> + 본인부담금 일부</p>
+    </div>
+    <div class="concept-card gold">
+      <div class="label">본인부담</div>
+      <h3>수급자 구분</h3>
+      <p><strong>1종</strong>: 무료~2,500원 / <strong>2종</strong>: 무료~비용의 15%<br>(특수장비촬영은 총액의 5%)</p>
+    </div>
+  </div>
+
+  <div class="sub-title">노인장기요양보험</div>
+
+  <div class="def-box">
+    <div class="def-term">장기요양보호 정의 (최성재·장인협, 2010)</div>
+    <span class="quote-mark">"</span>
+    신체적, 정신적 기능 면에서 <span class="highlight">일상생활상 활동장애를 가진 노인에게 상당한 기간에 걸쳐 건강보호와 사회보호를 제공하는 서비스</span>이다.
+  </div>
+
+  <div class="def-box">
+    <div class="def-term">노인장기요양보험 목적 (국민건강보험공단)</div>
+    <span class="quote-mark">"</span>
+    고령이나 노인성 질병 등의 사유로 일상생활을 혼자서 수행하기 어려운 노인 등에게 신체활동 또는 가사활동 지원 등 장기요양급여를 제공하여 <span class="highlight">노후의 건강증진 및 생활안정을 도모하고 그 가족의 부담을 덜어줌으로써 국민의 삶의 질을 향상</span>하도록 함을 목적으로 시행하는 사회보험 제도이다.
+  </div>
+
+  <div class="alert info">
+    <div class="alert-title">📌 노인장기요양보험 주요 특징</div>
+    • 2008년 7월 시행<br>
+    • 건강보험과 <strong>별개의 제도</strong>이나, 운영·관리는 <strong>국민건강보험공단으로 일원화</strong><br>
+    • 국민건강보험 가입자 = 자동으로 노인장기요양보험 가입<br>
+    • 별도 제도로 운영하는 이유: <strong>건강보험 재정 압박 방지</strong> (사회적 입원 감소 목적)
+  </div>
+
+  <div class="sub-title">장기요양서비스 3가지 구성 (최성재, 2012)</div>
+  <div class="concept-grid">
+    <div class="concept-card blue">
+      <div class="label">Health Care</div>
+      <h3>건강·의료서비스</h3>
+      <p>영양, 건강관리, 간호, 투약관리, 기능회복 훈련, 재활훈련 등</p>
+    </div>
+    <div class="concept-card green">
+      <div class="label">Personal Care</div>
+      <h3>대인보호서비스</h3>
+      <p>식사, 배설, 목욕, 일상동작 등에 대한 서비스</p>
+    </div>
+    <div class="concept-card gold">
+      <div class="label">Social Care</div>
+      <h3>사회보호서비스</h3>
+      <p>세탁, 청소, 요리, 집안일, 사회관계, 심리·사회적 문제해결 등</p>
+    </div>
+  </div>
+
+  <div class="sub-title">장기요양등급 판정 기준</div>
+  <div class="table-wrap">
+    <table class="grade-table">
+      <thead><tr><th>등급</th><th>기능 상태</th><th>점수 기준</th></tr></thead>
+      <tbody>
+        <tr><td>1등급</td><td>일상생활에서 <strong>전적으로</strong> 도움 필요</td><td>95점 이상</td></tr>
+        <tr><td>2등급</td><td>일상생활에서 <strong>상당 부분</strong> 도움 필요</td><td>75점 이상 95점 미만</td></tr>
+        <tr><td>3등급</td><td>일상생활에서 <strong>부분적으로</strong> 도움 필요</td><td>60점 이상 75점 미만</td></tr>
+        <tr><td>4등급</td><td>일상생활에서 <strong>일정 부분</strong> 도움 필요</td><td>51점 이상 60점 미만</td></tr>
+        <tr><td>5등급</td><td><strong>치매환자</strong> (노인성 질병 한정) / 등급 외 A</td><td>45점 이상 51점 미만</td></tr>
+        <tr><td>인지지원등급</td><td><strong>치매환자</strong> (45점 미만) / 등급 외 B, C<br><span style="font-size:12px;color:var(--muted)">2018년 신설 — 신체기능과 무관하게 치매 확인 시 적용</span></td><td>45점 미만</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sub-title">장기요양 급여 종류</div>
+  <div class="concept-grid">
+    <div class="concept-card green">
+      <div class="label">급여 ①</div>
+      <h3>재가급여</h3>
+      <p>일반주택 거주 + 필요 서비스 제공. 본인부담 <strong>15%</strong><br>방문요양, 방문목욕, 방문간호, 주간·야간보호, 단기보호, 복지용구 대여 포함</p>
+    </div>
+    <div class="concept-card green">
+      <div class="label">급여 ②</div>
+      <h3>시설급여</h3>
+      <p>특정 시설 입소 + 24시간 서비스. 본인부담 <strong>20%</strong></p>
+    </div>
+    <div class="concept-card green">
+      <div class="label">급여 ③</div>
+      <h3>특별현금급여</h3>
+      <p>도서·벽지 등 장기요양기관 현저히 부족 지역 거주자 등 특별한 경우 → 현금(가족요양비)</p>
+    </div>
+  </div>
+
+  <div class="alert warn">
+    <div class="alert-title">⚠ 현금급여 논쟁 핵심 포인트</div>
+    <strong>장점</strong>: 노인의 선호·선택 존중, 비공식 수발자 역할 지원<br>
+    <strong>단점</strong>: 악용 가능성으로 노인이 적절한 돌봄 못 받을 수 있음, 서비스 질 관리 어려움, 장기요양 사회화 취지에 역행<br>
+    <strong>해외 사례</strong>: 영국 요양보호자 수당(carer's allowance), 독일 요양보호 수당(현물급여의 절반 수준 제공)
+  </div>
+
+  <div class="sub-title">노인돌봄종합서비스</div>
+  <div class="def-box" style="background: var(--accent2)">
+    <div class="def-term" style="color:#afd4f5">노인돌봄종합서비스</div>
+    2006년 노인돌보미 바우처 + 독거노인 생활관리사 파견 → <span class="highlight">2009년 통합</span>. 혼자 힘으로 일상생활 영위 어려운 노인에게 가사·활동지원·주간보호서비스 제공. <strong>조세를 재원</strong>으로 운영 (노인장기요양보험과 다름!). 만 65세↑ 중 <strong>장기요양등급 외 A, B</strong> 판정자, 기준 중위소득 160% 이하.
+  </div>
+
+
+  <!-- ================================================================ -->
+  <!-- SECTION 4: 주거 보장 -->
+  <!-- ================================================================ -->
+  <h2 class="section-title" id="s4">
+    <span class="num">04</span> 주거 보장
+  </h2>
+
+  <div class="sub-title">노인주거 현황 (2017년)</div>
+  <div class="concept-grid">
+    <div class="concept-card gold">
+      <div class="label">가구 구성</div>
+      <h3>고령자 가구 비중</h3>
+      <p>전체 가구의 <strong>20.5%</strong></p>
+    </div>
+    <div class="concept-card gold">
+      <div class="label">유형별 1위</div>
+      <h3>1인 가구 33.4%</h3>
+      <p>부부가구 32.7%, 여성 1인 가구가 남성보다 <strong>3배</strong> 많음</p>
+    </div>
+    <div class="concept-card red">
+      <div class="label">안전</div>
+      <h3>낙상율 15.9%</h3>
+      <p>1년간 평균 2.1회 낙상. 원인: 바닥 미끄러움 26.4%, 다리 힘 풀림 20.1%</p>
+    </div>
+    <div class="concept-card red">
+      <div class="label">안전사고</div>
+      <h3>독거노인 사고율 4.5%</h3>
+      <p>노인부부가구 2.2%, 자녀동거가구 2.9%보다 높음</p>
+    </div>
+  </div>
+
+  <div class="sub-title">노인주거 복지시설 종류</div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>시설</th><th>정의 (교재 원문)</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>양로시설</td>
+          <td>노인을 입소시켜 <strong>급식과 그밖에 일상생활에 필요한 편의를 제공하는 곳</strong></td>
+        </tr>
+        <tr>
+          <td>노인공동생활가정</td>
+          <td>노인에게 <strong>가정과 같은 주거여건과 급식, 그밖에 일상생활에 필요한 편의를 제공하는 곳</strong></td>
+        </tr>
+        <tr>
+          <td>노인복지주택</td>
+          <td>노인에게 주거시설을 분양 또는 임대하여 <strong>주거의 편의, 생활지도, 상담 및 안전관리 등 일상생활에 필요한 편의를 제공</strong>함을 목적. 입소대상: 독립된 주거생활이 가능한 <strong>60세 이상</strong> (배우자는 60세 미만도 함께 입소 가능)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sub-title">공공임대주택 종류</div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>유형</th><th>특징</th></tr></thead>
+      <tbody>
+        <tr><td>국민임대주택</td><td>저소득층 대상, <strong>30년 이상</strong> 장기임대. 고령자용: 무장애설계(barrier-free). 장기거주 선호 노인에게 적합.</td></tr>
+        <tr><td>공공임대주택</td><td>5년 임대 후 분양 가능한 것 + 분양 없이 임대만 (<strong>2년 단위 갱신, 50년까지</strong> 거주 가능)</td></tr>
+        <tr><td>영구임대주택</td><td>저렴한 임대조건으로 <strong>영구적</strong> 거주. 입주자격 한정.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sub-title">재가노인복지서비스 (노인복지법)</div>
+  <div class="chips">
+    <span class="chip green">방문요양서비스</span>
+    <span class="chip green">주야간보호서비스</span>
+    <span class="chip green">단기보호서비스</span>
+    <span class="chip green">방문목욕서비스</span>
+    <span class="chip green">방문간호서비스</span>
+    <span class="chip green">재가지원서비스</span>
+  </div>
+
+
+  <!-- ================================================================ -->
+  <!-- QUIZ: 단답형·OX -->
+  <!-- ================================================================ -->
+  <h2 class="section-title" id="q-short">
+    <span class="num">QZ</span> 단답형 · OX 퀴즈
+  </h2>
+  <p style="margin-bottom: 20px; color: var(--muted); font-size: 13.5px;">각 문항을 클릭하면 정답이 표시됩니다.</p>
+
+  <div class="quiz-section">
+    <div class="quiz-item" onclick="toggle(this)">
+      <div class="quiz-q"><span class="quiz-num">Q1</span>한국 노인의 상대적 빈곤율(65세 이상, 2016년)은? <span class="toggle-hint">▾</span></div>
+      <div class="quiz-ans"><span class="ans-badge">정답</span><strong>46.5%</strong> — 전국 빈곤율 14.7%와 비교할 것. OECD 34개국 중 노인 빈곤율 1위.</div>
+    </div>
+    <div class="quiz-item" onclick="toggle(this)">
+      <div class="quiz-q"><span class="quiz-num">Q2</span>기초연금의 대상 기준은? <span class="toggle-hint">▾</span></div>
+      <div class="quiz-ans"><span class="ans-badge">정답</span><strong>만 65세 이상</strong>, 대한민국 국적, 가구 소득인정액 <strong>하위 70%</strong> 이하</div>
+    </div>
+    <div class="quiz-item" onclick="toggle(this)">
+      <div class="quiz-q"><span class="quiz-num">Q3</span>국민연금 완전노령연금 수급 요건은? <span class="toggle-hint">▾</span></div>
+      <div class="quiz-ans"><span class="ans-badge">정답</span>가입기간 <strong>20년 이상</strong> + <strong>60세 이상</strong></div>
+    </div>
+    <div class="quiz-item" onclick="toggle(this)">
+      <div class="quiz-q"><span class="quiz-num">Q4</span>노인장기요양보험의 시행 연도는? <span class="toggle-hint">▾</span></div>
+      <div class="quiz-ans"><span class="ans-badge">정답</span><strong>2008년 7월</strong></div>
+    </div>
+    <div class="quiz-item" onclick="toggle(this)">
+      <div class="quiz-q"><span class="quiz-num">Q5</span>장기요양보험 재가급여 본인부담금 비율은? <span class="toggle-hint">▾</span></div>
+      <div class="quiz-ans"><span class="ans-badge">정답</span><strong>15%</strong> (시설급여는 20%)</div>
+    </div>
+    <div class="quiz-item" onclick="toggle(this)">
+      <div class="quiz-q"><span class="quiz-num">Q6</span>국민기초생활보장제도가 현재 방식으로 시행된 연도는? <span class="toggle-hint">▾</span></div>
+      <div class="quiz-ans"><span class="ans-badge">정답</span><strong>2000년</strong> (1961년 생활보호제도 대체)</div>
+    </div>
+    <div class="quiz-item" onclick="toggle(this)">
+      <div class="quiz-q"><span class="quiz-num">Q7</span>장기요양 1등급의 인정 점수 기준은? <span class="toggle-hint">▾</span></div>
+      <div class="quiz-ans"><span class="ans-badge">정답</span><strong>95점 이상</strong>, 일상생활에서 전적으로 도움 필요</div>
+    </div>
+    <div class="quiz-item" onclick="toggle(this)">
+      <div class="quiz-q"><span class="quiz-num">Q8</span>의료급여의 재원은 국고보조금 몇 %? 나머지는? <span class="toggle-hint">▾</span></div>
+      <div class="quiz-ans"><span class="ans-badge">정답</span>국고보조금 <strong>80%</strong> + 지방자치단체 출연금 <strong>20%</strong></div>
+    </div>
+    <div class="quiz-item" onclick="toggle(this)">
+      <div class="quiz-q"><span class="quiz-num">Q9</span>2016년 건강보험 보장률은 몇 %? <span class="toggle-hint">▾</span></div>
+      <div class="quiz-ans"><span class="ans-badge">정답</span><strong>62.6%</strong> — 나머지 37.4%는 가계 직접 부담</div>
+    </div>
+    <div class="quiz-item" onclick="toggle(this)">
+      <div class="quiz-q"><span class="quiz-num">Q10</span>노인복지주택 입소 대상 연령은? <span class="toggle-hint">▾</span></div>
+      <div class="quiz-ans"><span class="ans-badge">정답</span>독립된 주거생활이 가능한 <strong>60세 이상</strong> (배우자는 60세 미만도 함께 입소 가능)</div>
+    </div>
+    <div class="quiz-item" onclick="toggle(this)">
+      <div class="quiz-q"><span class="quiz-num ox">OX1</span>노인장기요양보험은 국민건강보험의 하위 제도로, 같은 재정에서 운영된다. <span class="toggle-hint">▾</span></div>
+      <div class="quiz-ans"><span class="ans-badge">정답</span><strong>X (오답)</strong> — 별개의 제도이나 관리·운영만 국민건강보험공단으로 일원화. <strong>건강보험 재정 압박 방지</strong>를 위해 별도 제도로 운영.</div>
+    </div>
+    <div class="quiz-item" onclick="toggle(this)">
+      <div class="quiz-q"><span class="quiz-num ox">OX2</span>기초연금은 기여형 연금이다. <span class="toggle-hint">▾</span></div>
+      <div class="quiz-ans"><span class="ans-badge">정답</span><strong>X (오답)</strong> — 기초연금은 <strong>비기여적(공공부조식)</strong> 지원 체제. 국민연금제도 성숙까지 한시적으로 도입된 제도.</div>
+    </div>
+    <div class="quiz-item" onclick="toggle(this)">
+      <div class="quiz-q"><span class="quiz-num ox">OX3</span>인지지원등급은 2018년에 신설되어 치매 확인 시 신체기능과 무관하게 부여된다. <span class="toggle-hint">▾</span></div>
+      <div class="quiz-ans"><span class="ans-badge">정답</span><strong>O (정답)</strong> — 기존 1~5등급은 신체기능 중심이었으나, 인지지원등급은 신체기능과 무관하게 치매가 확인되면 부여.</div>
+    </div>
+    <div class="quiz-item" onclick="toggle(this)">
+      <div class="quiz-q"><span class="quiz-num ox">OX4</span>국민건강보험에서 건강보험료는 연금처럼 낸 보험료에 비례하여 급여가 지급된다. <span class="toggle-hint">▾</span></div>
+      <div class="quiz-ans"><span class="ans-badge">정답</span><strong>X (오답)</strong> — 건강보험은 보험료 부담수준과 <strong>관계없이 균등하게 필요에 따라</strong> 급여 지급.</div>
+    </div>
+    <div class="quiz-item" onclick="toggle(this)">
+      <div class="quiz-q"><span class="quiz-num ox">OX5</span>노인돌봄종합서비스는 사회보험 방식으로 운영된다. <span class="toggle-hint">▾</span></div>
+      <div class="quiz-ans"><span class="ans-badge">정답</span><strong>X (오답)</strong> — 노인돌봄종합서비스는 <strong>조세를 재원</strong>으로 운영. 노인장기요양보험(사회보험)과 구별할 것.</div>
+    </div>
+    <div class="quiz-item" onclick="toggle(this)">
+      <div class="quiz-q"><span class="quiz-num ox">OX6</span>2016년 기준 공적 장기요양서비스 급여 혜택 비율은 전체 노인의 약 7%이다. <span class="toggle-hint">▾</span></div>
+      <div class="quiz-ans"><span class="ans-badge">정답</span><strong>O (정답)</strong> — 2008년 제도 시행 시 4.2% → 2016년 7%로 증가. 일본(약 20%)에 비해 낮은 수준.</div>
+    </div>
+  </div>
+
+
+  <!-- ================================================================ -->
+  <!-- QUIZ: 주관식·서술형 -->
+  <!-- ================================================================ -->
+  <h2 class="section-title" id="q-essay">
+    <span class="num">서술</span> 주관식 · 서술형 대비
+  </h2>
+  <p style="margin-bottom: 20px; color: var(--muted); font-size: 13.5px;">클릭하면 핵심 키워드와 예시 답안이 표시됩니다.</p>
+
+  <div class="quiz-section">
+    <div class="quiz-item" onclick="toggle(this)">
+      <div class="quiz-q"><span class="quiz-num sub">주1</span>노인소득보장체계의 층위 구조(0~4층)를 쓰고, 각 층의 내용을 설명하시오. <span class="toggle-hint">▾</span></div>
+      <div class="quiz-ans"><span class="ans-badge">모범 답안 키워드</span>
+        <strong>0층 최종안전망</strong>: 기초연금(소득하위 70%), 기초생활보장제도(빈곤선 이하)<br>
+        <strong>1층 공적연금(1차 안전망)</strong>: 국민연금, 공무원·군인·사학 특수직연금<br>
+        <strong>2층 추가보장(사적연금)</strong>: 퇴직금·기업연금<br>
+        <strong>3층 추가보장</strong>: 개인연금<br>
+        <strong>4층 사적소득</strong>: 사적 근로소득, 사적 이전소득 등
+      </div>
+    </div>
+    <div class="quiz-item" onclick="toggle(this)">
+      <div class="quiz-q"><span class="quiz-num sub">주2</span>국민연금과 국민건강보험의 공통점과 차이점을 서술하시오. <span class="toggle-hint">▾</span></div>
+      <div class="quiz-ans"><span class="ans-badge">모범 답안 키워드</span>
+        <strong>공통점</strong>: 둘 다 사회보험 방식, 의무가입, 소득수준에 따른 차등 보험료<br><br>
+        <strong>차이점</strong>:<br>
+        — 국민연금: 나중에 받는 급여액 ∝ 낸 연금액(소득재분배 원칙 반영, 개인 단위 설계)<br>
+        — 국민건강보험: 보험료 부담수준과 무관하게 균등하게 필요에 따라 급여 지급, 피부양자에게도 급여 제공, 가족 단위 설계
+      </div>
+    </div>
+    <div class="quiz-item" onclick="toggle(this)">
+      <div class="quiz-q"><span class="quiz-num sub">주3</span>노인장기요양보험을 국민건강보험과 별도 제도로 운영하는 이유를 설명하시오. <span class="toggle-hint">▾</span></div>
+      <div class="quiz-ans"><span class="ans-badge">모범 답안 키워드</span>
+        ① <strong>건강보험 재정 압박 방지</strong>: 노년층은 만성질환 등으로 의료를 많이 이용 → 인구고령화 시 건강보험 재정 압박<br>
+        ② <strong>'사회적 입원' 감소</strong>: 별도 장기요양 시설·서비스 없으면 노인들이 급성질환 중심 일반병원에 장기입원 → 의료재정 압박<br>
+        ③ <strong>서비스 성격 차이</strong>: 장기요양보호는 의료적 처치보다 대인보호·사회보호 서비스 필요 → 별도 인프라와 제도 필요
+      </div>
+    </div>
+    <div class="quiz-item" onclick="toggle(this)">
+      <div class="quiz-q"><span class="quiz-num sub">주4</span>국민건강보험의 3대 이슈(보장성·지속가능성·형평성)를 각각 설명하시오. <span class="toggle-hint">▾</span></div>
+      <div class="quiz-ans"><span class="ans-badge">모범 답안 키워드</span>
+        <strong>보장성</strong>: 2016년 보장률 62.6%로 낮음. 비급여 항목 많고 본인부담 높음. OECD 가계 부담 평균보다 높아 보장성 강화 개편 추진.<br><br>
+        <strong>지속가능성</strong>: 부과식(해당 연도 비용→보험료)으로 운영. 고령인구 증가로 지출 급증 예상. 보장성 향상과 재정 건전성 균형 필요. 수입(보험료 조달 방식)과 지출(급여 대상·수준) 모두 고려 필요.<br><br>
+        <strong>형평성</strong>: 직장가입자(보수월액 기준)와 지역가입자(소득+재산+자동차 기준) 부과기준 불일치. 고액 자산자의 피부양자 무임승차 문제. 2018년·2022년 두 차례 단계적 개편.
+      </div>
+    </div>
+    <div class="quiz-item" onclick="toggle(this)">
+      <div class="quiz-q"><span class="quiz-num sub">주5</span>노인정책에서 '공공부조'와 '사회보험'의 차이를 비교·설명하시오. <span class="toggle-hint">▾</span></div>
+      <div class="quiz-ans"><span class="ans-badge">모범 답안 키워드</span>
+        <strong>공공부조</strong>: 국가 세금으로 재원 충당. 자격기준 조사 후 지원. 비기여적. 대상: 저소득층(빈곤선 이하). 예: 국민기초생활보장제도, 기초연금, 의료급여<br><br>
+        <strong>사회보험</strong>: 보험료를 강제 징수 + 국가 보조금. 기여 기반. 의무가입. 소득에 따라 보험료 차등 부과. 사회연대성 원칙. 예: 국민연금, 국민건강보험, 노인장기요양보험
+      </div>
+    </div>
+    <div class="quiz-item" onclick="toggle(this)">
+      <div class="quiz-q"><span class="quiz-num essay">서1</span>한국 사회에서 노인돌봄의 책임 주체가 변화해온 과정과 배경을 설명하고, 이것이 노인정책에 미친 영향을 서술하시오. <span class="toggle-hint">▾</span></div>
+      <div class="quiz-ans"><span class="ans-badge">서술형 핵심 논리</span>
+        <strong>[배경 변화]</strong><br>
+        • 과거 유교문화권: 장남·큰며느리가 노인돌봄 당연시<br>
+        • 산업화·도시화: 세대간 물리적 거리 확대<br>
+        • 여성 사회진출 증가, 노부모·자녀 동거가 선택적으로 변화<br><br>
+        <strong>[의식 변화 통계]</strong><br>
+        • '스스로 해결해야 한다': 2010년 18.4% → 2016년 27.2%<br>
+        • '가족과 정부·사회' 공동책임: 32.6%, '가족 단독': 32.6%<br>
+        • '장남·아들이 부양해야 한다' 견해 지속 감소<br><br>
+        <strong>[정책적 영향]</strong><br>
+        • 노인돌봄이 더 이상 가족만의 책임이 아님 → 사회적 돌봄 요구 증가<br>
+        • 재가노인복지서비스, 노인장기요양보험 등 공적 서비스 확충<br>
+        • 노인 관련 정책 지속 변화·발전
+      </div>
+    </div>
+    <div class="quiz-item" onclick="toggle(this)">
+      <div class="quiz-q"><span class="quiz-num essay">서2</span>장기요양보험의 현금급여(특별현금급여) 도입의 장점과 단점을 논하시오. <span class="toggle-hint">▾</span></div>
+      <div class="quiz-ans"><span class="ans-badge">서술형 핵심 논리</span>
+        <strong>[장점]</strong><br>
+        • 노인의 선호와 선택 존중<br>
+        • 원하는 사람(가족 포함)으로부터 직접 서비스 구입 가능<br>
+        • 비공식 수발자(가족) 역할 유지 지원<br>
+        • 독일 사례: 전체 대상자 50%가 현금급여 선택 → 재정안정에 기여<br><br>
+        <strong>[단점/우려]</strong><br>
+        • 비공식 수발자 악용 가능성 → 노인이 적절한 돌봄 못 받을 수 있음<br>
+        • 비공식 수발자 제공 서비스의 질 관리 어려움<br>
+        • 장기요양서비스를 사회화한다는 제도 취지에 역행<br><br>
+        <strong>[해외 사례]</strong>: 영국 carer's allowance, 독일 요양보호 수당(현물급여의 절반), 일본 일부 지자체 개호 위로금
+      </div>
+    </div>
+    <div class="quiz-item" onclick="toggle(this)">
+      <div class="quiz-q"><span class="quiz-num essay">서3</span>기초생활보장제도의 맞춤형 급여체계 개편(2013년) 내용과 목적을 서술하시오. <span class="toggle-hint">▾</span></div>
+      <div class="quiz-ans"><span class="ans-badge">서술형 핵심 논리</span>
+        <strong>[개편 배경]</strong>: 기존 통합급여방식은 소득이 일정수준 이상이 되면 급여 전체가 중단 → 자립·자활 유인 부족<br><br>
+        <strong>[개편 내용]</strong>:<br>
+        • 생계·의료·주거·교육 영역 별도 선정기준과 급여수준으로 분리 (개별급여방식)<br>
+        • 상대적 빈곤 관점 반영<br>
+        • 부양의무자 기준 완화: 2017년 11월부터 65세↑ 노인이나 중증장애인(1~3등급) 있으면 부양의무자 기준 폐지<br><br>
+        <strong>[목적]</strong>:<br>
+        ① 사회보장 강화<br>
+        ② 급여별 다층화로 필요 급여 지속 지원<br>
+        ③ 최종적으로 자립 유도
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ================================================================ -->
+  <!-- SUMMARY / 핵심 암기 카드 -->
+  <!-- ================================================================ -->
+  <h2 class="section-title">
+    <span class="num">⭐</span> 최종 암기 포인트
+  </h2>
+
+  <div class="summary-strip">
+    <h4>📌 숫자로 외우는 핵심 통계</h4>
+    <ul>
+      <li>65세 이상 상대적 빈곤율: <strong>46.5%</strong> (2016, 통계청)</li>
+      <li>전국 빈곤율: <strong>14.7%</strong> (2016)</li>
+      <li>기초연금 대상: 소득 <strong>하위 70%</strong></li>
+      <li>건강보험 보장률: <strong>62.6%</strong> (2016)</li>
+      <li>노인장기요양 공적 보호율: <strong>7%</strong> (2016) cf. 일본 약 20%</li>
+      <li>고령자 가구 비중: <strong>20.5%</strong> (2017)</li>
+      <li>노인 낙상율: <strong>15.9%</strong> (2017)</li>
+      <li>국민기초생활보장 수급자 중 노인비율: <strong>27.3%</strong> (2016)</li>
+      <li>여성노인 수급율 <strong>6.9%</strong> vs. 남성노인 <strong>4.5%</strong></li>
+      <li>노인주거복지시설 수용률: <strong>0.27%</strong> (2017)</li>
+    </ul>
+  </div>
+
+  <div class="summary-strip" style="background: var(--accent2); margin-top: 14px;">
+    <h4 style="color: #afd4f5">📌 제도 구분: 사회보험 vs. 공공부조</h4>
+    <ul>
+      <li><strong style="color:#afd4f5">사회보험</strong>: 국민연금 / 국민건강보험 / 노인장기요양보험 / 산재보험 / 고용보험</li>
+      <li><strong style="color:#afd4f5">공공부조</strong>: 국민기초생활보장제도 / 기초연금 / 의료급여</li>
+      <li><strong style="color:#afd4f5">조세 재원(사회서비스)</strong>: 노인돌봄종합서비스</li>
+    </ul>
+  </div>
+
+  <div class="summary-strip" style="background: var(--accent3); margin-top: 14px;">
+    <h4 style="color: #a8e6c1">📌 헷갈리는 포인트 정리</h4>
+    <ul>
+      <li>기초연금 ≠ 기여형 → <strong style="color:#a8e6c1">공공부조식, 비기여적</strong></li>
+      <li>노인장기요양보험 운영: 건강보험공단이지만 <strong style="color:#a8e6c1">별개 제도·별개 재정</strong></li>
+      <li>노인돌봄종합서비스 재원: 사회보험 X → <strong style="color:#a8e6c1">조세(세금)</strong></li>
+      <li>장기요양 재가급여 본인부담 <strong style="color:#a8e6c1">15%</strong> vs. 시설급여 <strong style="color:#a8e6c1">20%</strong></li>
+      <li>노인복지주택 입소 기준: <strong style="color:#a8e6c1">60세 이상</strong> (기초연금 65세와 구별)</li>
+      <li>인지지원등급: 2018년 신설, 신체기능 무관, <strong style="color:#a8e6c1">치매 확인 시 45점 미만</strong></li>
+    </ul>
+  </div>
+
+  <div class="chips" style="margin-top: 28px;">
+    <span class="chip red">소득보장</span>
+    <span class="chip red">공공부조</span>
+    <span class="chip red">사회보험</span>
+    <span class="chip red">기초연금</span>
+    <span class="chip red">국민연금</span>
+    <span class="chip blue">건강보험</span>
+    <span class="chip blue">의료급여</span>
+    <span class="chip blue">장기요양보험</span>
+    <span class="chip blue">보장성·지속가능성·형평성</span>
+    <span class="chip green">재가급여</span>
+    <span class="chip green">시설급여</span>
+    <span class="chip green">인지지원등급</span>
+    <span class="chip gold">노인돌봄종합서비스</span>
+    <span class="chip gold">주거보장</span>
+    <span class="chip gold">양로시설</span>
+  </div>
+
+</div>
+
+<footer>
+  CH.14 노인정책 · 노년학 기말고사 대비 &nbsp;|&nbsp; GERONTOLOGY STUDY GUIDE
+</footer>
+
+<script>
+  function toggle(item) {
+    const ans = item.querySelector('.quiz-ans');
+    const hint = item.querySelector('.toggle-hint');
+    if (ans.classList.contains('open')) {
+      ans.classList.remove('open');
+      hint.textContent = '▾';
+    } else {
+      ans.classList.add('open');
+      hint.textContent = '▴';
+    }
+  }
+</script>
+</body>
+</html>
