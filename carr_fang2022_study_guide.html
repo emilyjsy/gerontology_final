@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carr & Fang (2022) 논문 정리</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0f14;
+    --surface: #16181f;
+    --surface2: #1e2029;
+    --border: #2a2d3a;
+    --accent1: #e8b86d;
+    --accent2: #6d9ee8;
+    --accent3: #e86d8a;
+    --accent4: #6de8b8;
+    --text: #e8e9ef;
+    --text-muted: #8b8fa8;
+    --text-dim: #5a5e75;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 300;
+    line-height: 1.8;
+    min-height: 100vh;
+  }
+
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 2.5rem 2rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .header-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    align-items: flex-end;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .paper-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--accent1);
+    border: 1px solid var(--accent1);
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+
+  .header-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.4;
+  }
+
+  .header-sub { font-size: 0.78rem; color: var(--text-muted); margin-top: 0.25rem; }
+
+  .nav-tabs {
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    gap: 0.25rem;
+    padding: 1rem 2rem 0;
+    border-bottom: 1px solid var(--border);
+    overflow-x: auto;
+  }
+
+  .tab-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 0.82rem;
+    padding: 0.6rem 1.1rem;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active { color: var(--accent1); border-bottom-color: var(--accent1); font-weight: 500; }
+
+  main { max-width: 960px; margin: 0 auto; padding: 2rem; }
+
+  .section { display: none; animation: fadeIn 0.3s ease; }
+  .section.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .block-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+  .c-gold { color: var(--accent1); } .dot-gold { background: var(--accent1); }
+  .c-blue { color: var(--accent2); } .dot-blue { background: var(--accent2); }
+  .c-pink { color: var(--accent3); } .dot-pink { background: var(--accent3); }
+  .c-teal { color: var(--accent4); } .dot-teal { background: var(--accent4); }
+
+  .kv-row {
+    display: flex;
+    gap: 0.75rem;
+    padding: 0.65rem 0;
+    border-bottom: 1px solid var(--border);
+    align-items: baseline;
+    flex-wrap: wrap;
+  }
+  .kv-row:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .kv-key { font-size: 0.82rem; color: var(--text-muted); min-width: 175px; flex-shrink: 0; }
+  .kv-val { font-size: 0.88rem; color: var(--text); flex: 1; }
+  .kv-val strong { color: var(--accent1); font-weight: 500; }
+  .kv-val em    { color: var(--accent4); font-style: normal; }
+  .kv-val mark  { background: rgba(232,184,109,0.15); color: var(--accent1); padding: 0 0.3em; border-radius: 3px; }
+
+  .hl-box {
+    border-left: 3px solid var(--accent1);
+    background: rgba(232,184,109,0.07);
+    padding: 0.9rem 1rem;
+    border-radius: 0 6px 6px 0;
+    margin: 0.75rem 0;
+    font-size: 0.88rem;
+    line-height: 1.75;
+  }
+  .hl-box.blue { border-left-color: var(--accent2); background: rgba(109,158,232,0.07); }
+  .hl-box.pink { border-left-color: var(--accent3); background: rgba(232,109,138,0.07); }
+  .hl-box.teal { border-left-color: var(--accent4); background: rgba(109,232,184,0.07); }
+
+  /* quote block */
+  .quote-block {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent2);
+    border-radius: 0 6px 6px 0;
+    padding: 0.85rem 1.1rem;
+    margin: 0.6rem 0;
+    font-size: 0.84rem;
+    font-style: italic;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+  .quote-attr {
+    font-style: normal;
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    margin-top: 0.4rem;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* group cards */
+  .group-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 0.9rem;
+    margin-top: 0.5rem;
+  }
+
+  .group-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .group-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+  }
+
+  .gc-a::before { background: var(--accent3); }
+  .gc-b::before { background: var(--accent1); }
+  .gc-c::before { background: var(--accent4); }
+
+  .gc-pct {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.4rem;
+    font-weight: 600;
+    opacity: 0.35;
+    line-height: 1;
+    margin-bottom: 0.35rem;
+  }
+
+  .gc-a .gc-pct { color: var(--accent3); }
+  .gc-b .gc-pct { color: var(--accent1); }
+  .gc-c .gc-pct { color: var(--accent4); }
+
+  .gc-name { font-size: 0.88rem; font-weight: 500; color: var(--text); margin-bottom: 0.35rem; }
+  .gc-en { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--text-dim); margin-bottom: 0.5rem; }
+  .gc-desc { font-size: 0.8rem; color: var(--text-muted); line-height: 1.55; }
+
+  /* theme cards */
+  .theme-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+  }
+
+  .theme-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.9rem;
+  }
+
+  .theme-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--accent1);
+    margin-bottom: 0.3rem;
+  }
+
+  .theme-title { font-size: 0.85rem; font-weight: 500; color: var(--text); margin-bottom: 0.3rem; }
+  .theme-desc { font-size: 0.78rem; color: var(--text-muted); line-height: 1.55; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.83rem;
+    margin-top: 0.5rem;
+  }
+  th {
+    background: var(--surface2);
+    color: var(--text-muted);
+    font-weight: 500;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    padding: 0.6rem 0.9rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  td {
+    padding: 0.6rem 0.9rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(255,255,255,0.02); }
+  td.val { color: var(--accent1); font-family: 'JetBrains Mono', monospace; }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .mini-block { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 1rem; }
+  .mini-title { font-size: 0.72rem; font-family: 'JetBrains Mono', monospace; color: var(--text-muted); margin-bottom: 0.6rem; text-transform: uppercase; letter-spacing: 0.07em; }
+  .mini-list { list-style: none; font-size: 0.82rem; line-height: 1.72; color: var(--text); }
+  .mini-list li::before { content: '·'; color: var(--accent1); margin-right: 0.5rem; font-weight: 700; }
+
+  .sec-heading { font-family: 'Noto Serif KR', serif; font-size: 1.1rem; font-weight: 600; color: var(--accent1); margin-bottom: 1.25rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+
+  .sub-heading { font-size: 0.8rem; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin: 1.5rem 0 0.75rem; font-family: 'JetBrains Mono', monospace; }
+
+  /* quiz */
+  .quiz-list { display: flex; flex-direction: column; gap: 1rem; }
+  .quiz-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; transition: border-color 0.2s; }
+  .quiz-card:hover { border-color: var(--accent1); }
+  .quiz-q { padding: 1rem 1.25rem; display: flex; gap: 0.75rem; align-items: flex-start; cursor: pointer; user-select: none; }
+  .qnum { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--text-dim); min-width: 28px; padding-top: 0.15rem; }
+  .qtype { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; padding: 0.15rem 0.5rem; border-radius: 3px; min-width: fit-content; margin-top: 0.1rem; }
+  .qt-ox   { background: rgba(109,232,184,0.15); color: var(--accent4); }
+  .qt-fill { background: rgba(232,184,109,0.15); color: var(--accent1); }
+  .qt-mc   { background: rgba(109,158,232,0.15); color: var(--accent2); }
+  .qtext { font-size: 0.88rem; line-height: 1.6; flex: 1; }
+  .quiz-arrow { font-size: 0.75rem; color: var(--text-dim); transition: transform 0.2s; padding-top: 0.15rem; flex-shrink: 0; }
+  .quiz-a { display: none; padding: 0.85rem 1.25rem 1rem; border-top: 1px solid var(--border); background: var(--surface2); }
+  .quiz-a.shown { display: block; animation: fadeIn 0.2s ease; }
+  .answer-label { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: var(--text-dim); margin-bottom: 0.4rem; }
+  .answer-text { font-size: 0.87rem; line-height: 1.7; color: var(--text); }
+  .answer-text strong { color: var(--accent1); font-weight: 500; }
+  .ox-o { color: var(--accent4); font-size: 1.1rem; font-weight: 700; }
+  .ox-x { color: var(--accent3); font-size: 1.1rem; font-weight: 700; }
+
+  @media (max-width: 600px) {
+    .two-col { grid-template-columns: 1fr; }
+    .kv-key { min-width: 120px; }
+    header { padding: 1.5rem 1rem 1rem; }
+    main { padding: 1.5rem 1rem; }
+    .nav-tabs { padding: 0.75rem 1rem 0; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <span class="paper-badge">The Gerontologist · 2022 (Advance Access 2021.11.03)</span>
+    <div>
+      <div class="header-title">Carr & Fang (2022) — 논문 정리 노트</div>
+      <div class="header-sub">"We Are Good Neighbors, But We Are Not Carers!": Lived Experiences of Conflicting (In)dependence Needs in Retirement Villages Across the UK and Australia</div>
+    </div>
+  </div>
+</header>
+
+<div class="nav-tabs">
+  <button class="tab-btn active" onclick="showTab('overview')">① 개요 & 핵심 개념</button>
+  <button class="tab-btn" onclick="showTab('method')">② 연구 방법</button>
+  <button class="tab-btn" onclick="showTab('findings')">③ 주요 발견</button>
+  <button class="tab-btn" onclick="showTab('discussion')">④ 논의 & 함의</button>
+  <button class="tab-btn" onclick="showTab('quiz')">⑤ 퀴즈 연습</button>
+</div>
+
+<main>
+
+<!-- ════ ① 개요 ════ -->
+<div class="section active" id="sec-overview">
+  <div class="sec-heading">개요 & 핵심 개념</div>
+
+  <div class="block">
+    <div class="block-title c-gold"><span class="dot dot-gold"></span>논문 기본 정보</div>
+    <div class="kv-row">
+      <div class="kv-key">저자 / 소속</div>
+      <div class="kv-val">Sam Carr, Chao Fang — Department of Education and <em>Centre for Death and Society</em>, University of Bath, UK</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">게재지</div>
+      <div class="kv-val"><em>The Gerontologist</em>, 2022 (Advance Access: November 3, 2021)</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">연구 목적</div>
+      <div class="kv-val">영국·호주 은퇴마을(retirement villages) 거주 노인 80명의 <strong>독립성/의존성(independence/dependence)</strong>에 관한 살아있는 경험(lived experiences)을 질적으로 탐색</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">핵심 발견</div>
+      <div class="kv-val">독립/의존 욕구가 충돌하는 상황에서 "<strong>우리(us)</strong>"와 "<strong>그들(them)</strong>"의 분열 발생 — "장기간 중년 연장"을 추구하는 거주자들이 더 쇠약하고 의존적인 거주자들을 부담으로 느낌</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">키워드</div>
+      <div class="kv-val">에이지즘(Ageism) / 타자화(Othering) / 질적 연구(Qualitative) / 은퇴 생활(Retirement living)</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">연구비</div>
+      <div class="kv-val">Guild Living Ltd. (연구비 RE-ED1100) — 연구 설계·실행·분석에는 관여 없음</div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-title c-blue"><span class="dot dot-blue"></span>은퇴마을의 정의 & 거주 현황</div>
+    <div class="kv-row">
+      <div class="kv-key">은퇴마을 거주 비율</div>
+      <div class="kv-val">호주(65세 이상): <strong>3%</strong> / 미국: <strong>7–17%</strong> / 영국: <strong>0.6%</strong> (단, 수요 증가 중)</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">은퇴 공동체의<br>기본 특성 (Kingston et al., 2001)</div>
+      <div class="kv-val">
+        (a) 정규 풀타임 고용 종료 거주자 / (b) 동일 지리적 경계 내 연령 특화 집단 /<br>
+        (c) 공유 관심사·활동·시설을 포함하는 어느 정도의 공동체성 /<br>
+        (d) 자율성과 안전에 대한 어느 정도의 감각
+      </div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">이 연구의 대상 마을</div>
+      <div class="kv-val"><strong>55세 초과</strong>, 독립적 의존 돌봄 필요 없는 사람 대상의 <strong>독립생활 은퇴마을(independent-living retirement villages)</strong> — 목적 건축, 지리적 경계, 공유 여가 활동·시설, 독립적 라이프스타일 제공</div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-title c-teal"><span class="dot dot-teal"></span>독립성의 다차원적 의미 (Hillcoat-Nallétamby, 2014)</div>
+    <div class="theme-grid">
+      <div class="theme-card">
+        <div class="theme-num">DIMENSION 01</div>
+        <div class="theme-title">실행적 자율성</div>
+        <div class="theme-desc">executional autonomy — 다양한 정도로 혼자서, 도움 없이 과제 실행</div>
+      </div>
+      <div class="theme-card">
+        <div class="theme-num">DIMENSION 02</div>
+        <div class="theme-title">결정적 자율성</div>
+        <div class="theme-desc">decisional autonomy — 자신에 대한, 자신을 위한 결정 내리기</div>
+      </div>
+      <div class="theme-card">
+        <div class="theme-num">DIMENSION 03</div>
+        <div class="theme-title">공간적 독립성</div>
+        <div class="theme-desc">spatial independence — 사적이고 개인적인 주거 공간을 가짐</div>
+      </div>
+      <div class="theme-card">
+        <div class="theme-num">DIMENSION 04</div>
+        <div class="theme-title">사회적 독립성</div>
+        <div class="theme-desc">social independence — 사교 여부, 대상, 시기를 자유롭게 결정</div>
+      </div>
+    </div>
+    <div class="hl-box teal" style="margin-top:0.75rem;">
+      독립성·자율성은 <strong>단일 차원 구성 개념(unidimensional construct)이 아님</strong> — 노인들은 독립성을 매우 다양한 방식으로 경험하고 추구함
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-title c-pink"><span class="dot dot-pink"></span>타자화 (Othering) 개념</div>
+    <div class="kv-row">
+      <div class="kv-key">타자화 (othering)</div>
+      <div class="kv-val">어떤 사람이나 집단을 "다르다"고 표지하는 과정 — 내집단(in-group)이 외집단(out-group)을 차별하기 위해 "차이", "비교", "범주화"를 나타내는 언어를 사용 (Jönson, 2013; van Dyk, 2016)</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">이 연구에서의 타자화</div>
+      <div class="kv-val">독립성/의존성 정도에 따라 "우리"(활동적·독립적 거주자) vs. "그들"(노쇠·의존적 거주자) 구성됨</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">Jönson(2013)의 역설</div>
+      <div class="kv-val">"우리가 미래에 속하게 될 인구 집단을 처분하려 한다는 것은 비합리적이다 — 우리는 어떤 종류의 오해를 하고 있는 것이 틀림없다"</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">이동 동기 — 당김(pull) 요인</div>
+      <div class="kv-val">가족과 더 가까운 위치, 향상된 안전, 활동 증가 기대, 독립성 유지 인식 (Bekhet et al., 2009)</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">이동 동기 — 밀어냄(push) 요인</div>
+      <div class="kv-val">외로움, 자신 또는 배우자의 건강 악화, 더 많은 도움 필요 (Bekhet et al., 2009)</div>
+    </div>
+  </div>
+</div>
+
+<!-- ════ ② 방법 ════ -->
+<div class="section" id="sec-method">
+  <div class="sec-heading">연구 방법</div>
+
+  <div class="block">
+    <div class="block-title c-gold"><span class="dot dot-gold"></span>표본 (Sample)</div>
+    <div class="kv-row">
+      <div class="kv-key">총 인터뷰 수</div>
+      <div class="kv-val"><strong>80명</strong> / 영국 4개 마을 40명 + 호주 4개 마을 40명</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">마을 선정</div>
+      <div class="kv-val">각 나라의 운영 회사 1곳씩에서 4개 마을 선정 / 마을 고위 관리팀이 성별·연령·민족성 측면에서 가장 대표적이라 판단한 마을 선택</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">마을 규모</div>
+      <div class="kv-val">인터뷰 당시 마을당 거주자 <strong>50–150명</strong></div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">참여자 연령</div>
+      <div class="kv-val"><strong>55세 이상</strong>, 평균 <strong>79세</strong> (SD = 7.6), 최고령 93세, 최연소 55세</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">성별 분포</div>
+      <div class="kv-val">여성 <strong>55명</strong>, 남성 <strong>25명</strong></div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">거주 기간 평균</div>
+      <div class="kv-val">영국: 평균 <strong>2.8년</strong> / 호주: 평균 <strong>8년</strong></div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">거주 상태</div>
+      <div class="kv-val">배우자와 함께 거주: <strong>26명</strong> / 혼자 거주(사별·이혼·미혼): <strong>54명</strong></div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">상실 경험</div>
+      <div class="kv-val">최근 사랑하는 사람(종종 배우자·파트너) 잃은 경우: <strong>45명 이상(과반)</strong></div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">건강 상태</div>
+      <div class="kv-val">인터뷰 당시 중증 또는 점진적으로 생명을 위협하는 질환을 앓는 참여자 없음 (일부 만성 질환 있음)</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">모집 방법</div>
+      <div class="kv-val">마을 관리자가 게이트키퍼(gatekeeper) 역할 → 연구 소개 → 참여 희망 거주자가 관리자에게 연락 → 연구팀이 전화 연락</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">연구 기간</div>
+      <div class="kv-val"><strong>2019년 10월 – 2020년 2월</strong></div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">연구팀</div>
+      <div class="kv-val">영국 훈련된 연구자 4명 + 호주 훈련된 연구자 4명</div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-title c-blue"><span class="dot dot-blue"></span>인터뷰 설계 (Interviews)</div>
+    <div class="kv-row">
+      <div class="kv-key">형식</div>
+      <div class="kv-val">질적 반구조화 인터뷰 (qualitative semistructured interviews) / 참여자 자택에서 일대일 진행</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">인터뷰 길이</div>
+      <div class="kv-val"><strong>70–200분</strong>, 평균 약 <strong>100분</strong></div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">총 데이터</div>
+      <div class="kv-val">약 <strong>8,000분</strong>의 심층 데이터 — 오디오 녹음 후 전문 전사(professionally transcribed)</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">핵심 탐색 영역 (6가지)</div>
+      <div class="kv-val">
+        (a) 지금까지의 삶 (유년기, 청소년기, 경력, 가족 등) /<br>
+        (b) 가장 가까운 관계 /<br>
+        (c) 상실 경험 /<br>
+        (d) 외로움과 고립감 /<br>
+        (e) 은퇴 생활 이동 결정 /<br>
+        (f) 은퇴 공동체의 살아있는 경험
+      </div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">인터뷰 접근법</div>
+      <div class="kv-val">참여자가 자유롭게 이야기를 구성할 수 있도록 허용 / 인터뷰어는 경청하고 최소한으로 개입 / 인터뷰어는 "안전하고 관심 있는 낯선 사람(a safe, interested stranger)"(Johnson, 2013) 역할</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">익명 처리</div>
+      <div class="kv-val">참여자 기밀 보호를 위해 <strong>가명(pseudonyms)</strong> 사용</div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-title c-teal"><span class="dot dot-teal"></span>데이터 분석 (Data Analysis)</div>
+    <div class="kv-row">
+      <div class="kv-key">분석 방법</div>
+      <div class="kv-val"><strong>주제 분석 (thematic analysis)</strong> (Braun & Clarke, 2012) + <strong>귀납적 접근법 (inductive approach)</strong></div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">귀납적 접근의 이점</div>
+      <div class="kv-val">기존 이론적 프레임워크에 지배되지 않고, 대규모 데이터에서 중요한 메시지와 미묘한 감정이 <em>자연스럽게 부상</em>할 수 있도록 허용</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">소프트웨어</div>
+      <div class="kv-val"><strong>NVivo 12</strong> (질적 분석 소프트웨어) + Microsoft Word 기반 전통적 읽기·코딩 병용</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">Braun & Clarke의<br>6단계 주제 분석</div>
+      <div class="kv-val">
+        ① 데이터 친숙화 / ② 초기 코드 생성 / ③ 주제 탐색 /<br>
+        ④ 잠재적 주제 검토 및 논의 / ⑤ 주제 정제 및 명명 / ⑥ 주제 작성
+      </div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">분석 신뢰도 확보</div>
+      <div class="kv-val">두 저자가 독립적으로 각 인터뷰 전사본 코딩 → 코드 불일치·불일치 시 추가 읽기·논의 → 합의 도달. 최종 코드는 다이어그램으로 변환 (Figure 1, 2)</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">윤리 승인</div>
+      <div class="kv-val">University of Bath 사회과학연구윤리위원회(SSREC, 참조번호 S19-052) 승인 / 양국 마을 운영 관리팀 및 각 마을 관리자의 허가 획득</div>
+    </div>
+  </div>
+</div>
+
+<!-- ════ ③ 발견 ════ -->
+<div class="section" id="sec-findings">
+  <div class="sec-heading">주요 발견 (Findings)</div>
+
+  <div class="block">
+    <div class="block-title c-gold"><span class="dot dot-gold"></span>참여자 3집단 분류</div>
+    <div class="group-grid">
+      <div class="group-card gc-a">
+        <div class="gc-pct">15%</div>
+        <div class="gc-name">의존성 촉발 집단</div>
+        <div class="gc-en">"prompted by dependency group" (n=12)</div>
+        <div class="gc-desc">배우자 상실 및/또는 심각한 신체·인지 건강 악화 등 의존성 증가 경험 이후 더 많은 사회적·실질적 지원을 위해 이동</div>
+      </div>
+      <div class="group-card gc-b">
+        <div class="gc-pct">50%</div>
+        <div class="gc-name">의존성 이전 집단</div>
+        <div class="gc-en">"predependency group" (n=40)</div>
+        <div class="gc-desc">어떠한 중요한 상실이나 의존성 증가도 경험하기 이전에 이동 — 주 목적: (a) 활동적 삶 촉진 또는 (b) 미래 의존성 대비</div>
+      </div>
+      <div class="group-card gc-c">
+        <div class="gc-pct">35%</div>
+        <div class="gc-name">거주 후 의존성 증가 집단</div>
+        <div class="gc-en">"became-more-dependent-in-place group" (n=28)</div>
+        <div class="gc-desc">의존성 이전 집단과 같은 이유로 이동했으나, 이주 이후 어느 시점에 의존성 욕구가 증가</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-title c-blue"><span class="dot dot-blue"></span>4가지 핵심 주제 (Core Themes)</div>
+    <div class="theme-grid">
+      <div class="theme-card">
+        <div class="theme-num">THEME 01</div>
+        <div class="theme-title">독립적이고 활동적으로 남기</div>
+        <div class="theme-desc">Remaining Independent and Active — 배경: 중년 연장, 미래 대비, "노인" 이미지 거부</div>
+      </div>
+      <div class="theme-card">
+        <div class="theme-num">THEME 02</div>
+        <div class="theme-title">증가하는 의존성 욕구 대처</div>
+        <div class="theme-desc">Coping with Increasing Dependency Needs — 배경: 다양한 집단의 욕구와 기대</div>
+      </div>
+      <div class="theme-card">
+        <div class="theme-num">THEME 03 ★핵심</div>
+        <div class="theme-title">독립/의존 갈등하는 욕구</div>
+        <div class="theme-desc">Conflicting Needs around Independence and Dependence — 주요 발견: "우리 vs. 그들" 분열, 타자화</div>
+      </div>
+      <div class="theme-card">
+        <div class="theme-num">THEME 04</div>
+        <div class="theme-title">공동체 의식 발달</div>
+        <div class="theme-desc">Developing a Sense of Community — 갈등 완화 수단으로서의 "함께 늙어가기(aging together)"</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-title c-teal"><span class="dot dot-teal"></span>주제 1 — 독립적·활동적으로 남기</div>
+    <div class="sub-heading" style="margin-top:0;">중년 연장 (prolonging midlife)</div>
+    <div class="kv-row">
+      <div class="kv-key">약 25% 참여자</div>
+      <div class="kv-val">주로 의존성 이전 집단, 비교적 젊고 이주 2년 이내, 신체 활동적이라 자각 → 독립성·"활동적 삶" 유지, 본질적으로 중년을 연장하기 위해 이동</div>
+    </div>
+    <div class="quote-block">
+      "I'm a young 64-year-old … to keep me connected, not become isolated on my own. But also leave me my independence."
+      <div class="quote-attr">— Lucy, 64, UK</div>
+    </div>
+    <div class="sub-heading">미래 대비 (future proofing)</div>
+    <div class="kv-row">
+      <div class="kv-key">약 30% 참여자</div>
+      <div class="kv-val">의존성 이전 집단 전용 — 미래 의존성 증가에 "준비"되고 싶으나 아직 현실이 아님. 은퇴마을을 미래 손실·의존에 대한 안전장치로 인식</div>
+    </div>
+    <div class="quote-block">
+      "We only wanted to move once. So, you want to be somewhere where you're both comfortable and ready for the future."
+      <div class="quote-attr">— David, 76, UK</div>
+    </div>
+    <div class="sub-heading">"노인" 및 "의존"과의 거리두기</div>
+    <div class="kv-row">
+      <div class="kv-key">약 15% 참여자</div>
+      <div class="kv-val">활동적·독립적 생활 유지 욕구 + 노쇠·의존·"늙음"의 고정관념과 차별화 시도 — 은퇴마을에 대한 부정적 고정관념에서 자신을 분리하려 함</div>
+    </div>
+    <div class="quote-block">
+      "The older people make you feel older. Yes. They can't do as much … we do help them, but we can't be living our life around them."
+      <div class="quote-attr">— Jane, 72, UK</div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-title c-pink"><span class="dot dot-pink"></span>주제 2 — 증가하는 의존성 욕구 대처</div>
+    <div class="kv-row">
+      <div class="kv-key">약 15% 참여자</div>
+      <div class="kv-val">건강 악화나 사별이라는 직접적 경험으로 이동 → 은퇴마을에서 의존성 욕구를 이해·수용·지원받으면서도 상대적 독립성·자율성 유지 희망</div>
+    </div>
+    <div class="quote-block">
+      "I thought, this won't do at all. I am an independent person … it seemed to me that it was time I was thinking about finding somewhere like this to move to."
+      <div class="quote-attr">— Patricia, 85, UK (고관절 수술 후 쇠약·고립감으로 이동)</div>
+    </div>
+    <div class="quote-block">
+      "I feel as though with this organisation, I feel cared for. I feel safe and cared for and for me, that's enough."
+      <div class="quote-attr">— Meg, 84, Australia</div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-title c-gold"><span class="dot dot-gold"></span>주제 3 (핵심) — "우리는 돌봄자가 아닙니다!"</div>
+    <div class="hl-box">
+      <strong>가장 강력한 주제</strong> — 독립/의존에 대한 다른 욕구와 생각을 가진 사람들이 나란히 생활할 때 경험하는 <strong>타자화(othering)</strong>. 의존성 이전 집단(30%)이 더 쇠약하고 의존적인 거주자들에게 도전받거나, 분개하거나, 반대를 표명함.
+    </div>
+    <div class="quote-block">
+      "No, because they shouldn't be here! They should go into a care home. We're not carers! We're not a care home! This is for over 55s, actives, active living."
+      <div class="quote-attr">— Margaret, 78, UK</div>
+    </div>
+    <div class="quote-block">
+      "We've had to tell them we are good neighbours, we are not carers … We didn't sign up to look after people, we signed up to have an independent life."
+      <div class="quote-attr">— Roy, 72, UK (논문 제목의 직접 인용)</div>
+    </div>
+    <div class="quote-block">
+      "This is advertised as independent living for the active over 55-year-olds … and we feel that we are in an 'old people's home' rather than 'active, independent living'."
+      <div class="quote-attr">— Roy, 72, UK (판매된 이미지와의 괴리)</div>
+    </div>
+    <div class="sub-heading">동전의 반대편 — 타자화 당하는 경험</div>
+    <div class="kv-row">
+      <div class="kv-key">약 10% 참여자</div>
+      <div class="kv-val">의존성 촉발 집단 — 공동체 내에서 "타자화"를 경험하며 고립감·배제감을 느낌. 다른 거주자나 관리자로부터 욕구가 이해받지 못함을 지각</div>
+    </div>
+    <div class="quote-block">
+      "I just feel she's a bit like a leper really — because no one actually wants to get close to her here."
+      <div class="quote-attr">— Peter, 78, UK (치매 배우자 Sue의 배제 경험)</div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-title c-teal"><span class="dot dot-teal"></span>주제 4 — 공동체 의식 발달</div>
+    <div class="kv-row">
+      <div class="kv-key">약 35% 참여자</div>
+      <div class="kv-val">취약한 사람들을 지지하는 것에 가치를 두고, 다른 거주자에게 지지받는 것에 의미 부여 → 공동체 의식, 연대감, 포용성 추구</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">영국 거주자 (약 15%)</div>
+      <div class="kv-val">평균 2.8년 거주로 공동체 의식 아직 형성 중이나, <strong>함께 늙어가는 것(aging in community)</strong>이 친밀감·소속감을 키우는 핵심이 될 것이라 믿음</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">호주 거주자 (약 20%)</div>
+      <div class="kv-val">평균 8년 거주(일부 15년 이상) → 지속적인 돌봄과 공동체 감각이 소집단 또는 전체 공동체 수준에서 포착됨</div>
+    </div>
+    <div class="quote-block">
+      "In the area where we lived … we didn't know so many people around us … but here I can say I know everybody here."
+      <div class="quote-attr">— Emma, 87, Australia</div>
+    </div>
+    <div class="hl-box teal" style="margin-top:0.5rem;">
+      공동체적 대처(communal coping): Lawrence & Schigelone(2002) — 노화 관련 스트레스는 "개인적"인 것으로 여겨지지만 공동체적으로 공유·표현·대처할 수 있음
+    </div>
+  </div>
+</div>
+
+<!-- ════ ④ 논의 ════ -->
+<div class="section" id="sec-discussion">
+  <div class="sec-heading">논의 & 함의</div>
+
+  <div class="block">
+    <div class="block-title c-gold"><span class="dot dot-gold"></span>핵심 논의 포인트</div>
+    <div class="kv-row">
+      <div class="kv-key">다양성 인정 실패</div>
+      <div class="kv-val">Wiles et al.(2012): 장소를 단순한 "컨테이너"로, 노인들을 동질적 범주로 취급하면 다양한 욕구를 인식하지 못하게 됨 — 이 연구가 실증적으로 확인</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">다른 약속을 판 마을</div>
+      <div class="kv-val">은퇴마을이 <strong>다른 사람들에게 서로 다른 (때로 양립 불가한) 약속과 의미를 판매</strong> → 독립성/의존성에 대해 다른 생각을 가진 사람들이 같은 공간에서 충돌</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">에이지즘 증폭</div>
+      <div class="kv-val">McHugh(2000): "불멸의 중년(ageless self)"과 "중년의 연장"이 현대 사회의 주요 모티프가 됨 → 은퇴마을이 이 에이지즘적 태도와 사회적 가치를 <em>팔고</em> 이후 <em>강화</em>하는 역할</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">타자화의 역설</div>
+      <div class="kv-val">Jönson(2013): 더 쇠약하고 의존적인 노인들을 타자화하는 것은 비합리적 — 우리 모두가 언젠가는 그 집단의 일부가 될 것이기 때문. 이를 "자신의 미래 자아(embodiments of their future selves)"로 인식하는 것이 더 합리적</div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-title c-blue"><span class="dot dot-blue"></span>타자화의 세 가지 문제점</div>
+    <table>
+      <thead><tr><th>문제</th><th>설명</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>① 배제감·차별감 생성</strong></td>
+          <td>외집단 구성원이 차별받고 배제된다는 명확한 느낌 발생 (예: "나는 그녀가 나병환자 같다고 느낀다")</td>
+        </tr>
+        <tr>
+          <td><strong>② "모든 것을 모두에게" 불가</strong></td>
+          <td>중요한 의존 욕구를 가진 사람들을 완전히 수용하면서 동시에 "활동적 독립" 또는 "중년 연장"을 원하는 거주자 욕구를 충족시키는 환경 조성은 모순</td>
+        </tr>
+        <tr>
+          <td><strong>③ 비합리적 역설</strong></td>
+          <td>우리가 미래에 속하게 될 집단을 처분하려 하는 것 — 어떤 오해가 있는 것임 (Jönson, 2013)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="block">
+    <div class="block-title c-pink"><span class="dot dot-pink"></span>실천적 함의</div>
+    <div class="kv-row">
+      <div class="kv-key">개발자·제공자의 책임</div>
+      <div class="kv-val">은퇴마을이 독립/의존 서사에서의 충돌과 갈등을 <strong>구성하는 데 자신들의 역할</strong>이 있음을 인식해야 함</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">정책·개발자에게</div>
+      <div class="kv-val">은퇴마을이 어떻게 등장하고 경험되는지 — 다양하고 경쟁적·대립적이며 갈등적인 욕구와 동기에 관련하여 — 더 잘 이해해야 함</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">Laws(1995)의 제안</div>
+      <div class="kv-val">미래 은퇴마을 프로젝트는 "노인, 가난한 사람 … 대신 잘생기고 건강하며 편안한 중산층 노인이 햇빛 가득한 날들을 바쁘게 채우는" 이미지를 강화하는 공동체를 넘어서야 함</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">미래 공동체의 방향</div>
+      <div class="kv-val">타자화보다는, 다른 사람들이 단순히 자신들의 <strong>미래 자아의 구현</strong>일 수 있다는 인식을 바탕으로 서로를 이해·지지·포용하는 공동체</div>
+    </div>
+    <div class="kv-row">
+      <div class="kv-key">두 가지 근본 문제</div>
+      <div class="kv-val">
+        (a) "노인"을 동질적 범주로 설계된 공동체는 극히 광범위한 사람들의 다양하고 갈등하는 욕구를 <em>부적절하게 인식</em>하는가?<br>
+        (b) 종종 너무 모호하게 정의되어 "모든 사람에게 모든 것"을 제공하는 것처럼 보이는 것이 바람직한 모델인가?
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-title c-teal"><span class="dot dot-teal"></span>영국 vs. 호주 비교</div>
+    <table>
+      <thead><tr><th>비교 항목</th><th>영국</th><th>호주</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>평균 거주 기간</td>
+          <td class="val">2.8년</td>
+          <td class="val">8년 (일부 15년 이상)</td>
+        </tr>
+        <tr>
+          <td>공동체 감각</td>
+          <td>아직 형성 중 — 미래에 함께 늙어가며 만들어질 것이라 기대</td>
+          <td>이미 강한 공동체 의식 — 소집단 또는 전체 공동체 수준에서 포착</td>
+        </tr>
+        <tr>
+          <td>함의</td>
+          <td colspan="2">함께 늙어가는 시간(time aging together)이 긍정적 방향으로 의존·취약성 경험을 형성할 수 있음 — 거주 기간이 공동체 형성의 중요 요인 (단, 유일한 결정 요인은 아님)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ════ ⑤ 퀴즈 ════ -->
+<div class="section" id="sec-quiz">
+  <div class="sec-heading">퀴즈 연습</div>
+  <p style="font-size:0.83rem; color:var(--text-muted); margin-bottom:1.5rem;">각 문제를 클릭하면 정답이 표시됩니다.</p>
+
+  <div class="sub-heading">O/X 퀴즈</div>
+  <div class="quiz-list">
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">01</span><span class="qtype qt-ox">O/X</span>
+        <span class="qtext">이 연구에서 가장 많은 비율(50%)을 차지한 집단은 의존성 이전 집단(predependency group)으로, 어떠한 중요한 상실이나 의존성 증가도 경험하기 이전에 은퇴마을로 이동하였다.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text"><span class="ox-o">O</span> — 의존성 이전 집단 50%(n=40), 거주 후 의존성 증가 집단 35%(n=28), 의존성 촉발 집단 15%(n=12).</div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">02</span><span class="qtype qt-ox">O/X</span>
+        <span class="qtext">이 연구의 데이터 분석에는 연역적 접근법(deductive approach)이 사용되었다.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text"><span class="ox-x">X</span> — <strong>귀납적 접근법(inductive approach)</strong> 사용. 기존 이론 프레임워크에 지배되지 않고 데이터에서 중요한 메시지가 자연스럽게 부상하도록 허용.</div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">03</span><span class="qtype qt-ox">O/X</span>
+        <span class="qtext">이 연구의 참여자 평균 연령은 79세이며(SD=7.6), 가장 많은 참여자는 여성이었다.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text"><span class="ox-o">O</span> — 평균 연령 79세(SD=7.6), 최고령 93세, 최연소 55세. 여성 55명, 남성 25명.</div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">04</span><span class="qtype qt-ox">O/X</span>
+        <span class="qtext">Hillcoat-Nallétamby(2014)에 따르면, 독립성은 단일 차원 구성 개념이 아니며, 실행적·결정적·공간적·사회적 독립성의 네 차원으로 나뉜다.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text"><span class="ox-o">O</span> — executional autonomy / decisional autonomy / spatial independence / social independence. 독립성/자율성은 단일 차원(unidimensional) 구성 개념으로 생각해선 안 됨.</div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">05</span><span class="qtype qt-ox">O/X</span>
+        <span class="qtext">이 연구에서 호주 거주자들의 평균 거주 기간은 영국 거주자보다 길었으며, 그 결과 더 강한 공동체 의식이 포착되었다.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text"><span class="ox-o">O</span> — 영국 평균 2.8년 vs. 호주 평균 8년. 함께 늙어가는 시간이 긍정적 방향으로 공동체 의식을 형성할 수 있음.</div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">06</span><span class="qtype qt-ox">O/X</span>
+        <span class="qtext">논문 제목 "We Are Good Neighbors, But We Are Not Carers!"는 의존성 촉발 집단(prompted by dependency group) 거주자의 발언에서 직접 인용되었다.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text"><span class="ox-x">X</span> — <strong>의존성 이전 집단(predependency group)</strong>의 Roy(72세, 영국)의 발언. "We've had to tell them we are good neighbours, we are not carers … We signed up to have an independent life."</div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">07</span><span class="qtype qt-ox">O/X</span>
+        <span class="qtext">이 연구의 인터뷰는 평균 약 100분이었으며, 총 약 8,000분의 심층 데이터가 생성되었다.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text"><span class="ox-o">O</span> — 인터뷰 길이 70–200분, 평균 약 100분. 총 약 8,000분의 오디오 녹음 데이터, 전문 전사.</div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">08</span><span class="qtype qt-ox">O/X</span>
+        <span class="qtext">Jönson(2013)은 더 쇠약하고 의존적인 노인들을 타자화하는 것이 합리적이라고 주장한다 — 왜냐하면 그들은 독립적으로 생활할 능력이 없기 때문이다.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text"><span class="ox-x">X</span> — Jönson(2013)은 타자화가 <strong>비합리적(irrational)</strong>이라 주장 — "우리 모두가 언젠가는 그 집단의 일부가 될 것이기 때문"에 역설이 존재함.</div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">09</span><span class="qtype qt-ox">O/X</span>
+        <span class="qtext">이 연구에서 마을 관리자는 연구 참여자들에게 연구를 소개하는 게이트키퍼(gatekeeper) 역할을 하였다.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text"><span class="ox-o">O</span> — 마을 관리자가 연구 프로젝트와 연구자들을 거주자들에게 소개. 이를 통해 참여자와 연구자 사이의 신뢰감 형성에 기여.</div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">10</span><span class="qtype qt-ox">O/X</span>
+        <span class="qtext">이 연구에서 독립생활 은퇴마을은 55세 초과 거주자만을 대상으로 하며, 장기 돌봄 욕구가 있는 거주자는 더 높은 단계의 보조 생활 시설로 이동해야 했다.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text"><span class="ox-o">O</span> — 55세 초과, 독립적 의존 돌봄 필요 없는 사람 대상. 단기 재가 돌봄(청소, 요리 등)은 제공하나, 장기 돌봄 욕구(loosely defined)가 있는 거주자는 더 발전된 보조생활 시설로 이동 필요.</div></div>
+    </div>
+
+  </div>
+
+  <div class="sub-heading" style="margin-top:2rem;">단답형 / 내용 확인 퀴즈</div>
+  <div class="quiz-list">
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">11</span><span class="qtype qt-fill">단답</span>
+        <span class="qtext">이 연구의 표본 구성을 답하라: 총 인터뷰 수, 영국·호주 각 인터뷰 수, 마을 수(각국), 연구 기간.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text">총 <strong>80명</strong> / 영국 <strong>40명</strong>, 호주 <strong>40명</strong> / 각국 <strong>4개 마을</strong>(총 8개) / <strong>2019년 10월 – 2020년 2월</strong></div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">12</span><span class="qtype qt-fill">단답</span>
+        <span class="qtext">이 연구에서 사용된 분석 방법과 이론적 근거(누구의 몇 단계 과정인지)를 답하라.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text"><strong>주제 분석(thematic analysis)</strong> + 귀납적 접근(inductive approach) / <strong>Braun & Clarke(2012)</strong>의 6단계 주제 분석 과정: ① 데이터 친숙화 → ② 초기 코드 생성 → ③ 주제 탐색 → ④ 잠재 주제 검토·논의 → ⑤ 주제 정제·명명 → ⑥ 주제 작성</div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">13</span><span class="qtype qt-fill">단답</span>
+        <span class="qtext">Kingston et al.(2001)이 제시한 은퇴 공동체의 4가지 기본 정의적 특성을 모두 답하라.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text">
+        (a) 정규 풀타임 고용 종료 거주자<br>
+        (b) 동일 지리적 경계 내 연령 특화 집단<br>
+        (c) 공유 관심사·활동·시설을 포함하는 어느 정도의 공동체성<br>
+        (d) 자율성과 안전에 대한 어느 정도의 감각
+      </div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">14</span><span class="qtype qt-fill">단답</span>
+        <span class="qtext">이 연구에서 식별된 4가지 핵심 주제를 순서대로 답하라.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text">
+        (a) <strong>독립적이고 활동적으로 남기 (Remaining Independent and Active)</strong><br>
+        (b) <strong>증가하는 의존성 욕구 대처 (Coping with Increasing Dependency Needs)</strong><br>
+        (c) <strong>독립/의존을 둘러싼 갈등하는 욕구 (Conflicting Needs around Independence and Dependence)</strong> ← 핵심<br>
+        (d) <strong>공동체 의식 발달 (Developing a Sense of Community)</strong>
+      </div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">15</span><span class="qtype qt-fill">단답</span>
+        <span class="qtext">Bekhet et al.(2009)가 제시한 은퇴 공동체 이동의 "당김(pull) 요인"과 "밀어냄(push) 요인"을 각각 2가지 이상 답하라.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text">
+        <strong>pull 요인:</strong> 가족과 더 가까운 위치, 향상된 안전, 활동 증가 기대, 독립성 유지 인식<br>
+        <strong>push 요인:</strong> 외로움, 자신 또는 배우자의 건강 악화, 더 많은 도움 필요
+      </div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">16</span><span class="qtype qt-fill">단답</span>
+        <span class="qtext">McHugh(2000)의 "무연령의 자아(ageless self)"와 "중년의 연장(prolongation of midlife)" 개념을 설명하고, 이것이 이 논문에서 어떻게 비판적으로 다루어지는지 서술하라.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text">
+        <strong>McHugh(2000):</strong> "무연령의 자아"와 "중년의 연장"은 현대 사회의 모티프가 되었으며, 변화와 진정한 의미의 늙어감에 대해 거의 전달하지 않음.<br>
+        <strong>이 논문의 비판:</strong> 이러한 에이지즘적 태도와 사회적 가치가 은퇴마을의 정체성에 단단히 내장되어 있으며, 마을이 이 비현실적이고 잠재적으로 차별적인 늙어감의 이미지를 "판매"하고 "강화"하는 역할을 한다.
+      </div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">17</span><span class="qtype qt-mc">내용확인</span>
+        <span class="qtext">이 연구에서 식별된 3가지 참여자 집단의 이름(한국어·영어), 비율, 이동 동기를 각각 설명하라.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text">
+        ① <strong>의존성 촉발 집단 (prompted by dependency group)</strong>, 약 <strong>15%(n=12)</strong> — 배우자 상실 및/또는 심각한 신체·인지 건강 악화 <em>이후</em> 더 많은 사회적·실질적 지원을 찾아 이동<br><br>
+        ② <strong>의존성 이전 집단 (predependency group)</strong>, 약 <strong>50%(n=40)</strong> — 어떠한 중요한 상실이나 의존성 증가도 경험하기 <em>이전에</em> 이동; 주로 (a) 활동적 삶 촉진 또는 (b) 미래 의존성 대비<br><br>
+        ③ <strong>거주 후 의존성 증가 집단 (became-more-dependent-in-place group)</strong>, 약 <strong>35%(n=28)</strong> — 처음에는 의존성 이전 집단과 같은 이유로 이동했으나, 이주 이후 의존성 욕구 증가 경험
+      </div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">18</span><span class="qtype qt-mc">내용확인</span>
+        <span class="qtext">이 논문이 타자화(othering) 구성이 문제적인 이유로 제시하는 3가지를 설명하라.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text">
+        ① <strong>배제감·차별감 생성:</strong> 외집단 구성원이 차별받고 배제된다는 명확한 느낌 발생 (예: "나는 그녀가 나병환자 같다고 느낀다 — 아무도 그녀에게 가까이 다가오려 하지 않는다")<br><br>
+        ② <strong>"모든 것을 모두에게" 불가:</strong> 중요한 의존 욕구를 가진 사람들을 완전히 수용하면서 동시에 "활동적 독립" 또는 "연장된 중년"을 원하는 거주자를 만족시키는 환경은 서로 모순됨<br><br>
+        ③ <strong>비합리적 역설:</strong> 우리 모두가 미래에는 더 쇠약하고 의존적인 집단의 일부가 될 것임에도 그 집단을 처분하려 함 — 어떤 오해가 있는 것 (Jönson, 2013)
+      </div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">19</span><span class="qtype qt-mc">내용확인</span>
+        <span class="qtext">이 연구에서 "공동체 의식 발달" 주제가 은퇴마을 내 갈등을 어떻게 완화할 수 있는지, 영국과 호주의 사례를 비교하며 설명하라.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text">
+        <strong>공동체 의식의 갈등 완화 기제:</strong> 일부 거주자(35%)가 취약한 사람들을 지지하는 것에 가치를 두고 연대·포용을 추구 — 노화 관련 스트레스를 공동체적으로 공유하고 대처(Lawrence & Schigelone, 2002)<br><br>
+        <strong>영국 (평균 2.8년):</strong> 공동체 의식이 아직 형성 중. 하지만 함께 늙어가는 것이 미래에 친밀감과 소속감을 키울 것이라 믿음 — Ralph(72세): "나중에 우리가 여기서 더 늙고 더 연결되면 친한 친구에게 의존하게 될 수도 있다"<br><br>
+        <strong>호주 (평균 8년):</strong> 이미 강한 공동체 의식 — Milly(88세)처럼 10년간 월간 바비큐 주최 등 적극적 커뮤니티 형성. Emma(87세): "여기서 나는 모든 사람을 안다"
+      </div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">20</span><span class="qtype qt-mc">내용확인</span>
+        <span class="qtext">이 연구의 방법론적 특징(연구 설계, 분석 방법)과 연구의 한계를 서술하라.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text">
+        <strong>연구 설계:</strong> 질적 반구조화 인터뷰(qualitative semistructured interviews) — 독립/의존 맥락에서 노인들이 어떻게 이해하고 경험하는지 심층 탐색<br>
+        <strong>분석 방법:</strong> 주제 분석(Braun & Clarke, 2012) + 귀납적 접근법 / NVivo 12 활용 / 두 저자 독립 코딩 후 합의 도달<br><br>
+        <strong>한계:</strong><br>
+        ① 자기 선택(self-selected) 참여자로 인한 편향 가능성 — 특별한 조건·욕구를 가진 사람들의 관점을 포착하기는 하나, 전체 거주자를 대표하지 않을 수 있음<br>
+        ② 의존성의 정의가 마을마다 모호(vaguely defined) — 연구 대상 마을 자체의 특성
+      </div></div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-q" onclick="toggleAnswer(this)">
+        <span class="qnum">21</span><span class="qtype qt-mc">내용확인</span>
+        <span class="qtext">"미래 자아의 구현(embodiments of their future selves)"이라는 논문의 개념을 설명하고, 이것이 은퇴마을 내 타자화 문제 해결에 어떤 함의를 갖는지 서술하라.</span>
+        <span class="quiz-arrow">▼</span>
+      </div>
+      <div class="quiz-a"><div class="answer-label">ANSWER</div><div class="answer-text">
+        <strong>개념 설명:</strong> 의존성 이전 집단의 일부는 의존성 촉발 집단이나 거주 후 의존성 증가 집단이 바로 자신들의 미래 모습일 수 있다는 것을 암묵적으로 이해함 → 이때 그들을 더 수용하고 인정할 수 있게 됨.<br><br>
+        <strong>함의:</strong> 현재 더 쇠약하고 의존적인 거주자들은 단순히 대부분의 사람들이 언젠가 (다른 방식으로) 따라갈 경로를 더 앞서 걷고 있는 것 → 은퇴마을이 "타자화"보다 서로를 <em>미래 자아의 구현</em>으로 이해·지지·포용하는 공동체 만들기에 시간과 자원을 투자하는 것이 합리적 (Jönson, 2013 기반)
+      </div></div>
+    </div>
+
+  </div>
+</div>
+
+</main>
+
+<script>
+function showTab(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('sec-' + id).classList.add('active');
+  event.currentTarget.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function toggleAnswer(el) {
+  const card = el.closest('.quiz-card');
+  const ans = card.querySelector('.quiz-a');
+  const arrow = el.querySelector('.quiz-arrow');
+  const shown = ans.classList.toggle('shown');
+  arrow.style.transform = shown ? 'rotate(180deg)' : 'rotate(0deg)';
+}
+</script>
+</body>
+</html>
